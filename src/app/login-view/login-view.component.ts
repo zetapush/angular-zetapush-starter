@@ -1,15 +1,46 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, AfterViewInit, OnChanges, OnInit, Input, trigger } from '@angular/core'
+import { Router } from '@angular/router';
+import { ZetaPushConnection } from '../../zetapush/core';
+
+class Credentials {
+  public login = '';
+  public password = '';
+}
 
 @Component({
   selector: 'app-login-view',
-  templateUrl: './login-view.component.html',
-  styleUrls: ['./login-view.component.scss']
+  templateUrl: './login-view.component.html'
 })
-export class LoginViewComponent implements OnInit {
+export class LoginViewComponent {
 
-  constructor() { }
+  credentials: Credentials;
+  error: string;
+  handlers: Array<any> = [];
 
-  ngOnInit() {
+  @HostBinding('class') classes = 'flex-centered flex-height';
+
+  constructor(
+    private router: Router,
+    private connection: ZetaPushConnection
+  ) {
+    this.credentials = new Credentials();
+  }
+
+  onSubmit() {
+    console.log('LoginView::onSubmit', { credentials: this.credentials });
+    this.connection
+        .connect(this.credentials)
+        .then(() => this.onConnectionSuccess(), () => this.onConnectionError());
+  }
+
+  onConnectionSuccess() {
+    console.log('LoginView::onConnectionSuccess');
+    this.error = '';
+  }
+
+  onConnectionError() {
+    console.log('LoginView::onConnectionError');
+    this.error = 'Unable to connect';
   }
 
 }

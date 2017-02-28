@@ -2,6 +2,7 @@
 @import '~@angular/material/core/theming/all-theme';
 // Plus imports for other components in your app.
 @import "variables";
+@import "layout";
 
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
@@ -12,25 +13,3 @@
 // that you are using.
 @include angular-material-theme($theme);
 
-html,
-body {
-  height: 100vh;
-}
-body {
-  font-family: 'Noto Sans', sans-serif !important;
-}
-html {
-  background-color: $core-white;
-}
-html::before {
-  opacity: 0.5;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-color: $background-fade;
-  background-blend-mode: luminosity;
-}

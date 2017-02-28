@@ -1,16 +1,17 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+
+import { environment } from '../environments/environment';
+
+import { ZetaPushClient, ZetaPushConnection } from './core';
+import { ZetaPushClientConfig, ZetaPushClientFactory, ZetaPushConnectionFactory } from './di';
 
 @NgModule({
   declarations: [],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
+  imports: [],
   providers: [
+    { provide: ZetaPushClientConfig, useValue: environment.zetapush },
+    { provide: ZetaPushClient, useFactory: ZetaPushClientFactory, deps: [ ZetaPushClientConfig ] },
+    { provide: ZetaPushConnection, useFactory: ZetaPushConnectionFactory, deps: [ ZetaPushClient ] }
   ],
   bootstrap: []
 })

@@ -174,8 +174,8 @@ declare module "zetapush-js" {
     getCredentials(): any
     getSession(): any
     hasCredentials(): boolean
-    isStronglyAuthenticated(session: any): void
-    isWeaklyAuthenticated(session: any): void
+    isStronglyAuthenticated(session?: any): boolean
+    isWeaklyAuthenticated(session?: any): boolean
     setCredentials(credentials: any): void
   }
 

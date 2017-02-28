@@ -1,4 +1,4 @@
-import { Component, HostBinding, AfterViewInit, OnChanges, OnInit, Input, trigger } from '@angular/core'
+import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
 import { ZetaPushConnection } from '../../zetapush/core';
 
@@ -36,6 +36,7 @@ export class LoginViewComponent {
   onConnectionSuccess() {
     console.log('LoginView::onConnectionSuccess');
     this.error = '';
+    this.router.navigate(['/home']);
   }
 
   onConnectionError() {

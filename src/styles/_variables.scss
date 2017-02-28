@@ -1,0 +1,70 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/core/theming/all-theme';
+
+$black-87-opacity: rgba(black, 0.87);
+$white-87-opacity: rgba(white, 0.87);
+$mat-custom-blue: (
+  50: #13213C,
+  100: #13213C,
+  200: #13213C,
+  300: #13213C,
+  400: #13213C,
+  500: #13213C,
+  600: #13213C,
+  700: #13213C,
+  800: #13213C,
+  900: #13213C,
+  A100: #13213C,
+  A200: #13213C,
+  A400: #13213C,
+  A700: #13213C,
+  contrast: (
+    50: $black-87-opacity,
+    100: $black-87-opacity,
+    200: $black-87-opacity,
+    300: $black-87-opacity,
+    400: $black-87-opacity,
+    500: white,
+    600: white,
+    700: white,
+    800: $white-87-opacity,
+    900: $white-87-opacity,
+    A100: $black-87-opacity,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+
+$primary: mat-palette($mat-custom-blue);
+$accent:  mat-palette($mat-blue);
+
+// The warn palette is optional (defaults to red).
+$warn:    mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$theme: mat-light-theme($primary, $accent, $warn);
+
+$core-whiter: #FAFAFA;
+$core-white: #F5F5F5;
+$core-black: #252525;
+$core-green: #80cd3d;
+$core-red: #f1452a;
+$core-yellow: #fbc81e;
+
+$mat-error: $core-red;
+$mat-warning: $core-yellow;
+$mat-success: $core-green;
+
+$background: $core-white;
+$background-accent: $core-black;
+$background-fade: rgba($core-whiter, 0.75);
+
+$dark-background: $core-black;
+$dark-background-accent: $core-white;
+
+$mat-list-avatar-size: 36px;
+$mat-list-avatar-margin: 5px;
+$mat-list-avatar-computed-size: $mat-list-avatar-size + ($mat-list-avatar-margin * 2);
+$mat-toolbar-height: 64px;
+$mat-spinner-size: 40px;

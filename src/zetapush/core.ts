@@ -54,7 +54,7 @@ export class ZetaPushConnection {
     });
   }
 
-  connect(credentials: any): Promise<void> {
+  connect(credentials: any = {}): Promise<void> {
     return new Promise<void>((resolve, reject) => {
       const { client } = this;
       const handlers: Array<any> = [];

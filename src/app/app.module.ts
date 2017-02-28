@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 
-import { AppRoutingModule } from './app-routing.module'
-import { ZetaPushModule } from './../zetapush/zetapush.module';
+import { AppRoutingModule } from './app-routing.module';
+import { ZetaPushModule } from './../zetapush';
 
 import { AppComponent } from './app.component';
 import { LoginViewComponent } from './login-view/login-view.component';
@@ -35,4 +35,4 @@ import { CanActivateConnected } from './can-activate-connected.service';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

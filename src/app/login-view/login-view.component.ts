@@ -20,8 +20,8 @@ export class LoginViewComponent {
   @HostBinding('class') classes = 'flex-centered flex-height';
 
   constructor(
-    private router: Router,
-    private connection: ZetaPushConnection
+    private connection: ZetaPushConnection,
+    private router: Router
   ) {
     this.credentials = new Credentials();
   }

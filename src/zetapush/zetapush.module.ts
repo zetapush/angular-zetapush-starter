@@ -15,4 +15,4 @@ import { ZetaPushClientConfig, ZetaPushClientFactory, ZetaPushConnectionFactory 
   ],
   bootstrap: []
 })
-export class ZetaPushModule { }
+export class ZetaPushModule {}

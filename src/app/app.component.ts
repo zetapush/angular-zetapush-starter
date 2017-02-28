@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, HostBinding } from '@angular/core';
+import { ZetaPushConnection } from './../zetapush';
 
 @Component({
   selector: 'app-root',
-  template: `<router-outlet></router-outlet>`,
+  template: `<main><router-outlet></router-outlet></main>`,
   styles: [`
     :host {
       display: flex;
@@ -14,4 +15,10 @@ import { Component } from '@angular/core';
     }
   `]
 })
-export class AppComponent {}
+export class AppComponent {
+  @HostBinding('class.connected') isConnected = false;
+  constructor(private connection: ZetaPushConnection) {
+    console.log('AppComponent::constructor', connection);
+    connection.connect().then(() => this.isConnected = true);
+  }
+}

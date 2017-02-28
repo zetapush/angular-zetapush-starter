@@ -1,0 +1,30 @@
+@keyframes ring-animation{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+app-root:empty {
+  height: 100vmin;
+  width: 100vw;
+  display: flex;
+}
+app-root:empty:before {
+    content: attr(message);
+    width: 100%;
+    display: block;
+    position: absolute;
+    bottom: 25vmin;
+    text-align: center;
+}
+app-root:empty:after {
+  content: '';
+  margin: auto;
+  border-radius: 100%;
+  animation: ring-animation 750ms linear infinite;
+  width: 25vmin;
+  height: 25vmin;
+  box-shadow: 0 2px 0 0 #000;
+}

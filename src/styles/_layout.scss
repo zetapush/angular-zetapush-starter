@@ -1,24 +1,14 @@
 html,
 body {
   height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 body {
   font-family: 'Noto Sans', sans-serif !important;
 }
 html {
   background-color: $core-white;
-}
-html::before {
-  opacity: 0.5;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-  pointer-events: none;
-  background-color: $background-fade;
-  background-blend-mode: luminosity;
 }
 
 .flex-centered {

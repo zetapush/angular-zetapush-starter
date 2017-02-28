@@ -2,6 +2,7 @@
 @import '~@angular/material/core/theming/all-theme';
 // Plus imports for other components in your app.
 @import "variables";
+@import "critical";
 @import "layout";
 
 // Include the base styles for Angular Material core. We include this here so that you only

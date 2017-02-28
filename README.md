@@ -1,6 +1,6 @@
 # angular-zetapush-starter
 
-> Angular (2+) Zetapush Starter project
+> Angular (2+) ZetaPush Starter project
 
 ## Installation
 

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 import { ZetaPushClient, ZetaPushConnection } from './core';
 import { ZetaPushClientConfig, ZetaPushClientFactory, ZetaPushConnectionFactory } from './di';

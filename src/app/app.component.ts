@@ -1,8 +1,8 @@
 import { Component, HostBinding } from '@angular/core';
-import { ZetaPushConnection } from './../zetapush';
+import { ZetaPushConnection } from './zetapush';
 
 @Component({
-  selector: 'app-root',
+  selector: 'zp-root',
   template: `<main><router-outlet></router-outlet></main>`,
   styles: [`
     :host {

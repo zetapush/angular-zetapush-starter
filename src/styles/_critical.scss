@@ -6,12 +6,12 @@
     transform: rotate(360deg);
   }
 }
-app-root:empty {
+zp-root:empty {
   height: 100vmin;
   width: 100vw;
   display: flex;
 }
-app-root:empty:before {
+zp-root:empty:before {
     content: attr(message);
     width: 100%;
     display: block;
@@ -19,7 +19,7 @@ app-root:empty:before {
     bottom: 25vmin;
     text-align: center;
 }
-app-root:empty:after {
+zp-root:empty:after {
   content: '';
   margin: auto;
   border-radius: 100%;

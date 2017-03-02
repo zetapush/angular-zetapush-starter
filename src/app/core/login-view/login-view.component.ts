@@ -8,7 +8,7 @@ class Credentials {
 }
 
 @Component({
-  selector: 'app-login-view',
+  selector: 'zp-login-view',
   templateUrl: './login-view.component.html'
 })
 export class LoginViewComponent {

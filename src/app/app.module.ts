@@ -1,36 +1,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { MaterialModule } from '@angular/material';
+import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
-import { ZetaPushModule } from './../zetapush';
+import { ZetaPushModule } from './zetapush';
+import { CoreModule } from './core';
 
 import { AppComponent } from './app.component';
-import { LoginViewComponent } from './login-view/login-view.component';
-import { HomeViewComponent } from './home-view/home-view.component';
-
-import { CanActivateConnected } from './can-activate-connected.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginViewComponent,
-    HomeViewComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     CommonModule,
-    FormsModule,
-    HttpModule,
-    MaterialModule,
+    RouterModule,
+
     ZetaPushModule,
-    AppRoutingModule
+
+    CoreModule
   ],
   providers: [
-    CanActivateConnected,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-home-view',
+  selector: 'zp-home-view',
   template: `<h1>{{message}}</h1>`,
   styles: [`
     h1 {

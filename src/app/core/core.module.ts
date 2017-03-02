@@ -21,6 +21,9 @@ import { CanActivateConnected } from './can-activate-connected.service';
     LoginViewComponent,
     HomeViewComponent
   ],
+  exports: [
+    CoreRoutingModule
+  ],
   providers: [
     CanActivateConnected
   ]

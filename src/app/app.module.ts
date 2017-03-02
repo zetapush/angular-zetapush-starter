@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { ZetaPushModule } from './zetapush';
 import { CoreModule } from './core';
+import { UserModule } from './user';
 
 import { AppComponent } from './app.component';
 
@@ -19,7 +20,8 @@ import { AppComponent } from './app.component';
 
     ZetaPushModule,
 
-    CoreModule
+    CoreModule,
+    UserModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

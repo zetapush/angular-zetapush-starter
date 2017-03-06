@@ -5,6 +5,7 @@ import { CanActivateConnected } from '../core';
 
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
+import { ListUserViewComponent } from './list-user-view/list-user-view.component';
 
 const routes: Routes = [{
   path: 'user',
@@ -12,7 +13,8 @@ const routes: Routes = [{
   canActivate: [ CanActivateConnected ],
   children: [
     { path: '', redirectTo: 'create', pathMatch: 'full' },
-    { path: 'create', component: CreateUserViewComponent }
+    { path: 'create', component: CreateUserViewComponent },
+    { path: 'list', component: ListUserViewComponent }
   ]
 }];
 

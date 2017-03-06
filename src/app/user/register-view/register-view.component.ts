@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../user-api.service';
 
@@ -10,12 +11,15 @@ import { User } from '../user-api.service';
 })
 export class RegisterViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
 
   onCreateUser(user: User) {
-    console.log('CreateUserViewComponent::onCreateUser', user);
+    console.log('RegisterViewComponent::onCreateUser', user);
+    this.router.navigate([
+      '/login'
+    ]);
   }
 
 }

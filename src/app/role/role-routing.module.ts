@@ -5,6 +5,7 @@ import { CanActivateConnected } from '../core';
 
 import { RoleLayoutComponent } from './role-layout/role-layout.component';
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
+import { DetailsRoleViewComponent } from './details-role-view/details-role-view.component';
 
 const routes: Routes = [{
   path: 'role',
@@ -12,7 +13,8 @@ const routes: Routes = [{
   canActivate: [ CanActivateConnected ],
   children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: 'list', component: ListRoleViewComponent }
+    { path: 'list', component: ListRoleViewComponent },
+    { path: 'details/:name', component: DetailsRoleViewComponent }
   ]
 }];
 

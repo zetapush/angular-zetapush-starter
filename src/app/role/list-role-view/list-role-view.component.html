@@ -1,4 +1,6 @@
 <h2>list-role-view</h2>
 <md-list>
-  <md-list-item *ngFor="let role of roles">{{role.name}}</md-list-item>
+  <md-list-item *ngFor="let role of roles">
+    <a routerLink="/role/details/{{role.metadata.name}}">{{role.name}}</a>
+  </md-list-item>
 </md-list>

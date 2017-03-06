@@ -17,7 +17,7 @@ export class CreateUserFormComponent {
   constructor(private api: UserApi) { }
 
   onSubmit({ value, valid }: { value: User, valid: boolean }) {
-    console.log('CreateUserViewComponent::onSubmit', value, valid);
+    console.log('CreateUserFormComponent::onSubmit', value, valid);
 
     if (valid) {
       this.api.createUser(value).then((user) => {

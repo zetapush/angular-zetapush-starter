@@ -25,6 +25,7 @@ export class ListRoleViewComponent implements OnInit {
 
   private listRole() {
     this.role.listRole().then((roles) => {
+      console.log('ListRoleViewComponent::listRole', roles);
       this.roles = roles;
     }, (errors) => {
       console.error('ListRoleViewComponent::listRole', errors);

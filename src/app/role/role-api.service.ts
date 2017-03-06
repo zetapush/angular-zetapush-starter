@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { Api, ZetaPushClient, createApi } from '../zetapush';
 
 export interface Metadata {

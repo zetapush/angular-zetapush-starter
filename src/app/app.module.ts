@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { ZetaPushModule } from './zetapush';
 import { CoreModule } from './core';
+import { RoleModule } from './role';
 import { UserModule } from './user';
 
 import { AppComponent } from './app.component';
@@ -21,6 +22,7 @@ import { AppComponent } from './app.component';
     ZetaPushModule,
 
     CoreModule,
+    RoleModule,
     UserModule
   ],
   providers: [

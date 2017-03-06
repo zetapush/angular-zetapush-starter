@@ -1,0 +1,9 @@
+<md-card>
+  <md-card-title>Register</md-card-title>
+  <md-card-content>
+    <zp-create-user-form (create)="onCreateUser($event)"></zp-create-user-form>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button md-button [disabled]="form.invalid" form="registerForm">Submit</button>
+  </md-card-actions>
+</md-card>

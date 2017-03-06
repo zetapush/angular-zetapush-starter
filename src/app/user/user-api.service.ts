@@ -9,8 +9,9 @@ export interface User {
 }
 
 export class UserApi extends Api {
-  createUser({ login, password, email, firstname, lastname }) {
-    return this.$publish('createUser', { login, password, email, firstname, lastname }, false);
+  createUser({ login, password, email, firstname, lastname }): Promise<User> {
+    const parameters = { login, password, email, firstname, lastname };
+    return this.$publish('createUser', parameters).then(({ user }) => user);
   }
 }
 

@@ -1,21 +1,2 @@
 <h2>create-user-view</h2>
-<form mdContent (ngSubmit)="onSubmit(form)" novalidate #form="ngForm" fxLayout="column">
-  <md-input-container>
-    <input mdInput ngModel name="login" type="text" placeholder="Login" required />
-  </md-input-container>
-  <md-input-container>
-    <input mdInput ngModel name="password" type="password" placeholder="Password" required />
-  </md-input-container>
-  <md-input-container>
-    <input mdInput ngModel name="email" type="mail" placeholder="Email" />
-  </md-input-container>
-  <md-input-container>
-    <input mdInput ngModel name="firstname" type="text" placeholder="Firstname" />
-  </md-input-container>
-  <md-input-container>
-    <input mdInput ngModel name="lastname" type="text" placeholder="Lastname" />
-  </md-input-container>
-  <button md-button [disabled]="form.invalid">Submit</button>
-</form>
-<pre>{{form.value | json}}</pre>
-<pre>{{userKey | json}}</pre>
+<zp-create-user-form (create)="onCreateUser($event)"></zp-create-user-form>

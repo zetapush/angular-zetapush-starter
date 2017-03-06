@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+
+import { Role, RoleApi } from '../role-api.service';
+
+@Component({
+  selector: 'zp-list-role-view',
+  templateUrl: './list-role-view.component.html',
+  styles: [`
+
+  `]
+})
+export class ListRoleViewComponent implements OnInit {
+
+  roles: Array<Role> = [];
+
+  constructor(
+    private role: RoleApi
+  ) {
+
+  }
+
+  ngOnInit() {
+    this.listRole();
+  }
+
+  private listRole() {
+    this.role.listRole().then((roles) => {
+      this.roles = roles;
+    }, (errors) => {
+      console.error('ListRoleViewComponent::listRole', errors);
+    });
+  }
+
+}

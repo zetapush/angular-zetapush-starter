@@ -1,0 +1,17 @@
+<form mdContent (ngSubmit)="onSubmit(form)" novalidate #form="ngForm" fxLayout="column" id="registerForm">
+  <md-input-container>
+    <input mdInput ngModel name="login" type="text" placeholder="Login" required />
+  </md-input-container>
+  <md-input-container>
+    <input mdInput ngModel name="password" type="password" placeholder="Password" required />
+  </md-input-container>
+  <md-input-container>
+    <input mdInput ngModel name="email" type="mail" placeholder="Email" />
+  </md-input-container>
+  <md-input-container>
+    <input mdInput ngModel name="firstname" type="text" placeholder="Firstname" />
+  </md-input-container>
+  <md-input-container>
+    <input mdInput ngModel name="lastname" type="text" placeholder="Lastname" />
+  </md-input-container>
+</form>

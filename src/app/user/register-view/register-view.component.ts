@@ -3,12 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../user-api.service';
 
 @Component({
-  selector: 'zp-create-user-view',
-  templateUrl: './create-user-view.component.html',
+  selector: 'zp-register-view',
+  templateUrl: './register-view.component.html',
   styles: [`
   `]
 })
-export class CreateUserViewComponent implements OnInit {
+export class RegisterViewComponent implements OnInit {
 
   constructor() { }
 

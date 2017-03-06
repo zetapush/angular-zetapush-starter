@@ -73,15 +73,7 @@
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.0.0-rc.2.tgz#69f68639270d71b2e8c552e4fa939975fcb88304"
 
-"@angular/compiler-cli@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0":
-  version "4.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.0.0-rc.1.tgz#48cdcfb691eac2152602f296fb9fa7ffc4bfa5bd"
-  dependencies:
-    "@angular/tsc-wrapped" "4.0.0-rc.1"
-    minimist "^1.2.0"
-    reflect-metadata "^0.1.2"
-
-"@angular/compiler-cli@>=4.0.0-rc.2 <5.0.0":
+"@angular/compiler-cli@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0", "@angular/compiler-cli@>=4.0.0-rc.2 <5.0.0":
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/compiler-cli/-/compiler-cli-4.0.0-rc.2.tgz#49730cb232d48aba25d68541eb9166bf5330dd2b"
   dependencies:
@@ -89,19 +81,11 @@
     minimist "^1.2.0"
     reflect-metadata "^0.1.2"
 
-"@angular/compiler@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0":
-  version "4.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.0.0-rc.1.tgz#e89f2d76f8800cb599e9dc6c7f8a381e79b92715"
-
-"@angular/compiler@>=4.0.0-rc.2 <5.0.0":
+"@angular/compiler@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0", "@angular/compiler@>=4.0.0-rc.2 <5.0.0":
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.0.0-rc.2.tgz#643e199e6792413f42cf149a9cf1672284787c11"
 
-"@angular/core@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0":
-  version "4.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.0.0-rc.1.tgz#7f87b7696b407476e45d6d3c1880a50d5afbb6e3"
-
-"@angular/core@>=4.0.0-rc.2 <5.0.0":
+"@angular/core@>=2.3.1 <5.0.0 || >=4.0.0-beta <5.0.0", "@angular/core@>=4.0.0-rc.2 <5.0.0":
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.0.0-rc.2.tgz#59535050e5d0e6141417186eee571296f8e9c3d0"
 
@@ -133,15 +117,15 @@
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.0.0-rc.2.tgz#66fc5be012caa38441314d0a0b9c9b6a723c471a"
 
-"@angular/tsc-wrapped@4.0.0-rc.1", "@angular/tsc-wrapped@>=0.5.0 <5.0.0 || >=4.0.0-beta <5.0.0":
-  version "4.0.0-rc.1"
-  resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-4.0.0-rc.1.tgz#767ce64d70c66b9d4bd8ba1ef99a47bc02836336"
-  dependencies:
-    tsickle "^0.21.0"
-
 "@angular/tsc-wrapped@4.0.0-rc.2":
   version "4.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-4.0.0-rc.2.tgz#d7023d93f4576b6f776ffc7175ff760e7e133705"
+  dependencies:
+    tsickle "^0.21.0"
+
+"@angular/tsc-wrapped@>=0.5.0 <5.0.0 || >=4.0.0-beta <5.0.0":
+  version "4.0.0-rc.1"
+  resolved "https://registry.yarnpkg.com/@angular/tsc-wrapped/-/tsc-wrapped-4.0.0-rc.1.tgz#767ce64d70c66b9d4bd8ba1ef99a47bc02836336"
   dependencies:
     tsickle "^0.21.0"
 
@@ -4795,7 +4779,7 @@ type-is@~1.6.14:
   version "2.1.6"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.1.6.tgz#40c7e6e9e5da7961b7718b55505f9cac9487a607"
 
-typescript@^2.1.6:
+typescript@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.2.1.tgz#4862b662b988a4c8ff691cc7969622d24db76ae9"
 

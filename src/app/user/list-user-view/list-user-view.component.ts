@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { User } from '../user-api.service';
+
 @Component({
   selector: 'zp-list-user-view',
   templateUrl: './list-user-view.component.html',
@@ -9,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListUserViewComponent implements OnInit {
 
-  users: Array<any> = [];
+  users: Array<User> = [];
 
   constructor() { }
 

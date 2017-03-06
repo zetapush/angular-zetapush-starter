@@ -4,7 +4,9 @@ import { Component } from '@angular/core';
   selector: 'zp-home-view',
   template: `
     <h1>{{message}}</h1>
-    <a routerLink="/user">/user</a>
+    <nav>
+      <a *ngFor="let path of paths" [routerLink]="path">{{path}}</a>
+    </nav>
   `,
   styles: [`
     h1 {
@@ -13,5 +15,6 @@ import { Component } from '@angular/core';
   `]
 })
 export class HomeViewComponent {
+  paths: Array<string> = ['/user', '/role'];
   message = `Congrats, you're connected to ZetaPush!`;
 }

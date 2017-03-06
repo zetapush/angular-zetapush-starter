@@ -1,3 +1,5 @@
+import { NgZone } from '@angular/core';
+
 import { Api, ZetaPushClient, createApi } from '../zetapush';
 
 export interface User {
@@ -15,10 +17,10 @@ export class UserApi extends Api {
   }
 }
 
-export function UserApiFactory(client: ZetaPushClient): UserApi {
-  return createApi(client, UserApi) as UserApi;
+export function UserApiFactory(client: ZetaPushClient, zone: NgZone): UserApi {
+  return createApi(client, zone, UserApi) as UserApi;
 }
 
 export const UserApiProvider = {
-  provide: UserApi, useFactory: UserApiFactory, deps: [ ZetaPushClient ]
+  provide: UserApi, useFactory: UserApiFactory, deps: [ ZetaPushClient, NgZone ]
 };

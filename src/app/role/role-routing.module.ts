@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CanActivateConnected } from '../core';
+import { CanActivateConnected, CoreState } from '../core';
 
 import { RoleLayoutComponent } from './role-layout/role-layout.component';
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
@@ -23,4 +23,12 @@ const routes: Routes = [{
   exports: [RouterModule],
   providers: []
 })
-export class RoleRoutingModule { }
+export class RoleRoutingModule {
+  constructor(core: CoreState) {
+    console.log('RoleRoutingModule::constructor', core);
+    core.register({
+      name: 'role',
+      path: '/role'
+    });
+  }
+}

@@ -9,6 +9,7 @@ import { LoginViewComponent } from './login-view/login-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 
 import { CanActivateConnected } from './can-activate-connected.service';
+import { CoreState } from './core-state.service';
 
 @NgModule({
   imports: [
@@ -25,7 +26,14 @@ import { CanActivateConnected } from './can-activate-connected.service';
     CoreRoutingModule
   ],
   providers: [
-    CanActivateConnected
+    CanActivateConnected,
+    CoreState
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor(private core: CoreState) {
+    core.state.subscribe((modules) => {
+      console.log('CoreModule', modules);
+    });
+  }
+}

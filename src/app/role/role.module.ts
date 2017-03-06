@@ -32,4 +32,4 @@ import { DetailsRoleComponent } from './details-role/details-role.component';
     RoleApiProvider
   ]
 })
-export class RoleModule { }
+export class RoleModule {}

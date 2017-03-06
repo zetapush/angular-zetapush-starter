@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CoreState } from '../core-state.service';
+
 
 @Component({
   selector: 'zp-home-view',
@@ -15,6 +17,13 @@ import { Component } from '@angular/core';
   `]
 })
 export class HomeViewComponent {
-  paths: Array<string> = ['/user', '/role'];
+  paths: Array<string> = [];
   message = `Congrats, you're connected to ZetaPush!`;
+  constructor(private core: CoreState) {
+    console.log('HomeViewComponent::constructor', core);
+    core.state.subscribe((modules) => {
+      console.log('HomeViewComponent', modules);
+    });
+    this.paths = core.modules.map(({ path }) => path);
+  }
 }

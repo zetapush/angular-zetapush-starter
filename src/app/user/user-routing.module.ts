@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CanActivateConnected } from '../core';
+import { CanActivateConnected, CoreState } from '../core';
 
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
@@ -27,4 +27,12 @@ const routes: Routes = [{
   exports: [RouterModule],
   providers: []
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {
+  constructor(core: CoreState) {
+    console.log('UserRoutingModule::constructor', core);
+    core.register({
+      name: 'user',
+      path: '/user'
+    });
+  }
+}

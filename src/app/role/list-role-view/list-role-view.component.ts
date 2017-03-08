@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Role, RoleApi } from '../role-api.service';
+import { Role, RoleApi } from '../index';
 
 @Component({
   selector: 'zp-list-role-view',

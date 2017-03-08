@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Role } from '../role-api.service';
+import { Role } from '../index';
 
 @Component({
   selector: 'zp-details-role',
@@ -9,8 +9,7 @@ import { Role } from '../role-api.service';
 })
 export class DetailsRoleComponent implements OnInit {
 
-  @Input()
-  role: Role;
+  @Input() role: Role;
 
   constructor() { }
 

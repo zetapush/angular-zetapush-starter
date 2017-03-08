@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User } from '../user-api.service';
+import { User } from '../index';
 
 @Component({
   selector: 'zp-list-user-view',

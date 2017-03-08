@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '../user-api.service';
+import { User } from '../index';
 
 @Component({
   selector: 'zp-register-view',

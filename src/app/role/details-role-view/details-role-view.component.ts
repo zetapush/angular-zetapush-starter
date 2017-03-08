@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Role, RoleApi } from '../role-api.service';
+import { Role, RoleApi } from '../index';
 
 @Component({
   selector: 'zp-details-role-view',

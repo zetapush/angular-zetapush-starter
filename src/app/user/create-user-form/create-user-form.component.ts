@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { User, UserApi } from '../user-api.service';
+import { User, UserApi } from '../index';
 
 @Component({
   selector: 'zp-create-user-form',
@@ -11,8 +11,7 @@ import { User, UserApi } from '../user-api.service';
 })
 export class CreateUserFormComponent {
 
-  @Output()
-  create = new EventEmitter<User>();
+  @Output() create = new EventEmitter<User>();
 
   constructor(private api: UserApi) { }
 

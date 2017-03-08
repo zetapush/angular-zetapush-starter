@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   zetapush: {
     apiUrl: 'http://hq.zpush.io:9080/zbo/pub/business/',
-    sandboxId: 'enOn-xYX',
+    sandboxId: 'QD1ibMVv',
   }
 };

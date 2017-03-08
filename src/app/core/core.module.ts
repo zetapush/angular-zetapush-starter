@@ -8,7 +8,7 @@ import { CoreRoutingModule } from './core-routing.module';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
 
-import { CanActivateConnected } from './can-activate-connected.service';
+import { IsSimplyConnected, IsWeaklyConnected } from './auth-guard.service';
 import { CoreState } from './core-state.service';
 
 @NgModule({
@@ -26,7 +26,8 @@ import { CoreState } from './core-state.service';
     CoreRoutingModule
   ],
   providers: [
-    CanActivateConnected,
+    IsSimplyConnected,
+    IsWeaklyConnected,
     CoreState
   ]
 })

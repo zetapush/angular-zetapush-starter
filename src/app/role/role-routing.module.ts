@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CanActivateConnected, CoreState } from '../core';
+import { IsSimplyConnected, CoreState } from '../core';
 
 import { RoleLayoutComponent } from './role-layout/role-layout.component';
 import { CreateRoleViewComponent } from './create-role-view/create-role-view.component';
@@ -11,7 +11,7 @@ import { DetailsRoleViewComponent } from './details-role-view/details-role-view.
 const routes: Routes = [{
   path: 'role',
   component: RoleLayoutComponent,
-  canActivate: [ CanActivateConnected ],
+  canActivate: [ IsSimplyConnected ],
   children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
     { path: 'create', component: CreateRoleViewComponent },

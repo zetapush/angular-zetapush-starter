@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CanActivateConnected, CoreState } from '../core';
+import { IsSimplyConnected, IsWeaklyConnected, CoreState } from '../core';
 
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
@@ -11,7 +11,7 @@ import { RegisterViewComponent } from './register-view/register-view.component';
 const routes: Routes = [{
   path: 'user',
   component: UserLayoutComponent,
-  canActivate: [ CanActivateConnected ],
+  canActivate: [ IsSimplyConnected ],
   children: [
     { path: '', redirectTo: 'create', pathMatch: 'full' },
     { path: 'create', component: CreateUserViewComponent },
@@ -19,7 +19,8 @@ const routes: Routes = [{
   ]
 }, {
   path: 'register',
-  component: RegisterViewComponent
+  component: RegisterViewComponent,
+  canActivate: [ IsWeaklyConnected ]
 }];
 
 @NgModule({

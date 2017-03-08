@@ -14,6 +14,9 @@ import { CoreState } from '../core-state.service';
     h1 {
       text-align: center;
     }
+    nav a {
+      padding: 0 0 0 1rem;
+    }
   `]
 })
 export class HomeViewComponent {

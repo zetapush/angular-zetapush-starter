@@ -1,20 +1,7 @@
 // TODO Refactor with Lerna
 import { Api } from '../zetapush';
-
-export interface Metadata {
-  [key: string]: any;
-}
-
-export interface Group {
-  id: string;
-  deploymentId: string;
-  name: string;
-  owner: string;
-  resource: string;
-  members: Array<any>;
-  metadata: Metadata;
-  tags: Array<string>;
-}
+// TODO Refactor with Lerna
+import { Group } from '../group';
 
 export interface Role {
   id: string;

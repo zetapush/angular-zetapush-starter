@@ -10,6 +10,8 @@ import { CommonModule } from './common';
 // TODO Externalize via lerna
 import { CoreModule } from './core';
 // TODO Externalize via lerna
+import { GroupModule } from './group';
+// TODO Externalize via lerna
 import { RoleModule } from './role';
 // TODO Externalize via lerna
 import { UserModule } from './user';
@@ -28,6 +30,7 @@ import { AppComponent } from './app.component';
     // Provide Core Services
     CoreModule,
     // Applications modules
+    GroupModule,
     RoleModule,
     UserModule,
     // Provide Common Components and Routing

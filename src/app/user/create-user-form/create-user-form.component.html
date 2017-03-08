@@ -1,4 +1,4 @@
-<form mdContent (ngSubmit)="onSubmit(form)" novalidate #form="ngForm" fxLayout="column" id="registerForm">
+<form mdContent (ngSubmit)="onSubmit(form)" novalidate #form="ngForm" fxLayout="column" id="zpCreateUser">
   <md-input-container>
     <input mdInput ngModel name="login" type="text" placeholder="Login" required />
   </md-input-container>
@@ -14,5 +14,5 @@
   <md-input-container>
     <input mdInput ngModel name="lastname" type="text" placeholder="Lastname" />
   </md-input-container>
-  <button md-button [disabled]="form.invalid" form="registerForm">Submit</button>
+  <button md-button [disabled]="form.invalid" form="zpCreateUser">Submit</button>
 </form>

@@ -21,7 +21,6 @@ export class CreateUserFormComponent {
     if (valid) {
       this.api.createUser(value).then((user) => {
         console.log('CreateUserFormComponent::onCreateUser', user);
-
         this.create.emit(user);
       }, (errors) => {
         console.error('onCreateUser', errors);

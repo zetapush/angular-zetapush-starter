@@ -23,10 +23,10 @@ export interface Role {
 
 export class RoleApi extends Api {
   createRole({ name }: { name: string }): Promise<Role> {
-    return this.$publish('createRole', { name }).then(({ role }) => role);
+    return this.$publish('createRole', { name }).then(({ id, role }) => ({ id, name, role }));
   }
   getRole({ name }: { name: string }): Promise<Role> {
-    return this.$publish('getRole', { name }).then(({ role }) => role);
+    return this.$publish('getRole', { name }).then(({ id, role }) => ({ id, name, role }));
   }
   listRole(): Promise<Array<Role>> {
     return this.$publish('listRole', { }).then(({ roles }) => roles);

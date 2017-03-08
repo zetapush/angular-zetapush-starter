@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { User } from '../index';
 
@@ -10,12 +11,15 @@ import { User } from '../index';
 })
 export class CreateUserViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
 
   onCreateUser(user: User) {
     console.log('CreateUserViewComponent::onCreateUser', user);
+    this.router.navigate([
+      '/user/list'
+    ]);
   }
 
 }

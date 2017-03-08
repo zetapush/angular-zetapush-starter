@@ -9,6 +9,7 @@ export interface User {
   lastname: string;
 }
 
+// TODO Should be auto-generated
 export class UserApi extends Api {
   createUser({ login, password, email, firstname, lastname }): Promise<User> {
     const parameters = { login, password, email, firstname, lastname };

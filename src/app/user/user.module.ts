@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -17,6 +17,7 @@ import { CreateUserViewComponent } from './create-user-view/create-user-view.com
 import { ListUserViewComponent } from './list-user-view/list-user-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
+import { AutocompleteUserDialogComponent, DialogUserListComponent } from './autocomplete-user-dialog/autocomplete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,16 +25,23 @@ import { CreateUserFormComponent } from './create-user-form/create-user-form.com
     CreateUserViewComponent,
     ListUserViewComponent,
     RegisterViewComponent,
+    AutocompleteUserDialogComponent,
+    DialogUserListComponent,
     CreateUserFormComponent
+  ],
+  entryComponents: [
+    DialogUserListComponent
   ],
   exports: [
     UserRoutingModule,
 
+    AutocompleteUserDialogComponent,
     CreateUserFormComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
     CoreModule,

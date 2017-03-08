@@ -5,6 +5,7 @@ import { Group } from '../group';
 
 export interface Role extends Group {}
 
+// TODO Should be auto-generated
 export class RoleApi extends Api {
   createRole({ name }: { name: string }): Promise<Role> {
     return this.$publish('createRole', { name }).then(({ role }) => role);

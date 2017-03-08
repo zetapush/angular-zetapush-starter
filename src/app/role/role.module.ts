@@ -30,6 +30,11 @@ import { CreateRoleViewComponent } from './create-role-view/create-role-view.com
     CreateRoleFormComponent,
     CreateRoleViewComponent
   ],
+  exports: [
+    RoleRoutingModule,
+
+    DetailsRoleComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -37,9 +42,6 @@ import { CreateRoleViewComponent } from './create-role-view/create-role-view.com
     FlexLayoutModule,
     CoreModule,
     GroupModule,
-    RoleRoutingModule
-  ],
-  exports: [
     RoleRoutingModule
   ],
   providers: [

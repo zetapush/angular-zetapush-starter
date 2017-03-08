@@ -26,15 +26,17 @@ import { CreateUserFormComponent } from './create-user-form/create-user-form.com
     RegisterViewComponent,
     CreateUserFormComponent
   ],
+  exports: [
+    UserRoutingModule,
+
+    CreateUserFormComponent
+  ],
   imports: [
     CommonModule,
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
     CoreModule,
-    UserRoutingModule
-  ],
-  exports: [
     UserRoutingModule
   ],
   providers: [

@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
     </nav>
     <nav>
       <a routerLink="/group/list" routerLinkActive="active">/group/list</a>
+      <a routerLink="/group/details/debug" routerLinkActive="active">/group/details/debug</a>
     </nav>
     <router-outlet></router-outlet>
   `,

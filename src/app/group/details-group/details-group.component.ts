@@ -1,11 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Group } from '../';
 
 @Component({
   selector: 'zp-details-group',
   templateUrl: './details-group.component.html',
-  styles: []
+  styles: [`
+
+  `]
 })
 export class DetailsGroupComponent implements OnInit {
+
+  @Input() group: Group;
 
   constructor() { }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { User } from '../index';
+import { User } from '../';
 
 @Component({
   selector: 'zp-create-user-view',

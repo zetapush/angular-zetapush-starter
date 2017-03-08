@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { CoreState } from '../core-state.service';
 
+// TODO Refactor with Lerna
+import { CoreState } from '../../core';
 
 @Component({
   selector: 'zp-home-view',

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
-import { Role, RoleApi } from '../index';
+import { Role, RoleApi } from '../';
 
 @Component({
   selector: 'zp-create-role-form',

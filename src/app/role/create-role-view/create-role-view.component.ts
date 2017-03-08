@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Role } from '../index';
+import { Role } from '../';
 
 @Component({
   selector: 'zp-create-role-view',

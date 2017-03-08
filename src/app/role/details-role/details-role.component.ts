@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { Role } from '../index';
+import { Role } from '../';
 
 @Component({
   selector: 'zp-details-role',

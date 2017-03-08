@@ -1,5 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
+
+// TODO Refactor with Lerna
 import { ZetaPushConnection } from '../../zetapush/core';
 
 class Credentials {

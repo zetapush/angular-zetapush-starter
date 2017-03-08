@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 // TODO Externalize via lerna
 import { ZetaPushModule } from './zetapush';
+// TODO Externalize via lerna
+import { CommonModule } from './common';
 // TODO Externalize via lerna
 import { CoreModule } from './core';
 // TODO Externalize via lerna
@@ -20,14 +22,16 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     RouterModule,
-
+    // Provide ZetaPush Services
     ZetaPushModule,
-
+    // Provide Core Services
     CoreModule,
+
     RoleModule,
-    UserModule
+    UserModule,
+    // Provide Common Components and Routing
+    CommonModule
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy }

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { User, UserApi } from '../index';
+import { User, UserApi } from '../';
 
 @Component({
   selector: 'zp-create-user-form',

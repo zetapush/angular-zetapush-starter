@@ -3,6 +3,9 @@ import { CommonModule as NgCommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 
+// TODO Refactor with Lerna
+import { CoreModule } from '../core';
+
 import { CommonRoutingModule } from './common-routing.module';
 
 import { LoginViewComponent } from './login-view/login-view.component';
@@ -19,6 +22,7 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
     NgCommonModule,
     FormsModule,
     MaterialModule,
+    CoreModule,
     CommonRoutingModule
   ],
   exports: [

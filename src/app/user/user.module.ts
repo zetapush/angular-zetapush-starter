@@ -4,9 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { UserApiProvider } from './user-api.provider';
+// TODO Refactor with Lerna
+import { CoreModule } from '../core';
 
 import { UserRoutingModule } from './user-routing.module';
+
+import { UserApiProvider } from './user-api.provider';
 
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 
@@ -28,6 +31,7 @@ import { CreateUserFormComponent } from './create-user-form/create-user-form.com
     FormsModule,
     FlexLayoutModule,
     MaterialModule,
+    CoreModule,
     UserRoutingModule
   ],
   exports: [

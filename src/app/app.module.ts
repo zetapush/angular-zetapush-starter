@@ -27,7 +27,7 @@ import { AppComponent } from './app.component';
     ZetaPushModule,
     // Provide Core Services
     CoreModule,
-
+    // Applications modules
     RoleModule,
     UserModule,
     // Provide Common Components and Routing

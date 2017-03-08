@@ -4,9 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { RoleApiProvider } from './role-api.provider';
+// TODO Refactor with Lerna
+import { CoreModule } from '../core';
 
 import { RoleRoutingModule } from './role-routing.module';
+
+import { RoleApiProvider } from './role-api.provider';
+
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
 import { RoleLayoutComponent } from './role-layout/role-layout.component';
 import { DetailsRoleViewComponent } from './details-role-view/details-role-view.component';
@@ -28,7 +32,7 @@ import { CreateRoleViewComponent } from './create-role-view/create-role-view.com
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
-
+    CoreModule,
     RoleRoutingModule
   ],
   exports: [

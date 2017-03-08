@@ -1,6 +1,4 @@
-import { NgZone } from '@angular/core';
-
-import { Api, ZetaPushClient, createApi } from '../zetapush';
+import { Api } from '../zetapush';
 
 export interface Metadata {
   [key: string]: any;
@@ -24,6 +22,9 @@ export interface Role {
 }
 
 export class RoleApi extends Api {
+  createRole({ name }: { name: string }): Promise<Role> {
+    return this.$publish('createRole', { name }).then(({ role }) => role);
+  }
   getRole({ name }: { name: string }): Promise<Role> {
     return this.$publish('getRole', { name }).then(({ role }) => role);
   }
@@ -34,11 +35,3 @@ export class RoleApi extends Api {
     return this.$publish('listUserRole', { }).then(({ roles }) => roles);
   }
 }
-
-export function RoleApiFactory(client: ZetaPushClient, zone: NgZone): RoleApi {
-  return createApi(client, zone, RoleApi) as RoleApi;
-}
-
-export const RoleApiProvider = {
-  provide: RoleApi, useFactory: RoleApiFactory, deps: [ ZetaPushClient, NgZone ]
-};

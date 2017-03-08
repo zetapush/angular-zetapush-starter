@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { UserApiProvider } from './user-api.service';
+import { UserApiProvider } from './user-api.provider';
 
 import { UserRoutingModule } from './user-routing.module';
 

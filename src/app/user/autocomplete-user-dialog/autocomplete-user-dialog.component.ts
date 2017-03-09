@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MdDialog } from '@angular/material';
+import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -15,12 +15,12 @@ interface User {
   selector: 'zp-dialog-user-list',
   template: `
     <md-input-container>
-      <input mdInput placeholder="User" [mdAutocomplete]="search" [formControl]="login">
+      <input mdInput placeholder="User" [mdAutocomplete]="search" [formControl]="user">
     </md-input-container>
 
     <md-autocomplete #search="mdAutocomplete" [displayWith]="display">
-      <md-option *ngFor="let login of filtered | async" [value]="login">
-        {{ login }}
+      <md-option *ngFor="let user of filtered | async" [value]="user">
+        {{ user.login }}
       </md-option>
     </md-autocomplete>
   `,
@@ -29,7 +29,7 @@ interface User {
   `]
 })
 export class DialogUserListComponent {
-  login = new FormControl();
+  user = new FormControl();
   users: Array<User> = [
     { login: 'ghoullier', userKey: 'GH' },
     { login: 'jcmichel', userKey: 'JC' },
@@ -39,20 +39,28 @@ export class DialogUserListComponent {
   ];
   filtered: Observable<Array<User>>;
 
-  constructor() {
-    this.filtered = this.login.valueChanges
+  constructor(private dialog: MdDialogRef<User>) {
+    console.log('DialogUserListComponent::constructor', dialog);
+    this.filtered = this.user.valueChanges
         .startWith(null)
         .map((user) => user && typeof user === 'object' ? user.login : user)
         .map((name) => name ? this.filter(name) : this.users.slice());
+
+    this.user.valueChanges.subscribe((user) => {
+      console.log('DialogUserListComponent::onChangeUser', user);
+      if (user && typeof user === 'object') {
+        this.dialog.close(user);
+      }
+    });
   }
 
   filter(value: string): Array<User> {
-    console.log('filter', value);
+    console.log('DialogUserListComponent::filter', value);
     return this.users.filter((user) => new RegExp(value, 'gi').test(user.login));
   }
 
   display(user: User): string {
-    console.log('display', user);
+    console.log('DialogUserListComponent::display', user);
     return user ? user.login : '';
   }
 
@@ -74,7 +82,11 @@ export class AutocompleteUserDialogComponent implements OnInit {
   }
 
   open() {
-    this.dialog.open(DialogUserListComponent);
+    const ref = this.dialog.open(DialogUserListComponent);
+
+    ref.afterClosed().subscribe((value) => {
+      console.log('AutocompleteUserDialogComponent::afterClosed', value);
+    });
   }
 
 }

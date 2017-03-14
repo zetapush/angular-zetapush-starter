@@ -70,7 +70,7 @@ export class DialogUserListComponent {
 @Component({
   selector: 'zp-autocomplete-user-dialog',
   template: `
-    <button md-button-raised color="primary" (click)="open()">{{title}}</button>
+    <button md-icon-button color="primary" (click)="open()"><md-icon>add</md-icon></button>
   `,
   styles: [`
   `]

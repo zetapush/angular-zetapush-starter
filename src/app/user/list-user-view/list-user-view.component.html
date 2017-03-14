@@ -1,5 +1,7 @@
 <h1>list-user-view</h1>
 <md-list>
-  <md-list-item *ngFor="let user of users"></md-list-item>
+  <md-list-item *ngFor="let user of users | async">
+    {{ user | json }}
+  </md-list-item>
 </md-list>
-<zp-autocomplete-user-dialog></zp-autocomplete-user-dialog>
+<zp-autocomplete-user-dialog (select)="onSelectUser($event)" [users]="users"></zp-autocomplete-user-dialog>

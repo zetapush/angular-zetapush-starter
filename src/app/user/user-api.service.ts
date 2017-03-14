@@ -7,6 +7,7 @@ export interface User {
   email: string;
   firstname: string;
   lastname: string;
+  userKey: string;
 }
 
 // TODO Should be auto-generated

@@ -1,0 +1,17 @@
+<md-card>
+  <md-card-title>{{group?.name}}</md-card-title>
+  <md-card-subtitle>{{group?.owner}}:{{group?.id}}</md-card-subtitle>
+  <md-card-content>
+    <h3>Members:</h3>
+    <pre>{{group?.members | json}}</pre>
+    <h3>Metadata:</h3>
+    <pre>{{group?.metadata | json}}</pre>
+    <h3>Tags:</h3>
+    <pre>{{group?.tags | json}}</pre>
+    <md-chip-list chips="group?.tags"></md-chip-list>
+  </md-card-content>
+  <md-card-actions>
+    <button type="button" md-button color="accent">Add Member</button>
+    <button type="button" md-raised-button color="primary">Edit</button>
+  </md-card-actions>
+</md-card>

@@ -1,5 +1,7 @@
 import { Component, HostBinding } from '@angular/core';
 import { Router } from '@angular/router';
+
+// TODO Refactor with Lerna
 import { ZetaPushConnection } from '../../zetapush/core';
 
 class Credentials {
@@ -9,7 +11,9 @@ class Credentials {
 
 @Component({
   selector: 'zp-login-view',
-  templateUrl: './login-view.component.html'
+  templateUrl: './login-view.component.html',
+  styles: [`
+  `]
 })
 export class LoginViewComponent {
 

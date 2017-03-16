@@ -5271,6 +5271,10 @@ zetapush-js@^3.1.0:
   dependencies:
     zetapush-cometd "^3.0.13"
 
-zone.js@^0.7.2, zone.js@^0.7.6:
+zone.js@^0.7.2:
   version "0.7.8"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.7.8.tgz#4f3fe8834d44597f2639053a0fa438df34fffded"
+
+zone.js@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.4.tgz#cc40ae5a1c879601c5ebba2096b5c80f0c4c3602"

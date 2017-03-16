@@ -18,6 +18,13 @@ import { UserModule } from './user';
 
 import { AppComponent } from './app.component';
 
+// Add active application modules here
+const APPLICATIONS_MODULES = [
+  GroupModule,
+  RoleModule,
+  UserModule
+];
+
 @NgModule({
   declarations: [
     AppComponent
@@ -30,9 +37,7 @@ import { AppComponent } from './app.component';
     // Provide Core Services
     CoreModule,
     // Applications modules
-    GroupModule,
-    RoleModule,
-    UserModule,
+    ...APPLICATIONS_MODULES,
     // Provide Common Components and Routing
     CommonModule
   ],

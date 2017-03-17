@@ -5,6 +5,7 @@ import { IsSimplyConnected, CoreState } from '../core';
 
 import { OrganizationLayoutComponent } from './organization-layout/organization-layout.component';
 import { ListOrganizationViewComponent } from './list-organization-view/list-organization-view.component';
+import { ListUserOrganizationViewComponent } from './list-user-organization-view/list-user-organization-view.component';
 import { DetailsOrganizationViewComponent } from './details-organization-view/details-organization-view.component';
 
 const routes: Routes = [{
@@ -12,8 +13,9 @@ const routes: Routes = [{
   component: OrganizationLayoutComponent,
   canActivate: [ IsSimplyConnected ],
   children: [
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: 'list', component: ListOrganizationViewComponent },
+    { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
+    { path: 'list/all', component: ListOrganizationViewComponent },
+    { path: 'list/mine', component: ListUserOrganizationViewComponent },
     { path: 'details/:name', component: DetailsOrganizationViewComponent }
   ]
 }];

@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
       <a routerLink="/home">/home</a>
     </nav>
     <nav>
-      <a routerLink="/organization/list" routerLinkActive="active">/organization/list</a>
+      <a routerLink="/organization/list/all" routerLinkActive="active">/organization/list/all</a>
+      <a routerLink="/organization/list/mine" routerLinkActive="active">/organization/list/mine</a>
     </nav>
     <router-outlet></router-outlet>
   `,

@@ -6,6 +6,7 @@ import { IsSimplyConnected, CoreState } from '../core';
 import { RoleLayoutComponent } from './role-layout/role-layout.component';
 import { CreateRoleViewComponent } from './create-role-view/create-role-view.component';
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
+import { ListUserRoleViewComponent } from './list-user-role-view/list-user-role-view.component';
 import { DetailsRoleViewComponent } from './details-role-view/details-role-view.component';
 
 const routes: Routes = [{
@@ -13,9 +14,10 @@ const routes: Routes = [{
   component: RoleLayoutComponent,
   canActivate: [ IsSimplyConnected ],
   children: [
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
+    { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
     { path: 'create', component: CreateRoleViewComponent },
-    { path: 'list', component: ListRoleViewComponent },
+    { path: 'list/all', component: ListRoleViewComponent },
+    { path: 'list/mine', component: ListUserRoleViewComponent },
     { path: 'details/:name', component: DetailsRoleViewComponent }
   ]
 }];

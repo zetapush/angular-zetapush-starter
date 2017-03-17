@@ -8,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
     </nav>
     <nav>
       <a routerLink="/role/create" routerLinkActive="active">/role/create</a>
-      <a routerLink="/role/list" routerLinkActive="active">/role/list</a>
+      <a routerLink="/role/list/all" routerLinkActive="active">/role/list/all</a>
+      <a routerLink="/role/list/mine" routerLinkActive="active">/role/list/mine</a>
     </nav>
     <router-outlet></router-outlet>
   `,

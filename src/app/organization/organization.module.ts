@@ -16,6 +16,7 @@ import { OrganizationApiProvider } from './organization-api.provider';
 import { OrganizationLayoutComponent } from './organization-layout/organization-layout.component';
 
 import { ListOrganizationViewComponent } from './list-organization-view/list-organization-view.component';
+import { ListUserOrganizationViewComponent } from './list-user-organization-view/list-user-organization-view.component';
 import { DetailsOrganizationViewComponent } from './details-organization-view/details-organization-view.component';
 import { DetailsOrganizationComponent } from './details-organization/details-organization.component';
 
@@ -23,6 +24,7 @@ import { DetailsOrganizationComponent } from './details-organization/details-org
   declarations: [
     OrganizationLayoutComponent,
     ListOrganizationViewComponent,
+    ListUserOrganizationViewComponent,
     DetailsOrganizationViewComponent,
     DetailsOrganizationComponent
   ],

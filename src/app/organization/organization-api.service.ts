@@ -10,7 +10,7 @@ export class OrganizationApi extends Api {
   createOrganization({ name }: { name: string }): Promise<Organization> {
     return this.$publish('createOrganization', { name }).then(({ organization }) => organization);
   }
-  getOrganization({ id, name }: { id: string, name: string }): Promise<Organization> {
+  getOrganization({ id, name }: { id?: string, name?: string }): Promise<Organization> {
     return this.$publish('getOrganization', { name }).then(({ organization }) => organization);
   }
   getOrganizationList(): Promise<Array<Organization>> {

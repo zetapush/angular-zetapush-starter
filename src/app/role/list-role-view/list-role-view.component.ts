@@ -11,22 +11,18 @@ import { Role, RoleApi } from '../';
 })
 export class ListRoleViewComponent implements OnInit {
 
-  roles: Array<Role> = [];
+  list: Array<Role> = [];
 
-  constructor(
-    private role: RoleApi
-  ) {
-
-  }
+  constructor( private api: RoleApi) {}
 
   ngOnInit() {
     this.getRoleList();
   }
 
   private getRoleList() {
-    this.role.getRoleList().then((roles) => {
-      console.log('ListRoleViewComponent::getRoleList', roles);
-      this.roles = roles;
+    this.api.getRoleList().then((list) => {
+      console.log('ListRoleViewComponent::getRoleList', list);
+      this.list = list;
     }, (errors) => {
       console.error('ListRoleViewComponent::getRoleList', errors);
     });

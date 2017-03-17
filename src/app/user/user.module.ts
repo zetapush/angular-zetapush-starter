@@ -44,7 +44,9 @@ import { AutocompleteUserDialogComponent, DialogUserListComponent } from './auto
     ReactiveFormsModule,
     FlexLayoutModule,
     MaterialModule,
+
     CoreModule,
+
     UserRoutingModule
   ],
   providers: [

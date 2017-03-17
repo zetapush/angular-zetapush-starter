@@ -34,7 +34,9 @@ import { DetailsGroupComponent } from './details-group/details-group.component';
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
+
     CoreModule,
+
     GroupRoutingModule
   ],
   providers: [

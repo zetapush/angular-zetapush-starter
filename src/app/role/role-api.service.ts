@@ -13,10 +13,10 @@ export class RoleApi extends Api {
   getRole({ name }: { name: string }): Promise<Role> {
     return this.$publish('getRole', { name }).then(({ role }) => role);
   }
-  listRole(): Promise<Array<Role>> {
-    return this.$publish('listRole', { }).then(({ roles }) => roles);
+  getRoleList(): Promise<Array<Role>> {
+    return this.$publish('getRoleList', { }).then(({ list }) => list);
   }
-  listUserRole(): Promise<Array<Role>> {
-    return this.$publish('listUserRole', { }).then(({ roles }) => roles);
+  getUserRoleList(): Promise<Array<Role>> {
+    return this.$publish('getUserRoleList', { }).then(({ list }) => list);
   }
 }

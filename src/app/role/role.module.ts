@@ -40,8 +40,10 @@ import { CreateRoleViewComponent } from './create-role-view/create-role-view.com
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
+
     CoreModule,
     GroupModule,
+
     RoleRoutingModule
   ],
   providers: [

@@ -20,15 +20,15 @@ export class ListRoleViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listRole();
+    this.getRoleList();
   }
 
-  private listRole() {
-    this.role.listRole().then((roles) => {
-      console.log('ListRoleViewComponent::listRole', roles);
+  private getRoleList() {
+    this.role.getRoleList().then((roles) => {
+      console.log('ListRoleViewComponent::getRoleList', roles);
       this.roles = roles;
     }, (errors) => {
-      console.error('ListRoleViewComponent::listRole', errors);
+      console.error('ListRoleViewComponent::getRoleList', errors);
     });
   }
 

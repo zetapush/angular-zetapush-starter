@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Organization } from '../';
 
 @Component({
   selector: 'zp-details-organization',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class DetailsOrganizationComponent implements OnInit {
+
+  @Input() organization: Organization;
 
   constructor() { }
 

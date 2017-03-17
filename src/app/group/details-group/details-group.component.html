@@ -3,7 +3,11 @@
   <md-card-subtitle>{{group?.owner}}:{{group?.id}}</md-card-subtitle>
   <md-card-content>
     <h3>Members:</h3>
-    <pre>{{group?.members | json}}</pre>
+    <md-list>
+      <md-list-item *ngFor="let member of group?.members">
+        <a [routerLink]="['/user/details/', member.userKey]">{{member.login}}</a>
+      </md-list-item>
+    </md-list>
     <h3>Metadata:</h3>
     <pre>{{group?.metadata | json}}</pre>
     <h3>Tags:</h3>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
-import { Group } from '../';
+import { Group, GroupApi } from '../';
 
 @Component({
   selector: 'zp-details-group-view',
@@ -11,10 +12,17 @@ export class DetailsGroupViewComponent implements OnInit {
 
   group: Group;
 
-  constructor() { }
+  constructor(private api: GroupApi, private route: ActivatedRoute) {
+    route.params.subscribe((params) => {
+      console.log('DetailsGroupViewComponent::params', params);
+      const id = params['id'];
+      api.getGroup({ id }).then((group: Group) => {
+        this.group = group;
+      });
+    });
+  }
 
   ngOnInit() {
-    this.group = null;
   }
 
 }

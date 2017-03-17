@@ -4,7 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IsSimplyConnected, CoreState } from '../core';
 
 import { GroupLayoutComponent } from './group-layout/group-layout.component';
-import { ListGroupViewComponent } from './list-group-view/list-group-view.component';
+import { CreateGroupViewComponent } from './create-group-view/create-group-view.component';
+import { ListUserGroupViewComponent } from './list-user-group-view/list-user-group-view.component';
 import { DetailsGroupViewComponent } from './details-group-view/details-group-view.component';
 
 const routes: Routes = [{
@@ -12,9 +13,10 @@ const routes: Routes = [{
   component: GroupLayoutComponent,
   canActivate: [ IsSimplyConnected ],
   children: [
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: 'list', component: ListGroupViewComponent },
-    { path: 'details/:name', component: DetailsGroupViewComponent }
+    { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
+    { path: 'create', component: CreateGroupViewComponent },
+    { path: 'list/mine', component: ListUserGroupViewComponent },
+    { path: 'details/:id', component: DetailsGroupViewComponent }
   ]
 }];
 

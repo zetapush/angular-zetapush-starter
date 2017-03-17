@@ -20,7 +20,7 @@ export class CreateRoleViewComponent implements OnInit {
   onCreateRole(role: Role) {
     console.log('CreateRoleViewComponent::onCreateRole', role);
     this.router.navigate([
-      '/role/list'
+      '/role/list/all'
     ]);
   }
 

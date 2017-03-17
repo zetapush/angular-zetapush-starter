@@ -1,0 +1,6 @@
+<h1>list-user-group-view</h1>
+<md-list>
+  <md-list-item *ngFor="let group of list">
+    <a routerLink="/group/details/{{group.id}}">{{group.name}}</a>
+  </md-list-item>
+</md-list>

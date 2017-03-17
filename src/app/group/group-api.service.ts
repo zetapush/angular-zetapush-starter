@@ -51,19 +51,19 @@ export class GroupApi extends Api {
   }
 
   deleteGroup({ id }: ApiGroup): Promise<ApiGroup> {
-    return this.$publish('deleteGroup', { });
+    return this.$publish('deleteGroup', { id });
   }
 
   getGroup({ id }: ApiGroup): Promise<Group> {
-    return this.$publish('getGroup', { }).then(({ group }) => group);
+    return this.$publish('getGroup', { id }).then(({ group }) => group);
   }
 
-  listGroup(): Promise<Array<Group>> {
-    return this.$publish('listGroup', { }).then(({ groups }) => groups);
+  getGroupList(): Promise<Array<Group>> {
+    return this.$publish('getGroupList', { }).then(({ list }) => list);
   }
 
-  listUserGroup(): Promise<Array<Group>> {
-    return this.$publish('listUserGroup', { }).then(({ groups }) => groups);
+  getUserGroupList(): Promise<Array<Group>> {
+    return this.$publish('getUserGroupList', { }).then(({ list }) => list);
   }
 
 }

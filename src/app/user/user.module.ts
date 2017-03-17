@@ -18,6 +18,8 @@ import { ListUserViewComponent } from './list-user-view/list-user-view.component
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
 import { AutocompleteUserDialogComponent, DialogUserListComponent } from './autocomplete-user-dialog/autocomplete-user-dialog.component';
+import { DetailsUserViewComponent } from './details-user-view/details-user-view.component';
+import { DetailsUserComponent } from './details-user/details-user.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { AutocompleteUserDialogComponent, DialogUserListComponent } from './auto
     RegisterViewComponent,
     AutocompleteUserDialogComponent,
     DialogUserListComponent,
-    CreateUserFormComponent
+    CreateUserFormComponent,
+    DetailsUserViewComponent,
+    DetailsUserComponent
   ],
   entryComponents: [
     DialogUserListComponent
@@ -36,7 +40,8 @@ import { AutocompleteUserDialogComponent, DialogUserListComponent } from './auto
     UserRoutingModule,
 
     AutocompleteUserDialogComponent,
-    CreateUserFormComponent
+    CreateUserFormComponent,
+    DetailsUserComponent
   ],
   imports: [
     CommonModule,

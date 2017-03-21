@@ -1,0 +1,45 @@
+<div *ngIf="beacons">
+	<md-grid-list cols="3">
+		<md-grid-tile>
+		<h2>Entrance</h2>
+		<md-list *ngFor="let beacon of beacons">
+			<md-list-item>{{beacon.id}} -- {{beacon.distance}}</md-list-item>
+		</md-list>
+		</md-grid-tile>
+
+		<md-grid-tile>
+		<h2>Exit</h2>
+		<md-list *ngFor="let beacon of beacons | beacon_filter:filterExit">
+			<md-list-item>{{beacon.id}} -- {{beacon.distance}}</md-list-item>
+		</md-list>
+		</md-grid-tile>
+
+		<md-grid-tile>
+		<h2>Lock</h2>
+		<md-list *ngFor="let beacon of beacons | beacon_filter:filterLock">
+			<md-list-item>{{beacon.id}} -- {{beacon.distance}}</md-list-item>
+		</md-list>
+		</md-grid-tile>
+
+		<md-grid-tile>
+		<h2>Area 1</h2>
+		<md-list *ngFor="let beacon of beacons | beacon_filter:filterArea1">
+			<md-list-item>{{beacon.id}} -- {{beacon.distance}}</md-list-item>
+		</md-list>
+		</md-grid-tile>
+
+		<md-grid-tile>
+		<h2>Area 2</h2>
+		<md-list *ngFor="let beacon of beacons | beacon_filter:filterArea2">
+			<md-list-item>{{beacon.id}} -- {{beacon.distance}}</md-list-item>
+		</md-list>
+		</md-grid-tile>
+
+		<md-grid-tile>
+		<h2>Area 3</h2>
+		<md-list *ngFor="let beacon of beacons | beacon_filter:filterArea3">
+			<md-list-item>{{beacon.id}} -- {{beacon.distance}}</md-list-item>
+		</md-list>
+		</md-grid-tile>
+	</md-grid-list>
+</div>

@@ -1,0 +1,12 @@
+<table ng-table class='table table-condensed tale-bordered'>
+	<tr>
+		<td>ID</td>
+		<td>Area</td>
+		<td>Distance</td>
+	</tr>
+	<tr *ngFor="let beacon of beacons">
+		<td data-tile>{{beacon.id}}</td>
+		<td data-tile>{{beacon.area}}</td>
+		<td data-tile>{{beacon.distance}}</td>
+	</tr>
+</table>

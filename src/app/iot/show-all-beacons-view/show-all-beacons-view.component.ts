@@ -13,50 +13,42 @@ import { services } from 'zetapush-js';
 
 export class ShowAllBeaconsViewComponent implements OnInit {
 
-	beacons: Beacon[];
-	beaconsInList: string[] = [];
+	id = "none";
 
 	constructor(private beaconsService: BeaconsService, private client: ZetaPushClient) {
 
 		// Create listener to get beacons
-		const apiListenerBeacon = client.createService({
+		this.client.createService({
 			Type: services.Macro,
 			listener: {
-				updateUI({ data }) {
-
+				newBeacon: (message) => {
 					// Handle result of listener
-					var beacons = data.result.allDevices;
-
-					for (var i=0; i<beacons.length; i++){
-						console.log("beacon : " + beacons[i]);
-					}
-				}
+					//console.log("Beacon id : " + message.data.result.res_id);
+					this.id = "test";
+					console.log("Result id : ", message.data.result.res_id);
+				}	
 			}
-		})
+		}).call({name: 'newBeacon'})
 
-		// Call the apiListenerBeacon
-		apiListenerBeacon.call({ name: 'updateUI'})
-
-
+		
 	}
+
+	
+
+	beacons: Beacon[];	
 
 	getBeacons(): void {
-		this.beaconsService.getBeacons().then(beacons => {this.beacons = beacons, this.putBeaconInList()});
-	}
-
-	putBeaconInList(): void {
-		this.beaconsInList.push("ID");
-		this.beaconsInList.push("Area");
-		this.beaconsInList.push("Distance");
-
-		for(var i=0; i<this.beacons.length; i=i+1){
-			this.beaconsInList.push(this.beacons[i].id);
-			this.beaconsInList.push(this.beacons[i].area);
-			this.beaconsInList.push(this.beacons[i].distance.toString());
-		}
+		this.beaconsService.getBeacons().then(beacons => {this.beacons = beacons});
 	}
 
 	ngOnInit(): void {
 		this.getBeacons();
 	}
+
+
+	
+
+	// Call the apiListenerBeacon
+
+
 }

@@ -1,12 +1,12 @@
-<table ng-table class='table table-condensed tale-bordered'>
-	<tr>
-		<td>ID</td>
-		<td>Area</td>
-		<td>Distance</td>
-	</tr>
-	<tr *ngFor="let beacon of beacons">
-		<td data-tile>{{beacon.id}}</td>
-		<td data-tile>{{beacon.area}}</td>
-		<td data-tile>{{beacon.distance}}</td>
-	</tr>
-</table>
+<md-grid-list cols="6">
+	<md-grid-tile *ngFor="let beacon of beacons">
+		<md-card>
+			<md-card-content>
+				<h2>Beacon</h2>
+				<p>ID : {{beacon.id}}</p>
+				<p>Area : {{beacon.area}}</p>
+				<p>Distance : {{beacon.distance}}</p>
+			</md-card-content>
+		</md-card>
+	</md-grid-tile>
+</md-grid-list>

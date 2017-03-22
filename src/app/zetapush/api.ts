@@ -5,7 +5,7 @@ import { services } from 'zetapush-js';
 import { ZetaPushClient } from './core';
 
 export class Api extends services.Macro {
-  static DEFAULT_DEPLOYMENT_ID = services.Macro.DEFAULT_DEPLOYMENT_ID;
+
 }
 
 export function createApi(client: ZetaPushClient, zone: NgZone, Api) {

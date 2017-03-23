@@ -41,7 +41,8 @@ import { DetailsUserComponent } from './details-user/details-user.component';
 
     AutocompleteUserDialogComponent,
     CreateUserFormComponent,
-    DetailsUserComponent
+    DetailsUserComponent,
+    DialogUserListComponent
   ],
   imports: [
     CommonModule,

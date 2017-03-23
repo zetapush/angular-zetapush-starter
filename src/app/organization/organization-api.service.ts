@@ -2,11 +2,16 @@
 import { Api } from '../zetapush';
 // TODO Refactor with Lerna
 import { Group } from '../group';
+// TODO Refactor with Lerna
+import { User } from '../user';
 
 export interface Organization extends Group {}
 
 // TODO Should be auto-generated
 export class OrganizationApi extends Api {
+  getUserContactList(): Promise<Array<User>> {
+    return this.$publish('getUserContactList', { }).then(({ list }) => list);
+  }
   createOrganization({ name }: { name: string }): Promise<Organization> {
     return this.$publish('createOrganization', { name }).then(({ organization }) => organization);
   }

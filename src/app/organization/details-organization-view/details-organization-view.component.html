@@ -1,2 +1,6 @@
 <h1>details-organization-view</h1>
 <zp-details-group [group]="organization"></zp-details-group>
+
+<zp-autocomplete-user-dialog (select)="onSelectUser($event)" [users]="users"></zp-autocomplete-user-dialog>
+
+<pre>{{selection | json}}</pre>

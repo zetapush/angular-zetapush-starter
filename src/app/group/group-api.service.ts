@@ -1,6 +1,8 @@
 // TODO Refactor with Lerna
 import { Api } from '../zetapush';
 
+import { User } from '../user';
+
 export type Tags = Array<string>;
 
 export interface Metadata {
@@ -13,7 +15,7 @@ export interface Group {
   name: string;
   owner: string;
   resource: string;
-  members: Array<any>;
+  members: Array<User>;
   metadata: Metadata;
   tags: Tags;
 }
@@ -30,7 +32,7 @@ interface ApiGroupMember {
 
 interface ApiCreateGroup extends ApiGroup {
   name: string;
-  members: Array<string>;
+  members: Array<User>;
   metadata: Metadata;
   tags: Tags;
 }

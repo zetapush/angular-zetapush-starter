@@ -8,6 +8,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { CoreModule } from '../core';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
+// TODO Refactor with Lerna
+import { UserModule } from '../user';
 
 import { OrganizationRoutingModule } from './organization-routing.module';
 
@@ -41,6 +43,7 @@ import { DetailsOrganizationComponent } from './details-organization/details-org
 
     CoreModule,
     GroupModule,
+    UserModule,
 
     OrganizationRoutingModule
   ],

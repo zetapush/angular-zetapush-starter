@@ -14,11 +14,16 @@ const getExtensionsAndListener = (Class: any, zone: NgZone) => {
   const methods = Object.getOwnPropertyNames(Class.prototype).filter(filter);
   const extensions = {};
   const listener = methods.reduce((reducer, method) => {
-    const source = Observable.create((observer) => {
-      reducer[method] = ({ data = {} }) => {
+    const source = new Observable((observer) => {
+      reducer[method] = ({ data }: { data: { errors: Array<any>, result: any } }) => {
         console.log(`Api::on${toPascalCase(method)}`, data);
         zone.run(() => {
-          observer.next(data);
+          const { errors, result } = data;
+          if (errors.length) {
+            observer.error(result);
+          } else {
+            observer.next(result);
+          }
         });
       };
     });

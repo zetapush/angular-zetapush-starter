@@ -7,6 +7,8 @@ import { IotLayoutComponent } from './iot-layout/iot-layout.component';
 
 import { ShowAllBeaconsViewComponent } from './show-all-beacons-view/show-all-beacons-view.component';
 import { ShowBeaconsPerAreaViewComponent } from './show-beacons-per-area-view/show-beacons-per-area-view.component';
+import { UnlockingGateViewComponent } from './unlocking-gate-view/unlocking-gate-view.component';
+
 
 const routes: Routes = [{
 	path: 'iot',
@@ -15,7 +17,8 @@ const routes: Routes = [{
 	children: [
 	{ path: '', redirectTo: 'allBeacons', pathMatch: 'full'},
 	{ path: 'allBeacons', component: ShowAllBeaconsViewComponent },
-	{ path: 'beaconsPerArea', component: ShowBeaconsPerAreaViewComponent }]
+	{ path: 'beaconsPerArea', component: ShowBeaconsPerAreaViewComponent },
+	{ path: 'unlockingGate', component: UnlockingGateViewComponent}]
 }];
 
 

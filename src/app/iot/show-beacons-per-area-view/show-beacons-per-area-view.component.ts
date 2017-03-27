@@ -37,8 +37,8 @@ export class ShowBeaconsPerAreaViewComponent implements OnInit {
 
 			for (let beaconDetection of allBeaconDetections) {
 				this.saveBeaconDetection(beaconDetection);
-				console.log(beaconDetection);
 			} 
+			
 		}, (errors) => {
 			console.error('ShowBeaconsPerAreaViewComponent::getAllBeaconDetections', errors);
 		});

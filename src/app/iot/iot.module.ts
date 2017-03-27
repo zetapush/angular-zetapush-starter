@@ -6,6 +6,7 @@ import { IotRoutingModule } from './iot-routing.module';
 import { IotLayoutComponent } from './iot-layout/iot-layout.component';
 import { ShowAllBeaconsViewComponent } from './show-all-beacons-view/show-all-beacons-view.component';
 import { ShowBeaconsPerAreaViewComponent } from './show-beacons-per-area-view/show-beacons-per-area-view.component';
+import { UnlockingGateViewComponent } from './unlocking-gate-view/unlocking-gate-view.component';
 import { IotApiProvider } from './iot-api-provider'; 
 
 
@@ -15,7 +16,7 @@ import { IotApiProvider } from './iot-api-provider';
     IotRoutingModule,
     MaterialModule
   ],
-  declarations: [IotLayoutComponent, ShowAllBeaconsViewComponent, ShowBeaconsPerAreaViewComponent],
+  declarations: [IotLayoutComponent, ShowAllBeaconsViewComponent, ShowBeaconsPerAreaViewComponent, UnlockingGateViewComponent],
   providers: [
     IotApiProvider
   ]

@@ -26,7 +26,11 @@ export class ShowAllBeaconsViewComponent implements OnInit {
 	private getAllBeaconDetections() {
 		this.api.getAllBeaconDetections().then(( list ) => {
 			console.log('ShowAllBeaconsViewComponent::getAllBeaconDetections', list);
-			this.beaconDetections = list['tabOfAllBeacons'];
+			
+			for (let b of list['tabOfAllBeacons']){
+					this.beaconDetections.push(b);
+			}
+			
 		}, (errors) => {
 			console.error('ShowAllBeaconsViewComponent::getAllBeaconDetections', errors);
 		});

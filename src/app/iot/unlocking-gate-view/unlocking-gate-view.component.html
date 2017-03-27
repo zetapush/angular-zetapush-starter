@@ -1,0 +1,9 @@
+<!-- Handle beacon detections lock -->
+<div *ngIf="beaconDetectionsLock?.length > 0">
+	<h3>Unlocking Detections :</h3>
+	<li *ngFor="let detection of beaconDetectionsLock">
+		<span>
+			New unlocking by {{detection.id}} ({{detection.timestamp * 1000 | date:'medium'}})
+		</span>
+	</li>
+</div>

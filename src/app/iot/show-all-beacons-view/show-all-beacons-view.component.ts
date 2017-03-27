@@ -19,7 +19,7 @@ export class ShowAllBeaconsViewComponent implements OnInit {
 	constructor(private api: IotApi) {
 		api.onNewBeaconDetection.subscribe((beaconDetection) => {
 			console.log('ShowAllBeaconsViewComponent::onNewBeaconDetections', beaconDetection);
-			this.beaconDetections.push(beaconDetection['res']);
+			this.addNewBeaconDetection(beaconDetection['res']);
 		});
 	}
 
@@ -34,6 +34,23 @@ export class ShowAllBeaconsViewComponent implements OnInit {
 		}, (errors) => {
 			console.error('ShowAllBeaconsViewComponent::getAllBeaconDetections', errors);
 		});
+	}
+
+	private addNewBeaconDetection(beaconDetection: BeaconDetection) {
+		// Check if the beacon detection is already present (in this case => update)
+		let present = false;
+		for (let b of this.beaconDetections){
+			if (b.id == beaconDetection.id && b.beacon == beaconDetection.beacon){
+				b.timestamp = beaconDetection.timestamp;
+				b.distance = beaconDetection.distance;
+				present = true;
+			}
+		}
+
+		if (!present){
+			this.beaconDetections.push(beaconDetection);
+		}
+
 	}
 
 	ngOnInit() {

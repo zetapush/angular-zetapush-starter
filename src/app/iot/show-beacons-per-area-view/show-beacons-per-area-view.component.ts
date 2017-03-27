@@ -55,26 +55,43 @@ export class ShowBeaconsPerAreaViewComponent implements OnInit {
 
 		switch(beaconDetection.beacon){
 			case "Entrance":
-				this.beaconDetectionsEntrance.push(beaconDetection);
+				this.addNewBeaconDetection(beaconDetection, this.beaconDetectionsEntrance);
 				break;
 			case "Exit":
-				this.beaconDetectionsExit.push(beaconDetection);
+				this.addNewBeaconDetection(beaconDetection, this.beaconDetectionsExit);
 				break;
 			case "Lock":
-				this.beaconDetectionsLock.push(beaconDetection);
+				this.addNewBeaconDetection(beaconDetection, this.beaconDetectionsLock);
 				break;
 			case "One":
-				this.beaconDetectionsBeaconOne.push(beaconDetection);
+				this.addNewBeaconDetection(beaconDetection, this.beaconDetectionsBeaconOne);
 				break;
 			case "Two":
-				this.beaconDetectionsBeaconTwo.push(beaconDetection);
+				this.addNewBeaconDetection(beaconDetection, this.beaconDetectionsBeaconTwo);
 				break;
 			case "Three":
-				this.beaconDetectionsBeaconThree.push(beaconDetection);
+				this.addNewBeaconDetection(beaconDetection, this.beaconDetectionsBeaconThree);
 				break;
 			default:
 				console.error("Error to handle beacon detection");
 				break;
 		}
+	}
+
+	private addNewBeaconDetection(beaconDetection: BeaconDetection, tab: Array<BeaconDetection>) {
+		// Check if the beacon detection is already present (in this case => update)
+		let present = false;
+		for (let b of tab){
+			if (b.id == beaconDetection.id && b.beacon == beaconDetection.beacon){
+				b.timestamp = beaconDetection.timestamp;
+				b.distance = beaconDetection.distance;
+				present = true;
+			}
+		}
+
+		if (!present){
+			tab.push(beaconDetection);
+		}
+
 	}
 }

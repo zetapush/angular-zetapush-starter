@@ -22,7 +22,7 @@ export class UnlockingGateViewComponent implements OnInit {
 			
 			// Check if the beacon detection if from lock area
 			if (beaconDetection['res'].beacon == "Lock"){
-				this.beaconDetectionsLock.push(beaconDetection['res']);
+				this.addNewBeaconDetection(beaconDetection['res']);
 			}
 		});
 	}
@@ -37,10 +37,27 @@ export class UnlockingGateViewComponent implements OnInit {
 					this.beaconDetectionsLock.push(b);
 				}
 			}
-			
+
 		}, (errors) => {
 			console.error('UnlockingGateViewGate::getAllBeaconDetections', errors);
 		});
+	}
+
+	private addNewBeaconDetection(beaconDetection: BeaconDetection) {
+		// Check if the beacon detection is already present (in this case => update)
+		let present = false;
+		for (let b of this.beaconDetectionsLock){
+			if (b.id == beaconDetection.id && b.beacon == beaconDetection.beacon){
+				b.timestamp = beaconDetection.timestamp;
+				b.distance = beaconDetection.distance;
+				present = true;
+			}
+		}
+
+		if (!present){
+			this.beaconDetectionsLock.push(beaconDetection);
+		}
+
 	}
 
 	ngOnInit(): void {

@@ -19,6 +19,8 @@ import { ConversationModule } from './conversation';
 import { RoleModule } from './role';
 // TODO Externalize via lerna
 import { UserModule } from './user';
+// TODO Externalize via lerna 
+import { IotModule } from './iot';
 
 import { AppComponent } from './app.component';
 
@@ -28,7 +30,8 @@ const APPLICATIONS_MODULES = [
   RoleModule,
   OrganizationModule,
   ConversationModule,
-  UserModule
+  UserModule,
+  IotModule
 ];
 
 @NgModule({

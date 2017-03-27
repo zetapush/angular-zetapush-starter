@@ -2,7 +2,7 @@ import { Api } from '../zetapush';
 import { Observable } from 'rxjs/Observable';
 
 export interface BeaconDetection {
-	name: string;
+	beacon: string;
 	distance: number;
 	timestamp: number;
 	id: string;

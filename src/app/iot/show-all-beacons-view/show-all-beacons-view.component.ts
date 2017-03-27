@@ -3,6 +3,7 @@ import { BeaconsService } from '../beacons-service/beacons.service';
 import { ZetaPushClient } from '../../zetapush';
 import { services } from 'zetapush-js';
 import { BeaconDetection, IotApi } from '../iot-api.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
 	selector: 'zp-show-all-beacons',
@@ -13,8 +14,14 @@ import { BeaconDetection, IotApi } from '../iot-api.service';
 export class ShowAllBeaconsViewComponent implements OnInit {
 
 	beaconDetections : Array<BeaconDetection> = [];
+	beaconDetectionsFlow : Observable<Array<BeaconDetection>>;
 
-	constructor(private api: IotApi) {}
+	constructor(private api: IotApi) {
+		api.onNewBeaconDetection.subscribe((beaconDetection) => {
+			console.log('ShowAllBeaconsViewComponent::onNewBeaconDetections', beaconDetection);
+			this.beaconDetections.push(beaconDetection['res']);
+		});
+	}
 
 	private getAllBeaconDetections() {
 		this.api.getAllBeaconDetections().then(( list ) => {
@@ -26,6 +33,8 @@ export class ShowAllBeaconsViewComponent implements OnInit {
 	}
 
 	ngOnInit() {
+
+		// Get all beacon detections on init
 		this.getAllBeaconDetections();
 	}
 }

@@ -9,7 +9,6 @@ import { ShowBeaconsPerAreaViewComponent } from './show-beacons-per-area-view/sh
 import { UnlockingGateViewComponent } from './unlocking-gate-view/unlocking-gate-view.component';
 import { IotApiProvider } from './iot-api-provider'; 
 
-
 @NgModule({
   imports: [
     CommonModule,

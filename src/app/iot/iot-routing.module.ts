@@ -9,7 +9,6 @@ import { ShowAllBeaconsViewComponent } from './show-all-beacons-view/show-all-be
 import { ShowBeaconsPerAreaViewComponent } from './show-beacons-per-area-view/show-beacons-per-area-view.component';
 import { UnlockingGateViewComponent } from './unlocking-gate-view/unlocking-gate-view.component';
 
-
 const routes: Routes = [{
 	path: 'iot',
 	component: IotLayoutComponent,

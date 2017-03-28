@@ -4,7 +4,6 @@ import { Beacon } from '../beacons-service/beacon';
 import { Observable } from 'rxjs/Observable';
 import { BeaconDetection, IotApi} from '../iot-api.service';
 
-
 @Component({
 	selector: 'zp-show-beacons-per-area',
 	templateUrl: './show-beacons-per-area-view.component.html',
@@ -92,6 +91,5 @@ export class ShowBeaconsPerAreaViewComponent implements OnInit {
 		if (!present){
 			tab.push(beaconDetection);
 		}
-
 	}
 }

@@ -38,7 +38,7 @@ const APPLICATIONS_MODULES = [
   ConversationModule,
   UserModule,
   IotModule,
-  WhiteboardModules
+  WhiteboardModule
 ];
 
 @NgModule({

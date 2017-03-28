@@ -21,5 +21,4 @@ export class IotApi extends Api{
   	newBeaconDetection(): Promise<BeaconDetection> {
   		return this.$publish('newBeaconDetection', {});
   	}
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'zp-organization-layout',
@@ -18,11 +18,4 @@ import { Component, OnInit } from '@angular/core';
     }
   `]
 })
-export class OrganizationLayoutComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class OrganizationLayoutComponent {}

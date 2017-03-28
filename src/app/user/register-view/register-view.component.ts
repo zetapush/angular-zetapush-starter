@@ -9,11 +9,9 @@ import { User } from '../';
   styles: [`
   `]
 })
-export class RegisterViewComponent implements OnInit {
+export class RegisterViewComponent {
 
   constructor(private router: Router) { }
-
-  ngOnInit() { }
 
   onCreateUser(user: User) {
     console.log('RegisterViewComponent::onCreateUser', user);

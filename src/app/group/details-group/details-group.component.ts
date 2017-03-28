@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Group } from '../';
 
@@ -9,15 +9,10 @@ import { Group } from '../';
 
   `]
 })
-export class DetailsGroupComponent implements OnInit {
+export class DetailsGroupComponent {
 
   @Input() actions = false;
 
   @Input() group: Group;
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { User } from '../';
@@ -9,11 +9,9 @@ import { User } from '../';
   styles: [`
   `]
 })
-export class CreateUserViewComponent implements OnInit {
+export class CreateUserViewComponent {
 
   constructor(private router: Router) { }
-
-  ngOnInit() { }
 
   onCreateUser(user: User) {
     console.log('CreateUserViewComponent::onCreateUser', user);

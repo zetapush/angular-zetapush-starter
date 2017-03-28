@@ -12,8 +12,6 @@ export class CoreState {
 
   modules: Array<Module> = [];
 
-  constructor() { }
-
   register(module: Module) {
     this.modules.push(module);
     this.state.emit(this.modules);

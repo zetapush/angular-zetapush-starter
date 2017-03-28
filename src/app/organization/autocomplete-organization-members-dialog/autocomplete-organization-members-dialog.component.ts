@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MdDialog } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
@@ -16,7 +16,7 @@ import { Organization, OrganizationApi } from '../';
   styles: [`
   `]
 })
-export class AutocompleteOrganizationMembersDialogComponent implements OnInit {
+export class AutocompleteOrganizationMembersDialogComponent {
 
   users: Observable<Array<User>>;
 
@@ -27,8 +27,6 @@ export class AutocompleteOrganizationMembersDialogComponent implements OnInit {
   constructor(private api: OrganizationApi, public dialog: MdDialog) {
     this.users = Observable.of([]);
   }
-
-  ngOnInit() { }
 
   open() {
     console.log('AutocompleteOrganizationMembersDialogComponent::open');

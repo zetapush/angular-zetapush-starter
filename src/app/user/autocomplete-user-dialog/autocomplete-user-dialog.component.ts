@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MdDialog, MdDialogRef } from '@angular/material';
 
@@ -75,7 +75,7 @@ export class DialogUserListComponent {
   styles: [`
   `]
 })
-export class AutocompleteUserDialogComponent implements OnInit {
+export class AutocompleteUserDialogComponent {
 
   @Input() title = 'Add member';
   @Input() users: Observable<Array<User>>;
@@ -83,8 +83,6 @@ export class AutocompleteUserDialogComponent implements OnInit {
   @Output() select = new EventEmitter<User>();
 
   constructor(public dialog: MdDialog) { }
-
-  ngOnInit() { }
 
   open() {
     console.log('AutocompleteUserDialogComponent::open');

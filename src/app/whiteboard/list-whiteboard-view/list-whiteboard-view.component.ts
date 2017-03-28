@@ -16,18 +16,13 @@ import { Color, Mode } from '../';
     }
   `]
 })
-export class ListWhiteboardViewComponent implements OnInit {
+export class ListWhiteboardViewComponent {
 
   mode: Mode = 'Draw';
   modes: Array<Mode> = ['Draw', 'Edit', 'Text', 'Arrow'];
 
   color: Color = 'rgb(229,80,49)';
   colors: Array<Color> = ['rgb(229,80,49)', 'rgb(253,203,55)', 'rgb(152,192,72)', 'rgb(0,169,228)'];
-
-  constructor() { }
-
-  ngOnInit() {
-  }
 
   onObjectAdded($event) {
     console.log('ListWhiteboardViewComponent::onObjectAdded', $event);

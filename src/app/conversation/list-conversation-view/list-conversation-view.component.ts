@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'zp-list-conversation-view',
@@ -7,11 +7,4 @@ import { Component, OnInit } from '@angular/core';
 
   `]
 })
-export class ListConversationViewComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class ListConversationViewComponent {}

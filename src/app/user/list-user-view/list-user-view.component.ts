@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -11,7 +11,7 @@ import { User } from '../';
 
   `]
 })
-export class ListUserViewComponent implements OnInit {
+export class ListUserViewComponent {
 
   selection: User;
 
@@ -22,10 +22,6 @@ export class ListUserViewComponent implements OnInit {
     { login: 'pabreu', password: '', email: 'pabreu@zetapush.com', firstname: 'Pablo', lastname: 'Abreu', userKey: 'PA' },
     { login: 'rmillet', password: '', email: 'rmillet@zetapush.com', firstname: 'Raphael', lastname: 'Millet', userKey: 'RM' }
   ]);
-
-  constructor() { }
-
-  ngOnInit() { }
 
   onSelectUser(user: User) {
     console.log('ListUserViewComponent::onSelectUser', user);

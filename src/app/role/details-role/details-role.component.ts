@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Role } from '../';
 
@@ -7,12 +7,8 @@ import { Role } from '../';
   templateUrl: './details-role.component.html',
   styles: []
 })
-export class DetailsRoleComponent implements OnInit {
+export class DetailsRoleComponent {
 
   @Input() role: Role;
-
-  constructor() { }
-
-  ngOnInit() { }
 
 }

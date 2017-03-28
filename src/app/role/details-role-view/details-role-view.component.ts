@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Role, RoleApi } from '../';
@@ -10,7 +10,7 @@ import { Role, RoleApi } from '../';
 
   `]
 })
-export class DetailsRoleViewComponent implements OnInit {
+export class DetailsRoleViewComponent {
 
   role: Role;
 
@@ -25,7 +25,5 @@ export class DetailsRoleViewComponent implements OnInit {
       });
     });
   }
-
-  ngOnInit() { }
 
 }

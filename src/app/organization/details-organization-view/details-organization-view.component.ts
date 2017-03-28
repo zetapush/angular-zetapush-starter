@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -13,7 +13,7 @@ import { Organization, OrganizationApi } from '../';
   templateUrl: './details-organization-view.component.html',
   styles: []
 })
-export class DetailsOrganizationViewComponent implements OnInit {
+export class DetailsOrganizationViewComponent {
 
   organization: Organization;
   users: Observable<Array<User>>;
@@ -33,8 +33,6 @@ export class DetailsOrganizationViewComponent implements OnInit {
       });
     });
   }
-
-  ngOnInit() { }
 
   onSelectUser(user: User) {
     console.log('DetailsOrganizationViewComponent::onSelectUser', user);

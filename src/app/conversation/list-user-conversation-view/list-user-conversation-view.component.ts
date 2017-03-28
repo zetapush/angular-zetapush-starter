@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 // TODO Refactor with Lerna
 import { User } from '../../user';
@@ -14,12 +15,29 @@ import { Conversation, ConversationApi } from '../';
 
   `]
 })
-export class ListUserConversationViewComponent implements OnInit {
+export class ListUserConversationViewComponent implements OnDestroy, OnInit {
 
   users: Observable<Array<User>>;
   list: Array<Conversation> = [];
+  subscriptions: Array<Subscription> = [];
 
-  constructor(private api: ConversationApi) {}
+  constructor(private api: ConversationApi) {
+    this.subscriptions.push(api.onCreateConversation.subscribe((conversation) => {
+      console.log('onCreateConversation', conversation);
+      this.list.push(conversation);
+    }));
+    this.subscriptions.push(api.onCreateOneToOneConversation.subscribe((conversation) => {
+      console.log('onCreateOneToOneConversation', conversation);
+      this.list.push(conversation);
+    }));
+  }
+
+  ngOnDestroy() {
+    // Remove subscription
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
 
   ngOnInit() {
     this.getUserConversationList();

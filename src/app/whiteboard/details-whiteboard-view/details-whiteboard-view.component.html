@@ -1,0 +1,24 @@
+<h1>details-whiteboard-view {{whiteboard}}</h1>
+<nav>
+  <button md-button (click)="onPurgeWhiteboard($event)"><md-icon>clear</md-icon></button>
+</nav>
+<md-radio-group [(ngModel)]="mode">
+  <md-radio-button *ngFor="let mode of modes" [value]="mode">
+    {{mode}}
+  </md-radio-button>
+</md-radio-group>
+<md-radio-group [(ngModel)]="color">
+  <md-radio-button *ngFor="let color of colors" [value]="color">
+    <span [style.color]="color">{{color}}</span>
+  </md-radio-button>
+</md-radio-group>
+<zp-fabric
+  [color]="color"
+  [mode]="mode"
+  [objects]="config?.objects"
+  (added)="onObjectAdded($event)"
+  (modified)="onObjectModified($event)"
+  (selected)="onObjectSelected($event)"
+  (removed)="onObjectRemoved($event)"
+></zp-fabric>
+<pre>{{ conversation | json }}</pre>

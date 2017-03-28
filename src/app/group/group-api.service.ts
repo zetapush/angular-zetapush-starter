@@ -1,13 +1,10 @@
 // TODO Refactor with Lerna
 import { Api } from '../zetapush';
 
+// TODO Refactor with Lerna
+import { Metadata, Tags } from '../core';
+// TODO Refactor with Lerna
 import { User } from '../user';
-
-export type Tags = Array<string>;
-
-export interface Metadata {
-  [key: string]: any;
-}
 
 export interface Group {
   id: string;

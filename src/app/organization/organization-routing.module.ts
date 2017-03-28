@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+// TODO Refactor with Lerna
 import { IsSimplyConnected, CoreState } from '../core';
 
 import { OrganizationLayoutComponent } from './organization-layout/organization-layout.component';

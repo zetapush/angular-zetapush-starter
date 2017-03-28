@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 // TODO Refactor with Lerna
 import { Api } from '../zetapush';
 // TODO Refactor with Lerna
@@ -30,11 +31,16 @@ export interface ConversationMessageList {
 
 // TODO Should be auto-generated
 export class ConversationApi extends Api {
+  onAddConversationMessage: Observable<ConversationMessage>;
+  onCreateConversation: Observable<Conversation>;
+  onCreateOneToOneConversation: Observable<Conversation>;
+  onPurgeConversationMessageList: Observable<Conversation>;
+
   addConversationMessage({ room, type, value, metadata }): Promise<ConversationMessage> {
     return this.$publish('addConversationMessage', { room, type, value, metadata }).then(({ message }) => ({ room, message }));
   }
   createConversation({ name, members }: { name: string, members: Array<string> }): Promise<Conversation> {
-    return this.$publish('createConversation', { name, members })
+    return this.$publish('createConversation', { name, members });
   }
   createOneToOneConversation({ interlocutor }): Promise<Conversation> {
     return this.$publish('createOneToOneConversation', { interlocutor });

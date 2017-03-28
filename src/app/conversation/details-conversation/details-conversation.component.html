@@ -1,1 +1,30 @@
 <h2>details-conversation</h2>
+<div fxLayout="row">
+  <div fxFlex="60">
+    <md-list>
+      <md-list-item *ngFor="let message of conversation?.messages">
+        <a [routerLink]="['/user/details', message.author]">@{{ message.author }}</a>
+        >>
+        <span *ngIf="message.type == 'markup'">
+          <span>{{ message.value.text }}</span>
+        </span>
+        <span *ngIf="message.type == 'event'">
+          <a [routerLink]="['/whiteboard/details', conversation.room.owner, conversation.room.id, message.value.whiteboard]">New whiteboard ({{ message.value.whiteboard }})</a>
+        </span>
+      </md-list-item>
+    </md-list>
+    <form mdContent (ngSubmit)="onSubmit(form, $event)" novalidate #form="ngForm" fxLayout="column" id="zpAddConversationMessage">
+      <md-input-container>
+        <input mdInput ngModel name="message" type="text" placeholder="Message" required autocomplete="off" />
+      </md-input-container>
+      <button md-button [disabled]="form.invalid && !conversation" form="zpAddConversationMessage">Submit</button>
+    </form>
+  </div>
+  <div fxFlex="40">
+    <nav>
+      <button md-button (click)="onPurgConversation($event)"><md-icon>clear</md-icon></button>
+      <button md-button (click)="onCreateWhiteboard($event)"><md-icon>format_shapes</md-icon></button>
+    </nav>
+    <zp-details-group [group]="conversation?.room"></zp-details-group>
+  </div>
+</div>

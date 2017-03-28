@@ -10,6 +10,8 @@ import { CommonModule } from './common';
 // TODO Externalize via lerna
 import { CoreModule } from './core';
 // TODO Externalize via lerna
+import { FileModule } from './file';
+// TODO Externalize via lerna
 import { GroupModule } from './group';
 // TODO Externalize via lerna
 import { OrganizationModule } from './organization';
@@ -19,16 +21,20 @@ import { ConversationModule } from './conversation';
 import { RoleModule } from './role';
 // TODO Externalize via lerna
 import { UserModule } from './user';
+// TODO Externalize via lerna
+import { WhiteboardModule } from './whiteboard';
 
 import { AppComponent } from './app.component';
 
 // Add active application modules here
 const APPLICATIONS_MODULES = [
+  FileModule,
   GroupModule,
   RoleModule,
+  UserModule,
   OrganizationModule,
   ConversationModule,
-  UserModule
+  WhiteboardModule
 ];
 
 @NgModule({

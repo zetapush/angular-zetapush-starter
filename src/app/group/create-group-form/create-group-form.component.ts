@@ -1,6 +1,10 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
+import slugify from 'slugify';
+
 import { Group, GroupApi } from '../';
+
+const alphanumericify = (value) => slugify(value).replace(/\-/g, '').toLowerCase();
 
 @Component({
   selector: 'zp-create-group-form',
@@ -20,7 +24,11 @@ export class CreateGroupFormComponent implements OnInit {
     console.log('CreateGroupFormComponent::onSubmit', value, valid);
 
     if (valid) {
-      this.api.createGroup(value).then((group) => {
+      const parameters = {
+        ...value,
+        id: alphanumericify(value.name)
+      };
+      this.api.createGroup(parameters).then((group) => {
         console.log('CreateGroupFormComponent::onCreateUser', group);
         this.create.emit(value);
       }, (errors) => {

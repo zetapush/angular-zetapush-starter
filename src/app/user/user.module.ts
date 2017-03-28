@@ -20,6 +20,7 @@ import { CreateUserFormComponent } from './create-user-form/create-user-form.com
 import { AutocompleteUserDialogComponent, DialogUserListComponent } from './autocomplete-user-dialog/autocomplete-user-dialog.component';
 import { DetailsUserViewComponent } from './details-user-view/details-user-view.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
+import { UserBadgeComponent } from './user-badge/user-badge.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { DetailsUserComponent } from './details-user/details-user.component';
     DialogUserListComponent,
     CreateUserFormComponent,
     DetailsUserViewComponent,
-    DetailsUserComponent
+    DetailsUserComponent,
+    UserBadgeComponent
   ],
   entryComponents: [
     DialogUserListComponent
@@ -42,7 +44,8 @@ import { DetailsUserComponent } from './details-user/details-user.component';
     AutocompleteUserDialogComponent,
     CreateUserFormComponent,
     DetailsUserComponent,
-    DialogUserListComponent
+    DialogUserListComponent,
+    UserBadgeComponent
   ],
   imports: [
     CommonModule,

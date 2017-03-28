@@ -11,6 +11,8 @@ import { Group } from '../';
 })
 export class DetailsGroupComponent implements OnInit {
 
+  @Input() actions = false;
+
   @Input() group: Group;
 
   constructor() { }

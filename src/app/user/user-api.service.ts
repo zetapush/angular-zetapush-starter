@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 // TODO Refactor with Lerna
 import { Api } from '../zetapush';
 
@@ -10,13 +11,20 @@ export interface User {
   userKey: string;
 }
 
+interface UserWrapper {
+  user: User;
+}
+
 // TODO Should be auto-generated
 export class UserApi extends Api {
+  onCreateUser: Observable<UserWrapper>;
+  onUpdateUser: Observable<UserWrapper>;
+
   createUser({ login, password, email, firstname, lastname }): Promise<User> {
     const parameters = { login, password, email, firstname, lastname };
     return this.$publish('createUser', parameters).then(({ user }) => user);
   }
-  getUser({ userKey }: { userKey: string }): Promise<User> {
+  getUser({ userKey }: { userKey?: string }): Promise<User> {
     const parameters = { userKey };
     return this.$publish('getUser', parameters).then(({ user }) => user);
   }

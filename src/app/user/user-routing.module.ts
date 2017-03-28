@@ -5,7 +5,6 @@ import { IsSimplyConnected, IsWeaklyConnected, CoreState } from '../core';
 
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
-import { ListUserViewComponent } from './list-user-view/list-user-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { DetailsUserViewComponent } from './details-user-view/details-user-view.component';
 
@@ -16,8 +15,7 @@ const routes: Routes = [{
   children: [
     { path: '', redirectTo: 'create', pathMatch: 'full' },
     { path: 'create', component: CreateUserViewComponent },
-    { path: 'details/:userKey', component: DetailsUserViewComponent },
-    { path: 'list', component: ListUserViewComponent }
+    { path: 'details/:userKey', component: DetailsUserViewComponent }
   ]
 }, {
   path: 'register',

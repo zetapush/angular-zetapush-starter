@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+
+import { Conversation } from '../';
 
 @Component({
   selector: 'zp-details-conversation',
@@ -8,6 +10,8 @@ import { Component, OnInit } from '@angular/core';
   `]
 })
 export class DetailsConversationComponent implements OnInit {
+
+  @Input() conversation: Conversation;
 
   constructor() { }
 

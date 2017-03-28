@@ -3,7 +3,14 @@
   <div fxFlex="60">
     <md-list>
       <md-list-item *ngFor="let message of conversation?.messages">
-        @{{ message.author }}>>({{ message.type }}) :: {{ message.value | json }}
+        <a [routerLink]="['/user/details', message.author]">@{{ message.author }}</a>
+        >>
+        <span *ngIf="message.type == 'markup'">
+          <span>{{ message.value.text }}</span>
+        </span>
+        <span *ngIf="message.type == 'event'">
+          <a [routerLink]="['/whiteboard/details', conversation.room.owner, conversation.room.id, message.value.whiteboard]">New whiteboard ({{ message.value.whiteboard }})</a>
+        </span>
       </md-list-item>
     </md-list>
     <form mdContent (ngSubmit)="onSubmit(form, $event)" novalidate #form="ngForm" fxLayout="column" id="zpAddConversationMessage">

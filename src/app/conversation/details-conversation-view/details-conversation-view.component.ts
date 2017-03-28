@@ -61,7 +61,7 @@ export class DetailsConversationViewComponent implements OnDestroy, OnInit {
         room: this.conversation.room,
         type: 'markup',
         value: {
-          text: value
+          text: value.message
         },
         metadata: {
 

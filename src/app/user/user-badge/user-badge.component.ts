@@ -14,7 +14,7 @@ import { User, UserApi } from '../';
 export class UserBadgeComponent implements OnDestroy, OnInit {
 
   user: User;
-  subscriptions: Array<Subscription> = [];
+  private subscriptions: Array<Subscription> = [];
 
   constructor(private api: UserApi) {
     this.subscriptions.push(api.onUpdateUser.subscribe(({ user }) => {

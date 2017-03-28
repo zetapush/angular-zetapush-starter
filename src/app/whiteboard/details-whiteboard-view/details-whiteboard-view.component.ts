@@ -36,7 +36,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
 
   whiteboard: string;
 
-  subscriptions: Array<Subscription> = [];
+  private subscriptions: Array<Subscription> = [];
 
   constructor(private route: ActivatedRoute, private cApi: ConversationApi, private wApi: WhiteboardApi) {
     console.log('DetailsConversationViewComponent::constructor', wApi);

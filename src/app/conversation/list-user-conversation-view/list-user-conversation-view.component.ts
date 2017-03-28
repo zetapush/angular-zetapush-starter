@@ -19,7 +19,7 @@ export class ListUserConversationViewComponent implements OnDestroy, OnInit {
 
   users: Observable<Array<User>>;
   list: Array<Conversation> = [];
-  subscriptions: Array<Subscription> = [];
+  private subscriptions: Array<Subscription> = [];
 
   constructor(private api: ConversationApi) {
     this.subscriptions.push(api.onCreateConversation.subscribe((conversation) => {

@@ -23,8 +23,8 @@
   <div fxFlex="40">
     <nav>
       <button md-button (click)="onPurgConversation($event)"><md-icon>clear</md-icon></button>
-      <button md-button (click)="onCreateWhiteboard($event)"><md-icon>format_shapes</md-icon></button>
     </nav>
+    <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
     <zp-details-group [group]="conversation?.room"></zp-details-group>
   </div>
 </div>

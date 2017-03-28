@@ -10,6 +10,8 @@ import { CoreModule } from '../core';
 import { UserModule } from '../user';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
+// TODO Refactor with Lerna
+import { ConversationModule } from '../conversation';
 
 import { WhiteboardRoutingModule } from './whiteboard-routing.module';
 
@@ -21,6 +23,7 @@ import { ListWhiteboardViewComponent } from './list-whiteboard-view/list-whitebo
 import { DetailsWhiteboardViewComponent } from './details-whiteboard-view/details-whiteboard-view.component';
 import { DetailsWhiteboardComponent } from './details-whiteboard/details-whiteboard.component';
 import { FabricDirective } from './fabric.directive';
+import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-action/create-whiteboard-view-action.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { FabricDirective } from './fabric.directive';
     ListWhiteboardViewComponent,
     DetailsWhiteboardViewComponent,
     DetailsWhiteboardComponent,
-    FabricDirective
+    FabricDirective,
+    CreateWhiteboardViewActionComponent
   ],
   exports: [
     WhiteboardRoutingModule,
@@ -36,6 +40,9 @@ import { FabricDirective } from './fabric.directive';
     FabricDirective,
 
     DetailsWhiteboardComponent
+  ],
+  entryComponents: [
+    CreateWhiteboardViewActionComponent
   ],
   imports: [
     CommonModule,
@@ -46,6 +53,7 @@ import { FabricDirective } from './fabric.directive';
     CoreModule,
     GroupModule,
     UserModule,
+    ConversationModule,
 
     WhiteboardRoutingModule
   ],

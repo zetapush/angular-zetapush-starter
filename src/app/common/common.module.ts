@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@angular/material';
@@ -20,6 +21,7 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
   ],
   imports: [
     NgCommonModule,
+    BrowserModule,
     FormsModule,
     MaterialModule,
     CoreModule,
@@ -29,7 +31,11 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
     NgCommonModule,
     FormsModule,
     MaterialModule,
+
     CommonRoutingModule
+  ],
+  providers: [
+
   ]
 })
 export class CommonModule { }

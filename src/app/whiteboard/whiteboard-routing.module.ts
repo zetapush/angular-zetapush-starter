@@ -2,11 +2,15 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected, CoreState, ViewActionItem, ViewActionRegistry } from '../core';
+// TODO Refactor with Lerna
+import { DetailsConversationComponent } from '../conversation';
 
 import { WhiteboardLayoutComponent } from './whiteboard-layout/whiteboard-layout.component';
 import { ListWhiteboardViewComponent } from './list-whiteboard-view/list-whiteboard-view.component';
 import { DetailsWhiteboardViewComponent } from './details-whiteboard-view/details-whiteboard-view.component';
+
+import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-action/create-whiteboard-view-action.component';
 
 const routes: Routes = [{
   path: 'whiteboard',
@@ -25,11 +29,16 @@ const routes: Routes = [{
   providers: []
 })
 export class WhiteboardRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: CoreState, registry: ViewActionRegistry) {
     console.log('WhiteboardRoutingModule::constructor', core);
     core.register({
       name: 'whiteboard',
       path: '/whiteboard'
     });
+    registry.setActionsByView(DetailsConversationComponent, [
+      new ViewActionItem(CreateWhiteboardViewActionComponent, {
+        yo: 'bitch'
+      })
+    ]);
   }
 }

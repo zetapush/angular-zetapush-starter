@@ -1,11 +1,12 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
 
+import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Conversation, ConversationApi } from '../';
 
 // TODO Refactor with Lerna
-import { WhiteboardApi } from '../../whiteboard/';
+import { View } from '../../core/';
 
 @Component({
   selector: 'zp-details-conversation',
@@ -14,20 +15,24 @@ import { WhiteboardApi } from '../../whiteboard/';
 
   `]
 })
-export class DetailsConversationComponent implements OnDestroy, OnInit {
+export class DetailsConversationComponent implements OnDestroy, OnChanges {
 
   @Input() conversation: Conversation;
 
+  readonly view: View = DetailsConversationComponent;
+
   private subscriptions: Array<Subscription> = [];
 
-  constructor(private cApi: ConversationApi, /** TODO Externalize API */private wApi: WhiteboardApi) {
-    console.log('DetailsConversationComponent::constructor', cApi, wApi);
+  private context = new ReplaySubject<any>();
 
-    this.subscriptions.push(cApi.onAddConversationMessage.subscribe(({ message }) => {
+  constructor(private api: ConversationApi) {
+    console.log('DetailsConversationComponent::constructor', api);
+
+    this.subscriptions.push(api.onAddConversationMessage.subscribe(({ message }) => {
       console.log('DetailsConversationComponent::onAddConversationMessage', message);
       this.conversation.messages.push(message);
     }));
-    this.subscriptions.push(cApi.onPurgeConversationMessageList.subscribe(() => {
+    this.subscriptions.push(api.onPurgeConversationMessageList.subscribe(() => {
       console.log('DetailsConversationComponent::onPurgeConversationMessageList');
       this.conversation.messages.length = 0;
     }));
@@ -40,8 +45,11 @@ export class DetailsConversationComponent implements OnDestroy, OnInit {
     });
   }
 
-  ngOnInit() {
-
+  ngOnChanges(changes) {
+    const { conversation } = changes;
+    if (conversation && conversation.currentValue) {
+      this.context.next(conversation.currentValue);
+    }
   }
 
   onSubmit({ value, valid }: { value: any, valid: boolean }, event) {
@@ -58,7 +66,7 @@ export class DetailsConversationComponent implements OnDestroy, OnInit {
 
         }
       };
-      this.cApi.addConversationMessage(parameters).then(({ message }) => {
+      this.api.addConversationMessage(parameters).then(({ message }) => {
         console.log('DetailsConversationComponent::onAddConversationMessage', message);
       }, (errors) => {
         console.error('DetailsConversationComponent::onAddConversationMessage', errors);
@@ -67,20 +75,8 @@ export class DetailsConversationComponent implements OnDestroy, OnInit {
     }
   }
 
-  onCreateWhiteboard($event) {
-    console.log('DetailsConversationComponent::onCreateWhiteboard', $event);
-
-    this.wApi.createWhiteboard({
-      room: this.conversation.room
-    }).then((message) => {
-      console.log('DetailsConversationComponent::onCreateWhiteboard', message);
-    }, (errors) => {
-      console.error('DetailsConversationComponent::onCreateWhiteboard', errors);
-    });
-  }
-
   onPurgConversation($event) {
-    this.cApi.purgeConversationMessageList({
+    this.api.purgeConversationMessageList({
       room: this.conversation.room
     }).then((message) => {
       console.log('DetailsConversationComponent::onPurgeConversationMessageList', message);

@@ -21,9 +21,9 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
 
   readonly view: View = DetailsConversationComponent;
 
-  private subscriptions: Array<Subscription> = [];
+  context = new ReplaySubject<any>();
 
-  private context = new ReplaySubject<any>();
+  private subscriptions: Array<Subscription> = [];
 
   constructor(private api: ConversationApi) {
     console.log('DetailsConversationComponent::constructor', api);

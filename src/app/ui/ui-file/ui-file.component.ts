@@ -28,7 +28,7 @@ export class UiFileComponent {
 
   protected static id = 0;
 
-  protected id: string;
+  id: string;
 
   @Output() files = new EventEmitter<any>();
 

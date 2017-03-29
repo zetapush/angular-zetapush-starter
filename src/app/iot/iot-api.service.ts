@@ -13,7 +13,7 @@ export class IotApi extends Api{
     
     onNewBeaconDetection: Observable<BeaconDetection>;
 
-	// Call the macroscript to get all beacon detections from the Zetapush platform
+	  // Call the macroscript to get all beacon detections from the Zetapush platform
   	getAllBeaconDetections(): Promise<Array<BeaconDetection>> {
   		return this.$publish('getAllBeaconDetections', { });
   	}

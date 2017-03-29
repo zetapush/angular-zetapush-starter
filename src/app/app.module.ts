@@ -25,20 +25,14 @@ import { UserModule } from './user';
 import { IotModule } from './iot';
 // TODO Externalize via lerna
 import { WhiteboardModule } from './whiteboard';
+// TODO Externalize via lerna
+import { UnlockingModule } from './unlocking';
 
 import { AppComponent } from './app.component';
 
 // Add active application modules here
 const APPLICATIONS_MODULES = [
-  FileModule,
-  GroupModule,
-  RoleModule,
-  UserModule,
-  OrganizationModule,
-  ConversationModule,
-  UserModule,
-  IotModule,
-  WhiteboardModule
+  UnlockingModule
 ];
 
 @NgModule({

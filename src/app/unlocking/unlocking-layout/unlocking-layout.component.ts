@@ -17,8 +17,7 @@ export class UnlockingLayoutComponent implements OnInit {
   private unlockTheGate() {
     this.api.unlockTheGate().then(( output ) => {
       console.log("UnlockingLayoutComponent::unlockTheGate", output);
-
-      if (output['res'] == 200){
+      if (output['res'] == 200 || output['res'] == 400){
         console.log("UnlockingLayoutComponent::unlockTheGate => Success request");
         this.text_message = "Great ! The gate is now unlocked";
       } else {

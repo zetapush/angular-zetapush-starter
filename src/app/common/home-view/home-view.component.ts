@@ -7,6 +7,7 @@ import { CoreState } from '../../core';
   selector: 'zp-home-view',
   template: `
     <h1>{{message}}</h1>
+    <h3 id=title_link>Unlocking :</h3>
     <nav>
       <a *ngFor="let path of paths" [routerLink]="path">{{path}}</a>
     </nav>
@@ -17,6 +18,10 @@ import { CoreState } from '../../core';
     }
     nav a {
       padding: 0 0 0 1rem;
+      margin-left: 20px;
+    }
+    #title_link {
+      margin-left: 20px
     }
   `]
 })

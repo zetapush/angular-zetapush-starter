@@ -19,6 +19,7 @@ export class WhiteboardApi extends Api {
   onAddWhiteboardObject: Observable<any>;
   onCreateWhiteboard: Observable<any>;
   onPurgeWhiteboardObjectList: Observable<any>;
+  onUpdateWhiteboardObject: Observable<any>;
 
   addWhiteboardObject({ room, whiteboard, type, value, metadata }: ApiInputWhiteboardObject) {
     return this.$publish('addWhiteboardObject', { room, whiteboard, type, value, metadata });
@@ -31,5 +32,8 @@ export class WhiteboardApi extends Api {
   }
   purgeWhiteboardObjectList({ room, whiteboard }: { room: Group, whiteboard: string }) {
     return this.$publish('purgeWhiteboardObjectList', { room, whiteboard });
+  }
+  updateWhiteboardObject({ id, room, value, whiteboard }): Promise<any> {
+    return this.$publish('updateWhiteboardObject', { id, room, value, whiteboard })
   }
 }

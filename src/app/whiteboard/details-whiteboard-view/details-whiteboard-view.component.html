@@ -2,6 +2,7 @@
 <nav>
   <button md-button (click)="onPurgeWhiteboard($event)"><md-icon>clear</md-icon></button>
 </nav>
+<zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
 <md-radio-group [(ngModel)]="mode">
   <md-radio-button *ngFor="let mode of modes" [value]="mode">
     {{mode}}
@@ -15,6 +16,7 @@
 <zp-fabric
   [color]="color"
   [mode]="mode"
+  [images]="images"
   [objects]="config?.objects"
   (added)="onObjectAdded($event)"
   (modified)="onObjectModified($event)"

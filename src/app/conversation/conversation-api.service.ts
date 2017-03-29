@@ -35,6 +35,7 @@ export class ConversationApi extends Api {
   onCreateConversation: Observable<Conversation>;
   onCreateOneToOneConversation: Observable<Conversation>;
   onPurgeConversationMessageList: Observable<Conversation>;
+  onUpdateConversationMessage: Observable<ConversationMessage>;
 
   addConversationMessage({ room, type, value, metadata }): Promise<ConversationMessage> {
     return this.$publish('addConversationMessage', { room, type, value, metadata }).then(({ message }) => ({ room, message }));
@@ -56,5 +57,8 @@ export class ConversationApi extends Api {
   }
   purgeConversationMessageList({ room }: { room: Group }): Promise<Conversation> {
     return this.$publish('purgeConversationMessageList', { room }).then(() => ({ room }));
+  }
+  updateConversationMessage({ id, room, value }: { id: string, room: Group, value: any }): Promise<ConversationMessage> {
+    return this.$publish('updateConversationMessage', { id, room, value })
   }
 }

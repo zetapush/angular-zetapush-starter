@@ -30,6 +30,8 @@ export class DetailsWhiteboardViewComponent implements OnInit {
   color: Color = 'rgb(229,80,49)';
   colors: Array<Color> = ['rgb(229,80,49)', 'rgb(253,203,55)', 'rgb(152,192,72)', 'rgb(0,169,228)'];
 
+  images: Array<any> = [];
+
   config: any;
 
   conversation: Conversation;
@@ -52,6 +54,11 @@ export class DetailsWhiteboardViewComponent implements OnInit {
     });
     this.subscriptions.push(wApi.onAddWhiteboardObject.subscribe((message) => {
       console.log('DetailsConversationViewComponent::onAddWhiteboardObject', message);
+      // DUMMY Impl
+      this.loadWhiteboard();
+    }));
+    this.subscriptions.push(wApi.onUpdateWhiteboardObject.subscribe((message) => {
+      console.log('DetailsConversationViewComponent::onUpdateWhiteboardObject', message);
       // DUMMY Impl
       this.loadWhiteboard();
     }));
@@ -107,6 +114,20 @@ export class DetailsWhiteboardViewComponent implements OnInit {
 
   onObjectModified($event) {
     console.log('DetailsWhiteboardViewComponent::onObjectModified', $event);
+    if ($event['server:id']) {
+      this.wApi.updateWhiteboardObject({
+        id: $event['server:id'],
+        room: this.conversation.room,
+        value: {
+          json: JSON.stringify($event)
+        },
+        whiteboard: this.whiteboard
+      }).then((message) => {
+        console.log('DetailsWhiteboardViewComponent::onUpdateWhiteboardObject', message);
+      }, (errors) => {
+        console.error('DetailsWhiteboardViewComponent::onUpdateWhiteboardObject', errors);
+      });
+    }
   }
 
   onObjectSelected($event) {
@@ -118,10 +139,16 @@ export class DetailsWhiteboardViewComponent implements OnInit {
   }
 
   onPurgeWhiteboard($event) {
-    console.log('::onPurgeWhiteboard', $event);
+    console.log('DetailsWhiteboardViewComponent::onPurgeWhiteboard', $event);
     this.wApi.purgeWhiteboardObjectList({
       room: this.conversation.room,
       whiteboard: this.whiteboard
     });
+  }
+
+  onSelectFiles(images) {
+    console.log('DetailsWhiteboardViewComponent::onSelectFiles', images);
+
+    this.images = images
   }
 }

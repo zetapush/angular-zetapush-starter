@@ -52,6 +52,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
 
   private _mode: Mode = 'Draw';
   private _color: Color = 'rgb(229,80,49)';
+  private _images: Array<any> = [];
   private _objects: Array<any> = [];
   private canvas: any;
   private arrow: any;
@@ -120,6 +121,31 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
 
   get color(): Color {
     return this._color;
+  }
+
+  @Input()
+  set images(images: Array<any>) {
+    console.log('try to set images', images);
+    // Set new images
+    this._images = images;
+
+    images.forEach((image) => {
+      const url = URL.createObjectURL(image)
+      fabric.Image.fromURL(url, (img) => {
+        console.log('fabric image', img)
+        this.canvas.add(img);
+        /*
+        this.canvas.backgroundImage = img;
+        this.canvas.height = img.height;
+        this.canvas.width = img.width;
+        */
+        this.canvas.renderAll();
+      });
+    });
+  }
+
+  get images(): Array<any> {
+    return this._images;
   }
 
   @Input()

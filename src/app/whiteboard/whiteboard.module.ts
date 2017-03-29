@@ -7,6 +7,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
 // TODO Refactor with Lerna
+import { UiModule } from '../ui';
+// TODO Refactor with Lerna
 import { UserModule } from '../user';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
@@ -51,6 +53,7 @@ import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-ac
     FlexLayoutModule,
 
     CoreModule,
+    UiModule,
     GroupModule,
     UserModule,
     ConversationModule,

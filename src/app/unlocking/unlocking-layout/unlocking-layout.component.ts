@@ -10,13 +10,25 @@ import { UnlockingApi } from '../unlocking-api.service';
 })
 export class UnlockingLayoutComponent implements OnInit {
 
+  text_message = '';
+
   constructor(private api: UnlockingApi) { }
 
   private unlockTheGate() {
-    this.api.unlockTheGate().then(( res ) => {
-      console.log("Macroscript unlockTheGate called", res);
+    this.api.unlockTheGate().then(( output ) => {
+      console.log("UnlockingLayoutComponent::unlockTheGate", output);
+
+      if (output['res'] == 200){
+        console.log("UnlockingLayoutComponent::unlockTheGate => Success request");
+        this.text_message = "Great ! The gate is now unlocked";
+      } else {
+        console.error("UnlockingLayoutComponent::unlockTheGate => Error in the request")
+        this.text_message = "Error in the request, the gate is locked";
+      }
+      
+
     } , (errors) => {
-      console.error("Error the unlockTheGate", errors);
+      console.error("UnlockingLayoutComponent::unlockTheGate", errors);
     });
   }
 

@@ -7,4 +7,5 @@ export { ViewActionContainerComponent } from './view-action-container.component'
 export { ViewActionComponent } from './view-action.component';
 export { ViewActionItem } from './view-action-item';
 export { ViewActionHostDirective } from './view-action-host.directive';
-export { View, ViewActionRegistry } from './view-action-registry.service';
+export { ViewActionRegistry } from './view-action-registry.service';
+export { View } from './view';

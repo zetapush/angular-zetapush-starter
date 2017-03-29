@@ -1,8 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 
 import { ViewActionItem } from './view-action-item';
-
-export type View = Type<any>;
+import { View } from './view';
 
 @Injectable()
 export class ViewActionRegistry {

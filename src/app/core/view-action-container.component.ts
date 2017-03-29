@@ -2,7 +2,8 @@ import { Component, Input, AfterViewInit, ViewChild, ComponentFactoryResolver } 
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
-import { View, ViewActionRegistry } from './view-action-registry.service';
+import { View } from './view';
+import { ViewActionRegistry } from './view-action-registry.service';
 import { ViewActionComponent } from './view-action.component';
 import { ViewActionHostDirective } from './view-action-host.directive';
 import { ViewActionItem } from './view-action-item';

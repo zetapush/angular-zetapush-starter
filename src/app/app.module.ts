@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
+import { environment } from '../environments/environment';
+
 // TODO Externalize via lerna
-import { ZetaPushModule } from './zetapush';
+import { ZetaPushModule, ZetaPushClientConfig } from './zetapush';
 // TODO Externalize via lerna
 import { CommonModule } from './common';
 // TODO Externalize via lerna
@@ -54,6 +56,7 @@ const APPLICATIONS_MODULES = [
     CommonModule
   ],
   providers: [
+    { provide: ZetaPushClientConfig, useValue: environment.zetapush },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

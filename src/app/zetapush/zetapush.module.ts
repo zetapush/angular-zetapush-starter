@@ -9,7 +9,6 @@ import { ZetaPushClientConfig, ZetaPushClientFactory, ZetaPushConnectionFactory 
   declarations: [],
   imports: [],
   providers: [
-    { provide: ZetaPushClientConfig, useValue: environment.zetapush },
     { provide: ZetaPushClient, useFactory: ZetaPushClientFactory, deps: [ ZetaPushClientConfig ] },
     { provide: ZetaPushConnection, useFactory: ZetaPushConnectionFactory, deps: [ ZetaPushClient ] }
   ],

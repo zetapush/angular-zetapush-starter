@@ -11,7 +11,7 @@ import { ViewActionItem } from './view-action-item';
 @Component({
   selector: 'zp-view-action-container',
   template: `
-    <ng-template zp-view-action-host></ng-template>
+    <ng-template zpViewActionHost></ng-template>
   `
 })
 export class ViewActionContainerComponent implements AfterViewInit {

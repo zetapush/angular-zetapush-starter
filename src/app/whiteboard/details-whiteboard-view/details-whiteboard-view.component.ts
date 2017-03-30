@@ -15,7 +15,7 @@ import { Color, Mode, WhiteboardApi } from '../';
     md-radio-button {
       font-weight: bold;
     }
-    zp-fabric {
+    [zpFabric] {
       border: 1px solid #000;
       height: 500px;
       display: block;
@@ -149,6 +149,6 @@ export class DetailsWhiteboardViewComponent implements OnInit {
   onSelectFiles(images) {
     console.log('DetailsWhiteboardViewComponent::onSelectFiles', images);
 
-    this.images = images
+    this.images = images;
   }
 }

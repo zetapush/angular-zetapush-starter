@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnDestroy, OnChanges } from '@angular/core';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subscription } from 'rxjs/Subscription';

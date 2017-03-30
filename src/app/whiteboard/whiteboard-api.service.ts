@@ -11,7 +11,7 @@ interface ApiInputWhiteboardObject {
   whiteboard: string;
   type: string;
   value: any;
-  metadata: Metadata
+  metadata: Metadata;
 }
 
 // TODO Should be auto-generated
@@ -34,6 +34,6 @@ export class WhiteboardApi extends Api {
     return this.$publish('purgeWhiteboardObjectList', { room, whiteboard });
   }
   updateWhiteboardObject({ id, room, value, whiteboard }): Promise<any> {
-    return this.$publish('updateWhiteboardObject', { id, room, value, whiteboard })
+    return this.$publish('updateWhiteboardObject', { id, room, value, whiteboard });
   }
 }

@@ -25,7 +25,11 @@ const Arrow = fabric.util.createClass(fabric.Line, fabric.Observable, {
 
     e.lineWidth = this.strokeWidth;
     const s = e.strokeStyle;
-    e.strokeStyle = this.stroke || e.fillStyle, this.stroke && this._renderStroke(e), e.strokeStyle = s
+    e.strokeStyle = this.stroke || e.fillStyle;
+    if (this.stroke) {
+      this._renderStroke(e);
+    }
+    e.strokeStyle = s;
   },
   complexity: function() {
     return 2;
@@ -40,7 +44,7 @@ Arrow.fromObject = function(e) {
 fabric.Arrow = Arrow;
 
 @Directive({
-  selector: 'zp-fabric'
+  selector: '[zpFabric]'
 })
 export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit {
 
@@ -63,7 +67,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     const canvas = new fabric.Canvas(element, {
         isDrawingMode: true,
         selection: false,
-        stateful : true
+        stateful: true
     });
 
     this.canvas = canvas;
@@ -72,6 +76,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     this.canvas.freeDrawingBrush.color = this._color;
     this.canvas.freeDrawingBrush.width = 10;
     this.canvas.freeDrawingBrush.shadowBlur = 0;
+
     this.canvas.on('path:created', (event) => {
       // console.log('path:created', event);
     });
@@ -130,9 +135,9 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     this._images = images;
 
     images.forEach((image) => {
-      const url = URL.createObjectURL(image)
+      const url = URL.createObjectURL(image);
       fabric.Image.fromURL(url, (img) => {
-        console.log('fabric image', img)
+        console.log('fabric image', img);
         this.canvas.add(img);
         /*
         this.canvas.backgroundImage = img;
@@ -375,7 +380,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
 
   protected onCanvasMouseUp(event) {
     if ('Arrow' === this.mode) {
-      //this.onCanvasObjectModified(this.arrow);
+      // this.onCanvasObjectModified(this.arrow);
       this.arrow = null;
     } else if ('Text' === this.mode) {
       const text = prompt('Enter text value...', 'Text');

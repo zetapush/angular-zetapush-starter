@@ -1,4 +1,4 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { ViewActionItem } from './view-action-item';
 import { View } from './view';

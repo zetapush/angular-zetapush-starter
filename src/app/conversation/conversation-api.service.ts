@@ -59,6 +59,6 @@ export class ConversationApi extends Api {
     return this.$publish('purgeConversationMessageList', { room }).then(() => ({ room }));
   }
   updateConversationMessage({ id, room, value }: { id: string, room: Group, value: any }): Promise<ConversationMessage> {
-    return this.$publish('updateConversationMessage', { id, room, value })
+    return this.$publish('updateConversationMessage', { id, room, value });
   }
 }

@@ -1,7 +1,7 @@
 import { Directive, ViewContainerRef } from '@angular/core';
 
 @Directive({
-  selector: '[zp-view-action-host]',
+  selector: '[zpViewActionHost]',
 })
 export class ViewActionHostDirective {
   constructor(public viewContainerRef: ViewContainerRef) { }

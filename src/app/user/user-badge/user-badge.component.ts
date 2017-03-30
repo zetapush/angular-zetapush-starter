@@ -1,36 +1,30 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+import { ZetaPushClient } from '../../zetapush';
 
-import { User, UserApi } from '../';
+import { User } from '../user-api.service';
+import { UserCache } from '../user-cache.service';
 
 @Component({
   selector: 'zp-user-badge',
   template: `
-    <strong>{{ user?.login }}</strong>
+    <span>Welcome</span>
+    <strong>{{ user.login }}</strong>
   `,
   styles: []
 })
-export class UserBadgeComponent implements OnDestroy, OnInit {
+export class UserBadgeComponent implements OnInit {
+
+  @Input() userKey: string;
 
   user: User;
-  private subscriptions: Array<Subscription> = [];
 
-  constructor(private api: UserApi) {
-    this.subscriptions.push(api.onUpdateUser.subscribe(({ user }) => {
-      console.log('UserBadgeComponent::onUpdateUser', user);
-    }));
-  }
-
-  ngOnDestroy() {
-    // Remove subscription
-    this.subscriptions.forEach((subscription) => {
-      subscription.unsubscribe();
-    });
+  constructor(private cache: UserCache, private client: ZetaPushClient) {
+    this.userKey = client.getUserId();
   }
 
   ngOnInit() {
-    this.api.getUser({}).then((user) => {
+    this.cache.get(this.userKey).subscribe((user) => {
       this.user = user;
     });
   }

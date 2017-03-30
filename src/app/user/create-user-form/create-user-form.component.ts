@@ -2,6 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 import { User, UserApi } from '../';
 
+interface CreateUser extends User {
+  password: string;
+}
+
 @Component({
   selector: 'zp-create-user-form',
   templateUrl: './create-user-form.component.html',
@@ -15,7 +19,7 @@ export class CreateUserFormComponent {
 
   constructor(private api: UserApi) { }
 
-  onSubmit({ value, valid }: { value: User, valid: boolean }) {
+  onSubmit({ value, valid }: { value: CreateUser, valid: boolean }) {
     console.log('CreateUserFormComponent::onSubmit', value, valid);
 
     if (valid) {

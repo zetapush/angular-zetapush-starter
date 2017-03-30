@@ -10,6 +10,7 @@ import { CoreModule } from '../core';
 import { UserRoutingModule } from './user-routing.module';
 
 import { UserApiProvider } from './user-api.provider';
+import { UserCache } from './user-cache.service';
 
 import { UserLayoutComponent } from './user-layout/user-layout.component';
 
@@ -57,7 +58,12 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
     UserRoutingModule
   ],
   providers: [
-    UserApiProvider
+    UserApiProvider,
+    UserCache
   ]
 })
-export class UserModule { }
+export class UserModule {
+  constructor(cache: UserCache) {
+    window['UserCache'] = cache;
+  }
+}

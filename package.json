@@ -26,6 +26,7 @@
     "@angular/router": ">=4.0.0 <5.0.0",
     "core-js": "^2.4.1",
     "fabric": "^1.7.8",
+    "lodash.debounce": "^4.0.8",
     "rxjs": "^5.1.0",
     "slugify": "^1.1.0",
     "zetapush-js": "^3.1.0",

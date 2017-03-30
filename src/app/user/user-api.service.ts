@@ -4,7 +4,6 @@ import { Api } from '../zetapush';
 
 export interface User {
   login: string;
-  password: string;
   email: string;
   firstname: string;
   lastname: string;
@@ -31,6 +30,9 @@ export class UserApi extends Api {
   getUserByLogin({ login }: { login: string }): Promise<User> {
     const parameters = { login };
     return this.$publish('getUserByLogin', parameters).then(({ user }) => user);
+  }
+  getUserList({ userKeys }: { userKeys: Array<string> }): Promise<any> {
+    return this.$publish('getUserList', { userKeys });
   }
   updateUser({ login, ...profile }: { login: string }): Promise<User> {
     const parameters = { login, ...profile };

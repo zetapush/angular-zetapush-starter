@@ -1,10 +1,10 @@
-import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'zp-ui-file',
   template: `
     <form #form name="zp-ui-file-form">
-      <input [attr.id]="id" type="file" name="file" (change)="onChange($event)" accept="image/*" />
+      <input [attr.id]="id" type="file" name="file" (change)="onChange($event)" [attr.accept]="accept" [attr.multiple]="multiple" />
       <label [attr.for]="id"><md-icon>image</md-icon></label>
     </form>
   `,
@@ -29,6 +29,9 @@ export class UiFileComponent {
   protected static id = 0;
 
   id: string;
+
+  @Input() accept = 'image/*';
+  @Input() multiple = true;
 
   @Output() files = new EventEmitter<any>();
 

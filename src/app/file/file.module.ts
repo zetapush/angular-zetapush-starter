@@ -6,10 +6,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 
 import { FileRoutingModule } from './file-routing.module';
 
 import { FileApiProvider } from './file-api.provider';
+import { FileUpload } from './file-upload.service';
 
 import { FileLayoutComponent } from './file-layout/file-layout.component';
 
@@ -36,11 +39,13 @@ import { DetailsFileComponent } from './details-file/details-file.component';
     FlexLayoutModule,
 
     CoreModule,
+    UiModule,
 
     FileRoutingModule
   ],
   providers: [
-    FileApiProvider
+    FileApiProvider,
+    FileUpload
   ]
 })
 export class FileModule { }

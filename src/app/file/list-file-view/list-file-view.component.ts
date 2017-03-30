@@ -9,23 +9,19 @@ import { FileUpload, FileUploadRequest } from '../file-upload.service';
     <h1>list-file-view</h1>
     <zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
     <h3 [attr.contenteditable]="contenteditable" (blur)="onChangeFolder($event)">{{ folder }}</h3>
-    <div class="Requests">
-      <ul>
-        <li *ngFor="let request of requests">
-          <span>{{request.id}}</span>
-          <progress [attr.value]="request.progress | async" max="100"></progress>
-          <img [attr.src]="request.proxy" [attr.title]="request.file.name" height="150" />
-        </li>
-      </ul>
-    </div>
-    <div class="Entries">
-      <ul>
-        <li *ngFor="let entry of entries">
-          <span (click)="onDeleteFile(entry.url.path)">{{entry.metadata.name}}</span>
-          <img [attr.src]="entry.url.url" [attr.title]="entry.metadata.name" height="150" />
-        </li>
-      </ul>
-    </div>
+    <ul class="Requests">
+      <li *ngFor="let request of requests">
+        <span>{{request.id}}</span>
+        <progress [attr.value]="request.progress | async" max="100"></progress>
+        <img [attr.src]="request.proxy" [attr.title]="request.file.name" height="150" />
+      </li>
+    </ul>
+    <ul class="Entries">
+      <li *ngFor="let entry of entries">
+        <span (click)="onDeleteFile(entry.url.path)">{{entry.metadata.name}}</span>
+        <img [attr.src]="entry.url.url" [attr.title]="entry.metadata.name" height="150" />
+      </li>
+    </ul>
     <pre *ngIf="result" class="Result">{{ result | json }}</pre>
     <pre *ngIf="errors.length" class="Errors">{{ result | json }}</pre>
   `,

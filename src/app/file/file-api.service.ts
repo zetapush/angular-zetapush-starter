@@ -25,6 +25,7 @@ export interface File {
   creation: number;
   url: FileUrl;
   owner: string;
+  thumbnails: Array<Thumbnail>;
 }
 
 export interface FileEntry {
@@ -37,6 +38,12 @@ export interface FileUploadRequest {
   guid: string;
   url: string;
   owner: string;
+}
+
+export interface Thumbnail {
+  size: number;
+  guid: string;
+  url: string;
 }
 
 // TODO Should be auto-generated

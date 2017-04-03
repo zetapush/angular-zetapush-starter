@@ -1,7 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
-import { FileApi } from '../file-api.service';
+import { services } from 'zetapush-js';
+
+import { ZetaPushClient } from '../../zetapush';
+
+import { FileApi, File } from '../file-api.service';
 import { FileUpload, FileUploadRequest } from '../file-upload.service';
+
+interface ViewFileEntry {
+  file?: File;
+  request?: FileUploadRequest;
+}
 
 @Component({
   selector: 'zp-list-file-view',
@@ -9,21 +18,38 @@ import { FileUpload, FileUploadRequest } from '../file-upload.service';
     <h1>list-file-view</h1>
     <zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
     <h3 [attr.contenteditable]="contenteditable" (blur)="onChangeFolder($event)">{{ folder }}</h3>
-    <ul class="Requests">
-      <li *ngFor="let request of requests">
-        <span>{{request.id}}</span>
-        <progress [attr.value]="request.progress | async" max="100"></progress>
-        <img [attr.src]="request.proxy" [attr.title]="request.file.name" height="150" />
-      </li>
-    </ul>
-    <ul class="Entries">
-      <li *ngFor="let entry of entries">
-        <span (click)="onDeleteFile(entry.url.path)">{{entry.metadata.name}}</span>
-        <img [attr.src]="entry.url.url" [attr.title]="entry.metadata.name" height="150" />
-      </li>
-    </ul>
-    <pre *ngIf="result" class="Result">{{ result | json }}</pre>
-    <pre *ngIf="errors.length" class="Errors">{{ result | json }}</pre>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Image(Local)</th>
+          <th>Progress</th>
+          <th>Image(Remote)</th>
+          <th>Thumnails(Remote)</th>
+          <th>Debug</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let entry of entries">
+          <td>{{entry.file ? entry.file.metadata.name : entry.request.file.name}}</td>
+          <td [style.text-align]="'center'">
+            <img *ngIf="entry.request" [attr.src]="entry.request.proxy" [attr.title]="entry.request.file.name" height="150" />
+          </td>
+          <td>
+            <progress *ngIf="entry.request" [attr.value]="entry.request.progress | async" max="100"></progress>
+          </td>
+          <td [style.text-align]="'center'">
+            <img *ngIf="entry.file" (click)="onDeleteFile(entry.file.url.path)" [attr.src]="entry.file.url.url" [attr.title]="entry.file.metadata.name" height="150" />
+          </td>
+          <td [style.text-align]="'center'">
+            <img *ngFor="let thumbnail of entry.file?.thumbnails" [attr.src]="thumbnail.url" [attr.title]="entry.file?.metadata.name" [attr.height]="thumbnail.height">
+          </td>
+          <td>
+            {{ entry?.file?.metadata | json }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
   `,
   styles: [`
     :host {
@@ -33,35 +59,29 @@ import { FileUpload, FileUploadRequest } from '../file-upload.service';
       margin: 1rem 0;
       border: 1px dashed blue;
     }
-    .Requests {
-      margin: 1rem 0;
-      border: 1px dashed grey;
-    }
     .Entries {
       margin: 1rem 0;
       border: 1px dashed orange;
-    }
-    .Result {
-      margin: 1rem 0;
-      border: 1px dashed green;
-    }
-    .Errors {
-      margin: 1rem 0;
-      border: 1px dashed red;
     }
   `]
 })
 export class ListFileViewComponent implements OnInit {
 
   contenteditable = true;
-  errors: Array<any> = [];
-  entries: Array<any> = [];
-  requests: Array<FileUploadRequest> = [];
+  entries: Array<ViewFileEntry> = [];
   folder = '/';
-  result: any = {};
 
-  constructor(private api: FileApi, private upload: FileUpload) {
-    window['FileApi'] = api;
+  constructor(private api: FileApi, private upload: FileUpload, private client: ZetaPushClient) {
+    client.createService({
+      Type: services.Macro,
+      deploymentId: 'macro_1',
+      listener: {
+        core_file__onThumbnailCallback: (message) => {
+          console.log('core_file__onThumbnailCallback', message);
+          this.getFileEntryList();
+        }
+      }
+    });
   }
 
   ngOnInit() {
@@ -73,8 +93,44 @@ export class ListFileViewComponent implements OnInit {
       folder: this.folder
     }).then((result) => {
       console.log('ListFileViewComponent::onGetFileEntryList', result);
-      this.entries = result.entries.content;
-      this.result = result;
+      // Clean deleted elements
+      for (let i = 0; i < this.entries.length; ++i) {
+        const entry = this.entries[i];
+        if (entry.file) {
+          const found = result.entries.content.find((file: File) => {
+            return file.name === entry.file.name;
+          });
+          if (!found) {
+            this.entries.splice(i, 1);
+            --i;
+          }
+        }
+      }
+      // Manage updates Merge data from
+      result.entries.content.forEach((file: File) => {
+        const THUMBNAIL_PROPERTY_PATTERN = /thumb\-([0-9]+)/;
+        if (!file.thumbnails) {
+           file.thumbnails = [];
+          for (let property in file.metadata) {
+            if (file.metadata.hasOwnProperty(property) && THUMBNAIL_PROPERTY_PATTERN.test(property)) {
+              const value = file.metadata[property];
+              const [, height ] = THUMBNAIL_PROPERTY_PATTERN.exec(property);
+              file.thumbnails.push({
+                ...value,
+                height: parseInt(height, 10)
+              });
+            }
+          }
+        }
+        const entry = this.entries.find((element) => {
+          return element.request && element.request.transfer ? element.request.transfer.guid === file.name : false;
+        });
+        if (entry) {
+          entry.file = file;
+        } else {
+          this.entries = [ { file }, ...this.entries ];
+        }
+      });
     }, (errors) => {
       console.error('ListFileViewComponent::onGetFileEntryList', errors);
     });
@@ -102,7 +158,7 @@ export class ListFileViewComponent implements OnInit {
 
     files.forEach((file) => {
       const request = this.upload.add(this.folder, file);
-      this.requests.push(request);
+      this.entries = [ { request }, ...this.entries ];
       this.upload.request(request)
         .then((request) => {
           console.log('ListFileViewComponent::onAdd', request);

@@ -19,13 +19,15 @@ import { FileLayoutComponent } from './file-layout/file-layout.component';
 import { ListFileViewComponent } from './list-file-view/list-file-view.component';
 import { DetailsFileViewComponent } from './details-file-view/details-file-view.component';
 import { DetailsFileComponent } from './details-file/details-file.component';
+import { FileListComponent } from './file-list/file-list.component';
 
 @NgModule({
   declarations: [
     FileLayoutComponent,
     ListFileViewComponent,
     DetailsFileViewComponent,
-    DetailsFileComponent
+    DetailsFileComponent,
+    FileListComponent
   ],
   exports: [
     FileRoutingModule,

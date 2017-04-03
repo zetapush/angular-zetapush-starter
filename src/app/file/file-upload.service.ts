@@ -118,6 +118,7 @@ export class FileUpload {
       xhr.open(httpMethod, url, true);
       xhr.setRequestHeader('Content-Type', request.contentType);
       xhr.send(payload);
+      request.progress.next(0);
     });
   }
 

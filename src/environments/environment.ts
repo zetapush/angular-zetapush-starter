@@ -6,11 +6,7 @@
 export const environment = {
   production: false,
   zetapush: {
-    /*
-    apiUrl: 'http://vm-zbo:8080/zbo/pub/business/',
-    sandboxId: 'IgOv5_xs'
-    */
-    apiUrl: 'http://demo-1.zpush.io/zbo/pub/business/',
-    sandboxId: 'UxSoJcEk'
+    apiUrl: prompt('Enter your API url'),
+    sandboxId: prompt('Enter your sandbox id')
   }
 };

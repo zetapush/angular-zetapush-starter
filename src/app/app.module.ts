@@ -1,12 +1,43 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { ZetaPushModule } from './zetapush';
+import { environment } from '../environments/environment';
+
+// TODO Externalize via lerna
+import { ZetaPushModule, ZetaPushClientConfig } from './zetapush';
+// TODO Externalize via lerna
+import { CommonModule } from './common';
+// TODO Externalize via lerna
 import { CoreModule } from './core';
+// TODO Externalize via lerna
+import { FileModule } from './file';
+// TODO Externalize via lerna
+import { GroupModule } from './group';
+// TODO Externalize via lerna
+import { OrganizationModule } from './organization';
+// TODO Externalize via lerna
+import { ConversationModule } from './conversation';
+// TODO Externalize via lerna
+import { RoleModule } from './role';
+// TODO Externalize via lerna
+import { UserModule } from './user';
+// TODO Externalize via lerna
+import { WhiteboardModule } from './whiteboard';
 
 import { AppComponent } from './app.component';
+
+// Add active application modules here
+const APPLICATIONS_MODULES = [
+  FileModule,
+  GroupModule,
+  RoleModule,
+  UserModule,
+  OrganizationModule,
+  ConversationModule,
+  WhiteboardModule
+];
 
 @NgModule({
   declarations: [
@@ -14,14 +45,18 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    CommonModule,
     RouterModule,
-
+    // Provide ZetaPush Services
     ZetaPushModule,
-
-    CoreModule
+    // Provide Core Services
+    CoreModule,
+    // Applications modules
+    ...APPLICATIONS_MODULES,
+    // Provide Common Components and Routing
+    CommonModule
   ],
   providers: [
+    { provide: ZetaPushClientConfig, useValue: environment.zetapush },
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

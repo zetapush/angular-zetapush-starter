@@ -135,6 +135,7 @@ declare module "zetapush-js" {
   interface ClientHelper {
     authentication: Handshake.AuthenticationCallback
     servers: Promise<Array<string>>
+    getUniqRequestId(): string
   }
 
   type ConnectionStatusHandler = number

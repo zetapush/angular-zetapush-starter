@@ -1,28 +1,32 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 
-import { CoreRoutingModule } from './core-routing.module';
+import { IsSimplyConnected, IsWeaklyConnected } from './auth-guard.service';
+import { CoreState } from './core-state.service';
 
-import { LoginViewComponent } from './login-view/login-view.component';
-import { HomeViewComponent } from './home-view/home-view.component';
-
-import { CanActivateConnected } from './can-activate-connected.service';
+import { ViewActionContainerComponent } from './view-action-container.component';
+import { ViewActionHostDirective } from './view-action-host.directive';
+import { ViewActionRegistry } from './view-action-registry.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    MaterialModule,
-    CoreRoutingModule
-  ],
   declarations: [
-    LoginViewComponent,
-    HomeViewComponent
+    ViewActionContainerComponent,
+    ViewActionHostDirective
+  ],
+  imports: [],
+  exports: [
+    ViewActionContainerComponent
   ],
   providers: [
-    CanActivateConnected
+    IsSimplyConnected,
+    IsWeaklyConnected,
+    CoreState,
+    ViewActionRegistry
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+  constructor(private core: CoreState) {
+    core.state.subscribe((modules) => {
+      console.log('CoreModule', modules);
+    });
+  }
+}

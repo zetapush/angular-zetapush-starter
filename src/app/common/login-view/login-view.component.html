@@ -1,0 +1,19 @@
+<md-card>
+  <md-card-title>Login</md-card-title>
+  <md-card-content>
+    <form (ngSubmit)="onSubmit()" #loginForm="ngForm" id="loginForm">
+      <md-input-container>
+        <input mdInput type="type" placeholder="Login" [(ngModel)]="credentials.login" name="login" required />
+      </md-input-container>
+      <md-input-container>
+        <input mdInput type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password" required />
+      </md-input-container>
+      <div *ngIf="error">{{error}}</div>
+    </form>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button type="button" md-button color="accent" routerLink="/register">Register</button>
+    <button form="loginForm" type="submit" md-raised-button color="primary">Submit</button>
+  </md-card-actions>
+</md-card>
+

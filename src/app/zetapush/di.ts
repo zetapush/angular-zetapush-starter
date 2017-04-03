@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { Authentication, SmartClient, SmartClientOptions } from 'zetapush-js';
+import { SmartClientOptions } from 'zetapush-js';
 import { ZetaPushClient, ZetaPushConnection } from './core';
 
 export const ZetaPushClientConfig = new InjectionToken<SmartClientOptions>('ZetaPushClientConfig');

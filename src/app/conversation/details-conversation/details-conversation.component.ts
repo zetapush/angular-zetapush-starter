@@ -3,10 +3,13 @@ import { Component, Input, OnDestroy, OnChanges } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subscription } from 'rxjs/Subscription';
 
+
 import { Conversation, ConversationApi } from '../';
 
 // TODO Refactor with Lerna
 import { View } from '../../core/';
+// TODO Refactor with Lerna
+import { FileUploadRequest } from '../../file';
 
 @Component({
   selector: 'zp-details-conversation',
@@ -85,5 +88,26 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
     });
   }
 
+  onRequestConfirmed(request: FileUploadRequest) {
+    console.log('DetailsConversationComponent::onRequestConfirmed', request);
+
+    const parameters = {
+      room: this.conversation.room,
+      type: 'attachment',
+      value: {
+        contentType: request.contentType,
+        guid: request.transfer.guid,
+        path: `${request.folder}/${request.transfer.guid}`
+      },
+      metadata: {
+
+      }
+    };
+    this.api.addConversationMessage(parameters).then(({ message }) => {
+      console.log('DetailsConversationComponent::onAddConversationMessage', message);
+    }, (errors) => {
+      console.error('DetailsConversationComponent::onAddConversationMessage', errors);
+    });
+  }
 
 }

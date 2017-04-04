@@ -27,6 +27,7 @@ export interface FileUploadRequest {
   contentType: string;
   file: any;
   folder: string;
+  owner: string;
   progress: Subject<number>;
   proxy: SafeUrl;
   status: FileUploadStatus;
@@ -40,7 +41,7 @@ export class FileUpload {
 
   constructor(private api: FileApi, private client: ZetaPushClient, private sanitizer: DomSanitizer) { }
 
-  add(folder: string, file: any): FileUploadRequest {
+  add({ file, folder, owner }: { file: any, folder: string, owner: string }): FileUploadRequest {
     console.log('FileUpload::add', folder, file);
     const id = this.client.helper.getUniqRequestId();
     const contentType = file.type;
@@ -49,6 +50,7 @@ export class FileUpload {
       contentType,
       file,
       folder,
+      owner,
       proxy: this.getProxyFileUrl(file),
       progress: new Subject<number>(),
       status: FileUploadStatus.QUEUING
@@ -62,6 +64,7 @@ export class FileUpload {
     const { transfer } = request;
     return this.api.confirmFileUpload({
       guid: transfer.guid,
+      owner: request.owner,
       actions: {},
       metadata: {
         name: request.file.name

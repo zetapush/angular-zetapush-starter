@@ -5,7 +5,10 @@ import { Conversation, ConversationApi } from '../';
 
 @Component({
   selector: 'zp-details-conversation-view',
-  templateUrl: './details-conversation-view.component.html',
+  template: `
+    <h1>details-conversation-view</h1>
+    <zp-details-conversation [conversation]="conversation"></zp-details-conversation>
+  `,
   styles: [`
 
   `]
@@ -14,10 +17,10 @@ export class DetailsConversationViewComponent {
 
   conversation: Conversation;
 
-  constructor(private cApi: ConversationApi, private route: ActivatedRoute) {
-    console.log('DetailsConversationViewComponent::constructor', cApi);
+  constructor(private api: ConversationApi, private route: ActivatedRoute) {
+    console.log('DetailsConversationViewComponent::constructor', api);
     route.params.subscribe((params) => {
-      cApi.getConversation({ id: params.id, owner: params.owner }).then((conversation: Conversation) => {
+      api.getConversation({ id: params.id, owner: params.owner }).then((conversation: Conversation) => {
         console.log('DetailsConversationViewComponent::onGetConversation', conversation);
         this.conversation = conversation;
       }, (errors) => {

@@ -7,6 +7,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
 // TODO Refactor with Lerna
+import { FileModule } from '../file';
+// TODO Refactor with Lerna
 import { GroupModule } from '../group';
 // TODO Refactor with Lerna
 import { UserModule } from '../user';
@@ -44,6 +46,7 @@ import { DetailsConversationComponent } from './details-conversation/details-con
     FlexLayoutModule,
 
     CoreModule,
+    FileModule,
     GroupModule,
     UserModule,
     OrganizationModule,

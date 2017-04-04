@@ -20,6 +20,7 @@ import { ListFileViewComponent } from './list-file-view/list-file-view.component
 import { DetailsFileViewComponent } from './details-file-view/details-file-view.component';
 import { DetailsFileComponent } from './details-file/details-file.component';
 import { FileListComponent } from './file-list/file-list.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +28,14 @@ import { FileListComponent } from './file-list/file-list.component';
     ListFileViewComponent,
     DetailsFileViewComponent,
     DetailsFileComponent,
-    FileListComponent
+    FileListComponent,
+    FileUploadComponent
   ],
   exports: [
     FileRoutingModule,
 
-    DetailsFileComponent
+    DetailsFileComponent,
+    FileUploadComponent
   ],
   imports: [
     CommonModule,

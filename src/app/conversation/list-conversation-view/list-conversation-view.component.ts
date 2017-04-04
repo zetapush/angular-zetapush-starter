@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'zp-list-conversation-view',
-  templateUrl: './list-conversation-view.component.html',
+  template: `
+    <h1>list-conversation-view</h1>
+  `,
   styles: [`
 
   `]

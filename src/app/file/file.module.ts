@@ -7,6 +7,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
 // TODO Refactor with Lerna
+import { UserModule } from '../user';
+// TODO Refactor with Lerna
 import { UiModule } from '../ui';
 
 import { FileRoutingModule } from './file-routing.module';
@@ -44,6 +46,7 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     FlexLayoutModule,
 
     CoreModule,
+    UserModule,
     UiModule,
 
     FileRoutingModule

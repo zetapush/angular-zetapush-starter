@@ -21,6 +21,7 @@ import { AutocompleteUserDialogComponent, DialogUserListComponent } from './auto
 import { DetailsUserViewComponent } from './details-user-view/details-user-view.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
+import { UserDisconnectComponent } from './user-disconnect/user-disconnect.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
     CreateUserFormComponent,
     DetailsUserViewComponent,
     DetailsUserComponent,
-    UserBadgeComponent
+    UserBadgeComponent,
+    UserDisconnectComponent
   ],
   entryComponents: [
     DialogUserListComponent
@@ -44,7 +46,8 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
     CreateUserFormComponent,
     DetailsUserComponent,
     DialogUserListComponent,
-    UserBadgeComponent
+    UserBadgeComponent,
+    UserDisconnectComponent
   ],
   imports: [
     CommonModule,

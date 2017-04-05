@@ -50,7 +50,9 @@ export class AutocompleteOrganizationMembersDialogComponent {
 
       reference.afterClosed().subscribe((value) => {
         console.log('AutocompleteOrganizationMembersDialogComponent::afterClosed', value);
-        this.select.emit(value);
+        if (value) {
+          this.select.emit(value);
+        }
       });
     }, (errors) => {
       console.error('getUserOrganizationList', errors);

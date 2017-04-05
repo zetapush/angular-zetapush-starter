@@ -5,7 +5,6 @@ import { FileUpload, FileUploadRequest } from '../file-upload.service';
 @Component({
   selector: 'zp-file-upload',
   template: `
-    <pre>@{{owner}}:{{folder}}</pre>
     <zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
   `,
   styles: [`

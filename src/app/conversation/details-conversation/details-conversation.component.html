@@ -26,11 +26,9 @@
   <div fxFlex="40">
     <nav>
       <button md-button (click)="onPurgConversation($event)"><md-icon>clear</md-icon></button>
+      <zp-file-upload [folder]="conversation?.room.metadata.attachments" [owner]="conversation?.room.owner" (confirmed)="onRequestConfirmed($event)"></zp-file-upload>
     </nav>
     <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
     <zp-details-group [group]="conversation?.room"></zp-details-group>
   </div>
-</div>
-<div fxLayout="row">
-  <zp-file-upload [folder]="conversation?.room.metadata.attachments" [owner]="conversation?.room.owner" (confirmed)="onRequestConfirmed($event)"></zp-file-upload>
 </div>

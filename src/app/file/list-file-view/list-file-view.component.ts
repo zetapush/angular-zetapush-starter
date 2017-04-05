@@ -16,7 +16,8 @@ interface ViewFileEntry {
   selector: 'zp-list-file-view',
   template: `
     <h1>list-file-view</h1>
-    <zp-file-upload [folder]="folder" (added)="onRequestAdded($event)" (confirmed)="onRequestConfirmed($event)"></zp-file-upload>
+    <zp-file-upload [folder]="folder" [owner]="owner" (added)="onAdded($event)" (confirmed)="onConfirmed($event)">
+    </zp-file-upload>
     <h3 [attr.contenteditable]="contenteditable" (blur)="onChangeFolder($event)">{{ folder }}</h3>
     <table>
       <thead>
@@ -159,14 +160,14 @@ export class ListFileViewComponent implements OnInit {
     });
   }
 
-  onRequestAdded(request: FileUploadRequest) {
-    console.log('ListFileViewComponent::onRequestAdded', request);
+  onAdded(request: FileUploadRequest) {
+    console.log('ListFileViewComponent::onAdded', request);
 
     this.entries = [ { request }, ...this.entries ];
   }
 
-  onRequestConfirmed(request: FileUploadRequest) {
-    console.log('ListFileViewComponent::onRequestAdded', request);
+  onConfirmed(request: FileUploadRequest) {
+    console.log('ListFileViewComponent::onAdded', request);
 
     return this.getFileEntryList();
   }

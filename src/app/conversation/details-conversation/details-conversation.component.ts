@@ -91,6 +91,7 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
   onRequestConfirmed(request: FileUploadRequest) {
     console.log('DetailsConversationComponent::onRequestConfirmed', request);
 
+    /*
     const parameters = {
       room: this.conversation.room,
       type: 'attachment',
@@ -108,6 +109,7 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
     }, (errors) => {
       console.error('DetailsConversationComponent::onAddConversationMessage', errors);
     });
+    */
   }
 
 }

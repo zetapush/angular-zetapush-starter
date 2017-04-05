@@ -4,7 +4,14 @@ import { Role, RoleApi } from '../';
 
 @Component({
   selector: 'zp-list-role-view',
-  templateUrl: './list-role-view.component.html',
+  template: `
+    <h1>list-role-view</h1>
+    <md-list>
+      <md-list-item *ngFor="let role of list">
+        <a routerLink="/role/details/{{role.metadata.name}}">{{role.name}}</a>
+      </md-list-item>
+    </md-list>
+  `,
   styles: [`
 
   `]

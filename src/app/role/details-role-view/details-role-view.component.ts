@@ -5,7 +5,10 @@ import { Role, RoleApi } from '../';
 
 @Component({
   selector: 'zp-details-role-view',
-  templateUrl: './details-role-view.component.html',
+  template: `
+    <h1>details-role-view</h1>
+    <zp-details-group [group]="role"></zp-details-group>
+  `,
   styles: [`
 
   `]
@@ -17,7 +20,7 @@ export class DetailsRoleViewComponent {
   constructor(private api: RoleApi, private route: ActivatedRoute) {
     route.params.subscribe((params) => {
       const name = params['name'];
-      api.getRole({ name }).then((role) => {
+      api.getRole(name).then((role) => {
         console.log('DetailsRoleViewComponent::onGetRole', role);
         this.role = role;
       }, (errors) => {

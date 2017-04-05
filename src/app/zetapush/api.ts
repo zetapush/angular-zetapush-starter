@@ -35,6 +35,12 @@ const getExtensionsAndListener = (Class: any, zone: NgZone) => {
   return { extensions , listener };
 };
 
+export interface ApiError {
+  code: string;
+  location: string;
+  message: string;
+}
+
 export class Api extends services.Macro {
   $getUserId(): string {
     return '<abstract>';

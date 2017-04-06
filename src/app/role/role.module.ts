@@ -26,6 +26,7 @@ import { CreateRoleFormComponent } from './create-role-form/create-role-form.com
 import { CreateRoleViewComponent } from './create-role-view/create-role-view.component';
 import { HasPermissionDirective } from './has-permission.directive';
 import { HasRoleDirective } from './has-role.directive';
+import { PermissionGridViewComponent } from './permission-grid-view/permission-grid-view.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { HasRoleDirective } from './has-role.directive';
     CreateRoleFormComponent,
     CreateRoleViewComponent,
     HasPermissionDirective,
-    HasRoleDirective
+    HasRoleDirective,
+    PermissionGridViewComponent
   ],
   exports: [
     RoleRoutingModule,

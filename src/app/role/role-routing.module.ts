@@ -8,6 +8,7 @@ import { CreateRoleViewComponent } from './create-role-view/create-role-view.com
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
 import { ListUserRoleViewComponent } from './list-user-role-view/list-user-role-view.component';
 import { DetailsRoleViewComponent } from './details-role-view/details-role-view.component';
+import { PermissionGridViewComponent } from './permission-grid-view/permission-grid-view.component';
 
 const routes: Routes = [{
   path: 'role',
@@ -18,7 +19,8 @@ const routes: Routes = [{
     { path: 'create', component: CreateRoleViewComponent },
     { path: 'list/all', component: ListRoleViewComponent },
     { path: 'list/mine', component: ListUserRoleViewComponent },
-    { path: 'details/:name', component: DetailsRoleViewComponent }
+    { path: 'details/:name', component: DetailsRoleViewComponent },
+    { path: 'grid', component: PermissionGridViewComponent }
   ]
 }];
 

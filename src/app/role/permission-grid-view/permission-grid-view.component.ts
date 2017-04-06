@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Component, OnInit } from '@angular/core';
 
 import { RoleApi } from '../role-api.service';
@@ -21,7 +20,8 @@ import { RoleApi } from '../role-api.service';
           </td>
           <td *ngFor="let user of users" [style.text-align]="'center'">
             <form class="Form Form--SelectAll">
-              <input #input [attr.id]="id('select-all', user.userKey)" type="checkbox" name="select-all" class="Input Input--Permission" (change)="onSelectAll(index, $event)"/>
+              <input #input [attr.id]="id('select-all', user.userKey)" (change)="onSelectAll(index, $event)"
+                type="checkbox" name="select-all" class="Input Input--Permission" />
               <label [attr.for]="id('select-all', user.userKey)">
                 <md-icon>{{ input.checked ? 'check_box': 'check_box_outline_blank' }}</md-icon>
               </label>
@@ -34,7 +34,8 @@ import { RoleApi } from '../role-api.service';
           </td>
           <td *ngFor="let user of users" [style.text-align]="'center'">
             <form class="Form Form--Permission">
-              <input [attr.id]="id(permission, user.userKey)" type="checkbox" name="{{permission}}" [(ngModel)]="user.permissions[permission]" class="Input Input--Permission"/>
+              <input [attr.id]="id(permission, user.userKey)" [(ngModel)]="user.permissions[permission]"
+                type="checkbox" name="{{permission}}" class="Input Input--Permission" />
               <label [attr.for]="id(permission, user.userKey)">
                 <md-icon>{{ user.permissions[permission] ? 'check_box': 'check_box_outline_blank' }}</md-icon>
               </label>
@@ -102,9 +103,9 @@ export class PermissionGridViewComponent implements OnInit {
 
   onSelectAll(index, event) {
     console.log('PermissionGridViewComponent::onSelectAll', index, event);
-    const permissions = this.permissions.reduce((permissions, permission) => {
-      permissions[permission] = event.target.checked;
-      return permissions;
+    const permissions = this.permissions.reduce((grants, permission) => {
+      grants[permission] = event.target.checked;
+      return grants;
     }, {});
     this.users[index].permissions = permissions;
   }

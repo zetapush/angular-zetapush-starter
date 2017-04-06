@@ -21,7 +21,9 @@ import { ListOrganizationViewComponent } from './list-organization-view/list-org
 import { ListUserOrganizationViewComponent } from './list-user-organization-view/list-user-organization-view.component';
 import { DetailsOrganizationViewComponent } from './details-organization-view/details-organization-view.component';
 import { DetailsOrganizationComponent } from './details-organization/details-organization.component';
-import { AutocompleteOrganizationMembersDialogComponent } from './autocomplete-organization-members-dialog/autocomplete-organization-members-dialog.component';
+import {
+  AutocompleteOrganizationMembersDialogComponent
+} from './autocomplete-organization-members-dialog/autocomplete-organization-members-dialog.component';
 
 @NgModule({
   declarations: [

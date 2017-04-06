@@ -26,13 +26,13 @@ export class FileUploadComponent {
   onSelectFiles(files: Array<any>) {
     console.log('FileUploadComponent::onSelectFiles', files);
     files.forEach((file) => {
-      const request = this.upload.add({
+      const next = this.upload.add({
         folder: this.folder,
         owner: this.owner,
         file
       });
-      this.added.emit(request);
-      this.upload.request(request)
+      this.added.emit(next);
+      this.upload.request(next)
         .then((request) => {
           console.log('FileUploadComponent::onRequest', request);
           this.requested.emit(request);

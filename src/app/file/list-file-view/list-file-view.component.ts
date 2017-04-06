@@ -40,10 +40,12 @@ interface ViewFileEntry {
             <progress *ngIf="entry.request" [attr.value]="entry.request.progress | async" max="100"></progress>
           </td>
           <td [style.text-align]="'center'">
-            <img *ngIf="entry.file" (click)="onDeleteFile(entry.file.url.path)" [attr.src]="entry.file.url.url" [attr.title]="entry.file.metadata.name" height="150" />
+            <img *ngIf="entry.file"
+              (click)="onDeleteFile(entry.file.url.path)" [attr.src]="entry.file.url.url" [attr.title]="entry.file.metadata.name" height="150" />
           </td>
           <td [style.text-align]="'center'">
-            <img *ngFor="let thumbnail of entry.file?.thumbnails" [attr.src]="thumbnail.url" [attr.title]="entry.file?.metadata.name" [attr.height]="thumbnail.height">
+            <img *ngFor="let thumbnail of entry.file?.thumbnails"
+              [attr.src]="thumbnail.url" [attr.title]="entry.file?.metadata.name" [attr.height]="thumbnail.height">
           </td>
           <td>
             {{ entry?.file?.metadata | json }}
@@ -121,7 +123,7 @@ export class ListFileViewComponent implements OnInit {
       const THUMBNAIL_PROPERTY_PATTERN = /thumb\-([0-9]+)/;
       if (!file.thumbnails) {
           file.thumbnails = [];
-        for (let property in file.metadata) {
+        for (const property in file.metadata) {
           if (file.metadata.hasOwnProperty(property) && THUMBNAIL_PROPERTY_PATTERN.test(property)) {
             const value = file.metadata[property];
             const [, height ] = THUMBNAIL_PROPERTY_PATTERN.exec(property);

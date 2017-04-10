@@ -35,14 +35,13 @@ export class DialogUserListComponent {
   constructor(private dialog: MdDialogRef<User>) {
     console.log('DialogUserListComponent::constructor', dialog);
 
-    /*
-    if (dialog.config.data.users) {
-      this.users = dialog.config.data.users as Observable<Array<User>>;
+    const { dialogConfig } = dialog._containerInstance;
+
+    if (dialogConfig.data.users) {
+      this.users = dialogConfig.data.users as Observable<Array<User>>;
     } else {
       this.users = Observable.of([]);
     }
-    */
-    this.users = Observable.of([]);
 
     this.filtered = this.user.valueChanges
         .startWith(null)
@@ -103,4 +102,12 @@ export class AutocompleteUserDialogComponent {
     });
   }
 
+}
+
+import { MdDialogConfig, MdDialogContainer, OverlayRef } from '@angular/material';
+
+class FixMdDialogRef<T> extends MdDialogRef<T> {
+  constructor(_overlayRef: OverlayRef, _containerInstance: MdDialogContainer, public config: MdDialogConfig) {
+    super(_overlayRef, _containerInstance);
+  }
 }

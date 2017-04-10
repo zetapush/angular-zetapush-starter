@@ -18,9 +18,9 @@ import { RoleApi } from '../role-api.service';
           <td>
             <strong>SELECT_ALL</strong>
           </td>
-          <td *ngFor="let user of users" [style.text-align]="'center'">
+          <td *ngFor="let user of users; let i = index;" [style.text-align]="'center'">
             <form class="Form Form--SelectAll">
-              <input #input [attr.id]="id('select-all', user.userKey)" (change)="onSelectAll(index, $event)"
+              <input #input [attr.id]="id('select-all', user.userKey)" (change)="onSelectAll(i, $event)"
                 type="checkbox" name="select-all" class="Input Input--Permission" />
               <label [attr.for]="id('select-all', user.userKey)">
                 <md-icon>{{ input.checked ? 'check_box': 'check_box_outline_blank' }}</md-icon>

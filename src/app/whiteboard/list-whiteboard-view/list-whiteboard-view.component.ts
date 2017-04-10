@@ -4,7 +4,9 @@ import { Color, Mode } from '../';
 
 @Component({
   selector: 'zp-list-whiteboard-view',
-  templateUrl: './list-whiteboard-view.component.html',
+  template: `
+    <h1>list-whiteboard-view</h1>
+  `,
   styles: [`
     md-radio-button {
       font-weight: bold;

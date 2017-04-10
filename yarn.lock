@@ -5486,9 +5486,9 @@ zetapush-cometd@^3.0.13:
   version "3.0.13"
   resolved "https://registry.yarnpkg.com/zetapush-cometd/-/zetapush-cometd-3.0.13.tgz#7bd6fc9bc491a7db3535e772369818d82031cc56"
 
-zetapush-js@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/zetapush-js/-/zetapush-js-3.1.0.tgz#59365ec38522ec2db17a11ce5ad2182d2eba88ab"
+zetapush-js@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/zetapush-js/-/zetapush-js-3.1.1.tgz#80c28da3b82b8d39f645dad595e834f9b6efd5c5"
   dependencies:
     zetapush-cometd "^3.0.13"
 

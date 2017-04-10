@@ -8,6 +8,10 @@ import { CoreModule } from '../core';
 import { UiModule } from '../ui';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
+// TODO Refactor with Lerna
+import { OrganizationModule } from '../organization';
+// TODO Refactor with Lerna
+import { UserModule } from '../user';
 
 import { RoleRoutingModule } from './role-routing.module';
 
@@ -52,6 +56,8 @@ import { PermissionGridViewComponent } from './permission-grid-view/permission-g
     CoreModule,
     UiModule,
     GroupModule,
+    OrganizationModule,
+    UserModule,
 
     RoleRoutingModule
   ],

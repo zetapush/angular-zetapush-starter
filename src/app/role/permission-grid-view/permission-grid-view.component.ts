@@ -1,16 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 
-import { RoleApi } from '../role-api.service';
+// TODO Refactor with Lerna
+import { User } from '../../user';
+
+import { Permission, RoleApi } from '../role-api.service';
+
+interface PermissionList {
+  [permission: string]: boolean;
+}
+
+interface UserPermissionList {
+  user: User;
+  permissions: PermissionList;
+}
+
+const comparator = {
+  permission(current, next): number {
+    if (current.firstname < next.firstname) {
+      return -1;
+    } else if (current.firstname > next.firstname) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+}
 
 @Component({
   selector: 'zp-permission-grid-view',
   template: `
     <h1>permission-grid-view</h1>
+    <zp-autocomplete-organization-members-dialog (select)="onSelectUser($event)"></zp-autocomplete-organization-members-dialog>
     <table>
       <thead>
         <tr>
           <th>Permission</th>
-          <th *ngFor="let user of users">User({{user.userKey}})</th>
+          <th *ngFor="let item of users">
+            <a [routerLink]="['/user/details/', item.user.userKey]">{{item.user.login}}</a>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -30,14 +57,14 @@ import { RoleApi } from '../role-api.service';
         </tr>
         <tr *ngFor="let permission of permissions" class="Row">
           <td>
-            <strong>{{permission}}</strong>
+            <strong>{{permission.metadata.name}}</strong>
           </td>
           <td *ngFor="let user of users" [style.text-align]="'center'">
             <form class="Form Form--Permission">
-              <input [attr.id]="id(permission, user.userKey)" [(ngModel)]="user.permissions[permission]"
-                type="checkbox" name="{{permission}}" class="Input Input--Permission" />
-              <label [attr.for]="id(permission, user.userKey)">
-                <md-icon>{{ user.permissions[permission] ? 'check_box': 'check_box_outline_blank' }}</md-icon>
+              <input [attr.id]="id(permission.id, user.userKey)" [(ngModel)]="user.permissions[permission.metadata.name]"
+                type="checkbox" name="{{permission.metadata.name}}" class="Input Input--Permission" />
+              <label [attr.for]="id(permission.id, user.userKey)">
+                <md-icon>{{ user.permissions[permission.metadata.name] ? 'check_box': 'check_box_outline_blank' }}</md-icon>
               </label>
             </form>
           </td>
@@ -65,36 +92,32 @@ import { RoleApi } from '../role-api.service';
 })
 export class PermissionGridViewComponent implements OnInit {
 
-  users: Array<any> = [
-    { userKey: 'NbUU-9IiQa-MS03wsB8DpA', permissions: {} },
-    { userKey: 'ZoysUwB78Bzt55hDzF1Jzg', permissions: {} },
-    { userKey: 'uvdOB1D-wdJZzE8sQI2O2g', permissions: {} }
-  ];
+  users: Array<UserPermissionList> = [];
 
-  permissions: Array<string> = [
-    // Member
-    'addPermissionMember',
-    'addRoleMember',
-    'removePermissionMember',
-    'removeRoleMember',
-    // Permission
-    'createPermission',
-    'deletePermission',
-    'getPermissionList',
-    // Role
-    'createRole',
-    'deleteRole',
-    'getRoleList'
-  ];
+  permissions: Array<Permission> = [];
 
   constructor(private api: RoleApi) { }
 
   ngOnInit() {
     console.log('PermissionGridViewComponent::ngOnInit');
+
+    this.api.getPermissionList().then((permissions) => {
+      console.log('PermissionGridViewComponent::onGetPermissionList', permissions);
+      this.permissions = permissions.sort(comparator.permission);
+    }, (errors) => {
+      console.error('PermissionGridViewComponent::onGetPermissionList', errors);
+    });
   }
 
   onValidate() {
     console.log('PermissionGridViewComponent::onValidate');
+
+    const requests = this.users.map(({ user, permissions }) => this.api.addPermissionListMember({ member: user.userKey, permissions }));
+    Promise.all(requests).then((responses) => {
+      console.log('PermissionGridViewComponent::onAddPermissionListMember', responses);
+    }, (errors) => {
+      console.error('PermissionGridViewComponent::onAddPermissionListMember', errors);
+    });
   }
 
   id(permission: string, userKey: string) {
@@ -104,10 +127,28 @@ export class PermissionGridViewComponent implements OnInit {
   onSelectAll(index, event) {
     console.log('PermissionGridViewComponent::onSelectAll', index, event);
     const permissions = this.permissions.reduce((grants, permission) => {
-      grants[permission] = event.target.checked;
+      grants[permission.metadata.name] = event.target.checked;
       return grants;
     }, {});
     this.users[index].permissions = permissions;
+  }
+
+  onSelectUser(user: User) {
+    console.log('PermissionGridViewComponent::onSelectUser', user);
+
+    if (!this.users.find((element) => element.user.userKey === user.userKey)) {
+      // Add selected user to list
+      this.api.getUserPermissionList().then((list) => {
+        console.log('PermissionGridViewComponent::onGetUserPermissionList', list);
+        const permissions = this.permissions.reduce((grants, permission) => ({
+          ...grants,
+          [permission.metadata.name]: !!list.find((item) => item.id === permission.id)
+        }), {});
+        this.users.push({ permissions, user });
+      }, (errors) => {
+        console.error('PermissionGridViewComponent::onGetUserPermissionList', errors);
+      });
+    }
   }
 
 }

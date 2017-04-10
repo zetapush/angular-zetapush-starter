@@ -15,6 +15,9 @@ export interface Role extends Group {}
 
 // TODO Should be auto-generated
 export class RoleApi extends Api {
+  addPermissionListMember({ member, permissions }: { member: string, permissions: any }) {
+    return this.$publish('addPermissionListMember', { member, permissions });
+  }
   createPermission(name: string): Promise<Permission> {
     return this.$publish('createPermission', { name }).then(({ Permission }) => Permission);
   }

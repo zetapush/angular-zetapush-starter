@@ -6,11 +6,19 @@ import { Subscription } from 'rxjs/Subscription';
 // TODO Refactor with Lerna
 import { User } from '../../user';
 
-import { Conversation, ConversationApi } from '../';
+import { Conversation, ConversationApi } from '../conversation-api.service';
 
 @Component({
   selector: 'zp-list-user-conversation-view',
-  templateUrl: './list-user-conversation-view.component.html',
+  template: `
+    <h1>list-user-conversation-view</h1>
+    <md-list>
+      <md-list-item *ngFor="let conversation of list">
+        <a routerLink="/conversation/details/{{conversation.room.owner}}/{{conversation.room.id}}">{{conversation.room.name}}</a>
+      </md-list-item>
+    </md-list>
+    <zp-autocomplete-organization-members-dialog (select)="onSelectUser($event)"></zp-autocomplete-organization-members-dialog>
+  `,
   styles: [`
 
   `]

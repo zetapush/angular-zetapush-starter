@@ -2,10 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule as NgCommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 
 import { CommonRoutingModule } from './common-routing.module';
 
@@ -23,14 +24,13 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
     NgCommonModule,
     BrowserModule,
     FormsModule,
-    MaterialModule,
     CoreModule,
+    UiModule,
     CommonRoutingModule
   ],
   exports: [
     NgCommonModule,
     FormsModule,
-    MaterialModule,
 
     CommonRoutingModule
   ],

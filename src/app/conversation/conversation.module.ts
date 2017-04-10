@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 // TODO Refactor with Lerna
 import { FileModule } from '../file';
 // TODO Refactor with Lerna
@@ -42,10 +42,9 @@ import { DetailsConversationComponent } from './details-conversation/details-con
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
 
     CoreModule,
+    UiModule,
     FileModule,
     GroupModule,
     UserModule,

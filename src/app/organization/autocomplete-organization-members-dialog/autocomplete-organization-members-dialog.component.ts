@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MdDialog } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 
 // TODO Refactor with Lerna
 import { DialogUserListComponent, User } from '../../user';
+// TODO Refactor with Lerna
+import { MdDialog } from '../../ui';
 
 import { Organization, OrganizationApi } from '../';
 

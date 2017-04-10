@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
@@ -42,12 +40,10 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
 
     CoreModule,
-    UserModule,
     UiModule,
+    UserModule,
 
     FileRoutingModule
   ],

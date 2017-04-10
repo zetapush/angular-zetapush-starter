@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
 // TODO Refactor with Lerna
@@ -43,10 +43,9 @@ import {
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
 
     CoreModule,
+    UiModule,
     GroupModule,
     UserModule,
 

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 // TODO Refactor with Lerna
 import { UserModule } from '../user';
 
@@ -41,10 +41,9 @@ import { CreateGroupViewComponent } from './create-group-view/create-group-view.
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule,
-    FlexLayoutModule,
 
     CoreModule,
+    UiModule,
     UserModule,
 
     GroupRoutingModule

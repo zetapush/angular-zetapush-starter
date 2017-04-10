@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 
 import { UserRoutingModule } from './user-routing.module';
 
@@ -53,10 +53,9 @@ import { UserDisconnectComponent } from './user-disconnect/user-disconnect.compo
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
-    MaterialModule,
 
     CoreModule,
+    UiModule,
 
     UserRoutingModule
   ],

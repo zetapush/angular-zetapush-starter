@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs/Observable';
 // TODO Refactor with Lerna
 import { Api } from '../zetapush';
 // TODO Refactor with Lerna
@@ -72,6 +73,8 @@ interface RequestFileUploadApiInput {
 
 // TODO Should be auto-generated
 export class FileApi extends Api {
+  onDeleteFileEntry: Observable<any>;
+
   confirmFileUpload({ guid, owner, actions, metadata, tags }: ConfirmFileUploadApiInput) {
     return this.$publish('confirmFileUpload', { guid, owner, actions, metadata, tags });
   }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { services } from 'zetapush-js';
 
 import { ZetaPushClient } from '../../zetapush';
@@ -68,12 +68,13 @@ interface ViewFileEntry {
     }
   `]
 })
-export class ListFileViewComponent implements OnInit {
+export class ListFileViewComponent implements OnDestroy, OnInit {
 
   contenteditable = true;
   entries: Array<ViewFileEntry> = [];
   folder = '/';
   owner: string;
+  subscriptions: Array<Subscription> = [];
 
   constructor(private api: FileApi, private client: ZetaPushClient) {
     // Get owner
@@ -89,6 +90,14 @@ export class ListFileViewComponent implements OnInit {
         }
       }
     });
+    //
+    this.subscriptions.push(api.onDeleteFileEntry.subscribe(() => {
+      this.getFileEntryList();
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   ngOnInit() {

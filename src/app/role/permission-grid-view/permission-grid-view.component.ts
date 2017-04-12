@@ -112,11 +112,11 @@ export class PermissionGridViewComponent implements OnInit {
   onValidate() {
     console.log('PermissionGridViewComponent::onValidate');
 
-    const requests = this.users.map(({ user, permissions }) => this.api.addPermissionListMember({ member: user.userKey, permissions }));
+    const requests = this.users.map(({ user, permissions }) => this.api.setPermissionListMember({ member: user.userKey, permissions }));
     Promise.all(requests).then((responses) => {
-      console.log('PermissionGridViewComponent::onAddPermissionListMember', responses);
+      console.log('PermissionGridViewComponent::onSetPermissionListMember', responses);
     }, (errors) => {
-      console.error('PermissionGridViewComponent::onAddPermissionListMember', errors);
+      console.error('PermissionGridViewComponent::onSetPermissionListMember', errors);
     });
   }
 

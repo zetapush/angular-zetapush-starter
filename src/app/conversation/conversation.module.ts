@@ -25,6 +25,7 @@ import { ListConversationViewComponent } from './list-conversation-view/list-con
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
 import { DetailsConversationViewComponent } from './details-conversation-view/details-conversation-view.component';
 import { DetailsConversationComponent } from './details-conversation/details-conversation.component';
+import { ConversationLinkComponent } from './conversation-link/conversation-link.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { DetailsConversationComponent } from './details-conversation/details-con
     ListConversationViewComponent,
     ListUserConversationViewComponent,
     DetailsConversationViewComponent,
-    DetailsConversationComponent
+    DetailsConversationComponent,
+    ConversationLinkComponent
   ],
   exports: [
     ConversationRoutingModule,

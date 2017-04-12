@@ -14,7 +14,7 @@ import { Conversation, ConversationApi } from '../conversation-api.service';
     <h1>list-user-conversation-view</h1>
     <md-list>
       <md-list-item *ngFor="let conversation of list">
-        <a routerLink="/conversation/details/{{conversation.room.owner}}/{{conversation.room.id}}">{{conversation.room.name}}</a>
+        <zp-conversation-link [conversation]="conversation"></zp-conversation-link>
       </md-list-item>
     </md-list>
     <zp-autocomplete-organization-members-dialog (select)="onSelectUser($event)"></zp-autocomplete-organization-members-dialog>

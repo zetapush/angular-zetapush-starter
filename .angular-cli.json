@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "zp",
       "styles": [
+        "../node_modules/material-components-web/dist/material-components-web.css",
         "styles/_core.scss"
       ],
       "scripts": [],

@@ -5,7 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MdAutocompleteModule, MdButtonModule, MdCardModule, MdChipsModule, MdDialogModule, MdIconModule,
-  MdInputModule, MdListModule, MdRadioModule
+  MdInputModule, MdListModule, MdRadioModule, MdMenuModule
 } from '@angular/material';
 
 import { UiFileComponent } from './ui-file/ui-file.component';
@@ -22,6 +22,7 @@ const MATERIAL_MODULES = [
   MdDialogModule,
   MdIconModule,
   MdInputModule,
+  MdMenuModule,
   MdListModule,
   MdRadioModule
 ];

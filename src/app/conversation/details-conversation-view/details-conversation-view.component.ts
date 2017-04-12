@@ -10,7 +10,7 @@ import { Conversation, ConversationApi } from '../';
     <zp-details-conversation [conversation]="conversation"></zp-details-conversation>
   `,
   styles: [`
-
+    h1 {color:pink;}
   `]
 })
 export class DetailsConversationViewComponent {

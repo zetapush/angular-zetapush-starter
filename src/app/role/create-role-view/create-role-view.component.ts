@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Permission, Role } from '../role-api.service';
+import { Permission,  } from '../permission-api.service';
+import { Role } from '../role-api.service';
 
 @Component({
   selector: 'zp-create-role-view',

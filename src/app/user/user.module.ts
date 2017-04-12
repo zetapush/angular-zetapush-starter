@@ -22,6 +22,7 @@ import { DetailsUserViewComponent } from './details-user-view/details-user-view.
 import { DetailsUserComponent } from './details-user/details-user.component';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
 import { UserDisconnectComponent } from './user-disconnect/user-disconnect.component';
+import { UserLinkComponent } from './user-link/user-link.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserDisconnectComponent } from './user-disconnect/user-disconnect.compo
     DetailsUserViewComponent,
     DetailsUserComponent,
     UserBadgeComponent,
-    UserDisconnectComponent
+    UserDisconnectComponent,
+    UserLinkComponent
   ],
   entryComponents: [
     DialogUserListComponent
@@ -47,7 +49,8 @@ import { UserDisconnectComponent } from './user-disconnect/user-disconnect.compo
     DetailsUserComponent,
     DialogUserListComponent,
     UserBadgeComponent,
-    UserDisconnectComponent
+    UserDisconnectComponent,
+    UserLinkComponent
   ],
   imports: [
     CommonModule,

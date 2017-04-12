@@ -3,7 +3,7 @@ import { Component, Input, OnDestroy, OnChanges } from '@angular/core';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Conversation, ConversationApi } from '../conversation-api.service';
+import { Conversation, ConversationApi } from '../';
 
 // TODO Refactor with Lerna
 import { View } from '../../core/';

@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 // TODO Refactor with Lerna
 import { ZetaPushClient } from '../../zetapush';
 
-import { Conversation } from '../conversation-api.service';
+import { Conversation } from '../';
 
 @Component({
   selector: 'zp-conversation-link',

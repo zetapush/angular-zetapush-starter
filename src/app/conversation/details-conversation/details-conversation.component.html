@@ -3,7 +3,7 @@
   <div fxFlex="60">
     <md-list>
       <md-list-item *ngFor="let message of conversation?.messages">
-        <a [routerLink]="['/user/details', message.author]">@{{ message.author }}</a>
+        <zp-user-link [userKey]="message.author"></zp-user-link>
         >>
         <span *ngIf="message.type == 'markup'">
           <span>{{ message.value.text }}</span>

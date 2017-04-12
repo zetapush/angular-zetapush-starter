@@ -39,7 +39,8 @@ import { ConversationLinkComponent } from './conversation-link/conversation-link
   exports: [
     ConversationRoutingModule,
 
-    DetailsConversationComponent
+    DetailsConversationComponent,
+    ConversationLinkComponent
   ],
   imports: [
     CommonModule,

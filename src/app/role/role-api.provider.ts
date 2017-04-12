@@ -3,7 +3,7 @@ import { NgZone } from '@angular/core';
 // TODO Refactor with Lerna
 import { ZetaPushClient, createApi } from '../zetapush';
 
-import { RoleApi } from './';
+import { RoleApi } from './role-api.service';
 
 export function RoleApiFactory(client: ZetaPushClient, zone: NgZone): RoleApi {
   return createApi(client, zone, RoleApi) as RoleApi;

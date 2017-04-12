@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // TODO Refactor with Lerna
 import { User } from '../../user';
 
-import { Permission, RoleApi } from '../role-api.service';
+import { Permission, PermissionApi } from '../permission-api.service';
 
 interface PermissionList {
   [permission: string]: boolean;
@@ -96,7 +96,7 @@ export class PermissionGridViewComponent implements OnInit {
 
   permissions: Array<Permission> = [];
 
-  constructor(private api: RoleApi) { }
+  constructor(private api: PermissionApi) { }
 
   ngOnInit() {
     console.log('PermissionGridViewComponent::ngOnInit');
@@ -138,7 +138,7 @@ export class PermissionGridViewComponent implements OnInit {
 
     if (!this.users.find((element) => element.user.userKey === user.userKey)) {
       // Add selected user to list
-      this.api.getUserPermissionList().then((list) => {
+      this.api.getUserPermissionList(user.userKey).then((list) => {
         console.log('PermissionGridViewComponent::onGetUserPermissionList', list);
         const permissions = this.permissions.reduce((grants, permission) => ({
           ...grants,

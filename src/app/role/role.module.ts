@@ -15,6 +15,7 @@ import { UserModule } from '../user';
 
 import { RoleRoutingModule } from './role-routing.module';
 
+import { PermissionApiProvider } from './permission-api.provider';
 import { RoleApiProvider } from './role-api.provider';
 
 import { RoleLayoutComponent } from './role-layout/role-layout.component';
@@ -62,6 +63,7 @@ import { PermissionGridViewComponent } from './permission-grid-view/permission-g
     RoleRoutingModule
   ],
   providers: [
+    PermissionApiProvider,
     RoleApiProvider
   ]
 })

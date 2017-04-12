@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
-import { ApiError, Permission, RoleApi } from '../role-api.service';
+import { ApiError, Permission, PermissionApi } from '../permission-api.service';
 
 @Component({
   selector: 'zp-create-permission-form',
@@ -24,7 +24,7 @@ export class CreatePermissionFormComponent {
 
   errors: Array<ApiError> = [];
 
-  constructor(private api: RoleApi) { }
+  constructor(private api: PermissionApi) { }
 
   onSubmit({ value, valid }: { value: Permission, valid: boolean }) {
     console.log('CreatePermissionFormComponent::onSubmit', value, valid);

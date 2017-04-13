@@ -1,4 +1,5 @@
-import { Api } from 'zetapush-angular';
+import { NgZone } from '@angular/core';
+import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Group } from '../group';
@@ -25,3 +26,11 @@ export class OrganizationApi extends Api {
     return this.$publish('getUserOrganizationList', { }).then(({ list }) => list);
   }
 }
+
+export function OrganizationApiFactory(client: ZetaPushClient, zone: NgZone): OrganizationApi {
+  return createApi(client, zone, OrganizationApi) as OrganizationApi;
+}
+
+export const OrganizationApiProvider = {
+  provide: OrganizationApi, useFactory: OrganizationApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

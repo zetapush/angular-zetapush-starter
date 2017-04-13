@@ -1,5 +1,6 @@
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Api } from 'zetapush-angular';
+import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Metadata } from '../core';
@@ -37,3 +38,11 @@ export class WhiteboardApi extends Api {
     return this.$publish('updateWhiteboardObject', { id, room, value, whiteboard });
   }
 }
+
+export function WhiteboardApiFactory(client: ZetaPushClient, zone: NgZone): WhiteboardApi {
+  return createApi(client, zone, WhiteboardApi) as WhiteboardApi;
+}
+
+export const WhiteboardApiProvider = {
+  provide: WhiteboardApi, useFactory: WhiteboardApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

@@ -1,5 +1,6 @@
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Api } from 'zetapush-angular';
+import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Group } from '../group';
@@ -62,3 +63,11 @@ export class ConversationApi extends Api {
     return this.$publish('updateConversationMessage', { id, room, value });
   }
 }
+
+export function ConversationApiFactory(client: ZetaPushClient, zone: NgZone): ConversationApi {
+  return createApi(client, zone, ConversationApi) as ConversationApi;
+}
+
+export const ConversationApiProvider = {
+  provide: ConversationApi, useFactory: ConversationApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

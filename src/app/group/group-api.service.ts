@@ -1,4 +1,5 @@
-import { Api } from 'zetapush-angular';
+import { NgZone } from '@angular/core';
+import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Metadata, Tags } from '../core';
@@ -15,7 +16,6 @@ export interface Group {
   metadata: Metadata;
   tags: Tags;
 }
-
 
 interface ApiGroup {
   id: string;
@@ -65,3 +65,11 @@ export class GroupApi extends Api {
   }
 
 }
+
+export function GroupApiFactory(client: ZetaPushClient, zone: NgZone): GroupApi {
+  return createApi(client, zone, GroupApi) as GroupApi;
+}
+
+export const GroupApiProvider = {
+  provide: GroupApi, useFactory: GroupApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

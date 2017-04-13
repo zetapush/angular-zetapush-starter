@@ -1,5 +1,6 @@
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Api, ApiError } from 'zetapush-angular';
+import { Api, ApiError, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Group } from '../group';
@@ -45,3 +46,11 @@ export class RoleApi extends Api {
     return this.$publish('hasRole', { name });
   }
 }
+
+export function RoleApiFactory(client: ZetaPushClient, zone: NgZone): RoleApi {
+  return createApi(client, zone, RoleApi) as RoleApi;
+}
+
+export const RoleApiProvider = {
+  provide: RoleApi, useFactory: RoleApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

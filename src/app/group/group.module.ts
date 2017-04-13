@@ -11,7 +11,7 @@ import { UserModule } from '../user';
 
 import { GroupRoutingModule } from './group-routing.module';
 
-import { GroupApiProvider } from './group-api.provider';
+import { GroupApiProvider } from './group-api.service';
 
 import { GroupLayoutComponent } from './group-layout/group-layout.component';
 

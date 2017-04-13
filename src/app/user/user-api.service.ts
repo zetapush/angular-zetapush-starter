@@ -1,5 +1,6 @@
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Api } from 'zetapush-angular';
+import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 export interface User {
   login: string;
@@ -38,3 +39,11 @@ export class UserApi extends Api {
     return this.$publish('updateUser', parameters).then(({ user }) => user);
   }
 }
+
+export function UserApiFactory(client: ZetaPushClient, zone: NgZone): UserApi {
+  return createApi(client, zone, UserApi) as UserApi;
+}
+
+export const UserApiProvider = {
+  provide: UserApi, useFactory: UserApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

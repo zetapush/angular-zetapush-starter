@@ -1,5 +1,6 @@
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Api } from 'zetapush-angular';
+import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Metadata, Tags } from '../core';
@@ -91,3 +92,11 @@ export class FileApi extends Api {
     return this.$publish('requestFileUpload', { contentType, folder, owner });
   }
 }
+
+export function FileApiFactory(client: ZetaPushClient, zone: NgZone): FileApi {
+  return createApi(client, zone, FileApi) as FileApi;
+}
+
+export const FileApiProvider = {
+  provide: FileApi, useFactory: FileApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

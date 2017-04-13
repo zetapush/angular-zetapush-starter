@@ -29,4 +29,6 @@ yarn install
 yarn run start
 ```
 
+## [CHANGELOG](./CHANGELOG.md)
+
 ## [FAQ](./docs/FAQ.md)

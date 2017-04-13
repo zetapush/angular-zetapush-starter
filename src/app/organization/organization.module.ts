@@ -13,7 +13,7 @@ import { UserModule } from '../user';
 
 import { OrganizationRoutingModule } from './organization-routing.module';
 
-import { OrganizationApiProvider } from './organization-api.provider';
+import { OrganizationApiProvider } from './organization-api.service';
 
 import { OrganizationLayoutComponent } from './organization-layout/organization-layout.component';
 

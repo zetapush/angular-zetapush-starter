@@ -14,8 +14,8 @@ ng g service $module/$module-api --spec false
 echo "@angular/cli generate layout $module"
 ng g component $module/$module-layout --spec false --inline-style true --inline-template true
 echo "@angular/cli generate list view $module"
-ng g component $module/list-$module-view --spec false --inline-style true
+ng g component $module/list-$module-view --spec false --inline-style true --inline-template true
 echo "@angular/cli generate details view $module"
-ng g component $module/details-$module-view --spec false --inline-style true
+ng g component $module/details-$module-view --spec false --inline-style true --inline-template true
 echo "@angular/cli generate details component $module"
-ng g component $module/details-$module --spec false --inline-style true
+ng g component $module/details-$module --spec false --inline-style true --inline-template true

@@ -11,7 +11,7 @@ import { UiModule } from '../ui';
 
 import { FileRoutingModule } from './file-routing.module';
 
-import { FileApiProvider } from './file-api.provider';
+import { FileApiProvider } from './file-api.service';
 import { FileUpload } from './file-upload.service';
 
 import { FileLayoutComponent } from './file-layout/file-layout.component';

@@ -1,5 +1,6 @@
+import { NgZone } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { Api, ApiError } from 'zetapush-angular';
+import { Api, ApiError, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { Group } from '../group';
@@ -48,3 +49,11 @@ export class PermissionApi extends Api {
     return this.$publish('setPermissionListMember', { member, permissions });
   }
 }
+
+export function PermissionApiFactory(client: ZetaPushClient, zone: NgZone): PermissionApi {
+  return createApi(client, zone, PermissionApi) as PermissionApi;
+}
+
+export const PermissionApiProvider = {
+  provide: PermissionApi, useFactory: PermissionApiFactory, deps: [ ZetaPushClient, NgZone ]
+};

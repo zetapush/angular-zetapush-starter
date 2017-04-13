@@ -15,7 +15,7 @@ import { ConversationModule } from '../conversation';
 
 import { WhiteboardRoutingModule } from './whiteboard-routing.module';
 
-import { WhiteboardApiProvider } from './whiteboard-api.provider';
+import { WhiteboardApiProvider } from './whiteboard-api.service';
 
 import { WhiteboardLayoutComponent } from './whiteboard-layout/whiteboard-layout.component';
 

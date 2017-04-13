@@ -17,7 +17,7 @@ import { OrganizationModule } from '../organization';
 
 import { ConversationRoutingModule } from './conversation-routing.module';
 
-import { ConversationApiProvider } from './conversation-api.provider';
+import { ConversationApiProvider } from './conversation-api.service';
 
 import { ConversationLayoutComponent } from './conversation-layout/conversation-layout.component';
 

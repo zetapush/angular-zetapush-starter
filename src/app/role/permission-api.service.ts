@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
-// TODO Refactor with Lerna
-import { Api, ApiError } from '../zetapush';
+import { Api, ApiError } from 'zetapush-angular';
+
 // TODO Refactor with Lerna
 import { Group } from '../group';
 

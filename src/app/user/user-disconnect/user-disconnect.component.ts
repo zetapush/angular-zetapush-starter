@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-// TODO Refactor with Lerna
-import { ZetaPushConnection } from '../../zetapush';
+import { ZetaPushConnection } from 'zetapush-angular';
 
 @Component({
   selector: 'zp-user-disconnect',

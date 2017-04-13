@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-// TODO Refactor with Lerna
-import { Api } from '../zetapush';
+import { Api } from 'zetapush-angular';
 
 export interface User {
   login: string;

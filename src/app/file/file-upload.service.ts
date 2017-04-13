@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
 import { Subject } from 'rxjs/Subject';
-
-import { ZetaPushClient } from '../zetapush';
+import { ZetaPushClient } from 'zetapush-angular';
 
 import { FileApi } from './file-api.service';
 

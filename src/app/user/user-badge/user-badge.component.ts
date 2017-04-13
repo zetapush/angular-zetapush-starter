@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { ZetaPushClient } from '../../zetapush';
+import { ZetaPushClient } from 'zetapush-angular';
 
 import { User } from '../user-api.service';
 import { UserCache } from '../user-cache.service';

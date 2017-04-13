@@ -1,5 +1,5 @@
-// TODO Refactor with Lerna
-import { Api } from '../zetapush';
+import { Api } from 'zetapush-angular';
+
 // TODO Refactor with Lerna
 import { Group } from '../group';
 // TODO Refactor with Lerna

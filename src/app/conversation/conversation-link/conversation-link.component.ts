@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-
-// TODO Refactor with Lerna
-import { ZetaPushClient } from '../../zetapush';
+import { ZetaPushClient } from 'zetapush-angular';
 
 import { Conversation } from '../';
 

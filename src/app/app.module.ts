@@ -2,11 +2,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ZetaPushModule, ZetaPushClientConfig } from 'zetapush-angular';
 
 import { environment } from '../environments/environment';
 
-// TODO Externalize via lerna
-import { ZetaPushModule, ZetaPushClientConfig } from './zetapush';
 // TODO Externalize via lerna
 import { CommonModule } from './common';
 // TODO Externalize via lerna

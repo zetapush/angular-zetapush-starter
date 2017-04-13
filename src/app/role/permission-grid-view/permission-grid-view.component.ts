@@ -24,7 +24,7 @@ const comparator = {
       return 0;
     }
   }
-}
+};
 
 @Component({
   selector: 'zp-permission-grid-view',

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-// TODO Refactor with Lerna
-import { ZetaPushClient, ZetaPushConnection } from '../zetapush';
+import { ZetaPushClient, ZetaPushConnection } from 'zetapush-angular';
 
 @Injectable()
 export class IsWeaklyConnected implements CanActivate {

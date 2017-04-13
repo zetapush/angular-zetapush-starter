@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ZetaPushModule } from 'zetapush-angular';
 
-// TODO Refactor with Lerna
-import { ZetaPushModule } from '../zetapush';
 // TODO Refactor with Lerna
 import { IsSimplyConnected } from '../core';
 

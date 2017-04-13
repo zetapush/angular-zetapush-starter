@@ -80,7 +80,6 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
     // Get owner
     this.owner = api.$getUserId();
     // Create callback service
-    /*
     client.createService({
       Type: services.Macro,
       deploymentId: 'macro_1',
@@ -91,7 +90,6 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
         }
       }
     });
-    */
     //
     this.subscriptions.push(api.onDeleteFileEntry.subscribe(() => {
       this.getFileEntryList();

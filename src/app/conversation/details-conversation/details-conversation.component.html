@@ -3,13 +3,16 @@
   <div fxFlex="60">
     <md-list>
       <md-list-item *ngFor="let message of conversation?.messages">
-        <a [routerLink]="['/user/details', message.author]">@{{ message.author }}</a>
+        <zp-user-link [userKey]="message.author"></zp-user-link>
         >>
         <span *ngIf="message.type == 'markup'">
           <span>{{ message.value.text }}</span>
         </span>
         <span *ngIf="message.type == 'event'">
           <a [routerLink]="['/whiteboard/details', conversation.room.owner, conversation.room.id, message.value.whiteboard]">New whiteboard ({{ message.value.whiteboard }})</a>
+        </span>
+        <span *ngIf="message.type != 'markup' && message.type != 'event'">
+          <span>{{ message.value | json }}</span>
         </span>
       </md-list-item>
     </md-list>
@@ -23,6 +26,7 @@
   <div fxFlex="40">
     <nav>
       <button md-button (click)="onPurgConversation($event)"><md-icon>clear</md-icon></button>
+      <zp-file-upload [folder]="conversation?.room.metadata.attachments" [owner]="conversation?.room.owner" (confirmed)="onRequestConfirmed($event)"></zp-file-upload>
     </nav>
     <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
     <zp-details-group [group]="conversation?.room"></zp-details-group>

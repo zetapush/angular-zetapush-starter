@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-
-import { ZetaPushClient } from '../../zetapush';
+import { ZetaPushClient } from 'zetapush-angular';
 
 import { User } from '../user-api.service';
 import { UserCache } from '../user-cache.service';
@@ -10,6 +9,7 @@ import { UserCache } from '../user-cache.service';
   template: `
     <span>Welcome</span>
     <strong>{{ user.login }}</strong>
+    <zp-user-disconnect></zp-user-disconnect>
   `,
   styles: []
 })

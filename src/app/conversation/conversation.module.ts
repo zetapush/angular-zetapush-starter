@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
+// TODO Refactor with Lerna
+import { FileModule } from '../file';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
 // TODO Refactor with Lerna
@@ -23,6 +25,7 @@ import { ListConversationViewComponent } from './list-conversation-view/list-con
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
 import { DetailsConversationViewComponent } from './details-conversation-view/details-conversation-view.component';
 import { DetailsConversationComponent } from './details-conversation/details-conversation.component';
+import { ConversationLinkComponent } from './conversation-link/conversation-link.component';
 
 @NgModule({
   declarations: [
@@ -30,20 +33,22 @@ import { DetailsConversationComponent } from './details-conversation/details-con
     ListConversationViewComponent,
     ListUserConversationViewComponent,
     DetailsConversationViewComponent,
-    DetailsConversationComponent
+    DetailsConversationComponent,
+    ConversationLinkComponent
   ],
   exports: [
     ConversationRoutingModule,
 
-    DetailsConversationComponent
+    DetailsConversationComponent,
+    ConversationLinkComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
 
     CoreModule,
+    UiModule,
+    FileModule,
     GroupModule,
     UserModule,
     OrganizationModule,

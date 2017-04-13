@@ -1,32 +1,42 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
-import { Role, RoleApi } from '../';
+import { ApiError, Role, RoleApi } from '../role-api.service';
 
 @Component({
   selector: 'zp-create-role-form',
-  templateUrl: './create-role-form.component.html',
+  template: `
+    <form mdContent (ngSubmit)="onSubmit(form)" novalidate #form="ngForm" fxLayout="column" id="zpCreateRoleForm">
+      <h3>Create Role</h3>
+      <md-input-container>
+        <input mdInput ngModel name="name" type="text" placeholder="Name" required />
+      </md-input-container>
+      <zp-ui-error [errors]="errors"></zp-ui-error>
+      <button md-button [disabled]="form.invalid" form="zpCreateRoleForm">Submit</button>
+    </form>
+  `,
   styles: [`
 
   `]
 })
-export class CreateRoleFormComponent implements OnInit {
+export class CreateRoleFormComponent {
 
   @Output() create = new EventEmitter<Role>();
 
-  constructor(private api: RoleApi) { }
+  errors: Array<ApiError> = [];
 
-  ngOnInit() {
-  }
+  constructor(private api: RoleApi) { }
 
   onSubmit({ value, valid }: { value: Role, valid: boolean }) {
     console.log('CreateRoleFormComponent::onSubmit', value, valid);
 
     if (valid) {
-      this.api.createRole(value).then((role) => {
-        console.log('CreateRoleFormComponent::onCreateUser', role);
-        this.create.emit(value);
+      this.errors = [];
+      this.api.createRole(value.name).then((role: Role) => {
+        console.log('CreateRoleFormComponent::onCreateRole', role);
+        this.create.emit(role);
       }, (errors) => {
         console.error('onCreateRole', errors);
+        this.errors = errors;
       });
     }
   }

@@ -1,5 +1,6 @@
-// TODO Refactor with Lerna
-import { Api } from '../zetapush';
+import { Observable } from 'rxjs/Observable';
+import { Api } from 'zetapush-angular';
+
 // TODO Refactor with Lerna
 import { Metadata, Tags } from '../core';
 
@@ -46,21 +47,47 @@ export interface Thumbnail {
   url: string;
 }
 
+interface ConfirmFileUploadApiInput {
+  guid: string;
+  actions: Actions;
+  metadata: Metadata;
+  tags: Tags;
+  owner?: string;
+}
+
+interface FileEntryApiInput {
+  path: string;
+  owner?: string;
+}
+
+interface FolderEntryApiInput {
+  folder: string;
+  owner?: string;
+}
+
+interface RequestFileUploadApiInput {
+  contentType: string;
+  owner: string;
+  folder?: string;
+}
+
 // TODO Should be auto-generated
 export class FileApi extends Api {
-  confirmFileUpload({ guid, actions, metadata, tags }: { guid: string, actions: Actions, metadata: Metadata, tags: Tags }) {
-    return this.$publish('confirmFileUpload', { guid, actions, metadata, tags });
+  onDeleteFileEntry: Observable<any>;
+
+  confirmFileUpload({ guid, owner, actions, metadata, tags }: ConfirmFileUploadApiInput) {
+    return this.$publish('confirmFileUpload', { guid, owner, actions, metadata, tags });
   }
-  deleteFileEntry({ path }) {
+  deleteFileEntry({ path, owner }: FileEntryApiInput) {
     return this.$publish('deleteFileEntry', { path });
   }
-  getFileEntry({ path }: { path: string }) {
-    return this.$publish('getFileEntry', { path });
+  getFileEntry({ path, owner }: FileEntryApiInput) {
+    return this.$publish('getFileEntry', { path, owner });
   }
-  getFileEntryList({ folder }: { folder: string }) {
-    return this.$publish('getFileEntryList', { folder });
+  getFileEntryList({ folder, owner }: FolderEntryApiInput) {
+    return this.$publish('getFileEntryList', { folder, owner });
   }
-  requestFileUpload({ contentType, folder }: { contentType: string, folder: string }) {
-    return this.$publish('requestFileUpload', { contentType, folder });
+  requestFileUpload({ contentType, folder, owner }: RequestFileUploadApiInput) {
+    return this.$publish('requestFileUpload', { contentType, folder, owner });
   }
 }

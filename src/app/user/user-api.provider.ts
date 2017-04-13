@@ -1,7 +1,5 @@
 import { NgZone } from '@angular/core';
-
-// TODO Refactor with Lerna
-import { ZetaPushClient, createApi } from '../zetapush';
+import { ZetaPushClient, createApi } from 'zetapush-angular';
 
 import { UserApi } from './';
 

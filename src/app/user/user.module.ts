@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UiModule } from '../ui';
 
 import { UserRoutingModule } from './user-routing.module';
 
@@ -21,6 +21,8 @@ import { AutocompleteUserDialogComponent, DialogUserListComponent } from './auto
 import { DetailsUserViewComponent } from './details-user-view/details-user-view.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
+import { UserDisconnectComponent } from './user-disconnect/user-disconnect.component';
+import { UserLinkComponent } from './user-link/user-link.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
     CreateUserFormComponent,
     DetailsUserViewComponent,
     DetailsUserComponent,
-    UserBadgeComponent
+    UserBadgeComponent,
+    UserDisconnectComponent,
+    UserLinkComponent
   ],
   entryComponents: [
     DialogUserListComponent
@@ -44,16 +48,17 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
     CreateUserFormComponent,
     DetailsUserComponent,
     DialogUserListComponent,
-    UserBadgeComponent
+    UserBadgeComponent,
+    UserDisconnectComponent,
+    UserLinkComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
-    MaterialModule,
 
     CoreModule,
+    UiModule,
 
     UserRoutingModule
   ],

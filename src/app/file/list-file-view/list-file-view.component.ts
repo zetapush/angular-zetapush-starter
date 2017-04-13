@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
 import { services } from 'zetapush-js';
+import { ZetaPushClient } from 'zetapush-angular';
 
-import { ZetaPushClient } from '../../zetapush';
 
 import { FileApi, File } from '../file-api.service';
-import { FileUpload, FileUploadRequest } from '../file-upload.service';
+import { FileUploadRequest } from '../file-upload.service';
 
 interface ViewFileEntry {
   file?: File;
@@ -16,7 +16,8 @@ interface ViewFileEntry {
   selector: 'zp-list-file-view',
   template: `
     <h1>list-file-view</h1>
-    <zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
+    <zp-file-upload [folder]="folder" [owner]="owner" (added)="onAdded($event)" (confirmed)="onConfirmed($event)">
+    </zp-file-upload>
     <h3 [attr.contenteditable]="contenteditable" (blur)="onChangeFolder($event)">{{ folder }}</h3>
     <table>
       <thead>
@@ -39,10 +40,12 @@ interface ViewFileEntry {
             <progress *ngIf="entry.request" [attr.value]="entry.request.progress | async" max="100"></progress>
           </td>
           <td [style.text-align]="'center'">
-            <img *ngIf="entry.file" (click)="onDeleteFile(entry.file.url.path)" [attr.src]="entry.file.url.url" [attr.title]="entry.file.metadata.name" height="150" />
+            <img *ngIf="entry.file"
+              (click)="onDeleteFile(entry.file.url.path)" [attr.src]="entry.file.url.url" [attr.title]="entry.file.metadata.name" height="150" />
           </td>
           <td [style.text-align]="'center'">
-            <img *ngFor="let thumbnail of entry.file?.thumbnails" [attr.src]="thumbnail.url" [attr.title]="entry.file?.metadata.name" [attr.height]="thumbnail.height">
+            <img *ngFor="let thumbnail of entry.file?.thumbnails"
+              [attr.src]="thumbnail.url" [attr.title]="entry.file?.metadata.name" [attr.height]="thumbnail.height">
           </td>
           <td>
             {{ entry?.file?.metadata | json }}
@@ -65,13 +68,18 @@ interface ViewFileEntry {
     }
   `]
 })
-export class ListFileViewComponent implements OnInit {
+export class ListFileViewComponent implements OnDestroy, OnInit {
 
   contenteditable = true;
   entries: Array<ViewFileEntry> = [];
   folder = '/';
+  owner: string;
+  subscriptions: Array<Subscription> = [];
 
-  constructor(private api: FileApi, private upload: FileUpload, private client: ZetaPushClient) {
+  constructor(private api: FileApi, private client: ZetaPushClient) {
+    // Get owner
+    this.owner = api.$getUserId();
+    // Create callback service
     client.createService({
       Type: services.Macro,
       deploymentId: 'macro_1',
@@ -82,6 +90,14 @@ export class ListFileViewComponent implements OnInit {
         }
       }
     });
+    //
+    this.subscriptions.push(api.onDeleteFileEntry.subscribe(() => {
+      this.getFileEntryList();
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   ngOnInit() {
@@ -91,48 +107,50 @@ export class ListFileViewComponent implements OnInit {
   getFileEntryList() {
     this.api.getFileEntryList({
       folder: this.folder
-    }).then((result) => {
-      console.log('ListFileViewComponent::onGetFileEntryList', result);
-      // Clean deleted elements
-      for (let i = 0; i < this.entries.length; ++i) {
-        const entry = this.entries[i];
-        if (entry.file) {
-          const found = result.entries.content.find((file: File) => {
-            return file.name === entry.file.name;
-          });
-          if (!found) {
-            this.entries.splice(i, 1);
-            --i;
+    }).then((result) => this.onGetFileEntryList(result), (errors) => {
+      console.error('ListFileViewComponent::onGetFileEntryList', errors);
+    });
+  }
+
+  onGetFileEntryList(result) {
+    console.log('ListFileViewComponent::onGetFileEntryList', result);
+    // Clean deleted elements
+    for (let i = 0; i < this.entries.length; ++i) {
+      const entry = this.entries[i];
+      if (entry.file) {
+        const found = result.entries.content.find((file: File) => {
+          return file.name === entry.file.name;
+        });
+        if (!found) {
+          this.entries.splice(i, 1);
+          --i;
+        }
+      }
+    }
+    // Manage updates Merge data from
+    result.entries.content.forEach((file: File) => {
+      const THUMBNAIL_PROPERTY_PATTERN = /thumb\-([0-9]+)/;
+      if (!file.thumbnails) {
+          file.thumbnails = [];
+        for (const property in file.metadata) {
+          if (file.metadata.hasOwnProperty(property) && THUMBNAIL_PROPERTY_PATTERN.test(property)) {
+            const value = file.metadata[property];
+            const [, height ] = THUMBNAIL_PROPERTY_PATTERN.exec(property);
+            file.thumbnails.push({
+              ...value,
+              height: parseInt(height, 10)
+            });
           }
         }
       }
-      // Manage updates Merge data from
-      result.entries.content.forEach((file: File) => {
-        const THUMBNAIL_PROPERTY_PATTERN = /thumb\-([0-9]+)/;
-        if (!file.thumbnails) {
-           file.thumbnails = [];
-          for (let property in file.metadata) {
-            if (file.metadata.hasOwnProperty(property) && THUMBNAIL_PROPERTY_PATTERN.test(property)) {
-              const value = file.metadata[property];
-              const [, height ] = THUMBNAIL_PROPERTY_PATTERN.exec(property);
-              file.thumbnails.push({
-                ...value,
-                height: parseInt(height, 10)
-              });
-            }
-          }
-        }
-        const entry = this.entries.find((element) => {
-          return element.request && element.request.transfer ? element.request.transfer.guid === file.name : false;
-        });
-        if (entry) {
-          entry.file = file;
-        } else {
-          this.entries = [ { file }, ...this.entries ];
-        }
+      const entry = this.entries.find((element) => {
+        return element.request && element.request.transfer ? element.request.transfer.guid === file.name : false;
       });
-    }, (errors) => {
-      console.error('ListFileViewComponent::onGetFileEntryList', errors);
+      if (entry) {
+        entry.file = file;
+      } else {
+        this.entries = [ { file }, ...this.entries ];
+      }
     });
   }
 
@@ -153,25 +171,16 @@ export class ListFileViewComponent implements OnInit {
     });
   }
 
-  onSelectFiles(files: Array<any>) {
-    console.log('ListFileViewComponent::onSelectFiles', files);
+  onAdded(request: FileUploadRequest) {
+    console.log('ListFileViewComponent::onAdded', request);
 
-    files.forEach((file) => {
-      const request = this.upload.add(this.folder, file);
-      this.entries = [ { request }, ...this.entries ];
-      this.upload.request(request)
-        .then((request) => {
-          console.log('ListFileViewComponent::onAdd', request);
-          return this.upload.upload(request);
-        })
-        .then((request) => {
-          console.log('ListFileViewComponent::onUpload', request);
-          return this.upload.confirm(request);
-        })
-        .then((request) => {
-          console.log('ListFileViewComponent::onConfirm', request);
-          return this.getFileEntryList();
-        });
-    });
+    this.entries = [ { request }, ...this.entries ];
   }
+
+  onConfirmed(request: FileUploadRequest) {
+    console.log('ListFileViewComponent::onAdded', request);
+
+    return this.getFileEntryList();
+  }
+
 }

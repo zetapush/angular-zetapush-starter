@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
+// TODO Refactor with Lerna
+import { UserModule } from '../user';
 // TODO Refactor with Lerna
 import { UiModule } from '../ui';
 
@@ -20,6 +20,7 @@ import { ListFileViewComponent } from './list-file-view/list-file-view.component
 import { DetailsFileViewComponent } from './details-file-view/details-file-view.component';
 import { DetailsFileComponent } from './details-file/details-file.component';
 import { FileListComponent } from './file-list/file-list.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
@@ -27,21 +28,22 @@ import { FileListComponent } from './file-list/file-list.component';
     ListFileViewComponent,
     DetailsFileViewComponent,
     DetailsFileComponent,
-    FileListComponent
+    FileListComponent,
+    FileUploadComponent
   ],
   exports: [
     FileRoutingModule,
 
-    DetailsFileComponent
+    DetailsFileComponent,
+    FileUploadComponent
   ],
   imports: [
     CommonModule,
     FormsModule,
-    MaterialModule,
-    FlexLayoutModule,
 
     CoreModule,
     UiModule,
+    UserModule,
 
     FileRoutingModule
   ],

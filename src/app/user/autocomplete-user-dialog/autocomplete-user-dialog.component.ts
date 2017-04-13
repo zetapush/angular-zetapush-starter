@@ -1,13 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { MdDialog, MdDialogRef } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
-
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/scan';
 
-import { User } from '../';
+// TODO Refactor with lerna
+import { MdDialog, MdDialogRef } from '../../ui';
+
+import { User } from '../user-api.service';
 
 @Component({
   selector: 'zp-dialog-user-list',
@@ -34,8 +35,10 @@ export class DialogUserListComponent {
   constructor(private dialog: MdDialogRef<User>) {
     console.log('DialogUserListComponent::constructor', dialog);
 
-    if (dialog.config.data.users) {
-      this.users = dialog.config.data.users as Observable<Array<User>>;
+    const { dialogConfig } = dialog._containerInstance;
+
+    if (dialogConfig.data.users) {
+      this.users = dialogConfig.data.users as Observable<Array<User>>;
     } else {
       this.users = Observable.of([]);
     }
@@ -99,4 +102,12 @@ export class AutocompleteUserDialogComponent {
     });
   }
 
+}
+
+import { MdDialogConfig, MdDialogContainer, OverlayRef } from '@angular/material';
+
+class FixMdDialogRef<T> extends MdDialogRef<T> {
+  constructor(_overlayRef: OverlayRef, _containerInstance: MdDialogContainer, public config: MdDialogConfig) {
+    super(_overlayRef, _containerInstance);
+  }
 }

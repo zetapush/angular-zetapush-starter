@@ -24,6 +24,10 @@ import { RoleModule } from './role';
 import { UserModule } from './user';
 // TODO Externalize via lerna
 import { WhiteboardModule } from './whiteboard';
+// TODO Externalize via lerna
+import { ContextModule } from './context';
+// TODO Externalize via lerna
+import { WorkflowModule } from './workflow';
 
 import { AppComponent } from './app.component';
 
@@ -35,7 +39,9 @@ const APPLICATIONS_MODULES = [
   UserModule,
   OrganizationModule,
   ConversationModule,
-  WhiteboardModule
+  WhiteboardModule,
+  ContextModule,
+  WorkflowModule
 ];
 
 @NgModule({

@@ -6,7 +6,9 @@
     <ul class="mdc-list mdc-list--avatar-list">
       <li class="mdc-list-item" *ngFor="let member of group?.members">
         <img class="mdc-list-item__start-detail grey-bg" src="./src/assets/img/avatar.png" width="100" height="100" alt="avatar">
-        <a [routerLink]="['/user/details/', member.userKey]">{{member.login}}</a>
+        <span>
+           <a [routerLink]="['/user/details/', member.userKey]">{{member.firstname}} {{member.lastname}} (@{{member.login}})</a>
+        </span>
       </li>
     </ul>
     <h3>Metadata:</h3>

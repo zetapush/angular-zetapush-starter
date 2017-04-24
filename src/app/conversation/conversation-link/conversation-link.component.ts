@@ -11,6 +11,10 @@ import { Conversation } from '../';
     <a routerLink="/conversation/details/{{conversation.room.owner}}/{{conversation.room.id}}">{{getConversationName()}}</a>
   `,
   styles: [`
+a{
+  text-decoration:none;
+  color:#13213c;
+}
 
   `]
 })

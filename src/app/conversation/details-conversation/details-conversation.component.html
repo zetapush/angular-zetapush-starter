@@ -1,29 +1,85 @@
-<h2>details-conversation</h2>
-<div fxLayout="row">
-  <div fxFlex="60">
-    <md-list>
-      <md-list-item *ngFor="let message of conversation?.messages">
-        <zp-user-link [userKey]="message.author"></zp-user-link>
-        >>
-        <span *ngIf="message.type == 'markup'">
-          <span>{{ message.value.text }}</span>
-        </span>
-        <span *ngIf="message.type == 'event'">
-          <a [routerLink]="['/whiteboard/details', conversation.room.owner, conversation.room.id, message.value.whiteboard]">New whiteboard ({{ message.value.whiteboard }})</a>
-        </span>
-        <span *ngIf="message.type != 'markup' && message.type != 'event'">
-          <span>{{ message.value | json }}</span>
-        </span>
-      </md-list-item>
+<md-sidenav-container class="example-sidenav-fab-container">
+  <md-sidenav id="infos" #sidenav mode="over" opened="false">
+     <md-list>
+        <h3 md-subheader>Fichiers partagés</h3>
+        <md-list-item>
+          <md-icon md-list-icon>folder</md-icon>
+          <h4 md-line>Nom</h4>
+          <p md-line>Date d'importation</p>
+        </md-list-item>
+        <md-list-item>
+          <md-icon md-list-icon>folder</md-icon>
+          <h4 md-line>Nom</h4>
+          <p md-line>Date d'importation</p>
+        </md-list-item>
+        <md-divider></md-divider>
+        <h3 md-subheader>Whiteboards</h3>
+        <md-list-item>
+          <md-icon md-list-icon>dashboard</md-icon>
+          <h4 md-line>Nom</h4>
+          <p md-line>Date de dernière modification</p>
+        </md-list-item>
+        <md-divider></md-divider>
+        <h3 md-subheader>Documents Texte partagés</h3>
+        <md-list-item>
+          <md-icon md-list-icon>text_format</md-icon>
+          <h4 md-line>Nom</h4>
+          <p md-line>Date de dernière modification</p>
+        </md-list-item>
+        <md-divider></md-divider>
+        <h3 md-subheader>Membres</h3>
+        <md-list>
+          <md-list-item *ngFor="let member of conversation?.room.members">
+            <img class="mdc-list-item__start-detail grey-bg" src="./src/assets/img/avatar.png" width="100" height="100" alt="avatar">
+            <a id="memberLink" [routerLink]="['/user/details/', member.userKey]">{{member.login}}</a>
+          </md-list-item>
+          <md-list-item>
+            <button type="button" md-button color="red"><md-icon md-list-icon>add_circle</md-icon>Add Member</button>
+          </md-list-item>
+        </md-list>
+       <md-divider></md-divider>
     </md-list>
+  </md-sidenav>
+  <a id="infos" (click)="sidenav.toggle()">
+    <md-icon>info</md-icon>
+  </a>
+  <div class="example-scrolling-content">
+
+ <h2>details-conversation</h2>
+<div >
+  <div>
+    <ul>
+      <li class="mdc-list-item" *ngFor="let message of conversation?.messages">
+        <img mdTooltip="Nom + 13h56" class="mdc-list-item__start-detail" src="./src/assets/img/avatar.png" width="56" height="56" alt="avatar">
+        <md-card>
+          <!--<md-card-header>
+            <zp-user-link [userKey]="message.author"></zp-user-link>
+          </md-card-header>-->
+          <md-card-content>
+            <span *ngIf="message.type == 'markup'">
+              <span id="msg">{{ message.value.text }}</span>
+            </span>
+            <span *ngIf="message.type == 'event'">
+              <a [routerLink]="['/whiteboard/details', conversation.room.owner, conversation.room.id, message.value.whiteboard]">New whiteboard ({{ message.value.whiteboard }})</a>
+            </span>
+            <span *ngIf="message.type != 'markup' && message.type != 'event'">
+              <span>{{ message.value | json }}</span>
+            </span>
+          </md-card-content>
+        </md-card>
+      </li>
+    </ul>
+
     <form mdContent (ngSubmit)="onSubmit(form, $event)" novalidate #form="ngForm" fxLayout="column" id="zpAddConversationMessage">
+        <button id="import" md-button><zp-file-upload [folder]="conversation?.room.metadata.attachments" [owner]="conversation?.room.owner" (confirmed)="onRequestConfirmed($event)"></zp-file-upload></button>
       <md-input-container>
-        <input mdInput ngModel name="message" type="text" placeholder="Message" required autocomplete="off" />
+        <input mdInput ngModel name="message" type="text" placeholder="Tapez votre message" required autocomplete="off" />
       </md-input-container>
-      <button md-button [disabled]="form.invalid && !conversation" form="zpAddConversationMessage">Submit</button>
+      <button md-fab [disabled]="form.invalid && !conversation" form="zpAddConversationMessage"><md-icon>send</md-icon></button>
+      <button md-button (click)="onPurgConversation($event)"><md-icon>clear</md-icon></button>
     </form>
   </div>
-  <div fxFlex="40">
+  <div >
     <nav>
       <button md-button (click)="onPurgConversation($event)"><md-icon>clear</md-icon></button>
       <zp-file-upload [folder]="conversation?.room.metadata.attachments" [owner]="conversation?.room.owner" (confirmed)="onRequestConfirmed($event)"></zp-file-upload>
@@ -31,4 +87,9 @@
     <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
     <zp-details-group [group]="conversation?.room"></zp-details-group>
   </div>
+
+
 </div>
+
+  </div>
+</md-sidenav-container>

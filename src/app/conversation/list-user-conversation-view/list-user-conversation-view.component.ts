@@ -63,7 +63,7 @@ import { Conversation, ConversationApi } from '../conversation-api.service';
         position:relative;
       }
 
-      a{
+      .mdc-list-item__text__primary{
         text-decoration:none;
         color:#11213b;
         font-weight:500;

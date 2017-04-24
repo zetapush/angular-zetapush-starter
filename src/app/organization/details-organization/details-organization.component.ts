@@ -4,7 +4,10 @@ import { Organization } from '../';
 
 @Component({
   selector: 'zp-details-organization',
-  templateUrl: './details-organization.component.html',
+  template: `
+    <p>details-organization</p>
+    <pre>{{organization | json}}</pre>
+  `,
   styles: []
 })
 export class DetailsOrganizationComponent {

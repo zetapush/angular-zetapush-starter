@@ -24,6 +24,9 @@ import { DetailsOrganizationComponent } from './details-organization/details-org
 import {
   AutocompleteOrganizationMembersDialogComponent
 } from './autocomplete-organization-members-dialog/autocomplete-organization-members-dialog.component';
+import {
+  AddGroupMemberViewActionComponent
+} from './add-group-member-view-action/add-group-member-view-action.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,11 @@ import {
     DetailsOrganizationViewComponent,
     DetailsOrganizationComponent,
     ListOrganizationViewComponent,
-    ListUserOrganizationViewComponent
+    ListUserOrganizationViewComponent,
+    AddGroupMemberViewActionComponent
+  ],
+  entryComponents: [
+    AddGroupMemberViewActionComponent
   ],
   exports: [
     OrganizationRoutingModule,

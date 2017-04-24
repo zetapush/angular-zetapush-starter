@@ -1,4 +1,5 @@
 import { NgZone } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
@@ -35,6 +36,8 @@ interface ApiCreateGroup extends ApiGroup {
 
 // TODO Should be auto-generated
 export class GroupApi extends Api {
+
+  onAddGroupMember: Observable<ApiGroupMember>;
 
   addGroupMember({ id, member }: ApiGroupMember): Promise<ApiGroupMember> {
     return this.$publish('addGroupMember', { id, member });

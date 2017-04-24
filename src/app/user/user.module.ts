@@ -23,6 +23,7 @@ import { DetailsUserComponent } from './details-user/details-user.component';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
 import { UserDisconnectComponent } from './user-disconnect/user-disconnect.component';
 import { UserLinkComponent } from './user-link/user-link.component';
+import { UserAvatarComponent } from './user-avatar/user-avatar.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { UserLinkComponent } from './user-link/user-link.component';
     DetailsUserComponent,
     UserBadgeComponent,
     UserDisconnectComponent,
-    UserLinkComponent
+    UserLinkComponent,
+    UserAvatarComponent
   ],
   entryComponents: [
     DialogUserListComponent

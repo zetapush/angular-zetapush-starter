@@ -5,7 +5,10 @@ import { User, UserApi } from '../';
 
 @Component({
   selector: 'zp-details-user-view',
-  templateUrl: './details-user-view.component.html',
+  template: `
+    <h1>details-user-view</h1>
+    <zp-details-user [user]="user"></zp-details-user>
+  `,
   styles: []
 })
 export class DetailsUserViewComponent implements OnInit {

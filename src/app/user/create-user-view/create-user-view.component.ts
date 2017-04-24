@@ -5,7 +5,10 @@ import { User } from '../';
 
 @Component({
   selector: 'zp-create-user-view',
-  templateUrl: './create-user-view.component.html',
+  template: `
+    <h1>create-user-view</h1>
+    <zp-create-user-form (create)="onCreateUser($event)"></zp-create-user-form>
+  `,
   styles: [`
   `]
 })
@@ -16,7 +19,7 @@ export class CreateUserViewComponent {
   onCreateUser(user: User) {
     console.log('CreateUserViewComponent::onCreateUser', user);
     this.router.navigate([
-      '/user/list'
+      '/home'
     ]);
   }
 

@@ -40,6 +40,10 @@ import { FileUploadRequest } from '../../file';
     color:#11213b;
   }
 
+  .mat-sidenav{
+    transform:translate3d(100%,0,0);
+  }
+
   .mdc-list-item__start-detail{
     margin-right:8px;
     border-radius:50%;

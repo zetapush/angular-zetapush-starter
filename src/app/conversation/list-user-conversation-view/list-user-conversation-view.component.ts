@@ -108,6 +108,10 @@ import { Conversation, ConversationApi } from '../conversation-api.service';
         margin-left:40px;
       }
 
+      .material-icons{
+    color:#11213b;
+  }
+
   `]
 })
 export class ListUserConversationViewComponent implements OnDestroy, OnInit {

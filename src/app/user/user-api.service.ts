@@ -20,7 +20,7 @@ export class UserApi extends Api {
   onUpdateUser: Observable<UserWrapper>;
 
   createUser({ login, password, email, firstname, lastname }): Promise<User> {
-    const parameters = { login, password, email, firstname, lastname };
+    const parameters = { login, password, fields: { email, firstname, lastname } };
     return this.$publish('createUser', parameters).then(({ user }) => user);
   }
   getUser({ userKey }: { userKey?: string }): Promise<User> {
@@ -34,8 +34,8 @@ export class UserApi extends Api {
   getUserList({ userKeys }: { userKeys: Array<string> }): Promise<any> {
     return this.$publish('getUserList', { userKeys });
   }
-  updateUser({ login, ...profile }: { login: string }): Promise<User> {
-    const parameters = { login, ...profile };
+  updateUser({ login, ...fields }: { login: string }): Promise<User> {
+    const parameters = { login, fields };
     return this.$publish('updateUser', parameters).then(({ user }) => user);
   }
 }

@@ -19,6 +19,7 @@ import { ListGroupComponent } from './list-group/list-group.component';
 import { ListUserGroupViewComponent } from './list-user-group-view/list-user-group-view.component';
 import { DetailsGroupViewComponent } from './details-group-view/details-group-view.component';
 import { DetailsGroupComponent } from './details-group/details-group.component';
+import { DetailsUserGroupComponent } from './details-user-group/details-user-group.component';
 import { CreateGroupFormComponent } from './create-group-form/create-group-form.component';
 import { CreateGroupViewComponent } from './create-group-view/create-group-view.component';
 
@@ -29,6 +30,7 @@ import { CreateGroupViewComponent } from './create-group-view/create-group-view.
     ListUserGroupViewComponent,
     DetailsGroupViewComponent,
     DetailsGroupComponent,
+    DetailsUserGroupComponent,
     CreateGroupFormComponent,
     CreateGroupViewComponent,
   ],

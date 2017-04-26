@@ -1,6 +1,31 @@
 <h1>list-user-group-view</h1>
-<md-list>
-  <md-list-item *ngFor="let group of list">
-    <a routerLink="/group/details/{{group.id}}">{{group.name}}</a>
-  </md-list-item>
-</md-list>
+
+<md-menu #menu="mdMenu">
+    <button md-menu-item>
+      <md-icon>delete</md-icon>
+          <span>Supprimer</span>
+    </button>
+    <button md-menu-item disabled>
+      <md-icon>do_not_disturb_off</md-icon>
+      <span>Désactiver les notifications</span>
+    </button>
+    <button md-menu-item>
+      <md-icon>person_add</md-icon>
+      <span>Ajouter une personne</span>
+    </button>
+</md-menu>
+<div id="newGroup">
+    <button type="button" md-button><md-icon md-list-icon>create</md-icon></button>
+</div>
+ <ul class="mdc-list-divider" role="separator"></ul>
+<md-card class="example-card" *ngFor="let group of list">
+  <md-card-header>
+   <span md-card-avatar class="mdc-list-item__start-detail"><i id="IconGroup" class="material-icons">favorite</i></span>
+    <md-card-title><a routerLink="/group/details/{{group.id}}">{{group.name}}</a></md-card-title>
+    <md-card-subtitle>5 membres</md-card-subtitle>
+    <md-card-subtitle><img class="listAvatar" src="./src/assets/img/avatar.png" alt="avatar"><img class="listAvatar" src="./src/assets/img/avatar.png" alt="avatar"><img class="listAvatar" src="./src/assets/img/avatar.png" alt="avatar"><img class="listAvatar" src="./src/assets/img/avatar.png" alt="avatar"><img class="listAvatar" src="./src/assets/img/avatar.png" alt="avatar"></md-card-subtitle>
+    <button id="menu" md-icon-button [mdMenuTriggerFor]="menu">
+      <md-icon>more_vert</md-icon>
+  </button>
+  </md-card-header>
+</md-card>

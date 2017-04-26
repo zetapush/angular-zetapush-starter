@@ -1,0 +1,27 @@
+<md-card>
+  <md-card-title>{{group?.name}}</md-card-title>
+  <md-card-subtitle>{{group?.owner}}:{{group?.id}}</md-card-subtitle>
+  <md-card-content>
+    <h3>Members:</h3>
+    <ul class="mdc-list mdc-list--avatar-list">
+      <li class="mdc-list-item" *ngFor="let member of group?.members">
+        <img class="mdc-list-item__start-detail grey-bg" src="./src/assets/img/avatar.png" width="100" height="100" alt="avatar">
+        <span>
+           <a [routerLink]="['/user/details/', member.userKey]">{{member.firstname}} {{member.lastname}} (@{{member.login}})</a>
+        </span>
+        <button id="delete" md-icon-button>
+           <md-icon>close</md-icon>
+        </button>
+      </li>
+    </ul>
+    <h3>Metadata:</h3>
+    <pre>{{group?.metadata | json}}</pre>
+    <h3>Tags:</h3>
+    <pre>{{group?.tags | json}}</pre>
+    <md-chip-list chips="group?.tags"></md-chip-list>
+  </md-card-content>
+  <md-card-actions *ngIf="actions">
+    <button type="button" md-button color="accent">Add Member</button>
+    <button type="button" md-raised-button color="primary">Edit</button>
+  </md-card-actions>
+</md-card>

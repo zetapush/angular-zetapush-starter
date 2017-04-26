@@ -1,6 +1,14 @@
 <h1>list-organization-view</h1>
-<md-list>
-  <md-list-item *ngFor="let organization of list">
-    <a routerLink="/organization/details/{{organization.metadata.name}}">{{organization.name}}</a>
-  </md-list-item>
-</md-list>
+<md-card class="example-card" *ngFor="let organization of list">
+  <md-card-header>
+    <img md-card-avatar class="mdc-list-item__start-detail" src="./src/assets/img/zplogo.png" alt="Avatar Organisation">
+    <md-card-title><a routerLink="/organization/details/{{organization.metadata.name}}">{{organization.name}}</a></md-card-title>
+    <md-card-subtitle>2 membres</md-card-subtitle>
+  </md-card-header>
+  <md-card-content>
+    <p>
+      Description de l'organisation rédigée à la création par l'administrateur
+    </p>
+  </md-card-content>
+</md-card>
+

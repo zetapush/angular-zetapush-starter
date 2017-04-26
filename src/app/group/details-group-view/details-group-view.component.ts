@@ -15,7 +15,7 @@ import { Group, GroupApi } from '../group-api.service';
   selector: 'zp-details-group-view',
   template: `
     <h1>details-group-view</h1>
-    <zp-details-group [group]="group"></zp-details-group>
+    <zp-details-user-group [group]="group"></zp-details-user-group>
     <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
   `,
   styles: []

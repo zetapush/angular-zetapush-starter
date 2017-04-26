@@ -12,6 +12,7 @@ import { UiModule } from '../ui';
 import { FileRoutingModule } from './file-routing.module';
 
 import { FileApiProvider } from './file-api.service';
+import { FileCallbackApiProvider, FileCallbackApi } from './file-callback-api.service';
 import { FileUpload } from './file-upload.service';
 
 import { FileLayoutComponent } from './file-layout/file-layout.component';
@@ -49,7 +50,12 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
   ],
   providers: [
     FileApiProvider,
+    FileCallbackApiProvider,
     FileUpload
   ]
 })
-export class FileModule { }
+export class FileModule {
+  constructor(api: FileCallbackApi) {
+    window['FileCallbackApi'] = api;
+  }
+}

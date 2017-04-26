@@ -13,8 +13,6 @@ import { GroupRoutingModule } from './group-routing.module';
 
 import { GroupApiProvider } from './group-api.service';
 
-import { GroupLayoutComponent } from './group-layout/group-layout.component';
-
 import { ListGroupComponent } from './list-group/list-group.component';
 import { ListUserGroupViewComponent } from './list-user-group-view/list-user-group-view.component';
 import { DetailsGroupViewComponent } from './details-group-view/details-group-view.component';
@@ -24,7 +22,6 @@ import { CreateGroupViewComponent } from './create-group-view/create-group-view.
 
 @NgModule({
   declarations: [
-    GroupLayoutComponent,
     ListGroupComponent,
     ListUserGroupViewComponent,
     DetailsGroupViewComponent,

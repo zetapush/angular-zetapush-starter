@@ -4,9 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 // TODO Refactor with Lerna
 import { IsSimplyConnected, CoreState, ViewActionItem, ViewActionRegistry } from '../core';
 // TODO Refactor with Lerna
+import { RouterLayoutComponent } from '../router';
+// TODO Refactor with Lerna
 import { DetailsConversationComponent } from '../conversation';
 
-import { WhiteboardLayoutComponent } from './whiteboard-layout/whiteboard-layout.component';
 import { ListWhiteboardViewComponent } from './list-whiteboard-view/list-whiteboard-view.component';
 import { DetailsWhiteboardViewComponent } from './details-whiteboard-view/details-whiteboard-view.component';
 
@@ -14,8 +15,11 @@ import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-ac
 
 const routes: Routes = [{
   path: 'whiteboard',
-  component: WhiteboardLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: []
+  },
   children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
     { path: 'list', component: ListWhiteboardViewComponent },

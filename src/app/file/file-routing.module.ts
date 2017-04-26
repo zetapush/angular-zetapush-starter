@@ -3,14 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
 import { IsSimplyConnected, CoreState } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent } from '../router';
 
-import { FileLayoutComponent } from './file-layout/file-layout.component';
 import { ListFileViewComponent } from './list-file-view/list-file-view.component';
 
 const routes: Routes = [{
   path: 'file',
-  component: FileLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'list', name: 'file/list' }
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
     { path: 'list', component: ListFileViewComponent }

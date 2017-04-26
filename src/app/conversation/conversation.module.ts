@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
 // TODO Refactor with Lerna
+import { RouterModule } from '../router';
+// TODO Refactor with Lerna
 import { UiModule } from '../ui';
 // TODO Refactor with Lerna
 import { FileModule } from '../file';
@@ -18,8 +20,6 @@ import { OrganizationModule } from '../organization';
 import { ConversationRoutingModule } from './conversation-routing.module';
 
 import { ConversationApiProvider } from './conversation-api.service';
-
-import { ConversationLayoutComponent } from './conversation-layout/conversation-layout.component';
 
 import { ListConversationViewComponent } from './list-conversation-view/list-conversation-view.component';
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
@@ -35,7 +35,6 @@ import {
 
 @NgModule({
   declarations: [
-    ConversationLayoutComponent,
     ListConversationViewComponent,
     ListUserConversationViewComponent,
     DetailsConversationViewComponent,
@@ -57,6 +56,7 @@ import {
     FormsModule,
 
     CoreModule,
+    RouterModule,
     UiModule,
     FileModule,
     GroupModule,

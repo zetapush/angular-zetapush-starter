@@ -12,8 +12,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserApiProvider } from './user-api.service';
 import { UserCache } from './user-cache.service';
 
-import { UserLayoutComponent } from './user-layout/user-layout.component';
-
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
@@ -26,7 +24,6 @@ import { UserLinkComponent } from './user-link/user-link.component';
 
 @NgModule({
   declarations: [
-    UserLayoutComponent,
     CreateUserViewComponent,
     RegisterViewComponent,
     AutocompleteUserDialogComponent,

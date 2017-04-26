@@ -15,8 +15,6 @@ import { OrganizationRoutingModule } from './organization-routing.module';
 
 import { OrganizationApiProvider } from './organization-api.service';
 
-import { OrganizationLayoutComponent } from './organization-layout/organization-layout.component';
-
 import { ListOrganizationViewComponent } from './list-organization-view/list-organization-view.component';
 import { ListUserOrganizationViewComponent } from './list-user-organization-view/list-user-organization-view.component';
 import { DetailsOrganizationViewComponent } from './details-organization-view/details-organization-view.component';
@@ -30,7 +28,6 @@ import {
 
 @NgModule({
   declarations: [
-    OrganizationLayoutComponent,
     AutocompleteOrganizationMembersDialogComponent,
     DetailsOrganizationViewComponent,
     DetailsOrganizationComponent,

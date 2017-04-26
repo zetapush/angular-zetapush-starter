@@ -4,9 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 // TODO Refactor with Lerna
 import { IsSimplyConnected, CoreState, ViewActionItem, ViewActionRegistry } from '../core';
 // TODO Refactor with Lerna
+import { RouterLayoutComponent } from '../router';
+// TODO Refactor with Lerna
 import { DetailsGroupViewComponent } from '../group';
 
-import { OrganizationLayoutComponent } from './organization-layout/organization-layout.component';
 import { ListOrganizationViewComponent } from './list-organization-view/list-organization-view.component';
 import { ListUserOrganizationViewComponent } from './list-user-organization-view/list-user-organization-view.component';
 import { DetailsOrganizationViewComponent } from './details-organization-view/details-organization-view.component';
@@ -16,8 +17,14 @@ import {
 
 const routes: Routes = [{
   path: 'organization',
-  component: OrganizationLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'list/all', name: 'organization/list/all' },
+      { path: 'list/mine', name: 'organization/list/mine' },
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
     { path: 'list/all', component: ListOrganizationViewComponent },

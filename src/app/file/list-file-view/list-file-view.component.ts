@@ -1,10 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
-import { services } from 'zetapush-js';
-import { ZetaPushClient } from 'zetapush-angular';
-
 
 import { FileApi, File } from '../file-api.service';
+import { FileCallbackApi } from '../file-callback-api.service';
 import { FileUploadRequest } from '../file-upload.service';
 
 interface ViewFileEntry {
@@ -76,22 +74,14 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
   owner: string;
   subscriptions: Array<Subscription> = [];
 
-  constructor(private api: FileApi, private client: ZetaPushClient) {
+  constructor(private api: FileApi, private callbackApi: FileCallbackApi) {
     // Get owner
     this.owner = api.$getUserId();
-    // Create callback service
-    client.createService({
-      Type: services.Macro,
-      deploymentId: 'macro_1',
-      listener: {
-        core_file__onThumbnailCallback: (message) => {
-          console.log('core_file__onThumbnailCallback', message);
-          this.getFileEntryList();
-        }
-      }
-    });
     //
     this.subscriptions.push(api.onDeleteFileEntry.subscribe(() => {
+      this.getFileEntryList();
+    }));
+    this.subscriptions.push(callbackApi.onThumbnailCallback.subscribe(() => {
       this.getFileEntryList();
     }));
   }

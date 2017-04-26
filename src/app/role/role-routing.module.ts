@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IsSimplyConnected, CoreState } from '../core';
+// TODO Refactor with Lerna
+import { IsSimplyConnected } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent, RouterState } from '../router';
 
-import { RoleLayoutComponent } from './role-layout/role-layout.component';
 import { CreateRoleViewComponent } from './create-role-view/create-role-view.component';
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
 import { ListUserRoleViewComponent } from './list-user-role-view/list-user-role-view.component';
@@ -12,8 +14,15 @@ import { PermissionGridViewComponent } from './permission-grid-view/permission-g
 
 const routes: Routes = [{
   path: 'role',
-  component: RoleLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'create', name: 'role/create' },
+      { path: 'list/mine', name: 'role/list/mine' },
+      { path: 'grid', name: 'role/grid' }
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
     { path: 'create', component: CreateRoleViewComponent },
@@ -30,7 +39,7 @@ const routes: Routes = [{
   providers: []
 })
 export class RoleRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('RoleRoutingModule::constructor', core);
     core.register({
       name: 'role',

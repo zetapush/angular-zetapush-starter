@@ -100,9 +100,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
         value: {
           json: JSON.stringify($event)
         },
-        metadata: {
-          yo: 'bitch'
-        },
+        metadata: {},
         whiteboard: this.whiteboard
       }).then((message) => {
         console.log('DetailsWhiteboardViewComponent::onAddWhiteboardObject', message);

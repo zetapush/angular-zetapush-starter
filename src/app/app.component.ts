@@ -9,6 +9,9 @@ import { Component } from '@angular/core';
       height: 100%;
       flex-direction: column;
     }
+    main {
+      height: 100%;
+    }
   `]
 })
 export class AppComponent { }

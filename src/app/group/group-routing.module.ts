@@ -1,17 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { IsSimplyConnected, CoreState } from '../core';
+// TODO Refactor with Lerna
+import { IsSimplyConnected } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent, RouterState } from '../router';
 
-import { GroupLayoutComponent } from './group-layout/group-layout.component';
 import { CreateGroupViewComponent } from './create-group-view/create-group-view.component';
 import { ListUserGroupViewComponent } from './list-user-group-view/list-user-group-view.component';
 import { DetailsGroupViewComponent } from './details-group-view/details-group-view.component';
 
 const routes: Routes = [{
   path: 'group',
-  component: GroupLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'create', name: 'group/create' },
+      { path: 'list/mine', name: 'group/list/mine' },
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
     { path: 'create', component: CreateGroupViewComponent },
@@ -26,7 +34,7 @@ const routes: Routes = [{
   providers: []
 })
 export class GroupRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('GroupRoutingModule::constructor', core);
     core.register({
       name: 'group',

@@ -12,8 +12,6 @@ import { UserRoutingModule } from './user-routing.module';
 import { UserApiProvider } from './user-api.service';
 import { UserCache } from './user-cache.service';
 
-import { UserLayoutComponent } from './user-layout/user-layout.component';
-
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
@@ -24,10 +22,11 @@ import { UserBadgeComponent } from './user-badge/user-badge.component';
 import { UserDisconnectComponent } from './user-disconnect/user-disconnect.component';
 import { UserLinkComponent } from './user-link/user-link.component';
 import { UserAvatarComponent } from './user-avatar/user-avatar.component';
+import { UserBadgeViewActionComponent } from './user-badge-view-action/user-badge-view-action.component';
+import { UserDisconnectViewActionComponent } from './user-disconnect-view-action/user-disconnect-view-action.component';
 
 @NgModule({
   declarations: [
-    UserLayoutComponent,
     CreateUserViewComponent,
     RegisterViewComponent,
     AutocompleteUserDialogComponent,
@@ -38,10 +37,14 @@ import { UserAvatarComponent } from './user-avatar/user-avatar.component';
     UserBadgeComponent,
     UserDisconnectComponent,
     UserLinkComponent,
-    UserAvatarComponent
+    UserAvatarComponent,
+    UserBadgeViewActionComponent,
+    UserDisconnectViewActionComponent
   ],
   entryComponents: [
-    DialogUserListComponent
+    DialogUserListComponent,
+    UserBadgeViewActionComponent,
+    UserDisconnectViewActionComponent
   ],
   exports: [
     UserRoutingModule,
@@ -50,7 +53,9 @@ import { UserAvatarComponent } from './user-avatar/user-avatar.component';
     CreateUserFormComponent,
     DetailsUserComponent,
     DialogUserListComponent,
+	UserAvatarComponent,
     UserBadgeComponent,
+    UserBadgeViewActionComponent,
     UserDisconnectComponent,
     UserLinkComponent
   ],

@@ -13,15 +13,12 @@ import { WorkflowRoutingModule } from './workflow-routing.module';
 
 import { WorkflowApiProvider } from './workflow-api.service';
 
-import { WorkflowLayoutComponent } from './workflow-layout/workflow-layout.component';
-
 import { ListWorkflowViewComponent } from './list-workflow-view/list-workflow-view.component';
 import { DetailsWorkflowViewComponent } from './details-workflow-view/details-workflow-view.component';
 import { DetailsWorkflowComponent } from './details-workflow/details-workflow.component';
 
 @NgModule({
   declarations: [
-    WorkflowLayoutComponent,
     ListWorkflowViewComponent,
     DetailsWorkflowViewComponent,
     DetailsWorkflowComponent

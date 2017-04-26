@@ -2,15 +2,21 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent, RouterState } from '../router';
 
-import { FileLayoutComponent } from './file-layout/file-layout.component';
 import { ListFileViewComponent } from './list-file-view/list-file-view.component';
 
 const routes: Routes = [{
   path: 'file',
-  component: FileLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'list', name: 'file/list' }
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
     { path: 'list', component: ListFileViewComponent }
@@ -22,7 +28,7 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class FileRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('FileRoutingModule::constructor', core);
     core.register({
       name: 'file',

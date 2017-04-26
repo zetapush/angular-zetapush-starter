@@ -12,9 +12,8 @@ import { UiModule } from '../ui';
 import { FileRoutingModule } from './file-routing.module';
 
 import { FileApiProvider } from './file-api.service';
+import { FileCallbackApiProvider, FileCallbackApi } from './file-callback-api.service';
 import { FileUpload } from './file-upload.service';
-
-import { FileLayoutComponent } from './file-layout/file-layout.component';
 
 import { ListFileViewComponent } from './list-file-view/list-file-view.component';
 import { DetailsFileViewComponent } from './details-file-view/details-file-view.component';
@@ -24,7 +23,6 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
 
 @NgModule({
   declarations: [
-    FileLayoutComponent,
     ListFileViewComponent,
     DetailsFileViewComponent,
     DetailsFileComponent,
@@ -49,7 +47,12 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
   ],
   providers: [
     FileApiProvider,
+    FileCallbackApiProvider,
     FileUpload
   ]
 })
-export class FileModule { }
+export class FileModule {
+  constructor(api: FileCallbackApi) {
+    window['FileCallbackApi'] = api;
+  }
+}

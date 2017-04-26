@@ -18,8 +18,6 @@ import { RoleRoutingModule } from './role-routing.module';
 import { PermissionApiProvider } from './permission-api.service';
 import { RoleApiProvider } from './role-api.service';
 
-import { RoleLayoutComponent } from './role-layout/role-layout.component';
-
 import { ListRoleViewComponent } from './list-role-view/list-role-view.component';
 import { ListUserRoleViewComponent } from './list-user-role-view/list-user-role-view.component';
 import { DetailsRoleViewComponent } from './details-role-view/details-role-view.component';
@@ -33,7 +31,6 @@ import { PermissionGridViewComponent } from './permission-grid-view/permission-g
 
 @NgModule({
   declarations: [
-    RoleLayoutComponent,
     ListRoleViewComponent,
     ListUserRoleViewComponent,
     DetailsRoleViewComponent,

@@ -55,16 +55,11 @@
           <!--<md-card-header>
             <zp-user-link [userKey]="message.author"></zp-user-link>
           </md-card-header>-->
-          <md-card-content>
-            <span *ngIf="message.type == 'markup'">
-              <span id="msg">{{ message.value.text }}</span>
-            </span>
-            <span *ngIf="message.type == 'event'">
-              <a [routerLink]="['/whiteboard/details', conversation.room.owner, conversation.room.id, message.value.whiteboard]">New whiteboard ({{ message.value.whiteboard }})</a>
-            </span>
-            <span *ngIf="message.type != 'markup' && message.type != 'event'">
-              <span>{{ message.value | json }}</span>
-            </span>
+          <md-card-content [ngSwitch]="message.type">
+			<zp-conversation-attachment-message *ngSwitchCase="'attachment'" [message]="message"></zp-conversation-attachment-message>
+			<zp-conversation-event-message *ngSwitchCase="'event'" [message]="message"></zp-conversation-event-message>
+			<zp-conversation-markup-message *ngSwitchCase="'markup'" [message]="message"></zp-conversation-markup-message>
+			<zp-conversation-default-message *NgSwitchDefault [message]="message"></zp-conversation-default-message>
           </md-card-content>
         </md-card>
       </li>

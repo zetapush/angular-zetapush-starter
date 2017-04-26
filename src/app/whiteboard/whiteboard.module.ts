@@ -17,8 +17,6 @@ import { WhiteboardRoutingModule } from './whiteboard-routing.module';
 
 import { WhiteboardApiProvider } from './whiteboard-api.service';
 
-import { WhiteboardLayoutComponent } from './whiteboard-layout/whiteboard-layout.component';
-
 import { ListWhiteboardViewComponent } from './list-whiteboard-view/list-whiteboard-view.component';
 import { DetailsWhiteboardViewComponent } from './details-whiteboard-view/details-whiteboard-view.component';
 import { DetailsWhiteboardComponent } from './details-whiteboard/details-whiteboard.component';
@@ -27,7 +25,6 @@ import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-ac
 
 @NgModule({
   declarations: [
-    WhiteboardLayoutComponent,
     ListWhiteboardViewComponent,
     DetailsWhiteboardViewComponent,
     DetailsWhiteboardComponent,

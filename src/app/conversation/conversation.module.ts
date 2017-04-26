@@ -5,6 +5,8 @@ import { FormsModule } from '@angular/forms';
 // TODO Refactor with Lerna
 import { CoreModule } from '../core';
 // TODO Refactor with Lerna
+import { RouterModule } from '../router';
+// TODO Refactor with Lerna
 import { UiModule } from '../ui';
 // TODO Refactor with Lerna
 import { FileModule } from '../file';
@@ -19,22 +21,29 @@ import { ConversationRoutingModule } from './conversation-routing.module';
 
 import { ConversationApiProvider } from './conversation-api.service';
 
-import { ConversationLayoutComponent } from './conversation-layout/conversation-layout.component';
-
 import { ListConversationViewComponent } from './list-conversation-view/list-conversation-view.component';
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
 import { DetailsConversationViewComponent } from './details-conversation-view/details-conversation-view.component';
 import { DetailsConversationComponent } from './details-conversation/details-conversation.component';
 import { ConversationLinkComponent } from './conversation-link/conversation-link.component';
+import {
+  ConversationDefaultMessageComponent,
+  ConversationAttachmentMessageComponent,
+  ConversationEventMessageComponent,
+  ConversationMarkupMessageComponent
+} from './conversation-message/conversation-message.component';
 
 @NgModule({
   declarations: [
-    ConversationLayoutComponent,
     ListConversationViewComponent,
     ListUserConversationViewComponent,
     DetailsConversationViewComponent,
     DetailsConversationComponent,
-    ConversationLinkComponent
+    ConversationLinkComponent,
+    ConversationDefaultMessageComponent,
+    ConversationAttachmentMessageComponent,
+    ConversationEventMessageComponent,
+    ConversationMarkupMessageComponent
   ],
   exports: [
     ConversationRoutingModule,
@@ -47,6 +56,7 @@ import { ConversationLinkComponent } from './conversation-link/conversation-link
     FormsModule,
 
     CoreModule,
+    RouterModule,
     UiModule,
     FileModule,
     GroupModule,

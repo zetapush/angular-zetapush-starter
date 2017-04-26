@@ -2,16 +2,22 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent, RouterState } from '../router';
 
-import { WorkflowLayoutComponent } from './workflow-layout/workflow-layout.component';
 import { ListWorkflowViewComponent } from './list-workflow-view/list-workflow-view.component';
 import { DetailsWorkflowViewComponent } from './details-workflow-view/details-workflow-view.component';
 
 const routes: Routes = [{
   path: 'workflow',
-  component: WorkflowLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'list/all', name: 'workflow/list/all' }
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list/all', pathMatch: 'full' },
     { path: 'list/all', component: ListWorkflowViewComponent },
@@ -25,7 +31,7 @@ const routes: Routes = [{
   providers: []
 })
 export class WorkflowRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('WorkflowRoutingModule::constructor', core);
     core.register({
       name: 'workflow',

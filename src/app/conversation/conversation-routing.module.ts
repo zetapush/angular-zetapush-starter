@@ -2,17 +2,23 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent, RouterState } from '../router';
 
-import { ConversationLayoutComponent } from './conversation-layout/conversation-layout.component';
 import { ListConversationViewComponent } from './list-conversation-view/list-conversation-view.component';
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
 import { DetailsConversationViewComponent } from './details-conversation-view/details-conversation-view.component';
 
 const routes: Routes = [{
   path: 'conversation',
-  component: ConversationLayoutComponent,
+  component: RouterLayoutComponent,
   canActivate: [ IsSimplyConnected ],
+  data: {
+    links: [
+      { path: 'list/mine', name: 'conversation/list/mine' }
+    ]
+  },
   children: [
     { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
     { path: 'list/all', component: ListConversationViewComponent },
@@ -27,7 +33,7 @@ const routes: Routes = [{
   providers: []
 })
 export class ConversationRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('ConversationRoutingModule::constructor', core);
     core.register({
       name: 'conversation',

@@ -21,6 +21,8 @@ import { DetailsUserComponent } from './details-user/details-user.component';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
 import { UserDisconnectComponent } from './user-disconnect/user-disconnect.component';
 import { UserLinkComponent } from './user-link/user-link.component';
+import { UserBadgeViewActionComponent } from './user-badge-view-action/user-badge-view-action.component';
+import { UserDisconnectViewActionComponent } from './user-disconnect-view-action/user-disconnect-view-action.component';
 
 @NgModule({
   declarations: [
@@ -33,10 +35,14 @@ import { UserLinkComponent } from './user-link/user-link.component';
     DetailsUserComponent,
     UserBadgeComponent,
     UserDisconnectComponent,
-    UserLinkComponent
+    UserLinkComponent,
+    UserBadgeViewActionComponent,
+    UserDisconnectViewActionComponent
   ],
   entryComponents: [
-    DialogUserListComponent
+    DialogUserListComponent,
+    UserBadgeViewActionComponent,
+    UserDisconnectViewActionComponent
   ],
   exports: [
     UserRoutingModule,
@@ -46,6 +52,7 @@ import { UserLinkComponent } from './user-link/user-link.component';
     DetailsUserComponent,
     DialogUserListComponent,
     UserBadgeComponent,
+    UserBadgeViewActionComponent,
     UserDisconnectComponent,
     UserLinkComponent
   ],

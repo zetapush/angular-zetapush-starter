@@ -40,9 +40,7 @@ export class WhiteboardRoutingModule {
       path: '/whiteboard'
     });
     registry.setActionsByView(DetailsConversationComponent, [
-      new ViewActionItem(CreateWhiteboardViewActionComponent, {
-        yo: 'bitch'
-      })
+      new ViewActionItem(CreateWhiteboardViewActionComponent)
     ]);
   }
 }

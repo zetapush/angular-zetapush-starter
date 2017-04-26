@@ -46,9 +46,7 @@ export class OrganizationRoutingModule {
       path: '/organization'
     });
     registry.setActionsByView(DetailsGroupViewComponent, [
-      new ViewActionItem(AddGroupMemberViewActionComponent, {
-        yo: 'bitch'
-      })
+      new ViewActionItem(AddGroupMemberViewActionComponent)
     ]);
   }
 }

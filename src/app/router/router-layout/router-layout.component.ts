@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ReplaySubject } from 'rxjs/ReplaySubject';
+
+// TODO Refactor with Lerna
+import { View } from '../../core/';
+
 import { RouterState } from '../router-state.service';
 
 @Component({
@@ -9,6 +14,7 @@ import { RouterState } from '../router-state.service';
     <md-sidenav-container>
       <md-sidenav #sidenav fxLayout="column">
         <h2>ZetaPush</h2>
+        <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
         <a routerLink="/home">
           <md-icon>home</md-icon>
         </a>
@@ -51,6 +57,8 @@ import { RouterState } from '../router-state.service';
   `]
 })
 export class RouterLayoutComponent {
+  readonly view: View = RouterLayoutComponent;
+  context = new ReplaySubject<any>();
   links: Array<string> = [];
   paths: Array<string> = [];
   constructor(private core: RouterState, private route: ActivatedRoute) {

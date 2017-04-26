@@ -9,7 +9,6 @@ import { UserCache } from '../user-cache.service';
   template: `
     <span>Welcome</span>
     <strong>{{ user.login }}</strong>
-    <zp-user-disconnect></zp-user-disconnect>
   `,
   styles: []
 })

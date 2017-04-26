@@ -13,7 +13,7 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'login', component: RouterLayoutComponent, children: [] },
+  { path: 'login', component: LoginViewComponent },
   {
     path: 'home',
     component: RouterLayoutComponent,

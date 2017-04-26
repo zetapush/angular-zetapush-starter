@@ -4,15 +4,24 @@ import { ZetaPushModule } from 'zetapush-angular';
 
 // TODO Refactor with Lerna
 import { IsSimplyConnected } from '../core';
+// TODO Refactor with Lerna
+import { RouterLayoutComponent, RouterState } from '../router';
 
-import { LoginViewComponent } from './login-view/login-view.component';
 import { HomeViewComponent } from './home-view/home-view.component';
+import { LoginViewComponent } from './login-view/login-view.component';
 import { NotFoundViewComponent } from './not-found-view/not-found-view.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: 'login', component: LoginViewComponent },
-  { path: 'home', component: HomeViewComponent, canActivate: [ IsSimplyConnected ] },
+  { path: 'login', component: RouterLayoutComponent, children: [] },
+  {
+    path: 'home',
+    component: RouterLayoutComponent,
+    canActivate: [ IsSimplyConnected ],
+    children: [
+      { path: '', component: HomeViewComponent }
+    ]
+  },
   { path: '**', component: NotFoundViewComponent }
 ];
 

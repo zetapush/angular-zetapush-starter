@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected } from '../core';
 // TODO Refactor with Lerna
-import { RouterLayoutComponent } from '../router';
+import { RouterLayoutComponent, RouterState } from '../router';
 
 import { ListConversationViewComponent } from './list-conversation-view/list-conversation-view.component';
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
@@ -33,7 +33,7 @@ const routes: Routes = [{
   providers: []
 })
 export class ConversationRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('ConversationRoutingModule::constructor', core);
     core.register({
       name: 'conversation',

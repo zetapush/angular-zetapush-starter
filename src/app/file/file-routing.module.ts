@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected } from '../core';
 // TODO Refactor with Lerna
-import { RouterLayoutComponent } from '../router';
+import { RouterLayoutComponent, RouterState } from '../router';
 
 import { ListFileViewComponent } from './list-file-view/list-file-view.component';
 
@@ -28,7 +28,7 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class FileRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('FileRoutingModule::constructor', core);
     core.register({
       name: 'file',

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState, ViewActionItem, ViewActionRegistry } from '../core';
+import { IsSimplyConnected, ViewActionItem, ViewActionRegistry } from '../core';
 // TODO Refactor with Lerna
-import { RouterLayoutComponent } from '../router';
+import { RouterLayoutComponent, RouterState } from '../router';
 // TODO Refactor with Lerna
 import { DetailsGroupViewComponent } from '../group';
 
@@ -39,7 +39,7 @@ const routes: Routes = [{
   providers: []
 })
 export class OrganizationRoutingModule {
-  constructor(core: CoreState, registry: ViewActionRegistry) {
+  constructor(core: RouterState, registry: ViewActionRegistry) {
     console.log('OrganizationRoutingModule::constructor', core);
     core.register({
       name: 'organization',

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState, ViewActionItem, ViewActionRegistry } from '../core';
+import { IsSimplyConnected, ViewActionItem, ViewActionRegistry } from '../core';
 // TODO Refactor with Lerna
-import { RouterLayoutComponent } from '../router';
+import { RouterLayoutComponent, RouterState } from '../router';
 // TODO Refactor with Lerna
 import { DetailsConversationComponent } from '../conversation';
 
@@ -33,7 +33,7 @@ const routes: Routes = [{
   providers: []
 })
 export class WhiteboardRoutingModule {
-  constructor(core: CoreState, registry: ViewActionRegistry) {
+  constructor(core: RouterState, registry: ViewActionRegistry) {
     console.log('WhiteboardRoutingModule::constructor', core);
     core.register({
       name: 'whiteboard',

@@ -6,7 +6,7 @@ export interface Module {
 }
 
 @Injectable()
-export class CoreState {
+export class RouterState {
 
   state = new EventEmitter<Array<Module>>();
 

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, IsWeaklyConnected, CoreState } from '../core';
+import { IsSimplyConnected, IsWeaklyConnected } from '../core';
 // TODO Refactor with Lerna
-import { RouterLayoutComponent } from '../router';
+import { RouterLayoutComponent, RouterState } from '../router';
 
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
@@ -36,7 +36,7 @@ const routes: Routes = [{
   providers: []
 })
 export class UserRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('UserRoutingModule::constructor', core);
     core.register({
       name: 'user',

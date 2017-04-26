@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // TODO Refactor with Lerna
-import { IsSimplyConnected, CoreState } from '../core';
+import { IsSimplyConnected } from '../core';
 // TODO Refactor with Lerna
-import { RouterLayoutComponent } from '../router';
+import { RouterLayoutComponent, RouterState } from '../router';
 
 import { CreateGroupViewComponent } from './create-group-view/create-group-view.component';
 import { ListUserGroupViewComponent } from './list-user-group-view/list-user-group-view.component';
@@ -34,7 +34,7 @@ const routes: Routes = [{
   providers: []
 })
 export class GroupRoutingModule {
-  constructor(core: CoreState) {
+  constructor(core: RouterState) {
     console.log('GroupRoutingModule::constructor', core);
     core.register({
       name: 'group',

@@ -3,7 +3,10 @@ import { Location } from '@angular/common';
 
 @Component({
   selector: 'zp-not-found-view',
-  templateUrl: './not-found-view.component.html',
+  template: `
+    <h1>Page Not Found</h1>
+    <button type="button" md-button color="accent" (click)="onBackClick()">Go Back</button>
+  `,
   styles: [`
 
   `]

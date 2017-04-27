@@ -22,7 +22,7 @@ import { RouterState } from '../router-state.service';
       </md-sidenav>
       <md-toolbar>
         <button md-button (click)="sidenav.open()">
-          <md-icon>dehaze</md-icon>
+          <md-icon>menu</md-icon>
         </button>
         <md-toolbar-row *ngIf="links.length">
           <nav>

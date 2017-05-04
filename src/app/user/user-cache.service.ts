@@ -1,4 +1,3 @@
-import { CacheEntry } from './user-cache.service';
 import { Injectable } from '@angular/core';
 import debounce from 'lodash.debounce';
 import { ReplaySubject } from 'rxjs/ReplaySubject';

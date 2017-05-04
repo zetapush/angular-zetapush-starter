@@ -1,24 +1,31 @@
-import { Component } from '@angular/core';
+import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Workflow, WorkflowApi } from '../workflow-api.service';
 
 @Component({
   selector: 'zp-details-workflow-view',
   template: `
-    <h1 class="Title">details-workflow-view</h1>
+    <h1 class="Title">details-workflow-view <md-icon (click)="onAddContextClick()">add</md-icon></h1>
     <section class="Workflow" fxLayout="row" fxLayoutAlign="space-around center" fxFill>
       <div class="WorkflowStep" fxFlex="getFlexValue(workflow)" *ngFor="let step of workflow.steps; let i = index">
         <div class="WorkflowStep__Details">
           <h4>{{step.name}}<span class="Counter">{{step.contexts.length}}</span></h4>
         </div>
         <div class="WorkflowStep__ContextList"
-          dnd-sortable-container [sortableData]="step.contexts" [dropZones]="['context-dropZone']">
+          dnd-sortable-container
+          dnd-droppable
+          [dropEnabled]="true"
+          [sortableData]="step.contexts"
+          [allowDrop]="allowDropFunction(step)">
           <div class="WorkflowContext" *ngFor="let context of step.contexts; let x = index"
-            dnd-sortable [sortableIndex]="x" [dragData]="context">
+            dnd-sortable
+            [sortableIndex]="x" [dragData]="context"
+            (onDropSuccess)="onDropSuccess(step, $event)">
             <span class="WorkflowContext__Icon">
-              <md-icon>{{context.status}}</md-icon>
+              <md-icon>{{context.fields.icon}}</md-icon>
             </span>
-            <div>{{context.name}}</div>
+            <div>{{context.fields.title}}</div>
           </div>
         </div>
       </div>
@@ -56,6 +63,7 @@ import { Workflow, WorkflowApi } from '../workflow-api.service';
     }
     .WorkflowStep__ContextList {
       padding: 8px;
+      height: 100%;
     }
     .WorkflowContext {
       cursor: move;
@@ -86,13 +94,64 @@ import { Workflow, WorkflowApi } from '../workflow-api.service';
     }
   `]
 })
-export class DetailsWorkflowViewComponent {
+export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
+
+  private subscriptions: Array<Subscription> = [];
 
   workflow: Workflow = WorkflowApi.mock(0);
+
+  constructor(private api: WorkflowApi) {
+    this.subscriptions.push(api.onCreateTrelloContext.subscribe(() => {
+      this.api.getMyContextList().then(({ list }) => this.onGetContextList(list));
+    }));
+    this.subscriptions.push(api.onUpdateTrelloContext.subscribe(() => {
+      this.api.getMyContextList().then(({ list }) => this.onGetContextList(list));
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach((subscription) => {
+      subscription.unsubscribe();
+    });
+  }
+
+  ngOnInit() {
+    this.api.getMyContextList().then(({ list }) => this.onGetContextList(list));
+  }
+
+  onAddContextClick() {
+    console.log('DetailsWorkflowViewComponent::addContext');
+    this.api.createTrelloContext();
+  }
+
+  onGetContextList(list: Array<any>) {
+    console.log('DetailsWorkflowViewComponent::onGetContextList', list);
+    const steps = this.workflow.steps.reduce((acc, value) => {
+      value.contexts.length = 0;
+      acc[value.state] = value.contexts;
+      return acc;
+    }, {});
+    list.forEach((context) => steps[context.state].push(context));
+  }
 
   getFlexValue(workflow: Workflow) {
     const steps = workflow.steps.length || 1;
     return Math.trunc(100 / steps);
+  }
+
+  onDropSuccess(step, context) {
+    console.log('DetailsWorkflowViewComponent::onDropSuccess', step, context);
+    this.api.updateTrelloContext({
+      contextId: context.__key,
+      newState: step.state
+    });
+  }
+
+  allowDropFunction(step) {
+    return (dragData: any) => {
+      console.log('DetailsWorkflowViewComponent::allowDropFunction', step, dragData);
+      return true;
+    };
   }
 
 }

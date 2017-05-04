@@ -1,9 +1,24 @@
 import { NgZone } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { Api, ZetaPushClient, createApi } from 'zetapush-angular';
+
+interface ContextTransitionRequest {
+  contextId: string;
+  newState: string;
+}
+
+interface WorkflowContext {
+  fields: { [key: string]: any; };
+  info: { contextId: string; create: number };
+  state: string;
+  __key: string;
+}
 
 interface WorkflowStep {
   id: string;
   name: string;
+  state: string;
   contexts: Array<any>;
 }
 
@@ -14,6 +29,10 @@ export interface Workflow {
 
 // TODO Should be auto-generated
 export class WorkflowApi extends Api {
+
+  onCreateTrelloContext: Observable<any>;
+  onUpdateTrelloContext: Observable<any>;
+
   static mock(index): Workflow {
     return {
       id: `wrkflw-${index}`,
@@ -21,27 +40,33 @@ export class WorkflowApi extends Api {
         {
           id: `wrkflw-${index}-step-0`,
           name: 'TODO',
-          contexts: [
-            { id: `wrkflw-${index}-context-0`, status: 'assignment', name: 'Test' }
-          ]
+          state: 'TODO',
+          contexts: []
         },
         {
           id: `wrkflw-${index}-step-1`,
           name: 'In Progress',
-          contexts: [
-            { id: `wrkflw-${index}-context-1`, status: 'announcement', name: 'Support' },
-            { id: `wrkflw-${index}-context-2`, status: 'assignment_turned_in', name: 'Debug' }
-          ]
+          state: 'IN_PROGRESS',
+          contexts: []
         },
         {
           id: `wrkflw-${index}-step-2`,
           name: 'Done',
-          contexts: [
-            { id: `wrkflw-${index}-context-3`, status: 'bug_report', name: 'Bug' }
-          ]
+          state: 'DONE',
+          contexts: []
         }
       ]
     }
+  }
+
+  getMyContextList() {
+    return this.$publish('getMyContextList', {});
+  }
+  createTrelloContext() {
+    return this.$publish('createTrelloContext', {})
+  }
+  updateTrelloContext(request: ContextTransitionRequest) {
+    return this.$publish('updateTrelloContext', request)
   }
 }
 

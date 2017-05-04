@@ -13,15 +13,11 @@ import { Workflow, WorkflowApi } from '../workflow-api.service';
           <h4>{{step.name}}<span class="Counter">{{step.contexts.length}}</span></h4>
         </div>
         <div class="WorkflowStep__ContextList"
-          dnd-sortable-container
           dnd-droppable
-          [dropEnabled]="true"
-          [sortableData]="step.contexts"
-          [allowDrop]="allowDropFunction(step)">
+          [allowDrop]="allowDropFunction(step)"
+          (onDropSuccess)="onDropSuccess(step, $event.dragData)">
           <div class="WorkflowContext" *ngFor="let context of step.contexts; let x = index"
-            dnd-sortable
-            [sortableIndex]="x" [dragData]="context"
-            (onDropSuccess)="onDropSuccess(step, $event)">
+            dnd-draggable [dragData]="context">
             <span class="WorkflowContext__Icon">
               <md-icon>{{context.fields.icon}}</md-icon>
             </span>
@@ -148,9 +144,13 @@ export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
   }
 
   allowDropFunction(step) {
+    const permissions = {
+      'TODO': ['IN_PROGRESS'],
+      'IN_PROGRESS': ['TODO', 'DONE'],
+      'DONE': []
+    }
     return (dragData: any) => {
-      console.log('DetailsWorkflowViewComponent::allowDropFunction', step, dragData);
-      return true;
+      return permissions[dragData.state].indexOf(step.state) > -1;
     };
   }
 

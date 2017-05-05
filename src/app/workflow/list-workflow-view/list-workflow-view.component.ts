@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Workflow, WorkflowApi } from '../workflow-api.service';
+import { WorkflowApi } from '../workflow-api.service';
 
 @Component({
   selector: 'zp-list-workflow-view',
   template: `
     <h1>list-workflow-view</h1>
     <md-list>
-      <md-list-item *ngFor="let workflow of workflows">
-        <a [routerLink]="['/workflow/details/', workflow.id]">{{workflow.id}}</a>
+      <md-list-item *ngFor="let template of templates">
+        <a [routerLink]="['/workflow/details/', template.templateName]">{{template.templateName}}</a>
       </md-list-item>
     </md-list>
   `,
@@ -16,8 +16,18 @@ import { Workflow, WorkflowApi } from '../workflow-api.service';
 
   `]
 })
-export class ListWorkflowViewComponent {
+export class ListWorkflowViewComponent implements OnInit {
 
-  workflows: Array<Workflow> = Array.from({ length: 3 }).map((value, index) => WorkflowApi.mock(index))
+  templates = [];
+
+  constructor(private api: WorkflowApi) {
+
+  }
+
+  async ngOnInit() {
+    const { list: templates } = await this.api.getContextTemplateList();
+    this.templates = templates;
+  }
+
 
 }

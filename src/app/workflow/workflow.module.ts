@@ -12,7 +12,7 @@ import { UserModule } from '../user';
 
 import { WorkflowRoutingModule } from './workflow-routing.module';
 
-import { WorkflowApiProvider } from './workflow-api.service';
+import { WorkflowApi, WorkflowApiProvider } from './workflow-api.service';
 
 import { ListWorkflowViewComponent } from './list-workflow-view/list-workflow-view.component';
 import { DetailsWorkflowViewComponent } from './details-workflow-view/details-workflow-view.component';
@@ -44,4 +44,8 @@ import { EmbeddedSortableComponent } from './embedded-sortable.component';
     WorkflowApiProvider
   ]
 })
-export class WorkflowModule { }
+export class WorkflowModule {
+  constructor(api: WorkflowApi) {
+    window['WorkflowApi'] = api;
+  }
+}

@@ -28,6 +28,8 @@ import { WhiteboardModule } from './whiteboard';
 import { ContextModule } from './context';
 // TODO Externalize via lerna
 import { WorkflowModule } from './workflow';
+// TODO Externalize via lerne
+import { WebRTCModule } from './web-rtc';
 
 import { AppComponent } from './app.component';
 
@@ -41,7 +43,8 @@ const APPLICATIONS_MODULES = [
   ConversationModule,
   WhiteboardModule,
   ContextModule,
-  WorkflowModule
+  WorkflowModule,
+  WebRTCModule,
 ];
 
 @NgModule({

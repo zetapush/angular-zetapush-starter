@@ -8,8 +8,7 @@ import { RouterLayoutComponent, RouterState } from '../router';
 // TODO Refactor with Lerna
 import { DetailsConversationComponent } from '../conversation';
 
-import { ListWebRTCViewComponent } from './list-webRTC-view/list-webRTC-view.component';
-import { DetailsWebRTCViewComponent } from './details-webRTC-view/details-webRTC-view.component';
+import { WebRTCViewComponent } from './webRTC-view/webRTC-view.component';
 
 import { CreateWebRTCViewActionComponent } from './create-webRTC-view-action/create-webRTC-view-action.component';
 
@@ -22,8 +21,7 @@ const routes: Routes = [{
   },
   children: [
     { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: 'list', component: ListWebRTCViewComponent },
-    { path: 'details/:owner/:room/:webRTC', component: DetailsWebRTCViewComponent }
+    { path: ':owner/:room', component: WebRTCViewComponent }
   ]
 }];
 
@@ -35,10 +33,6 @@ const routes: Routes = [{
 export class WebRTCRoutingModule {
   constructor(core: RouterState, registry: ViewActionRegistry) {
     console.log('WebRTCRoutingModule::constructor', core);
-    core.register({
-      name: 'webrtc',
-      path: '/webrtc'
-    });
     registry.setActionsByView(DetailsConversationComponent, [
       new ViewActionItem(CreateWebRTCViewActionComponent)
     ]);

@@ -12,26 +12,26 @@ import { UserModule } from '../user';
 import { GroupModule } from '../group';
 // TODO Refactor with Lerna
 import { ConversationModule } from '../conversation';
+// TODO Refactor with Lerna
+import { OrganizationModule } from '../organization';
 
 import { WebRTCRoutingModule } from './web-rtc-routing.module';
 
 import { WebRTCApiProvider } from './webRTC-api.service';
 
-import { ListWebRTCViewComponent } from './list-webRTC-view/list-webRTC-view.component';
-import { DetailsWebRTCViewComponent } from './details-webRTC-view/details-webRTC-view.component';
-import { DetailsWebRTCComponent } from './details-webRTC/details-webRTC.component';
+import { WebRTCViewComponent } from './webRTC-view/webRTC-view.component';
 import { CreateWebRTCViewActionComponent } from './create-webRTC-view-action/create-webRTC-view-action.component';
+import { WebRtcService } from './webRTC-service/webRTC.service';
+import { OrderByTimestampPipe } from './pipes/orderByTimestamp.pipe';
 
 @NgModule({
   declarations: [
-    ListWebRTCViewComponent,
-    DetailsWebRTCViewComponent,
-    DetailsWebRTCComponent,
-    CreateWebRTCViewActionComponent
+    WebRTCViewComponent,
+    CreateWebRTCViewActionComponent,
+    OrderByTimestampPipe
   ],
   exports: [
     WebRTCRoutingModule,
-    DetailsWebRTCComponent
   ],
   entryComponents: [
     CreateWebRTCViewActionComponent
@@ -45,11 +45,12 @@ import { CreateWebRTCViewActionComponent } from './create-webRTC-view-action/cre
     GroupModule,
     UserModule,
     ConversationModule,
-
+    OrganizationModule,
     WebRTCRoutingModule
   ],
   providers: [
-    WebRTCApiProvider
+    WebRTCApiProvider,
+    WebRtcService
   ]
 })
 export class WebRTCModule { }

@@ -10,6 +10,7 @@ import { View } from '../../core/';
 // TODO Refactor with Lerna
 import { FileUploadRequest } from '../../file';
 
+
 @Component({
   selector: 'zp-details-conversation',
   templateUrl: './details-conversation.component.html',
@@ -110,5 +111,4 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
     });
     */
   }
-
 }

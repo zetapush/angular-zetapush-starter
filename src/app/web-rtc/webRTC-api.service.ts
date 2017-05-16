@@ -27,6 +27,7 @@ export class WebRTCApi extends Api {
     onDisconnection: Observable<WebRtcMessage>;
     onDeletePhoto: Observable<string>;
     onAskForVideoCall: Observable<string>;
+    onPermissionPhoto: Observable<string>;
 
     answer(answer: WebRtcMessage): Promise<WebRtcMessage> {
         return this.$publish('answer', { answer });
@@ -58,6 +59,10 @@ export class WebRTCApi extends Api {
 
     askForVideoCall(destinataire: string, order: string, owner: string, room: string): Promise<string> {
         return this.$publish('askForVideoCall', { destinataire, order, owner, room });
+    }
+
+    permissionPhoto(destinataire: string, order: string): Promise<string> {
+        return this.$publish('permissionPhoto', { destinataire, order});
     }
 
 }

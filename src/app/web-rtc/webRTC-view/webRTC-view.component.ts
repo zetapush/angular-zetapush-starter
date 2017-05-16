@@ -61,4 +61,8 @@ export class WebRTCViewComponent implements OnInit, OnDestroy {
   startCommunication(): void {
     this.webRtc.startCommunication();
   }
+
+  askPermissionPhoto(): void {
+    this.webRtc.permissionPhotoFunction("ask");
+  }
 }

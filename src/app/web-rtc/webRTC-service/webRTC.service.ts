@@ -32,6 +32,7 @@ export class WebRtcService {
     initiator = false;                                                          // Detect if the client init the communication
     owner;                                                                      // Owner of the conversation
     room;                                                                       // Room of the conversation
+    permissionPhoto = false;                                                     // Permission to take a photo on the other device
 
     constructor(
         private api: WebRTCApi, 
@@ -112,6 +113,27 @@ export class WebRtcService {
             console.log('WebRtcService::onListPictures', message);
             this.photos = message['listing']['entries']['content'];
             this.photosChange.next(this.photos);
+        })
+
+        api.onPermissionPhoto.subscribe((message) => {
+            console.log('WebRtcService::onPermissionPhoto', message);
+
+            if (message['order'] == "ask") {
+
+                if (confirm('Give the permission to take photos ?')) {
+                    this.permissionPhotoFunction("ok");
+                } else {
+                    this.permissionPhotoFunction("no");
+                }
+
+            } else if (message['order'] == "ok") {
+                alert("You have the permission to take photos");
+                this.permissionPhoto = true;
+            } else {
+                alert("You have not the permission to take photos");
+                this.permissionPhoto = false;
+            };
+
         })
 
         api.onDisconnection.subscribe((message) => {
@@ -354,11 +376,17 @@ export class WebRtcService {
     }
 
     takePhoto(): void {
-        this.api.orderTakePhoto(this.dest, "take");
+        if (this.permissionPhoto) {
+            this.api.orderTakePhoto(this.dest, "take");
+        } else {
+            alert("You have not the permission to take photo");
+        }
+        
     }
 
-
-
+    permissionPhotoFunction(order: string):void {
+        this.api.permissionPhoto(this.dest, order);
+    } 
 
     startCommunication(): void {
         this.init();

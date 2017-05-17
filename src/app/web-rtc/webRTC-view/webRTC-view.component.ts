@@ -46,20 +46,8 @@ export class WebRTCViewComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  deletePhoto(path: string): void {
-    this.webRtc.deletePhoto(path);
-  }
-
-  downloadPhoto(file: string): void {
-    window.location.assign(file);
-  }
-
   takePhoto(): void {
     this.webRtc.takePhoto();  
-  }
-
-  startCommunication(): void {
-    this.webRtc.startCommunication();
   }
 
   askPermissionPhoto(): void {

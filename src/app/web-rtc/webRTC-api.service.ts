@@ -23,9 +23,8 @@ export class WebRTCApi extends Api {
     onCandidate: Observable<WebRtcMessage>;
     onOffer: Observable<WebRtcMessage>;
     onOrderTakePhoto: Observable<string>;
-    onListPictures: Observable<Array<string>>;
+    onListPhotos: Observable<Array<string>>;
     onDisconnection: Observable<WebRtcMessage>;
-    onDeletePhoto: Observable<string>;
     onAskForVideoCall: Observable<string>;
     onPermissionPhoto: Observable<string>;
 
@@ -45,18 +44,14 @@ export class WebRTCApi extends Api {
         return this.$publish('orderTakePhoto', { destinataire, order });
     }
 
-    listPictures(): Promise<Array<string>> {
-        return this.$publish('listPictures', {});
+    listPhotos(folder: string, owner: string): Promise<Array<string>> {
+        return this.$publish('listPhotos', { folder, owner });
     }
 
     disconnection(disconnection: WebRtcMessage): Promise<WebRtcMessage> {
         return this.$publish('disconnection', { disconnection });
     }
-
-    deletePhoto(path: string): Promise<string> {
-        return this.$publish('deletePhoto', { path });
-    }
-
+    
     askForVideoCall(destinataire: string, order: string, owner: string, room: string): Promise<string> {
         return this.$publish('askForVideoCall', { destinataire, order, owner, room });
     }

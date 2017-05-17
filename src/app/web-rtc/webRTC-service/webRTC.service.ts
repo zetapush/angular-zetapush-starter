@@ -52,11 +52,6 @@ export class WebRtcService {
         //  =======================================================================================
         //                                      HANDLES ZETAPUSH     
         //  =======================================================================================
-        api.onDeletePhoto.subscribe((message) => {
-            console.log('WebRtcService::onDeletePhoto', message);
-            this.listPhotos();
-        })
-
         api.onOrderTakePhoto.subscribe((message) => {
             
             console.log('WebRtcService::onOrderTakePhoto', message);
@@ -77,8 +72,8 @@ export class WebRtcService {
                         
                         // Send the picture
                         let file = this.upload.add({
-                            folder: '/',
-                            owner: this.room,
+                            folder: "conversation/attachments/" + this.room,
+                            owner: this.owner,
                             file: this.picture
                         });
                         this.upload.request(file)
@@ -101,15 +96,15 @@ export class WebRtcService {
 
                 case 'newPhoto':
                     console.log('New photo updated');
-                    this.listPhotos();
+                    this.listPhotos("conversation/attachments/" + this.room, this.owner);
                     break;
-
+        
                 default:
                     console.log("Can't read the order: ", message['order']);
             }
         })
 
-        api.onListPictures.subscribe((message) => {
+        api.onListPhotos.subscribe((message) => {
             console.log('WebRtcService::onListPictures', message);
             this.photos = message['listing']['entries']['content'];
             this.photosChange.next(this.photos);
@@ -287,7 +282,7 @@ export class WebRtcService {
         });
 
         // Get all pictures
-        this.listPhotos();
+        this.listPhotos("conversation/attachments/" + this.room, this.owner);
 
         if (this.initiator){
             this.createOffer();
@@ -351,6 +346,9 @@ export class WebRtcService {
 
     askForVideoCall(destinataire: string, order: string, owner: string, room: string): void {
 
+        this.room = room;
+        this.owner = owner;
+
         // Start the communication when we init the communication
         if (order == "ask"){
             this.init();
@@ -367,12 +365,8 @@ export class WebRtcService {
      *                          Photo
      * ==================================================================
      */
-    listPhotos(): void {
-        this.api.listPictures();
-    }
-
-    deletePhoto(path: string): void {
-        this.api.deletePhoto(path);
+    listPhotos(folder: string, owner: string): void {
+        this.api.listPhotos(folder, owner);
     }
 
     takePhoto(): void {
@@ -386,10 +380,5 @@ export class WebRtcService {
 
     permissionPhotoFunction(order: string):void {
         this.api.permissionPhoto(this.dest, order);
-    } 
-
-    startCommunication(): void {
-        this.init();
-    }
-    
+    }     
 }

@@ -4,7 +4,6 @@
 <div>
     <button (click)="askPermissionPhoto()">Ask Permission</button>
     <button (click)="takePhoto()">Take photo</button>
-    <button (click)="startCommunication()">Start</button>
 </div>
 
 
@@ -13,7 +12,6 @@
     
     <li *ngFor="let photo of tabOfUrl | orderByTimestamp">
         <img src={{photo.file}} height="250"/>
-        <button (click)="deletePhoto(photo.name)">Delete</button>
-        <button (click)="downloadPhoto(photo.file)">Download</button>
+        <a class="button" href="{{photo.file}}" download="photo"><button>Download</button></a>
     </li>
 </div>

@@ -22,27 +22,63 @@ export class WhiteboardApi extends Api {
   onPurgeWhiteboardObjectList: Observable<any>;
   onUpdateWhiteboardObject: Observable<any>;
 
-  addWhiteboardObject({ room, whiteboard, type, value, metadata }: ApiInputWhiteboardObject) {
-    return this.$publish('addWhiteboardObject', { room, whiteboard, type, value, metadata });
+  addWhiteboardObject({
+    room,
+    whiteboard,
+    type,
+    value,
+    metadata,
+  }: ApiInputWhiteboardObject) {
+    return this.$publish('addWhiteboardObject', {
+      room,
+      whiteboard,
+      type,
+      value,
+      metadata,
+    });
   }
   createWhiteboard({ room }: { room: Group }) {
     return this.$publish('createWhiteboard', { room });
   }
-  getWhiteboardObjectList({ room, whiteboard, page }: { room: Group, whiteboard: string, page?: any }) {
+  getWhiteboardObjectList({
+    room,
+    whiteboard,
+    page,
+  }: {
+    room: Group;
+    whiteboard: string;
+    page?: any;
+  }) {
     return this.$publish('getWhiteboardObjectList', { room, whiteboard, page });
   }
-  purgeWhiteboardObjectList({ room, whiteboard }: { room: Group, whiteboard: string }) {
+  purgeWhiteboardObjectList({
+    room,
+    whiteboard,
+  }: {
+    room: Group;
+    whiteboard: string;
+  }) {
     return this.$publish('purgeWhiteboardObjectList', { room, whiteboard });
   }
   updateWhiteboardObject({ id, room, value, whiteboard }): Promise<any> {
-    return this.$publish('updateWhiteboardObject', { id, room, value, whiteboard });
+    return this.$publish('updateWhiteboardObject', {
+      id,
+      room,
+      value,
+      whiteboard,
+    });
   }
 }
 
-export function WhiteboardApiFactory(client: ZetaPushClient, zone: NgZone): WhiteboardApi {
+export function WhiteboardApiFactory(
+  client: ZetaPushClient,
+  zone: NgZone,
+): WhiteboardApi {
   return createApi(client, zone, WhiteboardApi) as WhiteboardApi;
 }
 
 export const WhiteboardApiProvider = {
-  provide: WhiteboardApi, useFactory: WhiteboardApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: WhiteboardApi,
+  useFactory: WhiteboardApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

@@ -5,15 +5,14 @@ import { Component, OnInit } from '@angular/core';
   template: `
     <h1>details-context-view</h1>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class DetailsContextViewComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

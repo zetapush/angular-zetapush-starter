@@ -21,7 +21,7 @@ import { DetailsContextComponent } from './details-context/details-context.compo
   declarations: [
     ListContextViewComponent,
     DetailsContextViewComponent,
-    DetailsContextComponent
+    DetailsContextComponent,
   ],
   exports: [],
   imports: [
@@ -32,10 +32,8 @@ import { DetailsContextComponent } from './details-context/details-context.compo
     UiModule,
     UserModule,
 
-    ContextRoutingModule
+    ContextRoutingModule,
   ],
-  providers: [
-    ContextApiProvider
-  ]
+  providers: [ContextApiProvider],
 })
-export class ContextModule { }
+export class ContextModule {}

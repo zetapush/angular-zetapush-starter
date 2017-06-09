@@ -12,7 +12,10 @@ import { UiModule } from '../ui';
 import { FileRoutingModule } from './file-routing.module';
 
 import { FileApiProvider } from './file-api.service';
-import { FileCallbackApiProvider, FileCallbackApi } from './file-callback-api.service';
+import {
+  FileCallbackApiProvider,
+  FileCallbackApi,
+} from './file-callback-api.service';
 import { FileUpload } from './file-upload.service';
 
 import { ListFileViewComponent } from './list-file-view/list-file-view.component';
@@ -27,14 +30,9 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     DetailsFileViewComponent,
     DetailsFileComponent,
     FileListComponent,
-    FileUploadComponent
+    FileUploadComponent,
   ],
-  exports: [
-    FileRoutingModule,
-
-    DetailsFileComponent,
-    FileUploadComponent
-  ],
+  exports: [FileRoutingModule, DetailsFileComponent, FileUploadComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -43,13 +41,9 @@ import { FileUploadComponent } from './file-upload/file-upload.component';
     UiModule,
     UserModule,
 
-    FileRoutingModule
+    FileRoutingModule,
   ],
-  providers: [
-    FileApiProvider,
-    FileCallbackApiProvider,
-    FileUpload
-  ]
+  providers: [FileApiProvider, FileCallbackApiProvider, FileUpload],
 })
 export class FileModule {
   constructor(api: FileCallbackApi) {

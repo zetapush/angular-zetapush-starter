@@ -1,4 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'zp-ui-file',
@@ -8,7 +15,8 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
       <label [attr.for]="id"><md-icon>image</md-icon></label>
     </form>
   `,
-  styles: [`
+  styles: [
+    `
     :host {
       display: inline;
     }
@@ -22,10 +30,10 @@ import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@
       width: 0;
       height: 0;
     }
-  `]
+  `,
+  ],
 })
 export class UiFileComponent {
-
   protected static id = 0;
 
   id: string;
@@ -50,5 +58,4 @@ export class UiFileComponent {
 
     this.form.nativeElement.reset();
   }
-
 }

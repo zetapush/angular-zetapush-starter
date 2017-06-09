@@ -14,31 +14,34 @@ import { ApiError, Role, RoleApi } from '../role-api.service';
       <button md-button [disabled]="form.invalid" form="zpCreateRoleForm">Submit</button>
     </form>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class CreateRoleFormComponent {
-
   @Output() create = new EventEmitter<Role>();
 
   errors: Array<ApiError> = [];
 
-  constructor(private api: RoleApi) { }
+  constructor(private api: RoleApi) {}
 
-  onSubmit({ value, valid }: { value: Role, valid: boolean }) {
+  onSubmit({ value, valid }: { value: Role; valid: boolean }) {
     console.log('CreateRoleFormComponent::onSubmit', value, valid);
 
     if (valid) {
       this.errors = [];
-      this.api.createRole(value.name).then((role: Role) => {
-        console.log('CreateRoleFormComponent::onCreateRole', role);
-        this.create.emit(role);
-      }, (errors) => {
-        console.error('onCreateRole', errors);
-        this.errors = errors;
-      });
+      this.api.createRole(value.name).then(
+        (role: Role) => {
+          console.log('CreateRoleFormComponent::onCreateRole', role);
+          this.create.emit(role);
+        },
+        errors => {
+          console.error('onCreateRole', errors);
+          this.errors = errors;
+        },
+      );
     }
   }
-
 }

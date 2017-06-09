@@ -10,7 +10,7 @@ import { FileApi } from '../../file';
   selector: 'zp-conversation-default-message',
   template: `
     <label>Default:<span>{{ message.value | json }}</span></label>
-  `
+  `,
 })
 export class ConversationDefaultMessageComponent {
   @Input() message: any;
@@ -21,24 +21,35 @@ export class ConversationDefaultMessageComponent {
   template: `
     <label>Attachment:<span>{{ message.value | json }}</span></label>
     <img *ngIf="entry && entry.metadata['thumb-100']" [attr.src]="entry.metadata['thumb-100'].url" />
-  `
+  `,
 })
 export class ConversationAttachmentMessageComponent implements OnInit {
   @Input() message: any;
   entry: any;
-  constructor(private api: FileApi, private client: ZetaPushClient) { }
+  constructor(private api: FileApi, private client: ZetaPushClient) {}
   ngOnInit() {
-    this.api.getFileEntry({
-      owner: this.message.value.owner,
-      path: this.message.value.path
-    }).then(({ entry, exists, owner }) => {
-      console.log('ConversationAttachmentMessageComponent::onGetFileEntry', { entry, exists, owner });
-      if (exists) {
-        this.entry = entry;
-      }
-    }, (errors) => {
-      console.error('ConversationAttachmentMessageComponent::onGetFileEntry', errors);
-    });
+    this.api
+      .getFileEntry({
+        owner: this.message.value.owner,
+        path: this.message.value.path,
+      })
+      .then(
+        ({ entry, exists, owner }) => {
+          console.log(
+            'ConversationAttachmentMessageComponent::onGetFileEntry',
+            { entry, exists, owner },
+          );
+          if (exists) {
+            this.entry = entry;
+          }
+        },
+        errors => {
+          console.error(
+            'ConversationAttachmentMessageComponent::onGetFileEntry',
+            errors,
+          );
+        },
+      );
   }
 }
 
@@ -46,7 +57,7 @@ export class ConversationAttachmentMessageComponent implements OnInit {
   selector: 'zp-conversation-event-message',
   template: `
     <label>Event:<span>{{ message.value | json }}</span></label>
-  `
+  `,
 })
 export class ConversationEventMessageComponent {
   @Input() message: any;
@@ -56,7 +67,7 @@ export class ConversationEventMessageComponent {
   selector: 'zp-conversation-markup-message',
   template: `
     <label>Markup:<span>{{ message.value.text }}</span></label>
-  `
+  `,
 })
 export class ConversationMarkupMessageComponent {
   @Input() message: any;

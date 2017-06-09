@@ -8,22 +8,25 @@ import { Conversation } from '../';
   template: `
     <a routerLink="/conversation/details/{{conversation.room.owner}}/{{conversation.room.id}}">{{getConversationName()}}</a>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class ConversationLinkComponent {
-
   @Input() conversation: Conversation;
 
-  constructor(private client: ZetaPushClient) { }
+  constructor(private client: ZetaPushClient) {}
 
   getConversationName() {
     const { room } = this.conversation;
     let name = room.name;
     if (name === 'I18N.ONE_TO_ONE_CONVERSATION' && room.members.length === 2) {
       const userKey = this.client.getUserId();
-      const interlocutor = room.members.find((member) => member.userKey !== userKey);
+      const interlocutor = room.members.find(
+        member => member.userKey !== userKey,
+      );
       name = `@${interlocutor.login} (${interlocutor.firstname} ${interlocutor.lastname})`;
     }
     return name;

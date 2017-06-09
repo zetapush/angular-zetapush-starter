@@ -10,7 +10,7 @@ enum FileUploadStatus {
   REQUESTED,
   TRANSFERING,
   TRANSFERED,
-  CONFIRMED
+  CONFIRMED,
 }
 
 interface FileUploadTransfer {
@@ -34,12 +34,23 @@ export interface FileUploadRequest {
 
 @Injectable()
 export class FileUpload {
-
   private queue: Array<FileUploadRequest> = [];
 
-  constructor(private api: FileApi, private client: ZetaPushClient, private sanitizer: DomSanitizer) { }
+  constructor(
+    private api: FileApi,
+    private client: ZetaPushClient,
+    private sanitizer: DomSanitizer,
+  ) {}
 
-  add({ file, folder, owner }: { file: any, folder: string, owner: string }): FileUploadRequest {
+  add({
+    file,
+    folder,
+    owner,
+  }: {
+    file: any;
+    folder: string;
+    owner: string;
+  }): FileUploadRequest {
     console.log('FileUpload::add', folder, file);
     const id = this.client.helper.getUniqRequestId();
     const contentType = file.type;
@@ -51,7 +62,7 @@ export class FileUpload {
       owner,
       proxy: this.getProxyFileUrl(file),
       progress: new Subject<number>(),
-      status: FileUploadStatus.QUEUING
+      status: FileUploadStatus.QUEUING,
     };
     this.queue.push(request);
     return request;
@@ -60,62 +71,86 @@ export class FileUpload {
   confirm(request: FileUploadRequest): Promise<FileUploadRequest> {
     console.log('FileUpload::confirm', request);
     const { transfer } = request;
-    return this.api.confirmFileUpload({
-      guid: transfer.guid,
-      owner: request.owner,
-      actions: {},
-      metadata: {
-        name: request.file.name
-      },
-      tags: []
-    }).then((result) => {
-      console.log('FileUpload::onConfirmFileUpload', result);
-      request.status = FileUploadStatus.CONFIRMED;
-      return request;
-    }, (errors) => {
-      console.error('FileUpload::onConfirmFileUpload', errors);
-    });
+    return this.api
+      .confirmFileUpload({
+        guid: transfer.guid,
+        owner: request.owner,
+        actions: {},
+        metadata: {
+          name: request.file.name,
+        },
+        tags: [],
+      })
+      .then(
+        result => {
+          console.log('FileUpload::onConfirmFileUpload', result);
+          request.status = FileUploadStatus.CONFIRMED;
+          return request;
+        },
+        errors => {
+          console.error('FileUpload::onConfirmFileUpload', errors);
+        },
+      );
   }
 
   request(request: FileUploadRequest): Promise<FileUploadRequest> {
     console.log('FileUpload::request', request);
-    return this.api.requestFileUpload(request).then((transfer) => {
-      console.log('FileUpload::onRequestFileUpload', transfer);
-      request.status = FileUploadStatus.REQUESTED;
-      request.transfer = transfer;
-      return request;
-    }, (errors) => {
-      console.error('FileUpload::onRequestFileUpload', errors);
-    });
+    return this.api.requestFileUpload(request).then(
+      transfer => {
+        console.log('FileUpload::onRequestFileUpload', transfer);
+        request.status = FileUploadStatus.REQUESTED;
+        request.transfer = transfer;
+        return request;
+      },
+      errors => {
+        console.error('FileUpload::onRequestFileUpload', errors);
+      },
+    );
   }
 
-  upload(request: FileUploadRequest): Promise<FileUploadRequest>  {
+  upload(request: FileUploadRequest): Promise<FileUploadRequest> {
     console.log('FileUpload::upload', request);
     request.status = FileUploadStatus.TRANSFERING;
     return new Promise<FileUploadRequest>((resolve, reject) => {
       const { guid, httpMethod, owner, url } = request.transfer;
       const payload = request.file;
       const xhr = new XMLHttpRequest();
-      xhr.addEventListener('readystatechange', (e) => {
-        if (4 === xhr.readyState ) {
-          if (200 <= xhr.status && xhr.status < 300) {
-            request.status = FileUploadStatus.TRANSFERED;
-            request.progress.complete();
-            resolve(request);
-          } else {
-            request.status = FileUploadStatus.QUEUING;
-            request.transfer = null;
-            reject(request);
+      xhr.addEventListener(
+        'readystatechange',
+        e => {
+          if (4 === xhr.readyState) {
+            if (200 <= xhr.status && xhr.status < 300) {
+              request.status = FileUploadStatus.TRANSFERED;
+              request.progress.complete();
+              resolve(request);
+            } else {
+              request.status = FileUploadStatus.QUEUING;
+              request.transfer = null;
+              reject(request);
+            }
           }
-        }
-      }, false);
-      xhr.upload.addEventListener('progress', (e: any) => {
-        const done = e.position || e.loaded;
-        const total = e.totalSize || e.total;
-        const progression = Math.floor(done / total * 1000) / 10;
-        console.log('xhr.upload progress: ' + done + ' / ' + total + ' = ' + (Math.floor(done / total * 1000) / 10) + '%');
-        request.progress.next(progression);
-      }, false);
+        },
+        false,
+      );
+      xhr.upload.addEventListener(
+        'progress',
+        (e: any) => {
+          const done = e.position || e.loaded;
+          const total = e.totalSize || e.total;
+          const progression = Math.floor(done / total * 1000) / 10;
+          console.log(
+            'xhr.upload progress: ' +
+              done +
+              ' / ' +
+              total +
+              ' = ' +
+              Math.floor(done / total * 1000) / 10 +
+              '%',
+          );
+          request.progress.next(progression);
+        },
+        false,
+      );
       xhr.open(httpMethod, url, true);
       xhr.setRequestHeader('Content-Type', request.contentType);
       xhr.send(payload);

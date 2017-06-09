@@ -8,10 +8,8 @@ import { Role } from '../';
     <p>details-role</p>
     <pre>{{role | json}}</pre>
   `,
-  styles: []
+  styles: [],
 })
 export class DetailsRoleComponent {
-
   @Input() role: Role;
-
 }

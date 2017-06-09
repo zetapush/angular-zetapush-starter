@@ -7,7 +7,6 @@ export interface Module {
 
 @Injectable()
 export class RouterState {
-
   state = new EventEmitter<Array<Module>>();
 
   modules: Array<Module> = [];

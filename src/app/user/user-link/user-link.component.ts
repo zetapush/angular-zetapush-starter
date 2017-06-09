@@ -8,20 +8,18 @@ import { UserCache } from '../user-cache.service';
   template: `
     <a [routerLink]="['/user/details', userKey]">@{{ user?.login }}</a>
   `,
-  styles: []
+  styles: [],
 })
 export class UserLinkComponent implements OnInit {
-
   @Input() userKey: string;
 
   user: User;
 
-  constructor(private cache: UserCache) { }
+  constructor(private cache: UserCache) {}
 
   ngOnInit() {
-    this.cache.get(this.userKey).subscribe((user) => {
+    this.cache.get(this.userKey).subscribe(user => {
       this.user = user;
     });
   }
-
 }

@@ -30,7 +30,7 @@ import {
   ConversationDefaultMessageComponent,
   ConversationAttachmentMessageComponent,
   ConversationEventMessageComponent,
-  ConversationMarkupMessageComponent
+  ConversationMarkupMessageComponent,
 } from './conversation-message/conversation-message.component';
 
 @NgModule({
@@ -43,13 +43,13 @@ import {
     ConversationDefaultMessageComponent,
     ConversationAttachmentMessageComponent,
     ConversationEventMessageComponent,
-    ConversationMarkupMessageComponent
+    ConversationMarkupMessageComponent,
   ],
   exports: [
     ConversationRoutingModule,
 
     DetailsConversationComponent,
-    ConversationLinkComponent
+    ConversationLinkComponent,
   ],
   imports: [
     CommonModule,
@@ -63,10 +63,8 @@ import {
     UserModule,
     OrganizationModule,
 
-    ConversationRoutingModule
+    ConversationRoutingModule,
   ],
-  providers: [
-    ConversationApiProvider
-  ]
+  providers: [ConversationApiProvider],
 })
-export class ConversationModule { }
+export class ConversationModule {}

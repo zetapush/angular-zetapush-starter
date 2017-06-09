@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Permission,  } from '../permission-api.service';
+import { Permission } from '../permission-api.service';
 import { Role } from '../role-api.service';
 
 @Component({
@@ -11,23 +11,21 @@ import { Role } from '../role-api.service';
     <zp-create-role-form (create)="onCreateRole($event)" zpHasPermission="createRole"></zp-create-role-form>
     <zp-create-permission-form (create)="onCreatePermission($event)" zpHasPermission="createPermission"></zp-create-permission-form>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class CreateRoleViewComponent {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   onCreateRole(role: Role) {
     console.log('CreateRoleViewComponent::onCreateRole', role);
-    this.router.navigate([
-      '/role/list/all'
-    ]);
+    this.router.navigate(['/role/list/all']);
   }
 
   onCreatePermission(permission: Permission) {
     console.log('CreateRoleViewComponent::onCreatePermission', permission);
   }
-
 }

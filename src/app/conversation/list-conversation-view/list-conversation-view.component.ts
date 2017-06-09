@@ -5,8 +5,10 @@ import { Component } from '@angular/core';
   template: `
     <h1>list-conversation-view</h1>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class ListConversationViewComponent {}

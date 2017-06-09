@@ -20,7 +20,11 @@ export class UserApi extends Api {
   onUpdateUser: Observable<UserWrapper>;
 
   createUser({ login, password, email, firstname, lastname }): Promise<User> {
-    const parameters = { login, password, fields: { email, firstname, lastname } };
+    const parameters = {
+      login,
+      password,
+      fields: { email, firstname, lastname },
+    };
     return this.$publish('createUser', parameters).then(({ user }) => user);
   }
   getUser({ userKey }: { userKey?: string }): Promise<User> {
@@ -45,5 +49,7 @@ export function UserApiFactory(client: ZetaPushClient, zone: NgZone): UserApi {
 }
 
 export const UserApiProvider = {
-  provide: UserApi, useFactory: UserApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: UserApi,
+  useFactory: UserApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

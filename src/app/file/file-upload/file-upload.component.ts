@@ -7,12 +7,13 @@ import { FileUpload, FileUploadRequest } from '../file-upload.service';
   template: `
     <zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class FileUploadComponent {
-
   @Input() folder: string;
   @Input() owner: string;
 
@@ -21,33 +22,33 @@ export class FileUploadComponent {
   @Output() uploaded = new EventEmitter<FileUploadRequest>();
   @Output() confirmed = new EventEmitter<FileUploadRequest>();
 
-  constructor(private upload: FileUpload) { }
+  constructor(private upload: FileUpload) {}
 
   onSelectFiles(files: Array<any>) {
     console.log('FileUploadComponent::onSelectFiles', files);
-    files.forEach((file) => {
+    files.forEach(file => {
       const next = this.upload.add({
         folder: this.folder,
         owner: this.owner,
-        file
+        file,
       });
       this.added.emit(next);
-      this.upload.request(next)
-        .then((request) => {
+      this.upload
+        .request(next)
+        .then(request => {
           console.log('FileUploadComponent::onRequest', request);
           this.requested.emit(request);
           return this.upload.upload(request);
         })
-        .then((request) => {
+        .then(request => {
           console.log('FileUploadComponent::onUpload', request);
           this.uploaded.emit(request);
           return this.upload.confirm(request);
         })
-        .then((request) => {
+        .then(request => {
           console.log('FileUploadComponent::onConfirm', request);
           this.confirmed.emit(request);
         });
     });
   }
-
 }

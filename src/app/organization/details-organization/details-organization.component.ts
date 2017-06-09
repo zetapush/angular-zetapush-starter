@@ -8,10 +8,8 @@ import { Organization } from '../';
     <p>details-organization</p>
     <pre>{{organization | json}}</pre>
   `,
-  styles: []
+  styles: [],
 })
 export class DetailsOrganizationComponent {
-
   @Input() organization: Organization;
-
 }

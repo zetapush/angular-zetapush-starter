@@ -12,27 +12,30 @@ import { Role, RoleApi } from '../';
       </md-list-item>
     </md-list>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class ListRoleViewComponent implements OnInit {
-
   list: Array<Role> = [];
 
-  constructor( private api: RoleApi) {}
+  constructor(private api: RoleApi) {}
 
   ngOnInit() {
     this.getRoleList();
   }
 
   private getRoleList() {
-    this.api.getRoleList().then((list) => {
-      console.log('ListRoleViewComponent::getRoleList', list);
-      this.list = list;
-    }, (errors) => {
-      console.error('ListRoleViewComponent::getRoleList', errors);
-    });
+    this.api.getRoleList().then(
+      list => {
+        console.log('ListRoleViewComponent::getRoleList', list);
+        this.list = list;
+      },
+      errors => {
+        console.error('ListRoleViewComponent::getRoleList', errors);
+      },
+    );
   }
-
 }

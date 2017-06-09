@@ -5,10 +5,9 @@ import { Organization, OrganizationApi } from '../';
 @Component({
   selector: 'zp-list-organization-view',
   templateUrl: './list-organization-view.component.html',
-  styles: []
+  styles: [],
 })
 export class ListOrganizationViewComponent implements OnInit {
-
   list: Array<Organization> = [];
 
   constructor(private api: OrganizationApi) {}
@@ -18,12 +17,17 @@ export class ListOrganizationViewComponent implements OnInit {
   }
 
   private getOrganizationList() {
-    this.api.getOrganizationList().then((list) => {
-      console.log('ListOrganizationViewComponent::getOrganizationList', list);
-      this.list = list;
-    }, (errors) => {
-      console.error('ListOrganizationViewComponent::getOrganizationList', errors);
-    });
+    this.api.getOrganizationList().then(
+      list => {
+        console.log('ListOrganizationViewComponent::getOrganizationList', list);
+        this.list = list;
+      },
+      errors => {
+        console.error(
+          'ListOrganizationViewComponent::getOrganizationList',
+          errors,
+        );
+      },
+    );
   }
-
 }

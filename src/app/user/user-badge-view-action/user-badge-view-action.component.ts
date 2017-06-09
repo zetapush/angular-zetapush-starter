@@ -10,19 +10,17 @@ import { ViewActionComponent } from '../../core';
   template: `
     <zp-user-badge></zp-user-badge>
   `,
-  styles: []
+  styles: [],
 })
 export class UserBadgeViewActionComponent implements ViewActionComponent {
-
   context: ReplaySubject<any>;
   parameters: any;
 
   onContextInjected(context: ReplaySubject<any>) {
     console.log('UserBadgeViewActionComponent::onContextInjected', context);
     this.context = context;
-    this.context.subscribe((conversation) => {
+    this.context.subscribe(conversation => {
       console.log('UserBadgeViewActionComponent::onGetContext', conversation);
     });
   }
-
 }

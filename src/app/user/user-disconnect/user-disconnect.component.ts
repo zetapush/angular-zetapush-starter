@@ -7,16 +7,16 @@ import { ZetaPushConnection } from 'zetapush-angular';
   template: `
     <button md-button (click)="onClick()"><md-icon>forward</md-icon></button>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class UserDisconnectComponent {
-
-  constructor(private connection: ZetaPushConnection, private router: Router) { }
+  constructor(private connection: ZetaPushConnection, private router: Router) {}
 
   onClick() {
     this.connection.disconnect().then(() => this.router.navigate(['/login']));
   }
-
 }

@@ -1,7 +1,12 @@
 import { Subscription } from 'rxjs/Subscription';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Context, ContextTemplate, WorkflowStateDefinition, WorkflowApi } from '../workflow-api.service';
+import {
+  Context,
+  ContextTemplate,
+  WorkflowStateDefinition,
+  WorkflowApi,
+} from '../workflow-api.service';
 
 @Component({
   selector: 'zp-details-workflow-view',
@@ -27,7 +32,8 @@ import { Context, ContextTemplate, WorkflowStateDefinition, WorkflowApi } from '
       </div>
     </section>
   `,
-  styles: [`
+  styles: [
+    `
     :host {
       display: block;
       height: calc(100% - 11rem);
@@ -88,10 +94,10 @@ import { Context, ContextTemplate, WorkflowStateDefinition, WorkflowApi } from '
 
       margin-left: 4px;
     }
-  `]
+  `,
+  ],
 })
 export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
-
   private subscriptions: Array<Subscription> = [];
 
   contextTemplate: ContextTemplate = WorkflowApi.mock(0);
@@ -99,20 +105,25 @@ export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
   permissions: { [key: string]: string[] } = {};
 
   constructor(private api: WorkflowApi) {
-    this.subscriptions.push(api.onCreateTrelloContext.subscribe(() => this.getMyContextList()));
-    this.subscriptions.push(api.onTransitionContext.subscribe(() => this.getMyContextList()));
+    this.subscriptions.push(
+      api.onCreateTrelloContext.subscribe(() => this.getMyContextList()),
+    );
+    this.subscriptions.push(
+      api.onTransitionContext.subscribe(() => this.getMyContextList()),
+    );
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => {
+    this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
   }
 
   ngOnInit() {
-    this.api.getContextTemplate({ contextTemplateId: 'trello' })
-        .then((contextTemplate) => this.onGetContextTemplate(contextTemplate))
-        .then(() => this.getMyContextList());
+    this.api
+      .getContextTemplate({ contextTemplateId: 'trello' })
+      .then(contextTemplate => this.onGetContextTemplate(contextTemplate))
+      .then(() => this.getMyContextList());
   }
 
   onAddContextClick() {
@@ -121,13 +132,19 @@ export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
   }
 
   onGetContextTemplate(contextTemplate: ContextTemplate) {
-    console.log('DetailsWorkflowViewComponent::onGetContextTemplate', contextTemplate);
+    console.log(
+      'DetailsWorkflowViewComponent::onGetContextTemplate',
+      contextTemplate,
+    );
     this.contextTemplate = contextTemplate;
-    this.permissions = contextTemplate.template.transitions.reduce((acc, transition) => {
-      acc[transition.from] = acc[transition.from] || [];
-      acc[transition.from].push(transition.to);
-      return acc
-    }, {});
+    this.permissions = contextTemplate.template.transitions.reduce(
+      (acc, transition) => {
+        acc[transition.from] = acc[transition.from] || [];
+        acc[transition.from].push(transition.to);
+        return acc;
+      },
+      {},
+    );
   }
 
   onGetContextList(list: Array<Context>) {
@@ -136,7 +153,7 @@ export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
       acc[value.stateId] = [];
       return acc;
     }, {});
-    list.forEach((context) => this.states[context.state].push(context));
+    list.forEach(context => this.states[context.state].push(context));
   }
 
   getFlexValue(workflow: ContextTemplate) {
@@ -148,18 +165,22 @@ export class DetailsWorkflowViewComponent implements OnDestroy, OnInit {
     console.log('DetailsWorkflowViewComponent::onDropSuccess', state, context);
     this.api.transitionContext({
       contextId: context.__key,
-      newState: state.stateId
+      newState: state.stateId,
     });
   }
 
   allowDropFunction(state: WorkflowStateDefinition) {
     return (context: Context) => {
-      return this.permissions[context.state] && this.permissions[context.state].indexOf(state.stateId) > -1;
+      return (
+        this.permissions[context.state] &&
+        this.permissions[context.state].indexOf(state.stateId) > -1
+      );
     };
   }
 
   private getMyContextList() {
-    return this.api.getMyContextList().then(({ list }) => this.onGetContextList(list));
+    return this.api
+      .getMyContextList()
+      .then(({ list }) => this.onGetContextList(list));
   }
-
 }

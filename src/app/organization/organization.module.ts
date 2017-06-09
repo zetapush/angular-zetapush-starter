@@ -19,12 +19,8 @@ import { ListOrganizationViewComponent } from './list-organization-view/list-org
 import { ListUserOrganizationViewComponent } from './list-user-organization-view/list-user-organization-view.component';
 import { DetailsOrganizationViewComponent } from './details-organization-view/details-organization-view.component';
 import { DetailsOrganizationComponent } from './details-organization/details-organization.component';
-import {
-  AutocompleteOrganizationMembersDialogComponent
-} from './autocomplete-organization-members-dialog/autocomplete-organization-members-dialog.component';
-import {
-  AddGroupMemberViewActionComponent
-} from './add-group-member-view-action/add-group-member-view-action.component';
+import { AutocompleteOrganizationMembersDialogComponent } from './autocomplete-organization-members-dialog/autocomplete-organization-members-dialog.component';
+import { AddGroupMemberViewActionComponent } from './add-group-member-view-action/add-group-member-view-action.component';
 
 @NgModule({
   declarations: [
@@ -33,16 +29,14 @@ import {
     DetailsOrganizationComponent,
     ListOrganizationViewComponent,
     ListUserOrganizationViewComponent,
-    AddGroupMemberViewActionComponent
+    AddGroupMemberViewActionComponent,
   ],
-  entryComponents: [
-    AddGroupMemberViewActionComponent
-  ],
+  entryComponents: [AddGroupMemberViewActionComponent],
   exports: [
     OrganizationRoutingModule,
 
     AutocompleteOrganizationMembersDialogComponent,
-    DetailsOrganizationComponent
+    DetailsOrganizationComponent,
   ],
   imports: [
     CommonModule,
@@ -53,10 +47,8 @@ import {
     GroupModule,
     UserModule,
 
-    OrganizationRoutingModule
+    OrganizationRoutingModule,
   ],
-  providers: [
-    OrganizationApiProvider
-  ]
+  providers: [OrganizationApiProvider],
 })
-export class OrganizationModule { }
+export class OrganizationModule {}

@@ -10,10 +10,9 @@ import { UserCache } from '../user-cache.service';
     <span>Welcome</span>
     <strong>{{ user.login }}</strong>
   `,
-  styles: []
+  styles: [],
 })
 export class UserBadgeComponent implements OnInit {
-
   @Input() userKey: string;
 
   user: User;
@@ -23,9 +22,8 @@ export class UserBadgeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.cache.get(this.userKey).subscribe((user) => {
+    this.cache.get(this.userKey).subscribe(user => {
       this.user = user;
     });
   }
-
 }

@@ -13,34 +13,39 @@ import { DetailsWhiteboardViewComponent } from './details-whiteboard-view/detail
 
 import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-action/create-whiteboard-view-action.component';
 
-const routes: Routes = [{
-  path: 'whiteboard',
-  component: RouterLayoutComponent,
-  canActivate: [ IsSimplyConnected ],
-  data: {
-    links: []
+const routes: Routes = [
+  {
+    path: 'whiteboard',
+    component: RouterLayoutComponent,
+    canActivate: [IsSimplyConnected],
+    data: {
+      links: [],
+    },
+    children: [
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'list', component: ListWhiteboardViewComponent },
+      {
+        path: 'details/:owner/:room/:whiteboard',
+        component: DetailsWhiteboardViewComponent,
+      },
+    ],
   },
-  children: [
-    { path: '', redirectTo: 'list', pathMatch: 'full' },
-    { path: 'list', component: ListWhiteboardViewComponent },
-    { path: 'details/:owner/:room/:whiteboard', component: DetailsWhiteboardViewComponent }
-  ]
-}];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [],
 })
 export class WhiteboardRoutingModule {
   constructor(core: RouterState, registry: ViewActionRegistry) {
     console.log('WhiteboardRoutingModule::constructor', core);
     core.register({
       name: 'whiteboard',
-      path: '/whiteboard'
+      path: '/whiteboard',
     });
     registry.setActionsByView(DetailsConversationComponent, [
-      new ViewActionItem(CreateWhiteboardViewActionComponent)
+      new ViewActionItem(CreateWhiteboardViewActionComponent),
     ]);
   }
 }

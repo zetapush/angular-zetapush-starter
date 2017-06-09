@@ -14,31 +14,37 @@ import { ApiError, Permission, PermissionApi } from '../permission-api.service';
       <button md-button [disabled]="form.invalid" form="zpCreatePermissionForm">Submit</button>
     </form>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class CreatePermissionFormComponent {
-
   @Output() create = new EventEmitter<Permission>();
 
   errors: Array<ApiError> = [];
 
-  constructor(private api: PermissionApi) { }
+  constructor(private api: PermissionApi) {}
 
-  onSubmit({ value, valid }: { value: Permission, valid: boolean }) {
+  onSubmit({ value, valid }: { value: Permission; valid: boolean }) {
     console.log('CreatePermissionFormComponent::onSubmit', value, valid);
 
     if (valid) {
       this.errors = [];
-      this.api.createPermission(value.name).then((permission: Permission) => {
-        console.log('CreatePermissionFormComponent::onCreatePermission', permission);
-        this.create.emit(permission);
-      }, (errors) => {
-        this.errors = errors;
-        console.error('onCreatePermission', errors);
-      });
+      this.api.createPermission(value.name).then(
+        (permission: Permission) => {
+          console.log(
+            'CreatePermissionFormComponent::onCreatePermission',
+            permission,
+          );
+          this.create.emit(permission);
+        },
+        errors => {
+          this.errors = errors;
+          console.error('onCreatePermission', errors);
+        },
+      );
     }
   }
-
 }

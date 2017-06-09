@@ -15,11 +15,7 @@ import { HomeViewComponent } from './home-view/home-view.component';
 import { NotFoundViewComponent } from './not-found-view/not-found-view.component';
 
 @NgModule({
-  declarations: [
-    LoginViewComponent,
-    HomeViewComponent,
-    NotFoundViewComponent
-  ],
+  declarations: [LoginViewComponent, HomeViewComponent, NotFoundViewComponent],
   imports: [
     NgCommonModule,
     BrowserModule,
@@ -28,16 +24,9 @@ import { NotFoundViewComponent } from './not-found-view/not-found-view.component
     RouterModule,
     UiModule,
 
-    CommonRoutingModule
+    CommonRoutingModule,
   ],
-  exports: [
-    NgCommonModule,
-    FormsModule,
-
-    CommonRoutingModule
-  ],
-  providers: [
-
-  ]
+  exports: [NgCommonModule, FormsModule, CommonRoutingModule],
+  providers: [],
 })
-export class CommonModule { }
+export class CommonModule {}

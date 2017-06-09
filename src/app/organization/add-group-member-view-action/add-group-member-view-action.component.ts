@@ -14,41 +14,63 @@ import { User } from '../../user';
   template: `
     <zp-autocomplete-organization-members-dialog (select)="onSelectUser($event)"></zp-autocomplete-organization-members-dialog>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class AddGroupMemberViewActionComponent implements ViewActionComponent {
-
   context: ReplaySubject<any>;
   parameters: any;
   group: Group;
 
   constructor(private api: GroupApi) {
-    console.log('AutocompleteOrganizationMemberViewActionComponent::constructor');
+    console.log(
+      'AutocompleteOrganizationMemberViewActionComponent::constructor',
+    );
   }
 
   onContextInjected(context: ReplaySubject<Group>) {
-    console.log('AutocompleteOrganizationMemberViewActionComponent::onContextInjected', context);
+    console.log(
+      'AutocompleteOrganizationMemberViewActionComponent::onContextInjected',
+      context,
+    );
     this.context = context;
-    this.context.subscribe((group) => {
-      console.log('AutocompleteOrganizationMemberViewActionComponent::onGetContext', group);
+    this.context.subscribe(group => {
+      console.log(
+        'AutocompleteOrganizationMemberViewActionComponent::onGetContext',
+        group,
+      );
       this.group = group;
     });
   }
 
   onSelectUser(user: User) {
-    console.log('AutocompleteOrganizationMemberViewActionComponent::onSelectUser', user);
+    console.log(
+      'AutocompleteOrganizationMemberViewActionComponent::onSelectUser',
+      user,
+    );
     if (this.group && user) {
-      this.api.addGroupMember({
-        id: this.group.id,
-        member: user.userKey
-      }).then((message) => {
-        console.log('AutocompleteOrganizationMemberViewActionComponent::onAddGroupMember', message);
-      }, (errors) => {
-        console.error('AutocompleteOrganizationMemberViewActionComponent::onAddGroupMember', errors);
-      });
+      this.api
+        .addGroupMember({
+          id: this.group.id,
+          member: user.userKey,
+        })
+        .then(
+          message => {
+            console.log(
+              'AutocompleteOrganizationMemberViewActionComponent::onAddGroupMember',
+              message,
+            );
+          },
+          errors => {
+            console.error(
+              'AutocompleteOrganizationMemberViewActionComponent::onAddGroupMember',
+              errors,
+            );
+          },
+        );
     }
   }
-
 }

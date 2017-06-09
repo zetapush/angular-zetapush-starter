@@ -6,14 +6,13 @@ import { User, UserApi } from '../';
 @Component({
   selector: 'zp-details-user-view',
   templateUrl: './details-user-view.component.html',
-  styles: []
+  styles: [],
 })
 export class DetailsUserViewComponent implements OnInit {
-
   user: User;
 
   constructor(private api: UserApi, private route: ActivatedRoute) {
-    route.params.subscribe((params) => {
+    route.params.subscribe(params => {
       const userKey = params['userKey'];
       api.getUser({ userKey }).then((user: User) => {
         this.user = user;
@@ -21,7 +20,5 @@ export class DetailsUserViewComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

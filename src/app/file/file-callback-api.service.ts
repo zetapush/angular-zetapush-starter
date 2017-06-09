@@ -7,13 +7,20 @@ export abstract class FileCallbackApi {
   onThumbnailCallback: Observable<any>;
 }
 
-export function FileCallbackApiFactory(client: ZetaPushClient, zone: NgZone): FileCallbackApi {
+export function FileCallbackApiFactory(
+  client: ZetaPushClient,
+  zone: NgZone,
+): FileCallbackApi {
   const METHOD_PATTERN = /^core_file__(\w+)$/;
   const methods = ['core_file__onThumbnailCallback'];
   const extensions = {} as FileCallbackApi;
   const listener = methods.reduce((reducer, method) => {
-    const source = new Observable((observer) => {
-      reducer[method] = ({ data }: { data: { errors: Array<any>, result: any } }) => {
+    const source = new Observable(observer => {
+      reducer[method] = ({
+        data,
+      }: {
+        data: { errors: Array<any>; result: any };
+      }) => {
         console.log(`Api::${method}`, data);
         zone.run(() => {
           const { errors, result } = data;
@@ -35,11 +42,13 @@ export function FileCallbackApiFactory(client: ZetaPushClient, zone: NgZone): Fi
   const api = client.createService({
     Type: services.Macro,
     deploymentId: 'macro_1',
-    listener
+    listener,
   });
   return Object.assign(api, extensions) as FileCallbackApi;
 }
 
 export const FileCallbackApiProvider = {
-  provide: FileCallbackApi, useFactory: FileCallbackApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: FileCallbackApi,
+  useFactory: FileCallbackApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

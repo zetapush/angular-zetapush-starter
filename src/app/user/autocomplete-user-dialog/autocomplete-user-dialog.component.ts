@@ -22,12 +22,13 @@ import { User } from '../user-api.service';
       </md-option>
     </md-autocomplete>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class DialogUserListComponent {
-
   user = new FormControl();
   users: Observable<Array<User>>;
   filtered: Observable<Array<User>>;
@@ -44,11 +45,11 @@ export class DialogUserListComponent {
     }
 
     this.filtered = this.user.valueChanges
-        .startWith(null)
-        .map((user) => user && typeof user === 'object' ? user.login : user)
-        .switchMap((name) => name ? this.filter(name) : this.users);
+      .startWith(null)
+      .map(user => (user && typeof user === 'object' ? user.login : user))
+      .switchMap(name => (name ? this.filter(name) : this.users));
 
-    this.user.valueChanges.subscribe((user) => {
+    this.user.valueChanges.subscribe(user => {
       console.log('DialogUserListComponent::onChangeUser', user);
       if (user && typeof user === 'object') {
         this.dialog.close(user);
@@ -59,7 +60,7 @@ export class DialogUserListComponent {
   filter(value: string): Observable<Array<User>> {
     console.log('DialogUserListComponent::filter', value);
     return this.users.scan((filtered, users) => {
-      return users.filter((user) => new RegExp(value, 'gi').test(user.login));
+      return users.filter(user => new RegExp(value, 'gi').test(user.login));
     }, []);
   }
 
@@ -67,7 +68,6 @@ export class DialogUserListComponent {
     console.log('DialogUserListComponent::display', user);
     return user ? user.login : '';
   }
-
 }
 
 @Component({
@@ -75,39 +75,47 @@ export class DialogUserListComponent {
   template: `
     <button md-icon-button color="primary" (click)="open()"><md-icon>add</md-icon></button>
   `,
-  styles: [`
-  `]
+  styles: [
+    `
+  `,
+  ],
 })
 export class AutocompleteUserDialogComponent {
-
   @Input() title = 'Add member';
   @Input() users: Observable<Array<User>>;
 
   @Output() select = new EventEmitter<User>();
 
-  constructor(public dialog: MdDialog) { }
+  constructor(public dialog: MdDialog) {}
 
   open() {
     console.log('AutocompleteUserDialogComponent::open');
 
     const reference = this.dialog.open(DialogUserListComponent, {
       data: {
-        users: this.users
-      }
+        users: this.users,
+      },
     });
 
-    reference.afterClosed().subscribe((value) => {
+    reference.afterClosed().subscribe(value => {
       console.log('AutocompleteUserDialogComponent::afterClosed', value);
       this.select.emit(value);
     });
   }
-
 }
 
-import { MdDialogConfig, MdDialogContainer, OverlayRef } from '@angular/material';
+import {
+  MdDialogConfig,
+  MdDialogContainer,
+  OverlayRef,
+} from '@angular/material';
 
 class FixMdDialogRef<T> extends MdDialogRef<T> {
-  constructor(_overlayRef: OverlayRef, _containerInstance: MdDialogContainer, public config: MdDialogConfig) {
+  constructor(
+    _overlayRef: OverlayRef,
+    _containerInstance: MdDialogContainer,
+    public config: MdDialogConfig,
+  ) {
     super(_overlayRef, _containerInstance);
   }
 }

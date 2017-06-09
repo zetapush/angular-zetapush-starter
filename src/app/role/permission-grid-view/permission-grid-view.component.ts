@@ -23,7 +23,7 @@ const comparator = {
     } else {
       return 0;
     }
-  }
+  },
 };
 
 @Component({
@@ -76,7 +76,8 @@ const comparator = {
     </nav>
     <pre>{{ users | json }}</pre>
   `,
-  styles: [`
+  styles: [
+    `
     .Form--Permission {
       position: relative;
       overflow: hidden;
@@ -88,36 +89,56 @@ const comparator = {
     .Row--SelectAll {
       border-bottom: 1px dashed black;
     }
-  `]
+  `,
+  ],
 })
 export class PermissionGridViewComponent implements OnInit {
-
   users: Array<UserPermissionList> = [];
 
   permissions: Array<Permission> = [];
 
-  constructor(private api: PermissionApi) { }
+  constructor(private api: PermissionApi) {}
 
   ngOnInit() {
     console.log('PermissionGridViewComponent::ngOnInit');
 
-    this.api.getPermissionList().then((permissions) => {
-      console.log('PermissionGridViewComponent::onGetPermissionList', permissions);
-      this.permissions = permissions.sort(comparator.permission);
-    }, (errors) => {
-      console.error('PermissionGridViewComponent::onGetPermissionList', errors);
-    });
+    this.api.getPermissionList().then(
+      permissions => {
+        console.log(
+          'PermissionGridViewComponent::onGetPermissionList',
+          permissions,
+        );
+        this.permissions = permissions.sort(comparator.permission);
+      },
+      errors => {
+        console.error(
+          'PermissionGridViewComponent::onGetPermissionList',
+          errors,
+        );
+      },
+    );
   }
 
   onValidate() {
     console.log('PermissionGridViewComponent::onValidate');
 
-    const requests = this.users.map(({ user, permissions }) => this.api.setPermissionListMember({ member: user.userKey, permissions }));
-    Promise.all(requests).then((responses) => {
-      console.log('PermissionGridViewComponent::onSetPermissionListMember', responses);
-    }, (errors) => {
-      console.error('PermissionGridViewComponent::onSetPermissionListMember', errors);
-    });
+    const requests = this.users.map(({ user, permissions }) =>
+      this.api.setPermissionListMember({ member: user.userKey, permissions }),
+    );
+    Promise.all(requests).then(
+      responses => {
+        console.log(
+          'PermissionGridViewComponent::onSetPermissionListMember',
+          responses,
+        );
+      },
+      errors => {
+        console.error(
+          'PermissionGridViewComponent::onSetPermissionListMember',
+          errors,
+        );
+      },
+    );
   }
 
   id(permission: string, userKey: string) {
@@ -136,19 +157,32 @@ export class PermissionGridViewComponent implements OnInit {
   onSelectUser(user: User) {
     console.log('PermissionGridViewComponent::onSelectUser', user);
 
-    if (!this.users.find((element) => element.user.userKey === user.userKey)) {
+    if (!this.users.find(element => element.user.userKey === user.userKey)) {
       // Add selected user to list
-      this.api.getUserPermissionList(user.userKey).then((list) => {
-        console.log('PermissionGridViewComponent::onGetUserPermissionList', list);
-        const permissions = this.permissions.reduce((grants, permission) => ({
-          ...grants,
-          [permission.metadata.name]: !!list.find((item) => item.id === permission.id)
-        }), {});
-        this.users.push({ permissions, user });
-      }, (errors) => {
-        console.error('PermissionGridViewComponent::onGetUserPermissionList', errors);
-      });
+      this.api.getUserPermissionList(user.userKey).then(
+        list => {
+          console.log(
+            'PermissionGridViewComponent::onGetUserPermissionList',
+            list,
+          );
+          const permissions = this.permissions.reduce(
+            (grants, permission) => ({
+              ...grants,
+              [permission.metadata.name]: !!list.find(
+                item => item.id === permission.id,
+              ),
+            }),
+            {},
+          );
+          this.users.push({ permissions, user });
+        },
+        errors => {
+          console.error(
+            'PermissionGridViewComponent::onGetUserPermissionList',
+            errors,
+          );
+        },
+      );
     }
   }
-
 }

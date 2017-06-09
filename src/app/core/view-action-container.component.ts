@@ -1,4 +1,10 @@
-import { Component, Input, AfterViewInit, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import {
+  Component,
+  Input,
+  AfterViewInit,
+  ViewChild,
+  ComponentFactoryResolver,
+} from '@angular/core';
 
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 
@@ -12,7 +18,7 @@ import { ViewActionItem } from './view-action-item';
   selector: 'zp-view-action-container',
   template: `
     <ng-template zpViewActionHost></ng-template>
-  `
+  `,
 })
 export class ViewActionContainerComponent implements AfterViewInit {
   @Input() context: ReplaySubject<any>;
@@ -21,14 +27,21 @@ export class ViewActionContainerComponent implements AfterViewInit {
 
   private actions: ViewActionItem[];
 
-  constructor(private resolver: ComponentFactoryResolver, private registry: ViewActionRegistry) { }
+  constructor(
+    private resolver: ComponentFactoryResolver,
+    private registry: ViewActionRegistry,
+  ) {}
 
   ngAfterViewInit() {
-    console.log('ViewActionContainerComponent::ngAfterInitView', this.context, this.view);
+    console.log(
+      'ViewActionContainerComponent::ngAfterInitView',
+      this.context,
+      this.view,
+    );
     this.actions = this.registry.getActionsByView(this.view);
     const container = this.zpViewActionHost.viewContainerRef;
     container.clear();
-    this.actions.forEach((action) => {
+    this.actions.forEach(action => {
       const factory = this.resolver.resolveComponentFactory(action.component);
       const ref = container.createComponent(factory);
       const component = <ViewActionComponent>ref.instance;
@@ -40,5 +53,4 @@ export class ViewActionContainerComponent implements AfterViewInit {
       component.onContextInjected(this.context);
     });
   }
-
 }

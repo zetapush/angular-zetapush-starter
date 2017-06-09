@@ -12,28 +12,15 @@ import { RouterState } from './router-state.service';
 import { RouterLayoutComponent } from './router-layout/router-layout.component';
 
 @NgModule({
-  declarations: [
-    RouterLayoutComponent
-  ],
-  imports: [
-    CommonModule,
-    NgRouterModule,
-    CoreModule,
-    UiModule
-  ],
-  exports: [
-    CommonModule,
-
-    RouterLayoutComponent
-  ],
-  providers: [
-    RouterState
-  ]
+  declarations: [RouterLayoutComponent],
+  imports: [CommonModule, NgRouterModule, CoreModule, UiModule],
+  exports: [CommonModule, RouterLayoutComponent],
+  providers: [RouterState],
 })
 export class RouterModule {
   constructor(router: RouterState) {
-    router.state.subscribe((state) => {
+    router.state.subscribe(state => {
       console.log('RouterState', state);
-    })
+    });
   }
 }

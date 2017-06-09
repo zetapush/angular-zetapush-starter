@@ -3,6 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'zp-list-group',
   templateUrl: './list-group.component.html',
-  styles: []
+  styles: [],
 })
 export class ListGroupComponent {}

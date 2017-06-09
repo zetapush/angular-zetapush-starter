@@ -41,13 +41,11 @@ const APPLICATIONS_MODULES = [
   ConversationModule,
   WhiteboardModule,
   ContextModule,
-  WorkflowModule
+  WorkflowModule,
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     RouterModule,
@@ -58,12 +56,12 @@ const APPLICATIONS_MODULES = [
     // Applications modules
     ...APPLICATIONS_MODULES,
     // Provide Common Components and Routing
-    CommonModule
+    CommonModule,
   ],
   providers: [
     { provide: ZetaPushClientConfig, useValue: environment.zetapush },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

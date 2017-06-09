@@ -40,13 +40,9 @@ import { PermissionGridViewComponent } from './permission-grid-view/permission-g
     CreateRoleViewComponent,
     HasPermissionDirective,
     HasRoleDirective,
-    PermissionGridViewComponent
+    PermissionGridViewComponent,
   ],
-  exports: [
-    RoleRoutingModule,
-
-    DetailsRoleComponent
-  ],
+  exports: [RoleRoutingModule, DetailsRoleComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -57,11 +53,8 @@ import { PermissionGridViewComponent } from './permission-grid-view/permission-g
     OrganizationModule,
     UserModule,
 
-    RoleRoutingModule
+    RoleRoutingModule,
   ],
-  providers: [
-    PermissionApiProvider,
-    RoleApiProvider
-  ]
+  providers: [PermissionApiProvider, RoleApiProvider],
 })
 export class RoleModule {}

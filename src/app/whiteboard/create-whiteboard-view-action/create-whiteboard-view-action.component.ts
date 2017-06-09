@@ -14,10 +14,10 @@ import { WhiteboardApi } from '../';
   template: `
     <button md-button (click)="onCreateWhiteboard($event)" [disabled]="!conversation"><md-icon>format_shapes</md-icon></button>
   `,
-  styles: []
+  styles: [],
 })
-export class CreateWhiteboardViewActionComponent implements ViewActionComponent {
-
+export class CreateWhiteboardViewActionComponent
+  implements ViewActionComponent {
   context: ReplaySubject<any>;
   parameters: any;
   conversation: Conversation;
@@ -27,23 +27,43 @@ export class CreateWhiteboardViewActionComponent implements ViewActionComponent 
   }
 
   onContextInjected(context: ReplaySubject<any>) {
-    console.log('CreateWhiteboardViewActionComponent::onContextInjected', context);
+    console.log(
+      'CreateWhiteboardViewActionComponent::onContextInjected',
+      context,
+    );
     this.context = context;
-    this.context.subscribe((conversation) => {
-      console.log('CreateWhiteboardViewActionComponent::onGetContext', conversation);
+    this.context.subscribe(conversation => {
+      console.log(
+        'CreateWhiteboardViewActionComponent::onGetContext',
+        conversation,
+      );
       this.conversation = conversation;
     });
   }
 
   onCreateWhiteboard($event) {
-    console.log('CreateWhiteboardViewActionComponent::onCreateWhiteboard', $event, this.conversation);
-    this.api.createWhiteboard({
-      room: this.conversation.room
-    }).then((message) => {
-      console.log('DetailsConversationComponent::onCreateWhiteboard', message);
-    }, (errors) => {
-      console.error('DetailsConversationComponent::onCreateWhiteboard', errors);
-    });
+    console.log(
+      'CreateWhiteboardViewActionComponent::onCreateWhiteboard',
+      $event,
+      this.conversation,
+    );
+    this.api
+      .createWhiteboard({
+        room: this.conversation.room,
+      })
+      .then(
+        message => {
+          console.log(
+            'DetailsConversationComponent::onCreateWhiteboard',
+            message,
+          );
+        },
+        errors => {
+          console.error(
+            'DetailsConversationComponent::onCreateWhiteboard',
+            errors,
+          );
+        },
+      );
   }
-
 }

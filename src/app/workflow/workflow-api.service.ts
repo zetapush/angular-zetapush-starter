@@ -21,7 +21,7 @@ interface ContextTemplateField {
   prettyName: string;
   mandatory: boolean;
   type: string;
-  typeConfig: { [key: string]: any; };
+  typeConfig: { [key: string]: any };
 }
 
 interface ContextTransitionRequest {
@@ -40,7 +40,7 @@ interface WorkflowTemplate {
 }
 
 interface ServiceVerbCall {
-  parameter: { [key: string]: any; };
+  parameter: { [key: string]: any };
   deploymentId: string;
   verb: string;
   loud: boolean;
@@ -64,7 +64,7 @@ interface ContextInfo {
 
 export interface Context {
   info: ContextInfo;
-  fields: { [key: string]: any; };
+  fields: { [key: string]: any };
   state: string;
 }
 
@@ -75,7 +75,6 @@ interface ContextTransitionRequest {
 
 // TODO Should be auto-generated
 export class WorkflowApi extends Api {
-
   onCreateTrelloContext: Observable<ContextInfo>;
   onTransitionContext: Observable<ContextTransitionRequest>;
 
@@ -86,15 +85,15 @@ export class WorkflowApi extends Api {
         defaultState: '',
         workflowTemplateName: '',
         groups: [],
-        contextTemplateId: ''
+        contextTemplateId: '',
       },
       fields: [],
       template: {
         states: [],
         templateName: 'trello',
-        transitions: []
-      }
-    }
+        transitions: [],
+      },
+    };
   }
 
   getContextTemplateList(): Promise<{ list: any[] }> {
@@ -110,18 +109,25 @@ export class WorkflowApi extends Api {
   }
 
   createTrelloContext(): Promise<ContextInfo> {
-    return this.$publish('createTrelloContext', {})
+    return this.$publish('createTrelloContext', {});
   }
 
-  transitionContext(request: ContextTransitionRequest): Promise<ContextTransitionRequest> {
-    return this.$publish('transitionContext', request)
+  transitionContext(
+    request: ContextTransitionRequest,
+  ): Promise<ContextTransitionRequest> {
+    return this.$publish('transitionContext', request);
   }
 }
 
-export function WorkflowApiFactory(client: ZetaPushClient, zone: NgZone): WorkflowApi {
+export function WorkflowApiFactory(
+  client: ZetaPushClient,
+  zone: NgZone,
+): WorkflowApi {
   return createApi(client, zone, WorkflowApi) as WorkflowApi;
 }
 
 export const WorkflowApiProvider = {
-  provide: WorkflowApi, useFactory: WorkflowApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: WorkflowApi,
+  useFactory: WorkflowApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

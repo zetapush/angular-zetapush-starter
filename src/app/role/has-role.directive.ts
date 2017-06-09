@@ -1,10 +1,8 @@
 import { Directive } from '@angular/core';
 
 @Directive({
-  selector: '[zpHasRole]'
+  selector: '[zpHasRole]',
 })
 export class HasRoleDirective {
-
-  constructor() { }
-
+  constructor() {}
 }

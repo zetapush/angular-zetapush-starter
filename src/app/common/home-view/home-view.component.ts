@@ -5,11 +5,13 @@ import { Component } from '@angular/core';
   template: `
     <h1>{{message}}</h1>
   `,
-  styles: [`
+  styles: [
+    `
     h1 {
       text-align: center;
     }
-  `]
+  `,
+  ],
 })
 export class HomeViewComponent {
   message = `Congrats, you're connected to ZetaPush!`;

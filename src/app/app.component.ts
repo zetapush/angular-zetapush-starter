@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'zp-root',
   template: `<main><router-outlet></router-outlet></main>`,
-  styles: [`
+  styles: [
+    `
     :host {
       display: flex;
       height: 100%;
@@ -12,6 +13,7 @@ import { Component } from '@angular/core';
     main {
       height: 100%;
     }
-  `]
+  `,
+  ],
 })
-export class AppComponent { }
+export class AppComponent {}

@@ -18,10 +18,9 @@ import { Group, GroupApi } from '../group-api.service';
     <zp-details-group [group]="group"></zp-details-group>
     <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
   `,
-  styles: []
+  styles: [],
 })
 export class DetailsGroupViewComponent implements OnDestroy {
-
   readonly view: View = DetailsGroupViewComponent;
 
   context = new ReplaySubject<Group>();
@@ -31,20 +30,22 @@ export class DetailsGroupViewComponent implements OnDestroy {
   subscriptions: Array<Subscription> = [];
 
   constructor(private api: GroupApi, private route: ActivatedRoute) {
-    route.params.subscribe((params) => {
+    route.params.subscribe(params => {
       console.log('DetailsGroupViewComponent::params', params);
       this.getGroup(params.id);
     });
-    this.subscriptions.push(api.onAddGroupMember.subscribe((membership) => {
-      console.log('DetailsGroupViewComponent::onAddGroupMember', membership);
-      if (this.group && this.group.id === membership.id) {
-        this.getGroup(membership.id);
-      }
-    }));
+    this.subscriptions.push(
+      api.onAddGroupMember.subscribe(membership => {
+        console.log('DetailsGroupViewComponent::onAddGroupMember', membership);
+        if (this.group && this.group.id === membership.id) {
+          this.getGroup(membership.id);
+        }
+      }),
+    );
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   private getGroup(id: string) {

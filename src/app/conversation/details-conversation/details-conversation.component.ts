@@ -13,12 +13,13 @@ import { FileUploadRequest } from '../../file';
 @Component({
   selector: 'zp-details-conversation',
   templateUrl: './details-conversation.component.html',
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class DetailsConversationComponent implements OnDestroy, OnChanges {
-
   @Input() conversation: Conversation;
 
   readonly view: View = DetailsConversationComponent;
@@ -30,19 +31,28 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
   constructor(private api: ConversationApi) {
     console.log('DetailsConversationComponent::constructor', api);
 
-    this.subscriptions.push(api.onAddConversationMessage.subscribe(({ message }) => {
-      console.log('DetailsConversationComponent::onAddConversationMessage', message);
-      this.conversation.messages.push(message);
-    }));
-    this.subscriptions.push(api.onPurgeConversationMessageList.subscribe(() => {
-      console.log('DetailsConversationComponent::onPurgeConversationMessageList');
-      this.conversation.messages.length = 0;
-    }));
+    this.subscriptions.push(
+      api.onAddConversationMessage.subscribe(({ message }) => {
+        console.log(
+          'DetailsConversationComponent::onAddConversationMessage',
+          message,
+        );
+        this.conversation.messages.push(message);
+      }),
+    );
+    this.subscriptions.push(
+      api.onPurgeConversationMessageList.subscribe(() => {
+        console.log(
+          'DetailsConversationComponent::onPurgeConversationMessageList',
+        );
+        this.conversation.messages.length = 0;
+      }),
+    );
   }
 
   ngOnDestroy() {
     // Remove subscription
-    this.subscriptions.forEach((subscription) => {
+    this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
   }
@@ -54,7 +64,7 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
     }
   }
 
-  onSubmit({ value, valid }: { value: any, valid: boolean }, event) {
+  onSubmit({ value, valid }: { value: any; valid: boolean }, event) {
     console.log('DetailsConversationComponent::onSubmit', value, valid, event);
 
     if (valid) {
@@ -62,29 +72,47 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
         room: this.conversation.room,
         type: 'markup',
         value: {
-          text: value.message
+          text: value.message,
         },
-        metadata: {
-
-        }
+        metadata: {},
       };
-      this.api.addConversationMessage(parameters).then(({ message }) => {
-        console.log('DetailsConversationComponent::onAddConversationMessage', message);
-      }, (errors) => {
-        console.error('DetailsConversationComponent::onAddConversationMessage', errors);
-      });
+      this.api.addConversationMessage(parameters).then(
+        ({ message }) => {
+          console.log(
+            'DetailsConversationComponent::onAddConversationMessage',
+            message,
+          );
+        },
+        errors => {
+          console.error(
+            'DetailsConversationComponent::onAddConversationMessage',
+            errors,
+          );
+        },
+      );
       event.target.reset();
     }
   }
 
   onPurgConversation($event) {
-    this.api.purgeConversationMessageList({
-      room: this.conversation.room
-    }).then((message) => {
-      console.log('DetailsConversationComponent::onPurgeConversationMessageList', message);
-    }, (errors) => {
-      console.error('DetailsConversationComponent::onPurgeConversationMessageList', errors);
-    });
+    this.api
+      .purgeConversationMessageList({
+        room: this.conversation.room,
+      })
+      .then(
+        message => {
+          console.log(
+            'DetailsConversationComponent::onPurgeConversationMessageList',
+            message,
+          );
+        },
+        errors => {
+          console.error(
+            'DetailsConversationComponent::onPurgeConversationMessageList',
+            errors,
+          );
+        },
+      );
   }
 
   onRequestConfirmed(request: FileUploadRequest) {
@@ -110,5 +138,4 @@ export class DetailsConversationComponent implements OnDestroy, OnChanges {
     });
     */
   }
-
 }

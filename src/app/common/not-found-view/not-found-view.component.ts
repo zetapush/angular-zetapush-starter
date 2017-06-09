@@ -7,16 +7,16 @@ import { Location } from '@angular/common';
     <h1>Page Not Found</h1>
     <button type="button" md-button color="accent" (click)="onBackClick()">Go Back</button>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class NotFoundViewComponent {
-
-  constructor(private location: Location) { }
+  constructor(private location: Location) {}
 
   onBackClick() {
     this.location.back();
   }
-
 }

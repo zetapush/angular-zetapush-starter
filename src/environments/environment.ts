@@ -7,6 +7,6 @@ export const environment = {
   production: false,
   zetapush: {
     apiUrl: prompt('Enter your API url'),
-    sandboxId: prompt('Enter your sandbox id')
-  }
+    sandboxId: prompt('Enter your sandbox id'),
+  },
 };

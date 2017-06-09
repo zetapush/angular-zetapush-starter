@@ -76,8 +76,20 @@ interface RequestFileUploadApiInput {
 export class FileApi extends Api {
   onDeleteFileEntry: Observable<any>;
 
-  confirmFileUpload({ guid, owner, actions, metadata, tags }: ConfirmFileUploadApiInput) {
-    return this.$publish('confirmFileUpload', { guid, owner, actions, metadata, tags });
+  confirmFileUpload({
+    guid,
+    owner,
+    actions,
+    metadata,
+    tags,
+  }: ConfirmFileUploadApiInput) {
+    return this.$publish('confirmFileUpload', {
+      guid,
+      owner,
+      actions,
+      metadata,
+      tags,
+    });
   }
   deleteFileEntry({ path, owner }: FileEntryApiInput) {
     return this.$publish('deleteFileEntry', { path });
@@ -98,5 +110,7 @@ export function FileApiFactory(client: ZetaPushClient, zone: NgZone): FileApi {
 }
 
 export const FileApiProvider = {
-  provide: FileApi, useFactory: FileApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: FileApi,
+  useFactory: FileApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

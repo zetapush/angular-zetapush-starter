@@ -16,14 +16,14 @@ interface ApiError {
       </li>
     </ul>
   `,
-  styles: [`
+  styles: [
+    `
     .List--Error {
       color: rgb(229, 80, 49);
     }
-  `]
+  `,
+  ],
 })
 export class UiErrorComponent {
-
   @Input() errors: Array<ApiError> = [];
-
 }

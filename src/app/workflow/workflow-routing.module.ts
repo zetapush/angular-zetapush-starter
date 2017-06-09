@@ -11,35 +11,37 @@ import { DetailsWorkflowViewComponent } from './details-workflow-view/details-wo
 
 import { EmbeddedSortableComponent } from './embedded-sortable.component';
 
-const routes: Routes = [{
-  path: 'workflow',
-  component: RouterLayoutComponent,
-  canActivate: [ IsSimplyConnected ],
-  data: {
-    links: [
-      { path: 'list/all', name: 'workflow/list/all' },
-      { path: 'dnd', name: 'workflow/dnd' }
-    ]
+const routes: Routes = [
+  {
+    path: 'workflow',
+    component: RouterLayoutComponent,
+    canActivate: [IsSimplyConnected],
+    data: {
+      links: [
+        { path: 'list/all', name: 'workflow/list/all' },
+        { path: 'dnd', name: 'workflow/dnd' },
+      ],
+    },
+    children: [
+      { path: '', redirectTo: 'list/all', pathMatch: 'full' },
+      { path: 'list/all', component: ListWorkflowViewComponent },
+      { path: 'details/:id', component: DetailsWorkflowViewComponent },
+      { path: 'dnd', component: EmbeddedSortableComponent },
+    ],
   },
-  children: [
-    { path: '', redirectTo: 'list/all', pathMatch: 'full' },
-    { path: 'list/all', component: ListWorkflowViewComponent },
-    { path: 'details/:id', component: DetailsWorkflowViewComponent },
-    { path: 'dnd', component: EmbeddedSortableComponent }
-  ]
-}];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [],
 })
 export class WorkflowRoutingModule {
   constructor(core: RouterState) {
     console.log('WorkflowRoutingModule::constructor', core);
     core.register({
       name: 'workflow',
-      path: '/workflow'
+      path: '/workflow',
     });
   }
 }

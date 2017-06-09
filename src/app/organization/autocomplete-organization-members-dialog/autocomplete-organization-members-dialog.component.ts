@@ -14,11 +14,12 @@ import { Organization, OrganizationApi } from '../';
   template: `
     <button md-icon-button color="primary" (click)="open()"><md-icon>add</md-icon></button>
   `,
-  styles: [`
-  `]
+  styles: [
+    `
+  `,
+  ],
 })
 export class AutocompleteOrganizationMembersDialogComponent {
-
   users: Observable<Array<User>>;
 
   @Input() organization: string;
@@ -32,32 +33,37 @@ export class AutocompleteOrganizationMembersDialogComponent {
   open() {
     console.log('AutocompleteOrganizationMembersDialogComponent::open');
 
-    this.api.getUserOrganizationList().then((list: Array<Organization>) => {
-      const users: Array<User> = [];
-      list.forEach((organization: Organization) => {
-        organization.members.forEach((member) => {
-          if (!users.find((user) => user.userKey === member.userKey)) {
-            users.push(member);
+    this.api.getUserOrganizationList().then(
+      (list: Array<Organization>) => {
+        const users: Array<User> = [];
+        list.forEach((organization: Organization) => {
+          organization.members.forEach(member => {
+            if (!users.find(user => user.userKey === member.userKey)) {
+              users.push(member);
+            }
+          });
+        });
+        this.users = Observable.of(users);
+
+        const reference = this.dialog.open(DialogUserListComponent, {
+          data: {
+            users: this.users,
+          },
+        });
+
+        reference.afterClosed().subscribe(value => {
+          console.log(
+            'AutocompleteOrganizationMembersDialogComponent::afterClosed',
+            value,
+          );
+          if (value) {
+            this.select.emit(value);
           }
         });
-      });
-      this.users = Observable.of(users);
-
-      const reference = this.dialog.open(DialogUserListComponent, {
-        data: {
-          users: this.users
-        }
-      });
-
-      reference.afterClosed().subscribe((value) => {
-        console.log('AutocompleteOrganizationMembersDialogComponent::afterClosed', value);
-        if (value) {
-          this.select.emit(value);
-        }
-      });
-    }, (errors) => {
-      console.error('getUserOrganizationList', errors);
-    });
+      },
+      errors => {
+        console.error('getUserOrganizationList', errors);
+      },
+    );
   }
-
 }

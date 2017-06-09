@@ -1,27 +1,47 @@
-import { AfterViewChecked, AfterViewInit, Directive, ElementRef, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import {
+  AfterViewChecked,
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 
 import { fabric } from 'fabric';
 
 export type Mode = 'Arrow' | 'Draw' | 'Edit' | 'Text' | 'Pointer' | 'Pan';
-export type Color = 'rgb(229,80,49)'| 'rgb(253,203,55)' | 'rgb(152,192,72)' | 'rgb(0,169,228)';
+export type Color =
+  | 'rgb(229,80,49)'
+  | 'rgb(253,203,55)'
+  | 'rgb(152,192,72)'
+  | 'rgb(0,169,228)';
 
 const Arrow = fabric.util.createClass(fabric.Line, fabric.Observable, {
   initialize: function(e, t) {
     this.callSuper('initialize', e, t);
     this.set({
-      type: 'arrow'
+      type: 'arrow',
     });
   },
   _render: function(e) {
     e.beginPath();
     const r = this.calcLinePoints();
-    const headlen = 8 * (this.strokeWidth || 1);   // length of head in pixels
+    const headlen = 8 * (this.strokeWidth || 1); // length of head in pixels
     const angle = Math.atan2(r.y2 - r.y1, r.x2 - r.x1);
     e.moveTo(r.x1, r.y1);
     e.lineTo(r.x2, r.y2);
-    e.lineTo(r.x2 - headlen * Math.cos(angle - Math.PI / 6), r.y2 - headlen * Math.sin(angle - Math.PI / 6));
+    e.lineTo(
+      r.x2 - headlen * Math.cos(angle - Math.PI / 6),
+      r.y2 - headlen * Math.sin(angle - Math.PI / 6),
+    );
     e.moveTo(r.x2, r.y2);
-    e.lineTo(r.x2 - headlen * Math.cos(angle + Math.PI / 6), r.y2 - headlen * Math.sin(angle + Math.PI / 6));
+    e.lineTo(
+      r.x2 - headlen * Math.cos(angle + Math.PI / 6),
+      r.y2 - headlen * Math.sin(angle + Math.PI / 6),
+    );
 
     e.lineWidth = this.strokeWidth;
     const s = e.strokeStyle;
@@ -33,7 +53,7 @@ const Arrow = fabric.util.createClass(fabric.Line, fabric.Observable, {
   },
   complexity: function() {
     return 2;
-  }
+  },
 });
 
 Arrow.fromObject = function(e) {
@@ -44,11 +64,10 @@ Arrow.fromObject = function(e) {
 fabric.Arrow = Arrow;
 
 @Directive({
-  selector: '[zpFabric]'
+  selector: '[zpFabric]',
 })
-export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit {
-
-
+export class FabricDirective
+  implements AfterViewChecked, AfterViewInit, OnInit {
   @Output() added = new EventEmitter<any>();
   @Output() modified = new EventEmitter<any>();
   @Output() removed = new EventEmitter<any>();
@@ -65,9 +84,9 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     const element = document.createElement('canvas');
     this.el.nativeElement.appendChild(element);
     const canvas = new fabric.Canvas(element, {
-        isDrawingMode: true,
-        selection: false,
-        stateful: true
+      isDrawingMode: true,
+      selection: false,
+      stateful: true,
     });
 
     this.canvas = canvas;
@@ -77,38 +96,38 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     this.canvas.freeDrawingBrush.width = 10;
     this.canvas.freeDrawingBrush.shadowBlur = 0;
 
-    this.canvas.on('path:created', (event) => {
+    this.canvas.on('path:created', event => {
       // console.log('path:created', event);
     });
-    this.canvas.on('object:added', (event) => {
+    this.canvas.on('object:added', event => {
       // console.log('object:added', event);
 
       this.added.emit(event.target);
     });
-    this.canvas.on('object:modified', (event) => {
+    this.canvas.on('object:modified', event => {
       // console.log('object:modified', event);
 
       this.modified.emit(event.target);
     });
-    this.canvas.on('object:removed', (event) => {
+    this.canvas.on('object:removed', event => {
       // console.log('object:removed', event);
 
       this.removed.emit(event.target);
     });
-    this.canvas.on('object:selected', (event) => {
+    this.canvas.on('object:selected', event => {
       // console.log('object:selected', event);
 
       this.selected.emit(event.target);
     });
-    this.canvas.on('mouse:down', (event) => {
+    this.canvas.on('mouse:down', event => {
       // console.log('mouse:down', event);
       this.onCanvasMouseDown(event);
     });
-    this.canvas.on('mouse:move', (event) => {
+    this.canvas.on('mouse:move', event => {
       // console.log('mouse:move', event);
       this.onCanvasMouseMove(event);
     });
-    this.canvas.on('mouse:up', (event) => {
+    this.canvas.on('mouse:up', event => {
       // console.log('mouse:up', event);
       this.onCanvasMouseUp(event);
     });
@@ -134,9 +153,9 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     // Set new images
     this._images = images;
 
-    images.forEach((image) => {
+    images.forEach(image => {
       const url = URL.createObjectURL(image);
-      fabric.Image.fromURL(url, (img) => {
+      fabric.Image.fromURL(url, img => {
         console.log('fabric image', img);
         this.canvas.add(img);
         /*
@@ -172,11 +191,14 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     // Set new objects
     this._objects = objects;
     // Update drawing color
-    this.canvas.loadFromJSON({
-      objects
-    }, () => {
-      this.canvas.renderAll();
-    });
+    this.canvas.loadFromJSON(
+      {
+        objects,
+      },
+      () => {
+        this.canvas.renderAll();
+      },
+    );
   }
 
   get objects(): Array<any> {
@@ -191,9 +213,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     this.resize();
   }
 
-  ngAfterViewChecked() {
-
-  }
+  ngAfterViewChecked() {}
 
   ngAfterViewInit() {
     console.log('FabricDirective::ngAfterViewInit');
@@ -215,7 +235,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     const canvas = this.canvas;
 
     canvas.selection = true;
-    canvas.forEachObject((object) => {
+    canvas.forEachObject(object => {
       if (object['client:not-selectable']) {
         object.selectable = false;
       } else {
@@ -231,7 +251,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
     const canvas = this.canvas;
 
     canvas.selection = false;
-    canvas.forEachObject((object) => {
+    canvas.forEachObject(object => {
       object.selectable = false;
     });
     canvas.deactivateAll().renderAll();
@@ -355,13 +375,13 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
   protected onCanvasMouseDown(event) {
     if ('Arrow' === this.mode) {
       const pointer = this.canvas.getPointer(event.e);
-      const points = [ pointer.x, pointer.y, pointer.x, pointer.y ];
+      const points = [pointer.x, pointer.y, pointer.x, pointer.y];
       this.arrow = new Arrow(points, {
         strokeWidth: 5,
         fill: this.canvas.freeDrawingBrush.color,
         stroke: this.canvas.freeDrawingBrush.color,
         originX: 'center',
-        originY: 'center'
+        originY: 'center',
       });
       this.canvas.add(this.arrow);
     }
@@ -393,7 +413,7 @@ export class FabricDirective implements AfterViewChecked, AfterViewInit, OnInit 
         const object = new fabric.Text(text, {
           selectable: false,
           left: left,
-          top: top
+          top: top,
         });
 
         object.setColor(this.canvas.freeDrawingBrush.color);

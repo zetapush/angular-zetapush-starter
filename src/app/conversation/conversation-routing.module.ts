@@ -10,34 +10,37 @@ import { ListConversationViewComponent } from './list-conversation-view/list-con
 import { ListUserConversationViewComponent } from './list-user-conversation-view/list-user-conversation-view.component';
 import { DetailsConversationViewComponent } from './details-conversation-view/details-conversation-view.component';
 
-const routes: Routes = [{
-  path: 'conversation',
-  component: RouterLayoutComponent,
-  canActivate: [ IsSimplyConnected ],
-  data: {
-    links: [
-      { path: 'list/mine', name: 'conversation/list/mine' }
-    ]
+const routes: Routes = [
+  {
+    path: 'conversation',
+    component: RouterLayoutComponent,
+    canActivate: [IsSimplyConnected],
+    data: {
+      links: [{ path: 'list/mine', name: 'conversation/list/mine' }],
+    },
+    children: [
+      { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
+      { path: 'list/all', component: ListConversationViewComponent },
+      { path: 'list/mine', component: ListUserConversationViewComponent },
+      {
+        path: 'details/:owner/:id',
+        component: DetailsConversationViewComponent,
+      },
+    ],
   },
-  children: [
-    { path: '', redirectTo: 'list/mine', pathMatch: 'full' },
-    { path: 'list/all', component: ListConversationViewComponent },
-    { path: 'list/mine', component: ListUserConversationViewComponent },
-    { path: 'details/:owner/:id', component: DetailsConversationViewComponent }
-  ]
-}];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [],
 })
 export class ConversationRoutingModule {
   constructor(core: RouterState) {
     console.log('ConversationRoutingModule::constructor', core);
     core.register({
       name: 'conversation',
-      path: '/conversation'
+      path: '/conversation',
     });
   }
 }

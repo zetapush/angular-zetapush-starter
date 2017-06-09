@@ -26,7 +26,7 @@ import { EmbeddedSortableComponent } from './embedded-sortable.component';
     DetailsWorkflowViewComponent,
     DetailsWorkflowComponent,
 
-    EmbeddedSortableComponent
+    EmbeddedSortableComponent,
   ],
   exports: [],
   imports: [
@@ -38,11 +38,9 @@ import { EmbeddedSortableComponent } from './embedded-sortable.component';
     UiModule,
     UserModule,
 
-    WorkflowRoutingModule
+    WorkflowRoutingModule,
   ],
-  providers: [
-    WorkflowApiProvider
-  ]
+  providers: [WorkflowApiProvider],
 })
 export class WorkflowModule {
   constructor(api: WorkflowApi) {

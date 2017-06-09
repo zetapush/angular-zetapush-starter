@@ -5,7 +5,7 @@ import { Api, ApiError, ZetaPushClient, createApi } from 'zetapush-angular';
 // TODO Refactor with Lerna
 import { Group } from '../group';
 
-export { ApiError }
+export { ApiError };
 
 export interface CheckPermission {
   id: string;
@@ -25,35 +25,68 @@ export class PermissionApi extends Api {
   onRemovePermissionMember: Observable<CheckMemberPermission>;
 
   createPermission(name: string): Promise<Permission> {
-    return this.$publish('createPermission', { name }).then(({ Permission }) => Permission);
+    return this.$publish('createPermission', { name }).then(
+      ({ Permission }) => Permission,
+    );
   }
   getPermission(name: string): Promise<Permission> {
-    return this.$publish('getPermission', { name }).then(({ Permission }) => Permission);
+    return this.$publish('getPermission', { name }).then(
+      ({ Permission }) => Permission,
+    );
   }
   getPermissionList(): Promise<Array<Permission>> {
-    return this.$publish('getPermissionList', { }).then(({ list }) => list);
+    return this.$publish('getPermissionList', {}).then(({ list }) => list);
   }
-  addPermissionMember({ id, name, member }: { id: string, name: string, member: string }) {
+  addPermissionMember({
+    id,
+    name,
+    member,
+  }: {
+    id: string;
+    name: string;
+    member: string;
+  }) {
     return this.$publish('addPermissionMember', { id, name, member });
   }
-  removePermissionMember({ id, name, member }: { id: string, name: string, member: string }) {
+  removePermissionMember({
+    id,
+    name,
+    member,
+  }: {
+    id: string;
+    name: string;
+    member: string;
+  }) {
     return this.$publish('removePermissionMember', { id, name, member });
   }
   getUserPermissionList(userKey?: string): Promise<Array<Permission>> {
-    return this.$publish('getUserPermissionList', { userKey }).then(({ list }) => list);
+    return this.$publish('getUserPermissionList', { userKey }).then(
+      ({ list }) => list,
+    );
   }
   hasPermission(name: string): Promise<CheckPermission> {
     return this.$publish('hasPermission', { name });
   }
-  setPermissionListMember({ member, permissions }: { member: string, permissions: any }) {
+  setPermissionListMember({
+    member,
+    permissions,
+  }: {
+    member: string;
+    permissions: any;
+  }) {
     return this.$publish('setPermissionListMember', { member, permissions });
   }
 }
 
-export function PermissionApiFactory(client: ZetaPushClient, zone: NgZone): PermissionApi {
+export function PermissionApiFactory(
+  client: ZetaPushClient,
+  zone: NgZone,
+): PermissionApi {
   return createApi(client, zone, PermissionApi) as PermissionApi;
 }
 
 export const PermissionApiProvider = {
-  provide: PermissionApi, useFactory: PermissionApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: PermissionApi,
+  useFactory: PermissionApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

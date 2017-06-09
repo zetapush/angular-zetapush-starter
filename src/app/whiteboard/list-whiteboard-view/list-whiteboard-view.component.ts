@@ -7,7 +7,8 @@ import { Color, Mode } from '../';
   template: `
     <h1>list-whiteboard-view</h1>
   `,
-  styles: [`
+  styles: [
+    `
     md-radio-button {
       font-weight: bold;
     }
@@ -16,15 +17,20 @@ import { Color, Mode } from '../';
       height: 500px;
       display: block;
     }
-  `]
+  `,
+  ],
 })
 export class ListWhiteboardViewComponent {
-
   mode: Mode = 'Draw';
   modes: Array<Mode> = ['Draw', 'Edit', 'Text', 'Arrow'];
 
   color: Color = 'rgb(229,80,49)';
-  colors: Array<Color> = ['rgb(229,80,49)', 'rgb(253,203,55)', 'rgb(152,192,72)', 'rgb(0,169,228)'];
+  colors: Array<Color> = [
+    'rgb(229,80,49)',
+    'rgb(253,203,55)',
+    'rgb(152,192,72)',
+    'rgb(0,169,228)',
+  ];
 
   onObjectAdded($event) {
     console.log('ListWhiteboardViewComponent::onObjectAdded', $event);
@@ -41,6 +47,4 @@ export class ListWhiteboardViewComponent {
   onObjectRemoved($event) {
     console.log('ListWhiteboardViewComponent::onObjectRemoved', $event);
   }
-
-
 }

@@ -7,18 +7,9 @@ import { ViewActionHostDirective } from './view-action-host.directive';
 import { ViewActionRegistry } from './view-action-registry.service';
 
 @NgModule({
-  declarations: [
-    ViewActionContainerComponent,
-    ViewActionHostDirective
-  ],
+  declarations: [ViewActionContainerComponent, ViewActionHostDirective],
   imports: [],
-  exports: [
-    ViewActionContainerComponent
-  ],
-  providers: [
-    IsSimplyConnected,
-    IsWeaklyConnected,
-    ViewActionRegistry
-  ]
+  exports: [ViewActionContainerComponent],
+  providers: [IsSimplyConnected, IsWeaklyConnected, ViewActionRegistry],
 })
 export class CoreModule {}

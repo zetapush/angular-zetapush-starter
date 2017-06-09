@@ -6,18 +6,16 @@ import { User } from '../';
 @Component({
   selector: 'zp-register-view',
   templateUrl: './register-view.component.html',
-  styles: [`
-  `]
+  styles: [
+    `
+  `,
+  ],
 })
 export class RegisterViewComponent {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   onCreateUser(user: User) {
     console.log('RegisterViewComponent::onCreateUser', user);
-    this.router.navigate([
-      '/login'
-    ]);
+    this.router.navigate(['/login']);
   }
-
 }

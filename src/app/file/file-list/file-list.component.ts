@@ -40,10 +40,8 @@ interface ViewFileEntry {
       </tbody>
     </table>
   `,
-  styles: []
+  styles: [],
 })
 export class FileListComponent {
-
   @Input() entries: Array<ViewFileEntry> = [];
-
 }

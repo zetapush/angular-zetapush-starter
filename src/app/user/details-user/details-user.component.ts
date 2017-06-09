@@ -5,10 +5,8 @@ import { User } from '../';
 @Component({
   selector: 'zp-details-user',
   templateUrl: './details-user.component.html',
-  styles: []
+  styles: [],
 })
 export class DetailsUserComponent {
-
   @Input() user: User;
-
 }

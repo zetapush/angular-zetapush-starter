@@ -52,7 +52,8 @@ interface ViewFileEntry {
       </tbody>
     </table>
   `,
-  styles: [`
+  styles: [
+    `
     :host {
       padding: 1rem;
     }
@@ -64,10 +65,10 @@ interface ViewFileEntry {
       margin: 1rem 0;
       border: 1px dashed orange;
     }
-  `]
+  `,
+  ],
 })
 export class ListFileViewComponent implements OnDestroy, OnInit {
-
   contenteditable = true;
   entries: Array<ViewFileEntry> = [];
   folder = '/';
@@ -78,16 +79,20 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
     // Get owner
     this.owner = api.$getUserId();
     //
-    this.subscriptions.push(api.onDeleteFileEntry.subscribe(() => {
-      this.getFileEntryList();
-    }));
-    this.subscriptions.push(callbackApi.onThumbnailCallback.subscribe(() => {
-      this.getFileEntryList();
-    }));
+    this.subscriptions.push(
+      api.onDeleteFileEntry.subscribe(() => {
+        this.getFileEntryList();
+      }),
+    );
+    this.subscriptions.push(
+      callbackApi.onThumbnailCallback.subscribe(() => {
+        this.getFileEntryList();
+      }),
+    );
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   ngOnInit() {
@@ -95,11 +100,16 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
   }
 
   getFileEntryList() {
-    this.api.getFileEntryList({
-      folder: this.folder
-    }).then((result) => this.onGetFileEntryList(result), (errors) => {
-      console.error('ListFileViewComponent::onGetFileEntryList', errors);
-    });
+    this.api
+      .getFileEntryList({
+        folder: this.folder,
+      })
+      .then(
+        result => this.onGetFileEntryList(result),
+        errors => {
+          console.error('ListFileViewComponent::onGetFileEntryList', errors);
+        },
+      );
   }
 
   onGetFileEntryList(result) {
@@ -121,25 +131,30 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
     result.entries.content.forEach((file: File) => {
       const THUMBNAIL_PROPERTY_PATTERN = /thumb\-([0-9]+)/;
       if (!file.thumbnails) {
-          file.thumbnails = [];
+        file.thumbnails = [];
         for (const property in file.metadata) {
-          if (file.metadata.hasOwnProperty(property) && THUMBNAIL_PROPERTY_PATTERN.test(property)) {
+          if (
+            file.metadata.hasOwnProperty(property) &&
+            THUMBNAIL_PROPERTY_PATTERN.test(property)
+          ) {
             const value = file.metadata[property];
-            const [, height ] = THUMBNAIL_PROPERTY_PATTERN.exec(property);
+            const [, height] = THUMBNAIL_PROPERTY_PATTERN.exec(property);
             file.thumbnails.push({
               ...value,
-              height: parseInt(height, 10)
+              height: parseInt(height, 10),
             });
           }
         }
       }
-      const entry = this.entries.find((element) => {
-        return element.request && element.request.transfer ? element.request.transfer.guid === file.name : false;
+      const entry = this.entries.find(element => {
+        return element.request && element.request.transfer
+          ? element.request.transfer.guid === file.name
+          : false;
       });
       if (entry) {
         entry.file = file;
       } else {
-        this.entries = [ { file }, ...this.entries ];
+        this.entries = [{ file }, ...this.entries];
       }
     });
   }
@@ -153,18 +168,21 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
   onDeleteFile(path) {
     console.log('ListFileViewComponent::onDeleteFile', path);
 
-    this.api.deleteFileEntry({ path }).then((result) => {
-      console.log('ListFileViewComponent::onDeleteFileEntry', result);
-      this.getFileEntryList();
-    }, (errors) => {
-      console.error('ListFileViewComponent::onDeleteFileEntry', errors);
-    });
+    this.api.deleteFileEntry({ path }).then(
+      result => {
+        console.log('ListFileViewComponent::onDeleteFileEntry', result);
+        this.getFileEntryList();
+      },
+      errors => {
+        console.error('ListFileViewComponent::onDeleteFileEntry', errors);
+      },
+    );
   }
 
   onAdded(request: FileUploadRequest) {
     console.log('ListFileViewComponent::onAdded', request);
 
-    this.entries = [ { request }, ...this.entries ];
+    this.entries = [{ request }, ...this.entries];
   }
 
   onConfirmed(request: FileUploadRequest) {
@@ -172,5 +190,4 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
 
     return this.getFileEntryList();
   }
-
 }

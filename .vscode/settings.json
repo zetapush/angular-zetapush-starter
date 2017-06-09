@@ -1,0 +1,14 @@
+// Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut
+{
+  // Contrôle si l'éditeur doit restituer des espaces
+  "editor.tabSize": 2,
+  "editor.renderWhitespace": "all",
+  "editor.formatOnSave": true,
+  "search.exclude": {
+    "**/bower_components": true,
+    "**/node_modules": false
+  },
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all"
+}

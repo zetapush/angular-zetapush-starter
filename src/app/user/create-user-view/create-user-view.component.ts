@@ -9,18 +9,16 @@ import { User } from '../';
     <h1>create-user-view</h1>
     <zp-create-user-form (create)="onCreateUser($event)"></zp-create-user-form>
   `,
-  styles: [`
-  `]
+  styles: [
+    `
+  `,
+  ],
 })
 export class CreateUserViewComponent {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   onCreateUser(user: User) {
     console.log('CreateUserViewComponent::onCreateUser', user);
-    this.router.navigate([
-      '/home'
-    ]);
+    this.router.navigate(['/home']);
   }
-
 }

@@ -6,20 +6,15 @@ import { Group } from '../';
 @Component({
   selector: 'zp-create-group-view',
   templateUrl: './create-group-view.component.html',
-  styles: []
+  styles: [],
 })
 export class CreateGroupViewComponent implements OnInit {
+  constructor(private router: Router) {}
 
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onCreateGroup(group: Group) {
     console.log('CreateGroupViewComponent::onCreateGroup', group);
-    this.router.navigate([
-      '/group/list/mine'
-    ]);
+    this.router.navigate(['/group/list/mine']);
   }
-
 }

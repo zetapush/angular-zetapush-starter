@@ -15,7 +15,10 @@ import { UserCache } from './user-cache.service';
 import { CreateUserViewComponent } from './create-user-view/create-user-view.component';
 import { RegisterViewComponent } from './register-view/register-view.component';
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
-import { AutocompleteUserDialogComponent, DialogUserListComponent } from './autocomplete-user-dialog/autocomplete-user-dialog.component';
+import {
+  AutocompleteUserDialogComponent,
+  DialogUserListComponent,
+} from './autocomplete-user-dialog/autocomplete-user-dialog.component';
 import { DetailsUserViewComponent } from './details-user-view/details-user-view.component';
 import { DetailsUserComponent } from './details-user/details-user.component';
 import { UserBadgeComponent } from './user-badge/user-badge.component';
@@ -37,12 +40,12 @@ import { UserDisconnectViewActionComponent } from './user-disconnect-view-action
     UserDisconnectComponent,
     UserLinkComponent,
     UserBadgeViewActionComponent,
-    UserDisconnectViewActionComponent
+    UserDisconnectViewActionComponent,
   ],
   entryComponents: [
     DialogUserListComponent,
     UserBadgeViewActionComponent,
-    UserDisconnectViewActionComponent
+    UserDisconnectViewActionComponent,
   ],
   exports: [
     UserRoutingModule,
@@ -54,7 +57,7 @@ import { UserDisconnectViewActionComponent } from './user-disconnect-view-action
     UserBadgeComponent,
     UserBadgeViewActionComponent,
     UserDisconnectComponent,
-    UserLinkComponent
+    UserLinkComponent,
   ],
   imports: [
     CommonModule,
@@ -64,12 +67,9 @@ import { UserDisconnectViewActionComponent } from './user-disconnect-view-action
     CoreModule,
     UiModule,
 
-    UserRoutingModule
+    UserRoutingModule,
   ],
-  providers: [
-    UserApiProvider,
-    UserCache
-  ]
+  providers: [UserApiProvider, UserCache],
 })
 export class UserModule {
   constructor(cache: UserCache) {

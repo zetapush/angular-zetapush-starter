@@ -9,33 +9,33 @@ import { RouterLayoutComponent, RouterState } from '../router';
 import { ListContextViewComponent } from './list-context-view/list-context-view.component';
 import { DetailsContextViewComponent } from './details-context-view/details-context-view.component';
 
-const routes: Routes = [{
-  path: 'context',
-  component: RouterLayoutComponent,
-  canActivate: [ IsSimplyConnected ],
-  data: {
-    links: [
-      { path: 'list/all', name: 'context/list/all' }
-    ]
+const routes: Routes = [
+  {
+    path: 'context',
+    component: RouterLayoutComponent,
+    canActivate: [IsSimplyConnected],
+    data: {
+      links: [{ path: 'list/all', name: 'context/list/all' }],
+    },
+    children: [
+      { path: '', redirectTo: 'list/all', pathMatch: 'full' },
+      { path: 'list/all', component: ListContextViewComponent },
+      { path: 'details/:id', component: DetailsContextViewComponent },
+    ],
   },
-  children: [
-    { path: '', redirectTo: 'list/all', pathMatch: 'full' },
-    { path: 'list/all', component: ListContextViewComponent },
-    { path: 'details/:id', component: DetailsContextViewComponent }
-  ]
-}];
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [],
 })
 export class ContextRoutingModule {
   constructor(core: RouterState) {
     console.log('ContextRoutingModule::constructor', core);
     core.register({
       name: 'context',
-      path: '/context'
+      path: '/context',
     });
   }
 }

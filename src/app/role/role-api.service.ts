@@ -5,7 +5,7 @@ import { Api, ApiError, ZetaPushClient, createApi } from 'zetapush-angular';
 // TODO Refactor with Lerna
 import { Group } from '../group';
 
-export { ApiError }
+export { ApiError };
 
 export interface CheckRole {
   id: string;
@@ -31,16 +31,34 @@ export class RoleApi extends Api {
     return this.$publish('getRole', { name }).then(({ role }) => role);
   }
   getRoleList(): Promise<Array<Role>> {
-    return this.$publish('getRoleList', { }).then(({ list }) => list);
+    return this.$publish('getRoleList', {}).then(({ list }) => list);
   }
-  addRoleMember({ id, name, member }: { id: string, name: string, member: string }) {
+  addRoleMember({
+    id,
+    name,
+    member,
+  }: {
+    id: string;
+    name: string;
+    member: string;
+  }) {
     return this.$publish('setRoleListMember', { id, name, member });
   }
-  removeRoleMember({ id, name, member }: { id: string, name: string, member: string }) {
+  removeRoleMember({
+    id,
+    name,
+    member,
+  }: {
+    id: string;
+    name: string;
+    member: string;
+  }) {
     return this.$publish('removeRoleMember', { id, name, member });
   }
   getUserRoleList(userKey?: string): Promise<Array<Role>> {
-    return this.$publish('getUserRoleList', { userKey }).then(({ list }) => list);
+    return this.$publish('getUserRoleList', { userKey }).then(
+      ({ list }) => list,
+    );
   }
   hasRole(name: string): Promise<CheckRole> {
     return this.$publish('hasRole', { name });
@@ -52,5 +70,7 @@ export function RoleApiFactory(client: ZetaPushClient, zone: NgZone): RoleApi {
 }
 
 export const RoleApiProvider = {
-  provide: RoleApi, useFactory: RoleApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: RoleApi,
+  useFactory: RoleApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

@@ -29,18 +29,16 @@ import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-ac
     DetailsWhiteboardViewComponent,
     DetailsWhiteboardComponent,
     FabricDirective,
-    CreateWhiteboardViewActionComponent
+    CreateWhiteboardViewActionComponent,
   ],
   exports: [
     WhiteboardRoutingModule,
 
     FabricDirective,
 
-    DetailsWhiteboardComponent
+    DetailsWhiteboardComponent,
   ],
-  entryComponents: [
-    CreateWhiteboardViewActionComponent
-  ],
+  entryComponents: [CreateWhiteboardViewActionComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -51,10 +49,8 @@ import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-ac
     UserModule,
     ConversationModule,
 
-    WhiteboardRoutingModule
+    WhiteboardRoutingModule,
   ],
-  providers: [
-    WhiteboardApiProvider
-  ]
+  providers: [WhiteboardApiProvider],
 })
-export class WhiteboardModule { }
+export class WhiteboardModule {}

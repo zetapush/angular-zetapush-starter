@@ -7,7 +7,7 @@ import { UserApi, User } from './user-api.service';
 enum CacheEntryStatus {
   PENDING,
   CACHED,
-  MISSING
+  MISSING,
 }
 
 export interface CacheEntry<T> {
@@ -42,14 +42,17 @@ export class UserCache {
     return entry.value;
   }
 
-  private addCacheEntry(userKey: string, user: User = this.getNotAvailableUser(userKey)): CacheEntry<User> {
+  private addCacheEntry(
+    userKey: string,
+    user: User = this.getNotAvailableUser(userKey),
+  ): CacheEntry<User> {
     console.log('UserCache::addCacheEntry', userKey);
 
     const entry = {
       id: userKey,
       createdAt: Date.now(),
       status: CacheEntryStatus.PENDING,
-      value: new ReplaySubject<User>(1)
+      value: new ReplaySubject<User>(1),
     };
     this.cache.set(userKey, entry);
     entry.value.next(user);
@@ -62,7 +65,7 @@ export class UserCache {
       login: `<not-available>`,
       email: '<not-available>',
       firstname: '<not-available>',
-      lastname: '<not-available>'
+      lastname: '<not-available>',
     };
   }
 
@@ -72,33 +75,35 @@ export class UserCache {
       login: `<not-found>`,
       email: '<not-found>',
       firstname: '<not-found>',
-      lastname: '<not-found>'
+      lastname: '<not-found>',
     };
   }
 
   private getEntriesByStatus(status: CacheEntryStatus) {
     const entries = Array.from(this.cache.values());
-    return entries.filter((entry) => entry.status === status);
+    return entries.filter(entry => entry.status === status);
   }
 
   private doFetch() {
     console.log('UserCache::doFetch');
-    const userKeys = this.getEntriesByStatus(CacheEntryStatus.PENDING).map(({ id }) => id);
+    const userKeys = this.getEntriesByStatus(CacheEntryStatus.PENDING).map(
+      ({ id }) => id,
+    );
     this.api.getUserList({ userKeys }).then(({ list }) => {
       console.log('UserCache::onGetUserList', list);
-      list.forEach(({ found, user }: { found: boolean, user: User }) => {
+      list.forEach(({ found, user }: { found: boolean; user: User }) => {
         const { userKey } = user;
         const entry = this.cache.get(userKey);
         if (found) {
           this.cache.set(userKey, {
             ...entry,
-            status: CacheEntryStatus.CACHED
+            status: CacheEntryStatus.CACHED,
           });
           entry.value.next(user);
         } else {
           this.cache.set(userKey, {
             ...entry,
-            status: CacheEntryStatus.MISSING
+            status: CacheEntryStatus.MISSING,
           });
           entry.value.next(this.getNotFoundUser(userKey));
         }

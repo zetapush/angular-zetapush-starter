@@ -17,22 +17,15 @@ const routes: Routes = [
   {
     path: 'home',
     component: RouterLayoutComponent,
-    canActivate: [ IsSimplyConnected ],
-    children: [
-      { path: '', component: HomeViewComponent }
-    ]
+    canActivate: [IsSimplyConnected],
+    children: [{ path: '', component: HomeViewComponent }],
   },
-  { path: '**', component: NotFoundViewComponent }
+  { path: '**', component: NotFoundViewComponent },
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(routes),
-    ZetaPushModule
-  ],
-  exports: [
-    RouterModule
-  ],
-  providers: []
+  imports: [RouterModule.forRoot(routes), ZetaPushModule],
+  exports: [RouterModule],
+  providers: [],
 })
 export class CommonRoutingModule {}

@@ -33,7 +33,8 @@ import { RouterState } from '../router-state.service';
       <router-outlet></router-outlet>
     </md-sidenav-container>
   `,
-  styles: [`
+  styles: [
+    `
     :host {
       display: block;
       height: 100%;
@@ -54,7 +55,8 @@ import { RouterState } from '../router-state.service';
     nav a {
       padding: 0 0.5rem 0 0;
     }
-  `]
+  `,
+  ],
 })
 export class RouterLayoutComponent {
   readonly view: View = RouterLayoutComponent;
@@ -62,13 +64,13 @@ export class RouterLayoutComponent {
   links: Array<string> = [];
   paths: Array<string> = [];
   constructor(private core: RouterState, private route: ActivatedRoute) {
-    core.state.subscribe((modules) => {
+    core.state.subscribe(modules => {
       console.log('RouterLayoutComponent', modules);
     });
     this.paths = core.modules.map(({ path }) => path);
     route.data.subscribe(({ links = [] }) => {
       console.log('RouterLayoutComponent', links);
       this.links = links;
-    })
+    });
   }
 }

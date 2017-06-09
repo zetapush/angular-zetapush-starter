@@ -5,10 +5,9 @@ import { Group, GroupApi } from '../';
 @Component({
   selector: 'zp-list-user-group-view',
   templateUrl: './list-user-group-view.component.html',
-  styles: []
+  styles: [],
 })
 export class ListUserGroupViewComponent implements OnInit {
-
   list: Array<Group> = [];
 
   constructor(private api: GroupApi) {}
@@ -18,12 +17,14 @@ export class ListUserGroupViewComponent implements OnInit {
   }
 
   private getUserGroupList() {
-    this.api.getUserGroupList().then((list) => {
-      console.log('ListUserGroupViewComponent::getGroupList', list);
-      this.list = list;
-    }, (errors) => {
-      console.error('ListUserGroupViewComponent::getGroupList', errors);
-    });
+    this.api.getUserGroupList().then(
+      list => {
+        console.log('ListUserGroupViewComponent::getGroupList', list);
+        this.list = list;
+      },
+      errors => {
+        console.error('ListUserGroupViewComponent::getGroupList', errors);
+      },
+    );
   }
-
 }

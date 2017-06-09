@@ -12,22 +12,19 @@ import { WorkflowApi } from '../workflow-api.service';
       </md-list-item>
     </md-list>
   `,
-  styles: [`
+  styles: [
+    `
 
-  `]
+  `,
+  ],
 })
 export class ListWorkflowViewComponent implements OnInit {
-
   templates = [];
 
-  constructor(private api: WorkflowApi) {
-
-  }
+  constructor(private api: WorkflowApi) {}
 
   async ngOnInit() {
     const { list: templates } = await this.api.getContextTemplateList();
     this.templates = templates;
   }
-
-
 }

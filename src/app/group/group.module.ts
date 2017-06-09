@@ -29,11 +29,7 @@ import { CreateGroupViewComponent } from './create-group-view/create-group-view.
     CreateGroupFormComponent,
     CreateGroupViewComponent,
   ],
-  exports: [
-    GroupRoutingModule,
-
-    DetailsGroupComponent
-  ],
+  exports: [GroupRoutingModule, DetailsGroupComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -43,10 +39,8 @@ import { CreateGroupViewComponent } from './create-group-view/create-group-view.
     UiModule,
     UserModule,
 
-    GroupRoutingModule
+    GroupRoutingModule,
   ],
-  providers: [
-    GroupApiProvider
-  ]
+  providers: [GroupApiProvider],
 })
-export class GroupModule { }
+export class GroupModule {}

@@ -36,7 +36,6 @@ interface ApiCreateGroup extends ApiGroup {
 
 // TODO Should be auto-generated
 export class GroupApi extends Api {
-
   onAddGroupMember: Observable<ApiGroupMember>;
 
   addGroupMember({ id, member }: ApiGroupMember): Promise<ApiGroupMember> {
@@ -47,8 +46,20 @@ export class GroupApi extends Api {
     return this.$publish('removeGroupMember', { id, member });
   }
 
-  createGroup({ id, name, members, metadata, tags }: ApiCreateGroup): Promise<Group> {
-    return this.$publish('createGroup', { id, name, members, metadata, tags }).then(({ group }) => group);
+  createGroup({
+    id,
+    name,
+    members,
+    metadata,
+    tags,
+  }: ApiCreateGroup): Promise<Group> {
+    return this.$publish('createGroup', {
+      id,
+      name,
+      members,
+      metadata,
+      tags,
+    }).then(({ group }) => group);
   }
 
   deleteGroup({ id }: ApiGroup): Promise<ApiGroup> {
@@ -60,19 +71,23 @@ export class GroupApi extends Api {
   }
 
   getGroupList(): Promise<Array<Group>> {
-    return this.$publish('getGroupList', { }).then(({ list }) => list);
+    return this.$publish('getGroupList', {}).then(({ list }) => list);
   }
 
   getUserGroupList(): Promise<Array<Group>> {
-    return this.$publish('getUserGroupList', { }).then(({ list }) => list);
+    return this.$publish('getUserGroupList', {}).then(({ list }) => list);
   }
-
 }
 
-export function GroupApiFactory(client: ZetaPushClient, zone: NgZone): GroupApi {
+export function GroupApiFactory(
+  client: ZetaPushClient,
+  zone: NgZone,
+): GroupApi {
   return createApi(client, zone, GroupApi) as GroupApi;
 }
 
 export const GroupApiProvider = {
-  provide: GroupApi, useFactory: GroupApiFactory, deps: [ ZetaPushClient, NgZone ]
+  provide: GroupApi,
+  useFactory: GroupApiFactory,
+  deps: [ZetaPushClient, NgZone],
 };

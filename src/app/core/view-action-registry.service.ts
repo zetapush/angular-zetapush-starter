@@ -5,7 +5,6 @@ import { View } from './view';
 
 @Injectable()
 export class ViewActionRegistry {
-
   private state = new WeakMap<View, Array<ViewActionItem>>();
 
   setActionsByView(view: View, ads: Array<ViewActionItem>) {

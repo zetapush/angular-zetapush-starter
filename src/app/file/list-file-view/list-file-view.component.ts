@@ -39,7 +39,7 @@ interface ViewFileEntry {
           </td>
           <td [style.text-align]="'center'">
             <img *ngIf="entry.file"
-              (click)="onDeleteFile(entry.file.url.path)" [attr.src]="entry.file.url.url" [attr.title]="entry.file.metadata.name" height="150" />
+              (click)="onDeleteFile(entry.file.file.path)" [attr.src]="entry.file.file.url" [attr.title]="entry.file.metadata.name" height="150" />
           </td>
           <td [style.text-align]="'center'">
             <img *ngFor="let thumbnail of entry.file?.thumbnails"
@@ -118,7 +118,7 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
     for (let i = 0; i < this.entries.length; ++i) {
       const entry = this.entries[i];
       if (entry.file) {
-        const found = result.entries.content.find((file: File) => {
+        const found = result.entries.find((file: File) => {
           return file.name === entry.file.name;
         });
         if (!found) {
@@ -128,7 +128,7 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
       }
     }
     // Manage updates Merge data from
-    result.entries.content.forEach((file: File) => {
+    result.entries.forEach((file: File) => {
       const THUMBNAIL_PROPERTY_PATTERN = /thumb\-([0-9]+)/;
       if (!file.thumbnails) {
         file.thumbnails = [];
@@ -157,6 +157,7 @@ export class ListFileViewComponent implements OnDestroy, OnInit {
         this.entries = [{ file }, ...this.entries];
       }
     });
+    console.log('this.entries', this.entries);
   }
 
   onChangeFolder(event) {

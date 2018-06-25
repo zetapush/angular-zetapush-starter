@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/theming';
-
+// Plus imports for other components in your app.
 $black-87-opacity: rgba(black, 0.87);
 $white-87-opacity: rgba(white, 0.87);
 $mat-custom-blue: (
@@ -68,3 +69,71 @@ $mat-list-avatar-margin: 5px;
 $mat-list-avatar-computed-size: $mat-list-avatar-size + ($mat-list-avatar-margin * 2);
 $mat-toolbar-height: 64px;
 $mat-spinner-size: 40px;
+
+@keyframes ring-animation{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+zp-root:empty {
+  height: 100vmin;
+  width: 100vw;
+  display: flex;
+}
+zp-root:empty:before {
+    content: attr(message);
+    width: 100%;
+    display: block;
+    position: absolute;
+    bottom: 25vmin;
+    text-align: center;
+}
+zp-root:empty:after {
+  content: '';
+  margin: auto;
+  border-radius: 100%;
+  animation: ring-animation 750ms linear infinite;
+  width: 25vmin;
+  height: 25vmin;
+  box-shadow: 0 2px 0 0 #000;
+}
+
+html,
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Noto Sans', sans-serif !important;
+}
+html {
+  background-color: $core-white;
+}
+
+.flex-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-height {
+  height: 100%;
+  flex: 1;
+}
+
+.flex-fill{
+    flex: 1 1 auto;
+}
+
+// Include the base styles for Angular Material core. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+@include mat-core();
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($theme);

@@ -6,7 +6,7 @@ import { IsSimplyConnected, ViewActionItem, ViewActionRegistry } from '../core';
 // TODO Refactor with Lerna
 import { RouterLayoutComponent, RouterState } from '../router';
 // TODO Refactor with Lerna
-import { DetailsConversationComponent } from '../conversation';
+import { DetailsRoomComponent } from '../room';
 
 import { ListWhiteboardViewComponent } from './list-whiteboard-view/list-whiteboard-view.component';
 import { DetailsWhiteboardViewComponent } from './details-whiteboard-view/details-whiteboard-view.component';
@@ -44,7 +44,7 @@ export class WhiteboardRoutingModule {
       name: 'whiteboard',
       path: '/whiteboard',
     });
-    registry.setActionsByView(DetailsConversationComponent, [
+    registry.setActionsByView(DetailsRoomComponent, [
       new ViewActionItem(CreateWhiteboardViewActionComponent),
     ]);
   }

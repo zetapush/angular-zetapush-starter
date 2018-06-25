@@ -5,14 +5,14 @@ import { ReplaySubject } from 'rxjs/ReplaySubject';
 // TODO Refactor with Lerna
 import { ViewActionComponent } from '../../core';
 // TODO Refactor with Lerna
-import { Conversation } from '../../conversation';
+import { Room } from '../../room';
 
 import { WhiteboardApi } from '../';
 
 @Component({
   selector: 'zp-create-whiteboard-view-action',
   template: `
-    <button md-button (click)="onCreateWhiteboard($event)" [disabled]="!conversation"><md-icon>format_shapes</md-icon></button>
+    <button mat-button (click)="onCreateWhiteboard($event)" [disabled]="!room"><mat-icon>format_shapes</mat-icon></button>
   `,
   styles: [],
 })
@@ -20,7 +20,7 @@ export class CreateWhiteboardViewActionComponent
   implements ViewActionComponent {
   context: ReplaySubject<any>;
   parameters: any;
-  conversation: Conversation;
+  room: Room;
 
   constructor(private api: WhiteboardApi) {
     console.log('CreateWhiteboardViewActionComponent::constructor', api);
@@ -32,12 +32,9 @@ export class CreateWhiteboardViewActionComponent
       context,
     );
     this.context = context;
-    this.context.subscribe(conversation => {
-      console.log(
-        'CreateWhiteboardViewActionComponent::onGetContext',
-        conversation,
-      );
-      this.conversation = conversation;
+    this.context.subscribe(room => {
+      console.log('CreateWhiteboardViewActionComponent::onGetContext', room);
+      this.room = room;
     });
   }
 
@@ -45,24 +42,18 @@ export class CreateWhiteboardViewActionComponent
     console.log(
       'CreateWhiteboardViewActionComponent::onCreateWhiteboard',
       $event,
-      this.conversation,
+      this.room,
     );
     this.api
       .createWhiteboard({
-        room: this.conversation.room,
+        room: this.room.room,
       })
       .then(
         message => {
-          console.log(
-            'DetailsConversationComponent::onCreateWhiteboard',
-            message,
-          );
+          console.log('DetailsRoomComponent::onCreateWhiteboard', message);
         },
         errors => {
-          console.error(
-            'DetailsConversationComponent::onCreateWhiteboard',
-            errors,
-          );
+          console.error('DetailsRoomComponent::onCreateWhiteboard', errors);
         },
       );
   }

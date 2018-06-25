@@ -17,7 +17,7 @@ import { GroupModule } from './group';
 // TODO Externalize via lerna
 import { OrganizationModule } from './organization';
 // TODO Externalize via lerna
-import { ConversationModule } from './conversation';
+import { RoomModule } from './room';
 // TODO Externalize via lerna
 import { RoleModule } from './role';
 // TODO Externalize via lerna
@@ -38,7 +38,7 @@ const APPLICATIONS_MODULES = [
   RoleModule,
   UserModule,
   OrganizationModule,
-  ConversationModule,
+  RoomModule,
   WhiteboardModule,
   ContextModule,
   WorkflowModule,

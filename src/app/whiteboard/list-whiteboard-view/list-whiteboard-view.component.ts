@@ -9,7 +9,7 @@ import { Color, Mode } from '../';
   `,
   styles: [
     `
-    md-radio-button {
+    mat-radio-button {
       font-weight: bold;
     }
     zp-fabric {

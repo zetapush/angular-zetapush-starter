@@ -11,27 +11,27 @@ import { RouterState } from '../router-state.service';
 @Component({
   selector: 'zp-router-layout',
   template: `
-    <md-sidenav-container>
-      <md-sidenav #sidenav fxLayout="column">
+    <mat-sidenav-container>
+      <mat-sidenav #sidenav fxLayout="column">
         <h2>ZetaPush</h2>
         <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
         <a routerLink="/home">
-          <md-icon>home</md-icon>
+          <mat-icon>home</mat-icon>
         </a>
         <a *ngFor="let path of paths" [routerLink]="path">{{path}}</a>
-      </md-sidenav>
-      <md-toolbar>
-        <button md-button (click)="sidenav.open()">
-          <md-icon>menu</md-icon>
+      </mat-sidenav>
+      <mat-toolbar>
+        <button mat-button (click)="sidenav.open()">
+          <mat-icon>menu</mat-icon>
         </button>
-        <md-toolbar-row *ngIf="links.length">
+        <mat-toolbar-row *ngIf="links.length">
           <nav>
             <a *ngFor="let link of links" [routerLink]="link.path" routerLinkActive="active">{{link.name}}</a>
           </nav>
-        </md-toolbar-row>
-      </md-toolbar>
+        </mat-toolbar-row>
+      </mat-toolbar>
       <router-outlet></router-outlet>
-    </md-sidenav-container>
+    </mat-sidenav-container>
   `,
   styles: [
     `
@@ -39,14 +39,14 @@ import { RouterState } from '../router-state.service';
       display: block;
       height: 100%;
     }
-    md-sidenav-container {
+    mat-sidenav-container {
       height: 100%;
     }
-    md-sidenav {
+    mat-sidenav {
       padding: 1rem;
       min-width: 30vw;
     }
-    md-sidenav a {
+    mat-sidenav a {
       font-size: 1.2rem;
     }
     .active {

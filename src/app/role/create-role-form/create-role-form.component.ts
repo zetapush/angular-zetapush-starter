@@ -7,11 +7,11 @@ import { ApiError, Role, RoleApi } from '../role-api.service';
   template: `
     <form mdContent (ngSubmit)="onSubmit(form)" novalidate #form="ngForm" fxLayout="column" id="zpCreateRoleForm">
       <h3>Create Role</h3>
-      <md-input-container>
-        <input mdInput ngModel name="name" type="text" placeholder="Name" required />
-      </md-input-container>
+      <mat-form-field>
+        <input matInput ngModel name="name" type="text" placeholder="Name" required />
+      </mat-form-field>
       <zp-ui-error [errors]="errors"></zp-ui-error>
-      <button md-button [disabled]="form.invalid" form="zpCreateRoleForm">Submit</button>
+      <button mat-button [disabled]="form.invalid" form="zpCreateRoleForm">Submit</button>
     </form>
   `,
   styles: [

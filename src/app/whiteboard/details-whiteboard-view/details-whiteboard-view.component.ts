@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
 // TODO Refactor with Lerna
-import { Conversation, ConversationApi } from '../../conversation';
+import { Room, RoomApi } from '../../room';
 
 import { Color, Mode, WhiteboardApi } from '../';
 
@@ -13,7 +13,7 @@ import { Color, Mode, WhiteboardApi } from '../';
   templateUrl: './details-whiteboard-view.component.html',
   styles: [
     `
-    md-radio-button {
+    mat-radio-button {
       font-weight: bold;
     }
     [zpFabric] {
@@ -40,7 +40,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
 
   config: any;
 
-  conversation: Conversation;
+  room: Room;
 
   whiteboard: string;
 
@@ -48,35 +48,26 @@ export class DetailsWhiteboardViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private cApi: ConversationApi,
+    private cApi: RoomApi,
     private wApi: WhiteboardApi,
   ) {
-    console.log('DetailsConversationViewComponent::constructor', wApi);
+    console.log('DetailsRoomViewComponent::constructor', wApi);
     route.params.subscribe(params => {
       this.whiteboard = params.whiteboard;
-      cApi.getConversation({ id: params.room, owner: params.owner }).then(
-        (conversation: Conversation) => {
-          console.log(
-            'DetailsConversationViewComponent::onGetConversation',
-            conversation,
-          );
-          this.conversation = conversation;
+      cApi.getRoom({ id: params.room, owner: params.owner }).then(
+        (room: Room) => {
+          console.log('DetailsRoomViewComponent::onGetRoom', room);
+          this.room = room;
           this.loadWhiteboard();
         },
         errors => {
-          console.error(
-            'DetailsConversationViewComponent::onGetConversation',
-            errors,
-          );
+          console.error('DetailsRoomViewComponent::onGetRoom', errors);
         },
       );
     });
     this.subscriptions.push(
       wApi.onAddWhiteboardObject.subscribe(message => {
-        console.log(
-          'DetailsConversationViewComponent::onAddWhiteboardObject',
-          message,
-        );
+        console.log('DetailsRoomViewComponent::onAddWhiteboardObject', message);
         // DUMMY Impl
         this.loadWhiteboard();
       }),
@@ -84,7 +75,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
     this.subscriptions.push(
       wApi.onUpdateWhiteboardObject.subscribe(message => {
         console.log(
-          'DetailsConversationViewComponent::onUpdateWhiteboardObject',
+          'DetailsRoomViewComponent::onUpdateWhiteboardObject',
           message,
         );
         // DUMMY Impl
@@ -94,7 +85,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
     this.subscriptions.push(
       wApi.onPurgeWhiteboardObjectList.subscribe(message => {
         console.log(
-          'DetailsConversationViewComponent::onPurgeWhiteboardObjectList',
+          'DetailsRoomViewComponent::onPurgeWhiteboardObjectList',
           message,
         );
         // DUMMY Impl
@@ -106,16 +97,16 @@ export class DetailsWhiteboardViewComponent implements OnInit {
   ngOnInit() {}
 
   private loadWhiteboard() {
-    console.log('DetailsConversationViewComponent::loadWhiteboard');
+    console.log('DetailsRoomViewComponent::loadWhiteboard');
     this.wApi
       .getWhiteboardObjectList({
-        room: this.conversation.room,
+        room: this.room.room,
         whiteboard: this.whiteboard,
       })
       .then(
         ({ room, list, page }) => {
           console.log(
-            'DetailsConversationViewComponent::onGetWhiteboardObjectList',
+            'DetailsRoomViewComponent::onGetWhiteboardObjectList',
             room,
             list,
             page,
@@ -128,14 +119,14 @@ export class DetailsWhiteboardViewComponent implements OnInit {
             ),
           };
           console.log(
-            'DetailsConversationViewComponent::onGetWhiteboardObjectList',
+            'DetailsRoomViewComponent::onGetWhiteboardObjectList',
             config,
           );
           this.config = config;
         },
         errors => {
           console.error(
-            'DetailsConversationViewComponent::onGetWhiteboardObjectList',
+            'DetailsRoomViewComponent::onGetWhiteboardObjectList',
             errors,
           );
         },
@@ -147,7 +138,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
     if (!$event['server:id']) {
       this.wApi
         .addWhiteboardObject({
-          room: this.conversation.room,
+          room: this.room.room,
           type: 'widget',
           value: {
             json: JSON.stringify($event),
@@ -178,7 +169,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
       this.wApi
         .updateWhiteboardObject({
           id: $event['server:id'],
-          room: this.conversation.room,
+          room: this.room.room,
           value: {
             json: JSON.stringify($event),
           },
@@ -212,7 +203,7 @@ export class DetailsWhiteboardViewComponent implements OnInit {
   onPurgeWhiteboard($event) {
     console.log('DetailsWhiteboardViewComponent::onPurgeWhiteboard', $event);
     this.wApi.purgeWhiteboardObjectList({
-      room: this.conversation.room,
+      room: this.room.room,
       whiteboard: this.whiteboard,
     });
   }

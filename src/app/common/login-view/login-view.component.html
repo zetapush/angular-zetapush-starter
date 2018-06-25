@@ -1,19 +1,19 @@
-<md-card>
-  <md-card-title>Login</md-card-title>
-  <md-card-content>
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-card-content>
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm" id="loginForm">
-      <md-input-container>
-        <input mdInput type="type" placeholder="Login" [(ngModel)]="credentials.login" name="login" required />
-      </md-input-container>
-      <md-input-container>
-        <input mdInput type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password" required />
-      </md-input-container>
+      <mat-form-field>
+        <input matInput type="type" placeholder="Login" [(ngModel)]="credentials.login" name="login" required />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password" required />
+      </mat-form-field>
       <div *ngIf="error">{{error}}</div>
     </form>
-  </md-card-content>
-  <md-card-actions align="end">
-    <button type="button" md-button color="accent" routerLink="/register">Register</button>
-    <button form="loginForm" type="submit" md-raised-button color="primary">Submit</button>
-  </md-card-actions>
-</md-card>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button type="button" mat-button color="accent" routerLink="/register">Register</button>
+    <button form="loginForm" type="submit" mat-raised-button color="primary">Submit</button>
+  </mat-card-actions>
+</mat-card>
 

@@ -1,18 +1,18 @@
 <h1>details-whiteboard-view</h1>
 <nav>
-  <button md-button (click)="onPurgeWhiteboard($event)"><md-icon>clear</md-icon></button>
+  <button mat-button (click)="onPurgeWhiteboard($event)"><mat-icon>clear</mat-icon></button>
 </nav>
 <zp-ui-file (files)="onSelectFiles($event)"></zp-ui-file>
-<md-radio-group [(ngModel)]="mode">
-  <md-radio-button *ngFor="let mode of modes" [value]="mode">
+<mat-radio-group [(ngModel)]="mode">
+  <mat-radio-button *ngFor="let mode of modes" [value]="mode">
     {{mode}}
-  </md-radio-button>
-</md-radio-group>
-<md-radio-group [(ngModel)]="color">
-  <md-radio-button *ngFor="let color of colors" [value]="color">
+  </mat-radio-button>
+</mat-radio-group>
+<mat-radio-group [(ngModel)]="color">
+  <mat-radio-button *ngFor="let color of colors" [value]="color">
     <span [style.color]="color">{{color}}</span>
-  </md-radio-button>
-</md-radio-group>
+  </mat-radio-button>
+</mat-radio-group>
 <div zpFabric
   [color]="color"
   [mode]="mode"

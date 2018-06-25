@@ -5,7 +5,7 @@ import { Location } from '@angular/common';
   selector: 'zp-not-found-view',
   template: `
     <h1>Page Not Found</h1>
-    <button type="button" md-button color="accent" (click)="onBackClick()">Go Back</button>
+    <button type="button" mat-button color="accent" (click)="onBackClick()">Go Back</button>
   `,
   styles: [
     `

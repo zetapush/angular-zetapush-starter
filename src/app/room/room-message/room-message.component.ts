@@ -4,26 +4,26 @@ import { ZetaPushClient } from 'zetapush-angular';
 // TODO Refactor with Lerna
 import { FileApi } from '../../file';
 
-// import { Message } from '../conversation-api.service';
+// import { Message } from '../room-api.service';
 
 @Component({
-  selector: 'zp-conversation-default-message',
+  selector: 'zp-room-default-message',
   template: `
     <label>Default:<span>{{ message.value | json }}</span></label>
   `,
 })
-export class ConversationDefaultMessageComponent {
+export class RoomDefaultMessageComponent {
   @Input() message: any;
 }
 
 @Component({
-  selector: 'zp-conversation-attachment-message',
+  selector: 'zp-room-attachment-message',
   template: `
     <label>Attachment:<span>{{ message.value | json }}</span></label>
     <img *ngIf="entry && entry.metadata['thumb-100']" [attr.src]="entry.metadata['thumb-100'].url" />
   `,
 })
-export class ConversationAttachmentMessageComponent implements OnInit {
+export class RoomAttachmentMessageComponent implements OnInit {
   @Input() message: any;
   entry: any;
   constructor(private api: FileApi, private client: ZetaPushClient) {}
@@ -36,7 +36,7 @@ export class ConversationAttachmentMessageComponent implements OnInit {
       .then(
         ({ entry, exists, owner }) => {
           console.log(
-            'ConversationAttachmentMessageComponent::onGetFileEntry',
+            'RoomAttachmentMessageComponent::onGetFileEntry',
             { entry, exists, owner },
           );
           if (exists) {
@@ -45,7 +45,7 @@ export class ConversationAttachmentMessageComponent implements OnInit {
         },
         errors => {
           console.error(
-            'ConversationAttachmentMessageComponent::onGetFileEntry',
+            'RoomAttachmentMessageComponent::onGetFileEntry',
             errors,
           );
         },
@@ -54,21 +54,21 @@ export class ConversationAttachmentMessageComponent implements OnInit {
 }
 
 @Component({
-  selector: 'zp-conversation-event-message',
+  selector: 'zp-room-event-message',
   template: `
     <label>Event:<span>{{ message.value | json }}</span></label>
   `,
 })
-export class ConversationEventMessageComponent {
+export class RoomEventMessageComponent {
   @Input() message: any;
 }
 
 @Component({
-  selector: 'zp-conversation-markup-message',
+  selector: 'zp-room-markup-message',
   template: `
     <label>Markup:<span>{{ message.value.text }}</span></label>
   `,
 })
-export class ConversationMarkupMessageComponent {
+export class RoomMarkupMessageComponent {
   @Input() message: any;
 }

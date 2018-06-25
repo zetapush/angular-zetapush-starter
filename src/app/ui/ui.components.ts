@@ -1,1 +1,1 @@
-export { MdDialog, MdDialogRef } from '@angular/material';
+export { MatDialog, MatDialogRef } from '@angular/material';

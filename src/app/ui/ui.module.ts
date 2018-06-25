@@ -4,17 +4,17 @@ import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdCardModule,
-  MdChipsModule,
-  MdDialogModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdRadioModule,
-  MdSidenavModule,
-  MdToolbarModule,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatRadioModule,
+  MatSidenavModule,
+  MatToolbarModule,
 } from '@angular/material';
 
 import { UiFileComponent } from './ui-file/ui-file.component';
@@ -24,17 +24,17 @@ const MATERIAL_MODULES = [
   NoopAnimationsModule,
   FlexLayoutModule,
 
-  MdAutocompleteModule,
-  MdButtonModule,
-  MdCardModule,
-  MdChipsModule,
-  MdDialogModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdRadioModule,
-  MdSidenavModule,
-  MdToolbarModule,
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatChipsModule,
+  MatDialogModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatRadioModule,
+  MatSidenavModule,
+  MatToolbarModule,
 ];
 
 @NgModule({

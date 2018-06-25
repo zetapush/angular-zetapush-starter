@@ -5,7 +5,7 @@ import { ZetaPushConnection } from 'zetapush-angular';
 @Component({
   selector: 'zp-user-disconnect',
   template: `
-    <button md-button (click)="onClick()"><md-icon>forward</md-icon></button>
+    <button mat-button (click)="onClick()"><mat-icon>forward</mat-icon></button>
   `,
   styles: [
     `

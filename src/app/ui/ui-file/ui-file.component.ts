@@ -12,7 +12,7 @@ import {
   template: `
     <form #form name="zp-ui-file-form">
       <input [attr.id]="id" type="file" name="file" (change)="onChange($event)" [attr.accept]="accept" [attr.multiple]="multiple" />
-      <label [attr.for]="id"><md-icon>image</md-icon></label>
+      <label [attr.for]="id"><mat-icon>image</mat-icon></label>
     </form>
   `,
   styles: [

@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'zp-details-workflow-view',
   template: `
-    <h1 class="Title">details-workflow-view <md-icon (click)="onAddContextClick()">add</md-icon></h1>
+    <h1 class="Title">details-workflow-view <mat-icon (click)="onAddContextClick()">add</mat-icon></h1>
     <section class="Workflow" fxLayout="row" fxLayoutAlign="space-around center" fxFill>
       <div class="WorkflowStep" fxFlex="getFlexValue(workflow)" *ngFor="let state of contextTemplate.template.states; let i = index">
         <div class="WorkflowStep__Details">
@@ -24,7 +24,7 @@ import {
           <div class="WorkflowContext" *ngFor="let context of states[state.stateId]; let x = index"
             dnd-draggable [dragData]="context">
             <span class="WorkflowContext__Icon">
-              <md-icon>{{context.fields.icon}}</md-icon>
+              <mat-icon>{{context.fields.icon}}</mat-icon>
             </span>
             <div>{{context.fields.title}}</div>
           </div>

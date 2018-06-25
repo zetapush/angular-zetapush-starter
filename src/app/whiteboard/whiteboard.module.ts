@@ -11,7 +11,7 @@ import { UserModule } from '../user';
 // TODO Refactor with Lerna
 import { GroupModule } from '../group';
 // TODO Refactor with Lerna
-import { ConversationModule } from '../conversation';
+import { RoomModule } from '../room';
 
 import { WhiteboardRoutingModule } from './whiteboard-routing.module';
 
@@ -47,7 +47,7 @@ import { CreateWhiteboardViewActionComponent } from './create-whiteboard-view-ac
     UiModule,
     GroupModule,
     UserModule,
-    ConversationModule,
+    RoomModule,
 
     WhiteboardRoutingModule,
   ],

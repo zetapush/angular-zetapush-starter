@@ -1,18 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 
 // TODO Refactor with Lerna
 import { DialogUserListComponent, User } from '../../user';
 // TODO Refactor with Lerna
-import { MdDialog } from '../../ui';
+import { MatDialog } from '../../ui';
 
 import { Organization, OrganizationApi } from '../';
 
 @Component({
   selector: 'zp-autocomplete-organization-members-dialog',
   template: `
-    <button md-icon-button color="primary" (click)="open()"><md-icon>add</md-icon></button>
+    <button mat-icon-button color="primary" (click)="open()"><mat-icon>add</mat-icon></button>
   `,
   styles: [
     `
@@ -26,7 +27,7 @@ export class AutocompleteOrganizationMembersDialogComponent {
 
   @Output() select = new EventEmitter<User>();
 
-  constructor(private api: OrganizationApi, public dialog: MdDialog) {
+  constructor(private api: OrganizationApi, public dialog: MatDialog) {
     this.users = Observable.of([]);
   }
 

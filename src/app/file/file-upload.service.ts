@@ -89,6 +89,7 @@ export class FileUpload {
         },
         errors => {
           console.error('FileUpload::onConfirmFileUpload', errors);
+          return request;
         },
       );
   }
@@ -104,6 +105,7 @@ export class FileUpload {
       },
       errors => {
         console.error('FileUpload::onRequestFileUpload', errors);
+        return request;
       },
     );
   }

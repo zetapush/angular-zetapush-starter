@@ -4,23 +4,25 @@ import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/scan';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
 
 // TODO Refactor with lerna
-import { MdDialog, MdDialogRef } from '../../ui';
+import { MatDialog, MatDialogRef } from '../../ui';
 
 import { User } from '../user-api.service';
 
 @Component({
   selector: 'zp-dialog-user-list',
   template: `
-    <md-input-container>
-      <input mdInput placeholder="User" [mdAutocomplete]="search" [formControl]="user">
-    </md-input-container>
-    <md-autocomplete #search="mdAutocomplete" [displayWith]="display">
-      <md-option *ngFor="let user of filtered | async" [value]="user">
+    <mat-form-field>
+      <input matInput placeholder="User" [matAutocomplete]="search" [formControl]="user">
+    </mat-form-field>
+    <mat-autocomplete #search="matAutocomplete" [displayWith]="display">
+      <mat-option *ngFor="let user of filtered | async" [value]="user">
         {{ user.login }}
-      </md-option>
-    </md-autocomplete>
+      </mat-option>
+    </mat-autocomplete>
   `,
   styles: [
     `
@@ -33,9 +35,10 @@ export class DialogUserListComponent {
   users: Observable<Array<User>>;
   filtered: Observable<Array<User>>;
 
-  constructor(private dialog: MdDialogRef<User>) {
+  constructor(private dialog: MatDialogRef<User>) {
     console.log('DialogUserListComponent::constructor', dialog);
 
+    /*
     const { dialogConfig } = dialog._containerInstance;
 
     if (dialogConfig.data.users) {
@@ -55,6 +58,7 @@ export class DialogUserListComponent {
         this.dialog.close(user);
       }
     });
+    */
   }
 
   filter(value: string): Observable<Array<User>> {
@@ -73,7 +77,7 @@ export class DialogUserListComponent {
 @Component({
   selector: 'zp-autocomplete-user-dialog',
   template: `
-    <button md-icon-button color="primary" (click)="open()"><md-icon>add</md-icon></button>
+    <button mat-icon-button color="primary" (click)="open()"><mat-icon>add</mat-icon></button>
   `,
   styles: [
     `
@@ -86,7 +90,7 @@ export class AutocompleteUserDialogComponent {
 
   @Output() select = new EventEmitter<User>();
 
-  constructor(public dialog: MdDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   open() {
     console.log('AutocompleteUserDialogComponent::open');
@@ -105,16 +109,18 @@ export class AutocompleteUserDialogComponent {
 }
 
 import {
-  MdDialogConfig,
-  MdDialogContainer,
-  OverlayRef,
+  MatDialogConfig,
+  MatDialogContainer
 } from '@angular/material';
+import {
+  OverlayRef
+} from '@angular/cdk/overlay';
 
-class FixMdDialogRef<T> extends MdDialogRef<T> {
+class FixMatDialogRef<T> extends MatDialogRef<T> {
   constructor(
     _overlayRef: OverlayRef,
-    _containerInstance: MdDialogContainer,
-    public config: MdDialogConfig,
+    _containerInstance: MatDialogContainer,
+    public config: MatDialogConfig,
   ) {
     super(_overlayRef, _containerInstance);
   }

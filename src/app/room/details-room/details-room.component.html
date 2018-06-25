@@ -1,0 +1,28 @@
+<h2>details-room</h2>
+<div fxLayout="row">
+  <div fxFlex="60">
+    <mat-list>
+      <mat-list-item *ngFor="let message of room?.messages" [ngSwitch]="message.type">
+        <zp-user-link [userKey]="message.author"></zp-user-link>
+        <zp-room-attachment-message *ngSwitchCase="'attachment'" [message]="message"></zp-room-attachment-message>
+        <zp-room-event-message *ngSwitchCase="'event'" [message]="message"></zp-room-event-message>
+        <zp-room-markup-message *ngSwitchCase="'markup'" [message]="message"></zp-room-markup-message>
+        <zp-room-default-message *NgSwitchDefault [message]="message"></zp-room-default-message>
+      </mat-list-item>
+    </mat-list>
+    <form mdContent (ngSubmit)="onSubmit(form, $event)" novalidate #form="ngForm" fxLayout="column" id="zpAddRoomMessage">
+      <mat-form-field>
+        <input matInput ngModel name="message" type="text" placeholder="Message" required autocomplete="off" />
+      </mat-form-field>
+      <button mat-button [disabled]="form.invalid && !room" form="zpAddRoomMessage">Submit</button>
+    </form>
+  </div>
+  <div fxFlex="40">
+    <nav>
+      <button mat-button (click)="onPurgRoom($event)"><mat-icon>clear</mat-icon></button>
+      <zp-file-upload [folder]="room?.room.metadata.attachments" [owner]="room?.room.owner" (confirmed)="onRequestConfirmed($event)"></zp-file-upload>
+    </nav>
+    <zp-view-action-container [view]="view" [context]="context"></zp-view-action-container>
+    <zp-details-group [group]="room?.room"></zp-details-group>
+  </div>
+</div>

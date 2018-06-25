@@ -1,6 +1,6 @@
 <h1>list-organization-view</h1>
-<md-list>
-  <md-list-item *ngFor="let organization of list">
+<mat-list>
+  <mat-list-item *ngFor="let organization of list">
     <a routerLink="/organization/details/{{organization.metadata.name}}">{{organization.name}}</a>
-  </md-list-item>
-</md-list>
+  </mat-list-item>
+</mat-list>

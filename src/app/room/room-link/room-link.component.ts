@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { ZetaPushClient } from 'zetapush-angular';
 
-import { Conversation } from '../';
+import { Room } from '../';
 
 @Component({
-  selector: 'zp-conversation-link',
+  selector: 'zp-room-link',
   template: `
-    <a routerLink="/conversation/details/{{conversation.room.owner}}/{{conversation.room.id}}">{{getConversationName()}}</a>
+    <a routerLink="/room/details/{{room.room.owner}}/{{room.room.id}}">{{getRoomName()}}</a>
   `,
   styles: [
     `
@@ -14,15 +14,15 @@ import { Conversation } from '../';
   `,
   ],
 })
-export class ConversationLinkComponent {
-  @Input() conversation: Conversation;
+export class RoomLinkComponent {
+  @Input() room: Room;
 
   constructor(private client: ZetaPushClient) {}
 
-  getConversationName() {
-    const { room } = this.conversation;
+  getRoomName() {
+    const { room } = this.room;
     let name = room.name;
-    if (name === 'I18N.ONE_TO_ONE_CONVERSATION' && room.members.length === 2) {
+    if (name === 'I18N.ONE_TO_ONE_ROOM' && room.members.length === 2) {
       const userKey = this.client.getUserId();
       const interlocutor = room.members.find(
         member => member.userKey !== userKey,

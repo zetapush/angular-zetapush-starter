@@ -50,7 +50,7 @@ const comparator = {
               <input #input [attr.id]="id('select-all', user.userKey)" (change)="onSelectAll(i, $event)"
                 type="checkbox" name="select-all" class="Input Input--Permission" />
               <label [attr.for]="id('select-all', user.userKey)">
-                <md-icon>{{ input.checked ? 'check_box': 'check_box_outline_blank' }}</md-icon>
+                <mat-icon>{{ input.checked ? 'check_box': 'check_box_outline_blank' }}</mat-icon>
               </label>
             </form>
           </td>
@@ -64,7 +64,7 @@ const comparator = {
               <input [attr.id]="id(permission.id, user.userKey)" [(ngModel)]="user.permissions[permission.metadata.name]"
                 type="checkbox" name="{{permission.metadata.name}}" class="Input Input--Permission" />
               <label [attr.for]="id(permission.id, user.userKey)">
-                <md-icon>{{ user.permissions[permission.metadata.name] ? 'check_box': 'check_box_outline_blank' }}</md-icon>
+                <mat-icon>{{ user.permissions[permission.metadata.name] ? 'check_box': 'check_box_outline_blank' }}</mat-icon>
               </label>
             </form>
           </td>
@@ -72,7 +72,7 @@ const comparator = {
       </tbody>
     </table>
     <nav>
-      <button md-button (click)="onValidate()">validate</button>
+      <button mat-button (click)="onValidate()">validate</button>
     </nav>
     <pre>{{ users | json }}</pre>
   `,

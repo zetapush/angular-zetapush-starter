@@ -10,14 +10,15 @@ import {
   Output,
 } from '@angular/core';
 
-import { fabric } from 'fabric';
-
 export type Mode = 'Arrow' | 'Draw' | 'Edit' | 'Text' | 'Pointer' | 'Pan';
 export type Color =
   | 'rgb(229,80,49)'
   | 'rgb(253,203,55)'
   | 'rgb(152,192,72)'
   | 'rgb(0,169,228)';
+
+  /*
+import { fabric } from 'fabric';
 
 const Arrow = fabric.util.createClass(fabric.Line, fabric.Observable, {
   initialize: function(e, t) {
@@ -62,6 +63,24 @@ Arrow.fromObject = function(e) {
 };
 
 fabric.Arrow = Arrow;
+*/
+
+class FabricStub {
+  constructor(...params) {
+    console.log(params);
+  }
+  static fromURL(url, callback) {
+
+  }
+}
+
+const fabric = {
+  Arrow: FabricStub,
+  Canvas: FabricStub,
+  PencilBrush: FabricStub,
+  Image: FabricStub,
+  Text: FabricStub
+};
 
 @Directive({
   selector: '[zpFabric]',
@@ -376,7 +395,7 @@ export class FabricDirective
     if ('Arrow' === this.mode) {
       const pointer = this.canvas.getPointer(event.e);
       const points = [pointer.x, pointer.y, pointer.x, pointer.y];
-      this.arrow = new Arrow(points, {
+      this.arrow = new fabric.Arrow(points, {
         strokeWidth: 5,
         fill: this.canvas.freeDrawingBrush.color,
         stroke: this.canvas.freeDrawingBrush.color,
@@ -414,7 +433,7 @@ export class FabricDirective
           selectable: false,
           left: left,
           top: top,
-        });
+        }) as any;
 
         object.setColor(this.canvas.freeDrawingBrush.color);
 

@@ -6,11 +6,11 @@ import { WorkflowApi } from '../workflow-api.service';
   selector: 'zp-list-workflow-view',
   template: `
     <h1>list-workflow-view</h1>
-    <md-list>
-      <md-list-item *ngFor="let template of templates">
+    <mat-list>
+      <mat-list-item *ngFor="let template of templates">
         <a [routerLink]="['/workflow/details/', template.templateName]">{{template.templateName}}</a>
-      </md-list-item>
-    </md-list>
+      </mat-list-item>
+    </mat-list>
   `,
   styles: [
     `

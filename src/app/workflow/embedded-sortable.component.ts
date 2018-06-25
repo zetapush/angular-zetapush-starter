@@ -6,16 +6,16 @@ import { Component } from '@angular/core';
     <h4>Move items between multi list sortable containers</h4>
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <div *ngFor="let container of containers; let i = index" fxFlex="30">
-        <md-card
+        <mat-card
           dnd-sortable-container [sortableData]="container.widgets" [dropZones]="['widget-dropZone']">
-          <md-card-title>{{container.id}} - {{container.name}}</md-card-title>
-          <md-card-content>
+          <mat-card-title>{{container.id}} - {{container.name}}</mat-card-title>
+          <mat-card-content>
             <ul class="list-group">
               <li *ngFor="let widget of container.widgets; let x = index" class="list-group-item"
                   dnd-sortable [sortableIndex]="x" [dragData]="widget">{{widget.name}}</li>
             </ul>
-          </md-card-content>
-        </md-card>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
     <pre>{{ containers | json }}</pre>

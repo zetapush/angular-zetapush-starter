@@ -1,21 +1,21 @@
-<md-card>
-  <md-card-title>{{group?.name}}</md-card-title>
-  <md-card-subtitle>{{group?.owner}}:{{group?.id}}</md-card-subtitle>
-  <md-card-content>
+<mat-card>
+  <mat-card-title>{{group?.name}}</mat-card-title>
+  <mat-card-subtitle>{{group?.owner}}:{{group?.id}}</mat-card-subtitle>
+  <mat-card-content>
     <h3>Members:</h3>
-    <md-list>
-      <md-list-item *ngFor="let member of group?.members">
+    <mat-list>
+      <mat-list-item *ngFor="let member of group?.members">
         <a [routerLink]="['/user/details/', member.userKey]">{{member.login}}</a>
-      </md-list-item>
-    </md-list>
+      </mat-list-item>
+    </mat-list>
     <h3>Metadata:</h3>
     <pre>{{group?.metadata | json}}</pre>
     <h3>Tags:</h3>
     <pre>{{group?.tags | json}}</pre>
-    <md-chip-list chips="group?.tags"></md-chip-list>
-  </md-card-content>
-  <md-card-actions *ngIf="actions">
-    <button type="button" md-button color="accent">Add Member</button>
-    <button type="button" md-raised-button color="primary">Edit</button>
-  </md-card-actions>
-</md-card>
+    <mat-chip-list chips="group?.tags"></mat-chip-list>
+  </mat-card-content>
+  <mat-card-actions *ngIf="actions">
+    <button type="button" mat-button color="accent">Add Member</button>
+    <button type="button" mat-raised-button color="primary">Edit</button>
+  </mat-card-actions>
+</mat-card>
